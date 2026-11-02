@@ -25,9 +25,9 @@ main > section[aria-labelledby="saudacao"] p { margin: 0; color: #EFF6FF; }
 #colunas-kanban > section > header h3 { margin: 0; }
 #colunas-kanban > section > header p { margin: 0; color: var(--color-text-muted); }
 #colunas-kanban > section > header button { grid-column: 1 / -1; width: 100%; }
-#colunas-kanban > section:nth-child(1) { border-top: 4px solid var(--color-todo); }
-#colunas-kanban > section:nth-child(2) { border-top: 4px solid var(--color-progress); }
-#colunas-kanban > section:nth-child(3) { border-top: 4px solid var(--color-done); }
+#colunas-kanban > section:nth-child(1) { border-top: 4px solid var(--color-todo-indicator); }
+#colunas-kanban > section:nth-child(2) { border-top: 4px solid var(--color-progress-indicator); }
+#colunas-kanban > section:nth-child(3) { border-top: 4px solid var(--color-done-indicator); }
 #colunas-kanban ul[aria-live] { display: grid; gap: .7rem; padding: 0; list-style: none; }
 #colunas-kanban > section > p { color: var(--color-text-muted); font-size: .85rem; }
 #aplicacao > aside:last-of-type { display: grid; align-content: start; gap: 1rem; }
@@ -55,7 +55,9 @@ main > section[aria-labelledby="saudacao"] p { margin: 0; color: #EFF6FF; }
   #aplicacao > aside:first-of-type header p:last-child { margin-left: auto; }
   #aplicacao > aside:first-of-type nav ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .25rem; margin: 0; }
   nav a { padding: .55rem .35rem; text-align: center; font-size: .8rem; }
-  #aplicacao > aside:first-of-type section { display: none; }
+  #aplicacao > aside:first-of-type section { display: block; margin-top: 0; }
+  #aplicacao > aside:first-of-type section ul { display: flex; flex-wrap: wrap; }
+  #aplicacao > aside:first-of-type section button { min-height: 2.3rem; font-size: .78rem; }
   main { padding: .9rem; }
   main > header { align-items: stretch; flex-direction: column; margin-bottom: 1rem; }
   main > section[aria-labelledby="saudacao"] { margin-bottom: 1rem; padding: 1.1rem; }
