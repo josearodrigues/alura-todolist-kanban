@@ -83,6 +83,18 @@ def calcular_relatorio_completo(
     if data_local_referencia is None:
         raise ValueError("data_local_referencia é obrigatória.")
 
+    # Validar os limites opcionais e impedir intervalos invertidos.
+    if periodo_conclusao_inicio is not None:
+        validar_data_limite(periodo_conclusao_inicio)
+    if periodo_conclusao_fim is not None:
+        validar_data_limite(periodo_conclusao_fim)
+    if (
+        periodo_conclusao_inicio is not None
+        and periodo_conclusao_fim is not None
+        and periodo_conclusao_inicio > periodo_conclusao_fim
+    ):
+        raise ValueError("periodo_conclusao_inicio não pode ser posterior a periodo_conclusao_fim.")
+
     dt_ref = datetime.strptime(data_local_referencia, "%Y-%m-%d").date()
     dt_amanha = dt_ref + timedelta(days=1)
     dt_limite_7_dias = dt_ref + timedelta(days=7)
