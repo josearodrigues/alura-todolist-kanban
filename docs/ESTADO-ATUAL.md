@@ -53,7 +53,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | **Etapa 4 — Plano de Implementação** | **Concluída e Aprovada** | Plano de Implementação (versão 2.1) formalmente aprovado pelo usuário. |
 | **Etapa 5 — Implementação Controlada** | **Em andamento** | Fase 1 concluída; Fase 2 implementada, com validação formal pendente; Fases 3 a 6 não iniciadas. |
 | ↳ *Fase 1: Domínio Python e Testes* | **Concluída e Validada** | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados. Após a revisão corretiva, o procedimento oficial aprovou 48/48 testes, com 96,16% de cobertura de linhas e 92,78% de branches. |
-| ↳ *Fase 2: HTML e Acessibilidade* | **Implementada; validação pendente** | `index.html` criado com estrutura semântica, três colunas, widgets, formulários, diálogos nativos, controles acessíveis e atalhos básicos. Nu HTML Checker e checklist manual de teclado/foco ainda não executados. |
+| ↳ *Fase 2: HTML e Acessibilidade* | **Implementada; validação pendente** | `index.html` implementado com estrutura semântica, três colunas, widgets, formulários, seis diálogos nativos, template de cartão, controles com nomes acessíveis e atalhos básicos. A validação oficial Nu e o checklist manual em navegador permanecem pendentes. |
 | ↳ *Fase 3: CSS e Validação Visual* | Não iniciada | Design system, temas, `check_contrast.py` e versão visual corrigida. |
 | ↳ *Fase 4: WebAssembly e Persistência* | Não iniciada | Carregamento Pyodide no virtual FS e `storage.js` com rollback. |
 | ↳ *Fase 5: Interações (Pointer Events)* | Não iniciada | Drag and drop unificado, touch, menu acessível, busca e calendário. |
@@ -67,9 +67,9 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 - **Planejado:** Aplicação To-Do Kanban estática com Python via WebAssembly (Pyodide), 3 colunas, drag and drop via Pointer Events, calendário integrado, métricas em tempo real e backup JSON.
 - **Aprovado:** Versão 1.7 de Requisitos (RNF06 alinhado à WCAG 2.2 AA), Etapa 3 (Arquitetura Técnica) e Etapa 4 (Plano de Implementação, versão 2.1) formalmente aprovadas.
 - **Implementado:** Fase 1 implementada: pacote Python `src/todolist/` (`models.py`, `services.py`, `metrics.py`, `schema.py`, `__init__.py`), configuração `pyproject.toml`, suíte `tests/` e script `scripts/verify_coverage.py`. Fases 2 a 6 não implementadas.
-- **Testado:** Fase 1: procedimento oficial `pytest && python scripts/verify_coverage.py`, com 48/48 testes aprovados, 96,16% de cobertura de linhas e 92,78% de branches. Fase 2: inspeção estática do arquivo e confirmação de três botões de criação, IDs e mecanismos de diálogo/atalho; Nu HTML Checker e testes manuais em navegador ainda pendentes.
+- **Testado:** Fase 1: procedimento oficial `pytest && python scripts/verify_coverage.py`, com 48/48 testes aprovados, 96,16% de cobertura de linhas e 92,78% de branches. Fase 2: inspeção estática do arquivo confirmou três botões de criação com nomes acessíveis distintos, seis diálogos, ausência de IDs duplicados e mecanismos de teclado. Nu HTML Checker e testes manuais em navegador ainda pendentes.
 - **Validado:** critérios CA1.1 a CA1.7 aceitos conforme evidências informadas pelo usuário. Na Fase 2, a implementação estrutural foi revisada, mas CA2.2 a CA2.6 ainda não podem ser declarados validados sem o relatório Nu e o checklist manual em navegador.
-- **Commitado / Enviado ao GitHub:** Fase 2 registrada diretamente na branch remota `main`: `e03fd94` (criação de `index.html`) e `92c3eed` (ajustes de rótulos e atalhos). A cópia local precisa sincronizar esses commits. Nenhuma tag, release ou publicação da aplicação foi criada.
+- **Commitado / Enviado ao GitHub:** Fase 2 registrada diretamente na branch remota `main`: `e03fd94` (criação de `index.html`), `92c3eed` (ajustes de rótulos e atalhos) e `a957eeb` (nomes acessíveis e fechamento de menus). A cópia local precisa sincronizar esses commits. Nenhuma tag, release ou publicação da aplicação foi criada.
 
 ---
 
