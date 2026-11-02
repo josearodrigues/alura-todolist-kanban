@@ -123,7 +123,7 @@ Esta seção registra as sete decisões técnicas formalmente aprovadas que defi
 │   └── todolist/                # Pacote principal da aplicação
 │       ├── __init__.py          # Exportações do pacote
 │       ├── models.py            # Entidade Tarefa (@dataclass), validações e conversões (to_dict/from_dict)
-│       ├── services.py          # Operações de negócio (criar, mover, reordenar, excluir)
+│       ├── services.py          # Operações de negócio (criar, editar, mover, reordenar, excluir)
 │       ├── metrics.py           # Cálculos estatísticos, prazos e atrasos dinâmicos
 │       └── schema.py            # Validação estrita do envelope e tarefas para import/export
 │
@@ -160,6 +160,8 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
   - Configurar dependências de desenvolvimento e regras de cobertura no `pyproject.toml`.
   - Implementar a entidade `Tarefa` com `@dataclass` e validações explícitas de atributos em `models.py`.
   - Implementar operações em `services.py` com injeção de identificadores/timestamps e reordenação contígua.
+  - Implementar a operação de **edição de tarefas**, preservando os metadados não editáveis (`id`, `data_criacao`, `estado`, `ordem`, `data_conclusao`) e atualizando `data_atualizacao` apenas quando houver alteração real confirmada e persistência bem-sucedida.
+  - Implementar testes unitários correspondentes à operação de edição em `test_services.py`, cobrindo: edição com alteração real, edição sem alteração (no-op), e tentativa de alteração de campos não editáveis.
   - Implementar cálculos estatísticos em `metrics.py` com referências temporais estritas.
   - Implementar validação preventiva de schema JSON em `schema.py` com rejeição de campos desconhecidos.
   - Implementar a suíte completa de testes no diretório `tests/`.
@@ -184,7 +186,13 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
 - **Dependências:** Conclusão da Fase 1.
 - **Critérios e Evidências de Conclusão:**
   1. Relatório do Nu HTML Checker local sem erros de estrutura ou semântica.
-  2. Roteiro de testes de acessibilidade via teclado documentado (tabulação, formulários, fechamento via `Esc`).
+  2. Roteiro de testes de acessibilidade via teclado documentado, contemplando:
+     - Tabulação (`Tab` e `Shift+Tab`) e ativação (`Enter`, `Espaço`) em todos os controles interativos.
+     - Fechamento via `Esc` em modais, menus e formulários.
+     - Entrada, permanência e saída de modais com gerenciamento de foco; focus trap ativo enquanto o modal estiver aberto.
+     - Navegação por teclado em menus contextuais e formulários de criação e edição.
+     - Indicador de foco visível e inequívoco em todos os elementos focáveis.
+     - Nomes acessíveis em botões e campos; estados não comunicados exclusivamente por cor.
 
 ---
 
@@ -200,7 +208,10 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
   - Aplicar suporte a `prefers-reduced-motion`.
 - **Dependências:** Conclusão da Fase 2.
 - **Critérios e Evidências de Conclusão:**
-  1. Relatório gerado por `check_contrast.py` demonstrando razão $\ge 4.5:1$ (texto) e $\ge 3.0:1$ (componentes) nos dois temas.
+  1. Relatório gerado por `check_contrast.py` demonstrando, para ambos os temas Claro e Escuro:
+     - Texto normal: razão de contraste $\ge 4{,}5:1$ (WCAG 1.4.3 — nível AA).
+     - Texto grande ($\ge 18\text{pt}$ ou $\ge 14\text{pt}$ negrito): razão $\ge 3{,}0:1$ (WCAG 1.4.3 — nível AA).
+     - Componentes gráficos e indicadores de estado essenciais: razão $\ge 3{,}0:1$ (WCAG 1.4.11 — nível AA).
   2. Evidência documental de inspeção visual confirmando integridade do layout em Desktop, Tablet e Mobile nos dois temas.
 
 ---
@@ -209,13 +220,17 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
 - **Objetivo:** Inicializar o runtime WebAssembly via Pyodide, carregar os módulos Python no virtual filesystem, estabelecer a ponte bidirecional JS $\leftrightarrow$ Python e implementar o motor de persistência consistente no `localStorage`.
 - **Arquivos Previstos:** `js/pyodide_bridge.js`, `js/storage.js`, `js/app.js`.
 - **Atividades:**
-  - Inicializar o Pyodide via CDN e realizar o `fetch()` dos arquivos Python de `src/todolist/` para o virtual filesystem.
+  - Inicializar o Pyodide via CDN e carregar os módulos Python no virtual filesystem pela seguinte sequência obrigatória:
+    1. Requisição `fetch()` individual de cada arquivo do pacote `src/todolist/` (`__init__.py`, `models.py`, `services.py`, `metrics.py`, `schema.py`).
+    2. Gravação de cada arquivo no virtual filesystem via `pyodide.FS.mkdirTree('/home/pyodide/todolist')` e `pyodide.FS.writeFile(...)`.
+    3. Configuração do caminho de importação via `sys.path.insert(0, '/home/pyodide')` executado no contexto Python do Pyodide.
+    4. Importação do pacote via `import todolist` e verificação de que as funções públicas estão disponíveis e operacionais.
   - Implementar a sincronização bidirecional entre interface e núcleo Python.
   - Implementar a persistência preventiva em documento JSON único no `localStorage` com controle de confirmação pós-gravação.
   - Implementar o tratamento de falhas de gravação (reversão do estado em memória e na tela).
 - **Dependências:** Conclusão das Fases 1, 2 e 3.
 - **Critérios e Evidências de Conclusão:**
-  1. Indicador de status transicionando visualmente para `✓ Carregado`.
+  1. Evidência de que a sequência de carregamento Pyodide foi concluída com sucesso: o indicador de status transiciona visualmente para `✓ Carregado` e as funções do pacote `todolist` respondem conforme esperado a partir do JavaScript.
   2. Testes de ciclo de vida e persistência executados separadamente para criação, edição, movimentação e exclusão, com recarga da página (`F5`) comprovando retenção íntegra e atualização sincronizada do timestamp.
   3. Teste de falha de gravação simulada comprovando preservação do estado anterior e notificação de erro ao usuário.
 
@@ -229,11 +244,16 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
   - Implementar o submenu "Mover para..." no menu `⋮` de cada cartão como via alternativa de movimentação.
   - Implementar busca em tempo real nos campos `titulo` e `descricao` com normalização de acentos e atalhos (`Ctrl + K`, `Esc`).
   - Implementar navegação do calendário entre meses, marcadores de tarefas e popover de foco com scroll suave no Kanban.
+  - Integrar menus contextuais e formulários de cartão com as operações de criação, edição, movimentação e exclusão do domínio Python.
 - **Dependências:** Conclusão da Fase 4.
 - **Critérios e Evidências de Conclusão:**
   1. Testes de movimentação realizados via mouse e via toque (*touch*), diferenciando-os explicitamente.
   2. Teste da movimentação acessível via menu `⋮`.
   3. Teste de busca com atalhos de teclado e teste do popover do calendário acionando foco e scroll no cartão correspondente.
+  4. Validação das regras de metadados de reordenação manual dentro da coluna:
+     - `data_atualizacao` é atualizada apenas na tarefa diretamente movida; tarefas apenas reindexadas para contiguidade mantêm suas datas originais inalteradas.
+     - O timestamp global da última alteração é atualizado somente quando houver reordenação efetiva.
+     - Operações sem mudança real de posição (drop na mesma posição) não disparam nenhuma atualização de metadados.
 
 ---
 
@@ -253,6 +273,7 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
   4. Teste de importação com campos desconhecidos no envelope ou nas tarefas, demonstrando rejeição integral e preservação dos dados existentes.
   5. Teste de cancelamento da importação comprovando ausência de alteração.
   6. Teste de falha de gravação durante a importação comprovando que o estado anterior é preservado e que os novos dados não são apresentados como salvos.
+  7. Regressão integrada verificando os requisitos funcionais (RF01–RF15) e não funcionais (RNF01–RNF07) conforme a matriz de rastreabilidade, sem substituir os testes específicos das fases anteriores.
 
 ---
 
@@ -267,3 +288,4 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
 | **1.4** | 2026-11-01 | Detalhamento da acessibilidade na Fase 2 e teste de falha de persistência na importação da Fase 6. | Blindagem de integridade de dados e conformidade WCAG. |
 | **1.5** | 2026-11-02 | Inclusão da atividade da saudação "Olá!" na Fase 3, testes de campos desconhecidos e formalização das reservas técnicas da Etapa 3. | Fechamento integral do plano de implementação funcional. |
 | **1.6** | 2026-11-02 | Consolidação integral da Etapa 3: Decisões 3.1 a 3.7 aprovadas, arquitetura modular `src/todolist/`, `pyproject.toml`, Pointer Events e procedimento oficial de validação da Fase 1. | Conclusão e aprovação formal da Etapa 3 (Arquitetura e Planejamento Técnico). |
+| **1.7** | 2026-11-02 | Seis ajustes pontuais à Etapa 4: operação de edição e testes em `services.py` (Fase 1); critérios de acessibilidade modal e foco (Fase 2); três limites de contraste explícitos WCAG 2.2 AA (Fase 3); sequência de quatro etapas de carregamento Pyodide com critério de conclusão (Fase 4); regras de metadados de reordenação e integração menus/formulários (Fase 5); regressão integrada RF01–RF15 e RNF01–RNF07 (Fase 6). | Fechamento das lacunas identificadas na revisão técnica da Etapa 4. |
