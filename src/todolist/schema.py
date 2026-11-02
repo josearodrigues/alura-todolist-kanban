@@ -79,7 +79,7 @@ def validar_envelope_backup(dados: Dict[str, Any]) -> Tuple[bool, str]:
         # Validação estrita via Tarefa.from_dict
         try:
             obj_tarefa = Tarefa.from_dict(t)
-        except ValueError as e:
+        except (ValueError, TypeError) as e:
             return False, f"Erro na tarefa de índice {idx}: {e}"
 
         if obj_tarefa.id in ids_vistos:
