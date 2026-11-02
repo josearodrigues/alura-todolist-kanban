@@ -7,8 +7,8 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 1 — Descoberta e levantamento de requisitos:** [Concluída]
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
-- **Etapa 4 — Plano de implementação detalhado:** [Pendente]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Pendente de autorização]
+- **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
+- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fase 1 autorizada]
 - **Etapa 6 — Validação final e homologação:** [Pendente]
 
 ---
@@ -172,6 +172,7 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
   - Implementar a suíte completa de testes no diretório `tests/`.
   - Implementar o script `scripts/verify_coverage.py`.
 - **Dependências:** Ambiente Python local com `pytest` e `pytest-cov`.
+- **Revisão corretiva:** Foram incluídas validações defensivas de enums, unicidade de ID na criação, proteção dos campos imutáveis da edição, verificação explícita do timestamp global nas seis transições e validação dos limites do período de conclusão. A aprovação final permanece condicionada à execução local do procedimento oficial após estas alterações.
 - **Critérios e Evidências de Conclusão:** Execução bem-sucedida do comando oficial:
   ```bash
   pytest && python scripts/verify_coverage.py
