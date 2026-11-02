@@ -5,28 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Quadro Kanban para organização de tarefas pessoais e de projeto.">
   <title>To-Do List Kanban</title>
-  <style>
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    :focus-visible {
-      outline: 3px solid currentColor;
-      outline-offset: 3px;
-    }
-
-    dialog {
-      max-width: min(42rem, calc(100vw - 2rem));
-    }
-  </style>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/kanban.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
   <a href="#conteudo-principal">Pular para o conteúdo principal</a>
@@ -70,7 +53,7 @@
           >
           <p id="ajuda-busca">Atalho: Ctrl + K para ir à busca. Esc limpa a busca ou fecha o componente aberto.</p>
         </div>
-        <button type="button" disabled>Alternar tema</button>
+        <button type="button" id="alternar-tema" aria-pressed="false" aria-label="Ativar tema escuro">Ativar tema escuro</button>
       </header>
 
       <section aria-labelledby="saudacao">
@@ -282,6 +265,42 @@
   <script>
     (() => {
       const search = document.getElementById("busca-tarefas");
+      const themeButton = document.getElementById("alternar-tema");
+      const themeStorageKey = "kanban-theme";
+
+      const applyTheme = (theme, persist = false) => {
+        const isDark = theme === "dark";
+        document.documentElement.dataset.theme = isDark ? "dark" : "light";
+        themeButton.setAttribute("aria-pressed", String(isDark));
+        themeButton.textContent = isDark ? "Ativar tema claro" : "Ativar tema escuro";
+        themeButton.setAttribute(
+          "aria-label",
+          isDark ? "Ativar tema claro" : "Ativar tema escuro"
+        );
+        if (persist) {
+          try {
+            localStorage.setItem(themeStorageKey, theme);
+          } catch {
+            // A preferência continua ativa nesta sessão se o armazenamento estiver indisponível.
+          }
+        }
+      };
+
+      let savedTheme = null;
+      try {
+        savedTheme = localStorage.getItem(themeStorageKey);
+      } catch {
+        // A preferência do sistema será usada como alternativa.
+      }
+      const preferredTheme = savedTheme === "light" || savedTheme === "dark"
+        ? savedTheme
+        : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      applyTheme(preferredTheme);
+
+      themeButton.addEventListener("click", () => {
+        const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        applyTheme(nextTheme, true);
+      });
 
       document.addEventListener("click", (event) => {
         const openButton = event.target.closest("[data-dialog-open]");
