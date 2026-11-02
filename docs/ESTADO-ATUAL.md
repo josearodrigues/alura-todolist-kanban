@@ -37,8 +37,8 @@
 ## 3. Estado da Governança Documental
 
 A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
-- **`docs/REQUISITOS.md`:** Atualizado (Versão 1.5 Corrigida).
-- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado e consolidado com as 7 decisões da Etapa 3.
+- **`docs/REQUISITOS.md`:** Atualizado (Versão 1.6 — metas de cobertura do RNF03 registradas).
+- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado e consolidado (Versão 1.8 — matriz de rastreabilidade completa e critérios de aceite objetivos para as Fases 1 a 6).
 - **`docs/ESTADO-ATUAL.md`:** Atualizado com o estado operacional corrente (este documento).
 
 ---
@@ -47,10 +47,10 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 | Etapa / Fase | Situação | Descrição / Entregáveis |
 | :--- | :--- | :--- |
-| **Etapa 1 — Descoberta e Requisitos** | **Concluída** | Levantamento via método Grill Me; requisitos aprovados. |
+| **Etapa 1 — Descoberta e Requisitos** | **Concluída e Aprovada** | Levantamento via método Grill Me; requisitos aprovados. |
 | **Etapa 2 — Planejamento Funcional** | **Concluída e Aprovada** | Especificação consolidada de RF01–RF15, RNF01–RNF07 e regras de negócio. |
 | **Etapa 3 — Arquitetura Técnica** | **Concluída e Aprovada** | Sete decisões técnicas aprovadas, arquitetura modular e critérios de testes definidos. |
-| **Etapa 4 — Plano de Implementação** | **Pendente** | Detalhamento final das fases antes de codificar. |
+| **Etapa 4 — Plano de Implementação** | **Pendente** | Consolidação documental final realizada (Versão 1.8); pendente de revisão e aprovação formal do usuário antes da codificação. |
 | **Etapa 5 — Implementação Controlada** | **Não iniciada** | Zero código de aplicação implementado. Aguarda autorização expressa. |
 | ↳ *Fase 1: Domínio Python e Testes* | Não iniciada | Pacote `src/todolist/`, `pyproject.toml`, testes e `verify_coverage.py`. |
 | ↳ *Fase 2: HTML e Acessibilidade* | Não iniciada | Estrutura semântica `index.html` e validação Nu HTML Checker. |
@@ -65,11 +65,12 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 ## 5. Matriz de Rastreabilidade
 
 - **Planejado:** Aplicação To-Do Kanban estática com Python via WebAssembly (Pyodide), 3 colunas, drag and drop via Pointer Events, calendário integrado, métricas em tempo real e backup JSON.
-- **Aprovado:** Versão 1.5 de Requisitos e Etapa 3 de Arquitetura e Planejamento Técnico formalmente aprovadas.
+- **Aprovado:** Versão 1.6 de Requisitos (RNF03 formalizado) e Etapa 3 de Arquitetura e Planejamento Técnico formalmente aprovadas.
+- **Consolidado para Homologação:** Etapa 4 detalhada com matriz de rastreabilidade (RF01–RF15 e RNF01–RNF07) e critérios de aceite (CA1.1 a CA6.8) documentados no `PLANO-IMPLEMENTACAO.md`.
 - **Implementado:** Zero código de aplicação implementado até o momento.
 - **Testado:** Nenhum teste automatizado executado ainda (arquivos de teste não criados).
 - **Validado:** Auditoria estrutural documental e integridade do mockup oficial.
-- **Commitado / Enviado ao GitHub / Publicado:** Nenhuma alteração foi commitada ou publicada.
+- **Commitado / Enviado ao GitHub / Publicado:** Nenhuma nova alteração foi commitada ou publicada nesta sessão.
 
 ---
 
@@ -80,22 +81,20 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 3. **Decisão 3.3 (Domínio Python):** Abordagem híbrida no pacote `src/todolist/`: entidade `Tarefa` estruturada com `@dataclass` e validações defensivas explícitas, combinada com serviços funcionais sem efeitos colaterais e com suporte a injeção determinística de datas e identificadores.
 4. **Decisão 3.4 (Identificadores e Invariantes):** UUID v4 nativo em string canônica, contiguidade ordinal estrita por coluna iniciando em zero (sem normalização silenciosa na importação) e 8 invariantes temporais em formato ISO 8601 UTC com milissegundos.
 5. **Decisão 3.5 (Estratégia de Testes):** Procedimento oficial `pytest && python scripts/verify_coverage.py`, exigindo 100% de aprovação de testes, $\ge 90,0\%$ de declarações (`percent_covered`) e $\ge 85,0\%$ de ramos (`percent_branches_covered`) via `coverage.json`.
-6. **Decisão 3.6 (Frontend e Acessibilidade):** Validação de HTML pelo Nu HTML Checker (v.Nu local), auditoria matemática de contraste via script `check_contrast.py` (WCAG 2.2 AA), checklist manual estruturado de teclado e adoção de **Pointer Events** para unificar mouse, toque e caneta no drag and drop.
+6. **Decisão 3.6 (Frontend e Acessibilidade):** Validação de HTML pelo Nu HTML Checker (v.Nu local), auditoria matemática de contraste via script `check_contrast.py` (WCAG 2.2 AA, critérios 1.4.3 e 1.4.11), checklist manual estruturado de teclado e adoção de **Pointer Events** para unificar mouse, toque e caneta no drag and drop.
 7. **Decisão 3.7 (Arquitetura Modular):** Organização completa em pastas com `pyproject.toml` na raiz, pacote `src/todolist/`, módulos JavaScript ES6+ desacoplados, CSS modular e scripts de suporte.
 
 ---
 
 ## 7. Informações e Pendências de Confirmação
 
-- **Ambiente Git:** Repositório remoto, branch `main` e commit `e9d13d4` confirmados no GitHub. O estado da árvore de trabalho local não foi afirmado como verificado.
+- **Ambiente Git:** Repositório remoto, branch `main` e commit de referência `e9d13d4` registrados no histórico do GitHub. O estado da árvore de trabalho local e a sincronização com o remoto não foram avaliados nem alterados nesta sessão.
 - **Implementação:** Nenhum código da aplicação foi implementado. Os diretórios previstos (`src/`, `js/`, `css/`, `tests/`, `scripts/`) constam no planejamento técnico aprovado e aguardam autorização formal para início da Fase 1 da implementação.
 
 ---
 
 ## 8. Próxima Ação Recomendada
 
-1. Registrar as Etapas 1, 2 e 3 como concluídas e formalmente aprovadas.
-2. Manter a Etapa 4 (Plano de Implementação Detalhado) como pendente.
-3. Manter a Etapa 5 (Implementação Controlada) e a Etapa 6 (Validação Final) como não iniciadas, dependentes de autorização explícita do usuário.
-4. Concluir a revisão e consolidação pontual da documentação da Etapa 3.
-5. Após a confirmação do usuário, proceder com o planejamento detalhado da Etapa 4, sem iniciar automaticamente a implementação.
+1. Submeter a consolidação documental da Etapa 4 (Versão 1.8 do `PLANO-IMPLEMENTACAO.md`) à revisão e aprovação formal do usuário.
+2. Manter a Etapa 4 como pendente até aprovação expressa.
+3. Não iniciar a Etapa 5 ou codificação antes de autorização explícita.

@@ -70,7 +70,10 @@ A interface adota como base de concepção visual o arquivo:
 
 - **RNF01 — Execução no GitHub Pages:** Compatibilidade integral com hospedagem estática no GitHub Pages, executando a lógica de negócio em Python diretamente no navegador do usuário por meio de WebAssembly.
 - **RNF02 — Lógica Central em Python:** Regras de negócio, cálculos estatísticos, ordenação e validações concentradas em código Python.
-- **RNF03 — Qualidade e Cobertura de Testes:** Suíte `pytest` com 100% de aprovação, cobertura integral da matriz de regras críticas e metas de cobertura de código a serem formalizadas na Etapa 3.
+- **RNF03 — Qualidade e Cobertura de Testes:** Suíte `pytest` com 100% de aprovação (zero falhas e zero erros), cobertura integral da matriz de regras críticas e as seguintes metas formalizadas na Etapa 3:
+  - Cobertura de linhas: `percent_covered` $\ge 90{,}0\%$ (campo do `coverage.json` gerado pelo `coverage.py`).
+  - Cobertura de ramos: `percent_branches_covered` $\ge 85{,}0\%$ (campo do `coverage.json`).
+  - Procedimento oficial de validação: `pytest && python scripts/verify_coverage.py`.
 - **RNF04 — Persistência Segura no Navegador:** Persistência no `localStorage` com garantia de consistência entre dados das tarefas e metadados globais, garantia de reversão do estado em memória e na tela diante de falhas de gravação e tratamento de exceções.
 - **RNF05 — Responsividade Adaptativa:** Breakpoints de referência (Desktop $\ge 1200\text{px}$, Tablet $768\text{px}-1199\text{px}$, Mobile $< 768\text{px}$), ajustáveis na validação visual.
 - **RNF06 — Acessibilidade Referenciada em WCAG 2.2 Nível AA:** Foco visível evidente, navegação lógica por teclado, estrutura semântica com atributos ARIA, alternativa acessível de movimentação, suporte a `prefers-reduced-motion` e contraste de cores $\ge 4.5:1$ nos dois temas.
@@ -167,3 +170,4 @@ A exportação de arquivos JSON oferece um mecanismo de backup externo e portabi
 | **1.3** | 2026-11-01 | Precisão conceitual de persistência, matriz explícita de movimentação, teste de touch. | Eliminação de ambiguidades técnicas e de acessibilidade. |
 | **1.4** | 2026-11-01 | Neutralidade de WebAssembly no RNF01, regras de importação estrutural e falhas de persistência. | Aprofundamento da integridade de dados e conformidade documental. |
 | **1.5** | 2026-11-02 | Semântica estrita de `data_atualizacao`, contrato fechado de 10 atributos (sem `responsavel`), garantia de preservação de estado, saudação neutra "Olá!" e preservação do PNG histórico. | Aprovação final do planejamento funcional consolidado. |
+| **1.6** | 2026-11-02 | Atualização do RNF03: metas de cobertura formalizadas na Etapa 3 registradas (`percent_covered` $\ge 90\%$, `percent_branches_covered` $\ge 85\%$, 100% de aprovação, comando oficial `pytest && python scripts/verify_coverage.py`). | Eliminação de referência pendente à Etapa 3 e registro das metas aprovadas. |
