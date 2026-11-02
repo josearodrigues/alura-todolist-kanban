@@ -1,0 +1,69 @@
+name: Validar HTML
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - ".github/workflows/validar-html.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - ".github/workflows/validar-html.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  nu-html-checker:
+    name: Nu HTML Checker
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Validar index.html
+        id: nu
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          curl \
+            --fail-with-body \
+            --silent \
+            --show-error \
+            --retry 3 \
+            --retry-delay 2 \
+            --retry-all-errors \
+            -H "Content-Type: text/html; charset=utf-8" \
+            --data-binary @index.html \
+            "https://validator.w3.org/nu/?out=json" \
+            --output nu-report.json
+
+          jq -e '.messages | type == "array"' nu-report.json > /dev/null
+
+          echo "## Resultado do Nu HTML Checker" >> "$GITHUB_STEP_SUMMARY"
+          jq -r '
+            [.messages[]? | select(.type == "error" or .type == "fatal")] as $errors |
+            [.messages[]? | select(.type == "info" and (.subType // "") == "warning")] as $warnings |
+            "- Erros: \($errors | length)\n- Avisos: \($warnings | length)"
+          ' nu-report.json >> "$GITHUB_STEP_SUMMARY"
+
+          jq -r '
+            .messages[]? |
+            select(.type == "error" or .type == "fatal" or (.type == "info" and (.subType // "") == "warning")) |
+            "- **\(.type)** — \(.message) (linha \(.lastLine // "n/d"), coluna \(.lastColumn // "n/d"))"
+          ' nu-report.json >> "$GITHUB_STEP_SUMMARY"
+
+          if jq -e '[.messages[]? | select(.type == "error" or .type == "fatal")] | length == 0' nu-report.json > /dev/null; then
+            echo "Validação concluída: nenhum erro HTML encontrado."
+          else
+            echo "::error::O Nu HTML Checker encontrou erros em index.html."
+            exit 1
+          fi
