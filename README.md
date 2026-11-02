@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual:** Fase 1 (domínio Python e testes) concluída e validada. Fase 2 (HTML e acessibilidade estrutural) implementada, com validação automática de HTML aprovada; o checklist manual ainda está pendente. As Fases 3 a 6 não foram iniciadas. A aplicação ainda não está publicada para uso final no GitHub Pages.
+> **Estado atual:** Fase 1 (domínio Python e testes) concluída e validada. Fase 2 (HTML e acessibilidade estrutural) implementada, com validação automática de HTML aprovada; o checklist manual ainda está pendente. A implementação CSS da Fase 3 foi adicionada, mas sua validação visual em diferentes resoluções e a execução confirmada da auditoria automatizada ainda estão pendentes. As Fases 4 a 6 não foram iniciadas. A aplicação ainda não está publicada para uso final no GitHub Pages.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
@@ -33,6 +33,8 @@ As funcionalidades de interação e persistência ainda não integradas permanec
 | pytest | Testes automatizados do domínio Python |
 | pytest-cov | Medição de cobertura de linhas e branches |
 | HTML5 | Estrutura semântica da interface |
+| CSS3 modular | Design system, temas claro/escuro e layout responsivo (Fase 3) |
+| Python (script padrão) | Auditoria matemática das combinações de contraste WCAG 2.2 AA |
 | JavaScript | Comportamentos mínimos de teclado e abertura/fechamento dos diálogos nesta fase |
 | HTML Dialog | Estrutura nativa dos diálogos |
 | GitHub Actions | Automação da validação de HTML |
@@ -40,7 +42,7 @@ As funcionalidades de interação e persistência ainda não integradas permanec
 | GitHub Pages | Hospedagem estática prevista para a aplicação final |
 | Pyodide / WebAssembly | Execução de Python no navegador, prevista para a Fase 4 |
 
-A tabela distingue tecnologias já utilizadas daquelas previstas na arquitetura e nas próximas fases.
+A tabela distingue tecnologias já utilizadas daquelas previstas na arquitetura e nas próximas fases. A alternância de tema claro/escuro foi implementada na Fase 3 e salva a preferência visual no navegador; isso não representa a implementação da persistência das tarefas.
 
 ---
 
@@ -77,7 +79,7 @@ alura-todolist-kanban/
 
 - **`src/todolist/`:** pacote Python com o modelo de domínio, serviços, métricas e validação do schema.
 - **`tests/`:** testes automatizados do domínio.
-- **`scripts/`:** ferramentas auxiliares de validação, incluindo a verificação de cobertura.
+- **`css/`:** tokens de design, estilos base, layout responsivo, quadro Kanban e componentes.\n- **`scripts/`:** ferramentas auxiliares de validação, incluindo a verificação de cobertura e a auditoria de contraste.
 - **`docs/`:** requisitos, plano de implementação, estado operacional e referência visual aprovada.
 - **`.github/workflows/`:** automação da validação HTML.
 - **`index.html`:** estrutura atual da interface web.
@@ -160,7 +162,7 @@ Os resultados acima registram as evidências já obtidas; não representam uma n
 |---|---|---|
 | 1. Domínio Python e testes | Entidade, regras de negócio, serviços, métricas, schema e testes | Concluída e validada |
 | 2. HTML e acessibilidade | Estrutura semântica, diálogos, teclado, foco e validação HTML | Implementada; checklist manual pendente |
-| 3. CSS e validação visual | Design system, temas, responsividade e contraste WCAG 2.2 AA | Não iniciada |
+| 3. CSS e validação visual | Design system, temas, responsividade e contraste WCAG 2.2 AA | Implementação CSS concluída; validação visual e execução confirmada da auditoria pendentes |
 | 4. WebAssembly e persistência | Integração Pyodide, execução Python no navegador e persistência local | Não iniciada |
 | 5. Interações | Movimentação, reordenação, busca e calendário | Não iniciada |
 | 6. Relatórios e backup JSON | Relatórios, exportação e importação com validação e consistência | Não iniciada |
@@ -187,7 +189,7 @@ Esses itens descrevem o escopo aprovado, não funcionalidades já concluídas. A
 
 ---
 
-## Acessibilidade e Verificação Manual da Fase 2
+## Verificação Visual da Fase 3\n\nA Fase 3 introduziu folhas de estilo modulares, temas claro e escuro, layout adaptativo e suporte a movimento reduzido. Para completar a validação, abra a aplicação localmente e inspecione:\n\n1. Desktop: largura igual ou superior a 1200 px.\n2. Tablet: largura entre 768 px e 1199 px.\n3. Mobile: largura inferior a 768 px.\n4. Cada uma das três larguras nos temas claro e escuro.\n5. Alternância de tema, recarga da página e preservação da preferência selecionada.\n6. Preferência de movimento reduzido ativada no sistema operacional ou navegador.\n\nA auditoria matemática está disponível pelo comando `python scripts/check_contrast.py`. O workflow do GitHub Actions também foi configurado para executá-la quando houver alterações relevantes em CSS ou no script. A inspeção visual humana e a confirmação da execução no Actions ainda precisam ser registradas.\n\n---\n\n## Acessibilidade e Verificação Manual da Fase 2
 
 A estrutura atual inclui navegação semântica, link para pular ao conteúdo principal, rótulos associados aos campos, nomes acessíveis, foco visível, atalho de busca e diálogos nativos.
 
@@ -220,7 +222,7 @@ Registre cada item como **Aprovado**, **Reprovado** ou **Não aplicável**, anot
 
 - **Fase 1:** concluída e validada.
 - **Fase 2:** implementada; validação automática de HTML aprovada; checklist manual pendente.
-- **Fases 3 a 6:** não iniciadas.
+- **Fase 3:** CSS modular, temas e responsividade implementados; validação visual e execução confirmada do script de contraste pendentes.\n- **Fases 4 a 6:** não iniciadas.
 - **Validação final:** pendente.
 - **Publicação no GitHub Pages:** ainda não realizada.
 
