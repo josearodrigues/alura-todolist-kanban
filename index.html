@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Quadro Kanban para organização de tarefas pessoais e de projeto.">
+  <title>To-Do List Kanban</title>
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 3px solid currentColor;
+      outline-offset: 3px;
+    }
+
+    dialog {
+      max-width: min(42rem, calc(100vw - 2rem));
+    }
+  </style>
+</head>
+<body>
+  <a href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+  <div id="aplicacao">
+    <aside aria-label="Navegação principal">
+      <header>
+        <p>To-Do List</p>
+        <p>Kanban</p>
+      </header>
+
+      <nav aria-label="Seções da aplicação">
+        <ul>
+          <li><a href="#quadro-kanban" aria-current="page">Quadro Kanban</a></li>
+          <li><a href="#calendario">Calendário</a></li>
+          <li><a href="#resumo-projeto">Resumo do Projeto</a></li>
+        </ul>
+      </nav>
+
+      <section aria-labelledby="acoes-projeto-titulo">
+        <h2 id="acoes-projeto-titulo">Projeto</h2>
+        <ul>
+          <li><button type="button" data-dialog-open="dialog-relatorios">Relatórios</button></li>
+          <li><button type="button" data-dialog-open="dialog-importar">Importar dados</button></li>
+          <li><button type="button" data-dialog-open="dialog-exportar">Exportar dados</button></li>
+        </ul>
+      </section>
+    </aside>
+
+    <main id="conteudo-principal">
+      <header aria-label="Cabeçalho do quadro">
+        <div>
+          <label for="busca-tarefas">Buscar tarefas</label>
+          <input
+            id="busca-tarefas"
+            name="busca"
+            type="search"
+            placeholder="Buscar por título ou descrição"
+            autocomplete="off"
+            aria-describedby="ajuda-busca"
+          >
+          <p id="ajuda-busca">Atalho: Ctrl + K para ir à busca. Esc limpa a busca ou fecha o componente aberto.</p>
+        </div>
+        <button type="button" disabled aria-disabled="true">Alternar tema</button>
+      </header>
+
+      <section aria-labelledby="saudacao">
+        <h1 id="saudacao">Olá!</h1>
+        <p>Foco de hoje: <output id="foco-hoje">0</output> tarefas pendentes.</p>
+      </section>
+
+      <section id="quadro-kanban" aria-labelledby="titulo-quadro">
+        <header>
+          <h2 id="titulo-quadro">Quadro Kanban</h2>
+          <p>Organize suas tarefas conforme o estado de execução.</p>
+        </header>
+
+        <div id="colunas-kanban">
+          <section aria-labelledby="titulo-a-fazer">
+            <header>
+              <h3 id="titulo-a-fazer">A Fazer</h3>
+              <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-a-fazer">0</output></p>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa em A Fazer</button>
+            </header>
+            <ul id="lista-a-fazer" aria-label="Tarefas a fazer" aria-live="polite"></ul>
+            <p id="vazio-a-fazer">Nenhuma tarefa nesta coluna.</p>
+          </section>
+
+          <section aria-labelledby="titulo-em-andamento">
+            <header>
+              <h3 id="titulo-em-andamento">Em Andamento</h3>
+              <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-em-andamento">0</output></p>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa em Em Andamento</button>
+            </header>
+            <ul id="lista-em-andamento" aria-label="Tarefas em andamento" aria-live="polite"></ul>
+            <p id="vazio-em-andamento">Nenhuma tarefa nesta coluna.</p>
+          </section>
+
+          <section aria-labelledby="titulo-concluidas">
+            <header>
+              <h3 id="titulo-concluidas">Concluídas</h3>
+              <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-concluidas">0</output></p>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa em Concluídas</button>
+            </header>
+            <ul id="lista-concluidas" aria-label="Tarefas concluídas" aria-live="polite"></ul>
+            <p id="vazio-concluidas">Nenhuma tarefa nesta coluna.</p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <aside aria-label="Painel de informações">
+      <section id="calendario" aria-labelledby="titulo-calendario">
+        <h2 id="titulo-calendario">Calendário</h2>
+        <p id="calendario-orientacao">A visualização mensal será disponibilizada na etapa de interações.</p>
+        <div id="calendario-conteudo" aria-live="polite">
+          <p>Calendário ainda não inicializado.</p>
+        </div>
+      </section>
+
+      <section id="resumo-projeto" aria-labelledby="titulo-resumo">
+        <h2 id="titulo-resumo">Resumo do Projeto</h2>
+        <dl>
+          <div>
+            <dt>Total de tarefas</dt>
+            <dd><output id="total-tarefas">0</output></dd>
+          </div>
+          <div>
+            <dt>Concluídas</dt>
+            <dd><output id="percentual-concluidas">0,0%</output></dd>
+          </div>
+          <div>
+            <dt>Pendentes</dt>
+            <dd><output id="percentual-pendentes">0,0%</output></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="titulo-status-runtime">
+        <h2 id="titulo-status-runtime">Status da aplicação</h2>
+        <p id="status-runtime" role="status" aria-live="polite">Python: aguardando inicialização.</p>
+        <p>Última alteração: <time id="ultima-alteracao">Ainda não registrada</time></p>
+      </section>
+    </aside>
+  </div>
+
+  <template id="modelo-cartao-tarefa">
+    <li>
+      <article>
+        <h4 data-task-title></h4>
+        <p data-task-description></p>
+        <p>Prioridade: <span data-task-priority></span></p>
+        <p>Prazo: <time data-task-due-date></time></p>
+        <details>
+          <summary aria-label="Abrir opções da tarefa">Opções da tarefa</summary>
+          <ul>
+            <li><button type="button" data-dialog-open="dialog-editar-tarefa">Editar tarefa</button></li>
+            <li>
+              <details>
+                <summary>Mover para...</summary>
+                <ul>
+                  <li><button type="button" data-move-to="a_fazer">A Fazer</button></li>
+                  <li><button type="button" data-move-to="em_andamento">Em Andamento</button></li>
+                  <li><button type="button" data-move-to="concluida">Concluídas</button></li>
+                </ul>
+              </details>
+            </li>
+            <li><button type="button" data-dialog-open="dialog-excluir-tarefa">Excluir tarefa</button></li>
+          </ul>
+        </details>
+      </article>
+    </li>
+  </template>
+
+  <dialog id="dialog-nova-tarefa" aria-labelledby="titulo-nova-tarefa" aria-describedby="descricao-nova-tarefa">
+    <header>
+      <h2 id="titulo-nova-tarefa">Nova tarefa</h2>
+      <p id="descricao-nova-tarefa">Preencha os dados para cadastrar uma tarefa.</p>
+    </header>
+    <form>
+      <p>
+        <label for="nova-tarefa-titulo">Título (obrigatório)</label>
+        <input id="nova-tarefa-titulo" name="titulo" type="text" minlength="3" maxlength="100" required>
+      </p>
+      <p>
+        <label for="nova-tarefa-descricao">Descrição (opcional)</label>
+        <textarea id="nova-tarefa-descricao" name="descricao" maxlength="500"></textarea>
+      </p>
+      <p>
+        <label for="nova-tarefa-prioridade">Prioridade</label>
+        <select id="nova-tarefa-prioridade" name="prioridade" required>
+          <option value="baixa">Baixa</option>
+          <option value="media" selected>Média</option>
+          <option value="alta">Alta</option>
+        </select>
+      </p>
+      <p>
+        <label for="nova-tarefa-prazo">Data limite (opcional)</label>
+        <input id="nova-tarefa-prazo" name="data_limite" type="date">
+      </p>
+      <p>A tarefa será criada no estado A Fazer.</p>
+      <button type="button" disabled aria-disabled="true">Salvar tarefa (integração pendente)</button>
+      <button type="button" data-dialog-close>Cancelar</button>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-editar-tarefa" aria-labelledby="titulo-editar-tarefa">
+    <header>
+      <h2 id="titulo-editar-tarefa">Editar tarefa</h2>
+      <p>Altere somente os campos editáveis da tarefa.</p>
+    </header>
+    <form>
+      <p>
+        <label for="editar-tarefa-titulo">Título (obrigatório)</label>
+        <input id="editar-tarefa-titulo" name="titulo" type="text" minlength="3" maxlength="100" required>
+      </p>
+      <p>
+        <label for="editar-tarefa-descricao">Descrição (opcional)</label>
+        <textarea id="editar-tarefa-descricao" name="descricao" maxlength="500"></textarea>
+      </p>
+      <p>
+        <label for="editar-tarefa-prioridade">Prioridade</label>
+        <select id="editar-tarefa-prioridade" name="prioridade" required>
+          <option value="baixa">Baixa</option>
+          <option value="media">Média</option>
+          <option value="alta">Alta</option>
+        </select>
+      </p>
+      <p>
+        <label for="editar-tarefa-prazo">Data limite (opcional)</label>
+        <input id="editar-tarefa-prazo" name="data_limite" type="date">
+      </p>
+      <button type="button" disabled aria-disabled="true">Salvar alterações (integração pendente)</button>
+      <button type="button" data-dialog-close>Cancelar</button>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-excluir-tarefa" aria-labelledby="titulo-excluir-tarefa">
+    <h2 id="titulo-excluir-tarefa">Confirmar exclusão</h2>
+    <p>Tem certeza de que deseja excluir esta tarefa? Esta ação não poderá ser desfeita.</p>
+    <button type="button" disabled aria-disabled="true">Confirmar exclusão (integração pendente)</button>
+    <button type="button" data-dialog-close>Cancelar</button>
+  </dialog>
+
+  <dialog id="dialog-relatorios" aria-labelledby="titulo-relatorios">
+    <h2 id="titulo-relatorios">Relatórios</h2>
+    <p>Os indicadores detalhados serão apresentados após a integração com o núcleo Python.</p>
+    <button type="button" data-dialog-close>Fechar</button>
+  </dialog>
+
+  <dialog id="dialog-importar" aria-labelledby="titulo-importar">
+    <h2 id="titulo-importar">Importar dados</h2>
+    <form>
+      <p>
+        <label for="arquivo-importacao">Arquivo de backup JSON</label>
+        <input id="arquivo-importacao" name="arquivo" type="file" accept="application/json,.json">
+      </p>
+      <p>A validação e a confirmação da substituição serão habilitadas na etapa de backup.</p>
+      <button type="button" disabled aria-disabled="true">Validar arquivo (integração pendente)</button>
+      <button type="button" data-dialog-close>Cancelar</button>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-exportar" aria-labelledby="titulo-exportar">
+    <h2 id="titulo-exportar">Exportar dados</h2>
+    <p>O download do backup JSON será habilitado na etapa de backup.</p>
+    <button type="button" disabled aria-disabled="true">Exportar JSON (integração pendente)</button>
+    <button type="button" data-dialog-close>Fechar</button>
+  </dialog>
+
+  <script>
+    (() => {
+      const search = document.getElementById("busca-tarefas");
+
+      document.addEventListener("click", (event) => {
+        const openButton = event.target.closest("[data-dialog-open]");
+        if (openButton) {
+          const dialog = document.getElementById(openButton.dataset.dialogOpen);
+          if (dialog instanceof HTMLDialogElement && !dialog.open) {
+            dialog.showModal();
+          }
+          return;
+        }
+
+        const closeButton = event.target.closest("[data-dialog-close]");
+        if (closeButton) {
+          const dialog = closeButton.closest("dialog");
+          if (dialog instanceof HTMLDialogElement && dialog.open) {
+            dialog.close();
+          }
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+          event.preventDefault();
+          search.focus();
+          return;
+        }
+
+        if (event.key !== "Escape") {
+          return;
+        }
+
+        const openDialog = [...document.querySelectorAll("dialog[open]")].at(-1);
+        if (openDialog) {
+          event.preventDefault();
+          openDialog.close();
+          return;
+        }
+
+        const openMenu = [...document.querySelectorAll("details[open]")].at(-1);
+        if (openMenu) {
+          event.preventDefault();
+          const summary = openMenu.querySelector(":scope > summary");
+          openMenu.open = false;
+          summary?.focus();
+          return;
+        }
+
+        if (document.activeElement === search && search.value !== "") {
+          event.preventDefault();
+          search.value = "";
+          search.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
