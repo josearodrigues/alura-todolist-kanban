@@ -2,7 +2,24 @@
 
 Este arquivo registra alterações relevantes do projeto em ordem cronológica inversa. Os registros descrevem o que foi implementado e validado, sem antecipar funcionalidades planejadas.
 
-## [Não lançado] — 2026-11-02
+## [Não lançado]
+
+### Fase 3 — CSS e validação visual (implementação)
+
+- Criadas as folhas modulares `css/variables.css`, `css/base.css`, `css/layout.css`, `css/kanban.css` e `css/components.css`.
+- Integrados os estilos ao `index.html`, com layout para Desktop (>= 1200 px), Tablet (768–1199 px) e Mobile (< 768 px).
+- Implementados os temas Claro e Escuro com tokens CSS nativos, alternância acessível e persistência da preferência visual no navegador.
+- Adicionado suporte a `prefers-reduced-motion`.
+- Criado `scripts/check_contrast.py`, com verificações de contraste de texto, indicadores, bordas e foco para os dois temas.
+- Ampliado o workflow `validar-html.yml` para executar a auditoria de contraste e considerar alterações em CSS.
+- Verificação matemática independente das 23 combinações previstas no script: todas atingiram os limites definidos; a execução confirmatória do script pelo workflow ainda precisa ser conferida.
+- Permanecem pendentes a inspeção visual humana nos seis cenários responsivos/temas e a evidência visual de referência atualizada. O PNG original permanece preservado.
+
+### Fase 2 — HTML e acessibilidade
+
+- Atualizado o README com roteiro de inspeção visual da Fase 3 e instruções para executar a auditoria de contraste.
+
+ — 2026-11-02
 
 ### Adicionado
 - Estrutura HTML semântica da aplicação, com as três colunas do Kanban, áreas de apoio, formulários e diálogos nativos.
