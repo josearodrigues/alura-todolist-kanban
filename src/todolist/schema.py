@@ -1,0 +1,121 @@
+"""Validação de schema JSON para importação e exportação de backups.
+
+Implementa a política estrita de rejeição integral em caso de campos
+desconhecidos ou ausentes, sem correções silenciosas (RF13, RF14, Seção 5).
+"""
+
+from typing import Any, Dict, List, Set, Tuple
+from todolist.models import (
+    CAMPOS_OBRIGATORIOS_TAREFA,
+    Tarefa,
+    validar_iso_utc_ms,
+)
+
+CAMPOS_OBRIGATORIOS_ENVELOPE: Set[str] = {
+    "versao_schema",
+    "aplicacao",
+    "data_exportacao",
+    "total_tarefas",
+    "tarefas",
+}
+VERSAO_SCHEMA_ESPERADA = "1.0"
+APLICACAO_ESPERADA = "To-Do List Kanban"
+
+
+def validar_envelope_backup(dados: Dict[str, Any]) -> Tuple[bool, str]:
+    """Valida o documento JSON de backup (envelope e tarefas).
+
+    Retorna: (is_valido, mensagem_erro).
+    Se for válido, mensagem_erro será "".
+    """
+    if not isinstance(dados, dict):
+        return False, "O backup JSON deve ser um objeto JSON (dicionário)."
+
+    chaves_envelope = set(dados.keys())
+
+    # Rejeição de campos desconhecidos no envelope
+    campos_desconhecidos = chaves_envelope - CAMPOS_OBRIGATORIOS_ENVELOPE
+    if campos_desconhecidos:
+        return False, f"Envelope contém campos desconhecidos: {sorted(list(campos_desconhecidos))}."
+
+    # Verificação de campos faltantes no envelope
+    campos_faltantes = CAMPOS_OBRIGATORIOS_ENVELOPE - chaves_envelope
+    if campos_faltantes:
+        return False, f"Envelope possui campos obrigatórios ausentes: {sorted(list(campos_faltantes))}."
+
+    # Validação de valores do envelope
+    if dados["versao_schema"] != VERSAO_SCHEMA_ESPERADA:
+        return False, f"versao_schema inválida: '{dados['versao_schema']}'. Esperado: '{VERSAO_SCHEMA_ESPERADA}'."
+
+    if dados["aplicacao"] != APLICACAO_ESPERADA:
+        return False, f"aplicacao inválida: '{dados['aplicacao']}'. Esperado: '{APLICACAO_ESPERADA}'."
+
+    try:
+        validar_iso_utc_ms(dados["data_exportacao"], "data_exportacao")
+    except ValueError as e:
+        return False, f"data_exportacao inválida no envelope: {e}"
+
+    tarefas = dados["tarefas"]
+    if not isinstance(tarefas, list):
+        return False, "Campo 'tarefas' deve ser uma lista."
+
+    if not isinstance(dados["total_tarefas"], int) or isinstance(dados["total_tarefas"], bool):
+        return False, "Campo 'total_tarefas' deve ser um inteiro."
+
+    if dados["total_tarefas"] != len(tarefas):
+        return (
+            False,
+            f"Divergência de contagem: total_tarefas ({dados['total_tarefas']}) != len(tarefas) ({len(tarefas)}).",
+        )
+
+    # Validar individualmente cada tarefa e garantir unicidade de id
+    ids_vistos: Set[str] = set()
+    ordens_por_coluna: Dict[str, List[int]] = {"a_fazer": [], "em_andamento": [], "concluida": []}
+
+    for idx, t in enumerate(tarefas):
+        if not isinstance(t, dict):
+            return False, f"Item {idx} da lista de tarefas não é um objeto JSON."
+
+        # Validação estrita via Tarefa.from_dict
+        try:
+            obj_tarefa = Tarefa.from_dict(t)
+        except ValueError as e:
+            return False, f"Erro na tarefa de índice {idx}: {e}"
+
+        if obj_tarefa.id in ids_vistos:
+            return False, f"ID duplicado detectado: '{obj_tarefa.id}' na tarefa de índice {idx}."
+        ids_vistos.add(obj_tarefa.id)
+
+        ordens_por_coluna[obj_tarefa.estado].append(obj_tarefa.ordem)
+
+    # Validar contiguidade de ordem por coluna iniciando em zero: 0, 1, 2...
+    for estado, ordens in ordens_por_coluna.items():
+        ordens_ordenadas = sorted(ordens)
+        ordens_esperadas = list(range(len(ordens)))
+        if ordens_ordenadas != ordens_esperadas:
+            return (
+                False,
+                f"Coluna '{estado}' possui sequência de ordem inválida: recebido {ordens_ordenadas}, esperado {ordens_esperadas}.",
+            )
+
+    return True, ""
+
+
+def gerar_envelope_backup(
+    tarefas: List[Dict[str, Any]],
+    timestamp_exportacao: str,
+) -> Dict[str, Any]:
+    """Gera o envelope JSON oficial de exportação (RF13)."""
+    validar_iso_utc_ms(timestamp_exportacao, "timestamp_exportacao")
+
+    # Valida todas as tarefas antes de empacotar
+    for t in tarefas:
+        Tarefa.from_dict(t)
+
+    return {
+        "versao_schema": VERSAO_SCHEMA_ESPERADA,
+        "aplicacao": APLICACAO_ESPERADA,
+        "data_exportacao": timestamp_exportacao,
+        "total_tarefas": len(tarefas),
+        "tarefas": [dict(t) for t in tarefas],
+    }

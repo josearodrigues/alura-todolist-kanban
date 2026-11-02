@@ -1,0 +1,4 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "--cov=src/todolist --cov-branch --cov-report=term-missing --cov-report=json:coverage.json"
