@@ -25,10 +25,9 @@
 - **Controle de Versão (Git):**
   - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
   - *Branch confirmada:* `main`
-  - *Último commit confirmado:* `e9d13d4` — `docs: consolidar arquitetura e planejamento técnico`
-  - *Situação remota:* Alterações documentais enviadas ao GitHub.
-  - *Árvore de trabalho local:* Não afirmada como verificada nesta sessão.
-  - *Ações realizadas:* Nenhuma nova operação de commit, push, tag ou publicação remota foi executada pelo assistente.
+  - *Último commit remoto conhecido:* `03eae77` — `docs: consolidar plano e critérios de aceite`
+  - *Situação remota:* Informação registrada com base na revisão externa do GitHub; a sincronização entre a árvore local e o repositório remoto não foi afirmada nem verificada nesta sessão.
+  - *Ações realizadas:* Nenhuma operação de commit, push, tag ou publicação remota foi executada pelo assistente.
 - **Mockup Oficial de Referência:**
   - `docs/design/referencias/todolist-kanban-1.0-mockup.png`: Presente, verificado e preservado intacto em sua forma binária original.
 
@@ -37,8 +36,8 @@
 ## 3. Estado da Governança Documental
 
 A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
-- **`docs/REQUISITOS.md`:** Atualizado (Versão 1.6 — metas de cobertura do RNF03 registradas).
-- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado e consolidado (Versão 1.8 — matriz de rastreabilidade completa e critérios de aceite objetivos para as Fases 1 a 6).
+- **`docs/REQUISITOS.md`:** Atualizado (Versão 1.7 — RNF06 alinhado aos critérios normativos de contraste WCAG 2.2 AA).
+- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado e consolidado (Versão 1.9 — eliminação da contradição de focus trap, atribuição de persistência estrita ao JS, CA2.1/CA4.1 adicionados e Matriz de Rastreabilidade rigorosamente associada).
 - **`docs/ESTADO-ATUAL.md`:** Atualizado com o estado operacional corrente (este documento).
 
 ---

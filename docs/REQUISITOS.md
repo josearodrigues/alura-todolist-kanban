@@ -76,7 +76,11 @@ A interface adota como base de concepção visual o arquivo:
   - Procedimento oficial de validação: `pytest && python scripts/verify_coverage.py`.
 - **RNF04 — Persistência Segura no Navegador:** Persistência no `localStorage` com garantia de consistência entre dados das tarefas e metadados globais, garantia de reversão do estado em memória e na tela diante de falhas de gravação e tratamento de exceções.
 - **RNF05 — Responsividade Adaptativa:** Breakpoints de referência (Desktop $\ge 1200\text{px}$, Tablet $768\text{px}-1199\text{px}$, Mobile $< 768\text{px}$), ajustáveis na validação visual.
-- **RNF06 — Acessibilidade Referenciada em WCAG 2.2 Nível AA:** Foco visível evidente, navegação lógica por teclado, estrutura semântica com atributos ARIA, alternativa acessível de movimentação, suporte a `prefers-reduced-motion` e contraste de cores $\ge 4.5:1$ nos dois temas.
+- **RNF06 — Acessibilidade Referenciada em WCAG 2.2 Nível AA:** Foco visível evidente, navegação lógica por teclado, estrutura semântica com atributos ARIA, alternativa acessível de movimentação, suporte a `prefers-reduced-motion` e conformidade com os critérios de contraste da WCAG 2.2 (nível AA):
+  - Texto normal: razão de contraste mínima de 4,5:1 (critério 1.4.3 — Contrast Minimum).
+  - Texto grande ($\ge 18\text{pt}$ ou $\ge 14\text{pt}$ negrito): razão de contraste mínima de 3:1 (critério 1.4.3 — Contrast Minimum).
+  - Componentes gráficos relevantes e elementos não textuais: razão de contraste mínima de 3:1 (critério 1.4.11 — Non-text Contrast).
+  - Aplicação obrigatória em ambos os temas Claro e Escuro.
 - **RNF07 — Feedback de Inicialização:** Indicador de carregamento amigável durante a preparação do ambiente WebAssembly.
 
 ---
@@ -171,3 +175,4 @@ A exportação de arquivos JSON oferece um mecanismo de backup externo e portabi
 | **1.4** | 2026-11-01 | Neutralidade de WebAssembly no RNF01, regras de importação estrutural e falhas de persistência. | Aprofundamento da integridade de dados e conformidade documental. |
 | **1.5** | 2026-11-02 | Semântica estrita de `data_atualizacao`, contrato fechado de 10 atributos (sem `responsavel`), garantia de preservação de estado, saudação neutra "Olá!" e preservação do PNG histórico. | Aprovação final do planejamento funcional consolidado. |
 | **1.6** | 2026-11-02 | Atualização do RNF03: metas de cobertura formalizadas na Etapa 3 registradas (`percent_covered` $\ge 90\%$, `percent_branches_covered` $\ge 85\%$, 100% de aprovação, comando oficial `pytest && python scripts/verify_coverage.py`). | Eliminação de referência pendente à Etapa 3 e registro das metas aprovadas. |
+| **1.7** | 2026-11-02 | Alinhamento do RNF06 à classificação normativa WCAG 2.2 nível AA: especificação dos limites para texto normal (1.4.3 $\ge 4{,}5:1$), texto grande (1.4.3 $\ge 3:1$) e componentes não textuais relevantes (1.4.11 $\ge 3:1$) em ambos os temas. | Eliminação da definição genérica de contraste de 4.5:1 e alinhamento com as decisões arquiteturais. |

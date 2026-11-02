@@ -88,7 +88,7 @@ Esta seção registra as sete decisões técnicas formalmente aprovadas que defi
   - Componentes gráficos e indicadores não textuais relevantes: $\ge 3{,}0:1$ (WCAG 2.2, critério 1.4.11 — Non-text Contrast).
 - **Checklist Manual Estruturado de Acessibilidade:**
   - Navegação integral via teclado (Tab, Shift+Tab, Enter, Espaço, Esc).
-  - Foco visível inequívoco e focus trap ativo em todos os modais.
+  - Foco visível inequívoco e gerenciamento adequado de foco, com focus trap quando aplicável.
   - Fechamento contextual de menus e popovers.
   - Não dependência exclusiva de cores para transmissão de estado ou prioridade.
   - Respeito à preferência do usuário por `prefers-reduced-motion`.
@@ -161,11 +161,11 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
   - Configurar dependências de desenvolvimento e regras de cobertura no `pyproject.toml`.
   - Implementar a entidade `Tarefa` com `@dataclass` e validações explícitas de atributos em `models.py`.
   - Implementar operações em `services.py` com injeção de identificadores/timestamps e reordenação contígua.
-  - Implementar a operação de **edição de tarefas**, com o seguinte fluxo obrigatório:
-    1. **Preparação do estado candidato:** o serviço recebe o estado atual e os novos valores; se houver alteração efetiva de conteúdo, gera o candidato com `data_atualizacao = timestamp_utc` injetado; em caso de operação sem alteração real (no-op), devolve o estado inalterado sem gerar novo timestamp.
-    2. **Validação e tentativa de persistência:** o estado candidato é validado e a gravação é tentada; em caso de falha, o estado anterior é preservado e a operação é abortada.
-    3. **Confirmação:** somente após gravação bem-sucedida o novo estado é confirmado em memória e a interface é atualizada.
-    - Metadados não editáveis preservados em todas as circunstâncias: `id`, `data_criacao`, `estado`, `ordem`, `data_conclusao`.
+  - Implementar a operação de **edição de tarefas** no domínio Python, com o seguinte fluxo arquitetural:
+    1. **Preparação e validação do estado candidato (Python):** o serviço recebe o estado atual e os novos valores; valida os campos; se houver alteração efetiva de conteúdo, gera o estado candidato com `data_atualizacao = timestamp_utc` injetado; em caso de operação sem alteração real (no-op), devolve o estado inalterado sem gerar novo timestamp.
+    2. **Tentativa de persistência preventiva (JavaScript):** a camada de storage JavaScript recebe o estado candidato preparado pelo domínio e tenta a gravação síncrona no `localStorage`; em caso de falha de gravação (ex.: cota excedida), a camada JS preserva o estado anterior intacto e notifica o usuário, sem confirmar a alteração.
+    3. **Confirmação pós-gravação (JavaScript / UI):** somente após a gravação bem-sucedida pelo JavaScript, o novo estado é confirmado na memória da aplicação e os componentes da interface são atualizados.
+    - Metadados não editáveis preservados pelo domínio Python em todas as circunstâncias: `id`, `data_criacao`, `estado`, `ordem`, `data_conclusao`.
   - Implementar testes unitários correspondentes à operação de edição em `test_services.py`, cobrindo: edição com alteração real, edição sem alteração (no-op), e tentativa de alteração de campos não editáveis.
   - Implementar cálculos estatísticos em `metrics.py` com referências temporais estritas.
   - Implementar validação preventiva de schema JSON em `schema.py` com rejeição de campos desconhecidos.
@@ -215,11 +215,12 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
 
 | # | Critério | Evidência |
 |---|----------|-----------|
-| CA2.1 | HTML validado pelo Nu HTML Checker sem erros de estrutura ou semântica (RNF06). | Relatório do Nu HTML Checker sem erros. |
-| CA2.2 | Todos os controles interativos operáveis via `Tab`, `Shift+Tab`, `Enter` e `Espaço`; `Esc` fecha o componente ativo superior (RF07, RNF06). | Checklist manual documentado. |
-| CA2.3 | Modais com gerenciamento adequado de foco e focus trap quando aplicável; entrada, permanência e saída documentadas (RNF06). | Checklist manual documentado. |
-| CA2.4 | Menus contextuais e formulários de criação/edição navegáveis por teclado (RF02, RF03, RF04, RF06, RNF06). | Checklist manual documentado. |
-| CA2.5 | Foco visível e inequívoco em todos os elementos focáveis; nomes acessíveis em botões e campos; estados não comunicados exclusivamente por cor (RNF06). | Inspeção visual e checklist manual documentados. |
+| CA2.1 | Estrutura semântica dos 3 painéis (Sidebar, Kanban com 3 colunas e Área de Widgets), cabeçalhos estilizados, botões de ação e contadores dinâmicos de tarefas implementados em HTML (RF01). | Inspeção da árvore DOM e verificação visual dos elementos e contadores. |
+| CA2.2 | HTML validado pelo Nu HTML Checker sem erros de estrutura ou semântica (RNF06). | Relatório do Nu HTML Checker sem erros. |
+| CA2.3 | Todos os controles interativos operáveis via `Tab`, `Shift+Tab`, `Enter` e `Espaço`; `Esc` fecha o componente ativo superior (RF07, RNF06). | Checklist manual documentado. |
+| CA2.4 | Modais com gerenciamento adequado de foco e focus trap quando aplicável; entrada, permanência e saída documentadas (RNF06). | Checklist manual documentado. |
+| CA2.5 | Menus contextuais e formulários de criação/edição navegáveis por teclado (RF02, RF03, RF04, RF06, RNF06). | Checklist manual documentado. |
+| CA2.6 | Foco visível e inequívoco em todos os elementos focáveis; nomes acessíveis em botões e campos; estados não comunicados exclusivamente por cor (RNF06). | Inspeção visual e checklist manual documentados. |
 
 ---
 
@@ -275,11 +276,12 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
 
 | # | Critério | Evidência |
 |---|----------|-----------|
-| CA4.1 | Pyodide inicializado com sucesso via CDN; indicador de status transiciona para `✓ Carregado` (RF11, RNF01, RNF07). | Inspeção visual do indicador de status. |
-| CA4.2 | Todos os arquivos do pacote `todolist` gravados no virtual filesystem; `sys.path` configurado; `import todolist` bem-sucedido; funções públicas respondendo a partir do JavaScript (Decisão 3.1). | Evidência em console/log de inicialização. |
-| CA4.3 | Comunicação bidirecional JS $\leftrightarrow$ Python funcional para as operações de criação, edição, movimentação e exclusão (RNF02). | Testes de ciclo de vida por operação com recarga de página (`F5`). |
-| CA4.4 | Persistência preventiva: gravação síncrona no `localStorage` antes da confirmação em memória e atualização da interface; timestamp global persistente entre sessões (RF11, RNF04, Decisão 3.2). | Teste com recarga de página comprovando retenção íntegra. |
-| CA4.5 | Falha de gravação (ex.: `QuotaExceededError`) preserva estado anterior em memória e na interface; usuário recebe notificação clara (RNF04, Seção 6.3 REQUISITOS.md). | Teste de falha de gravação simulada. |
+| CA4.1 | Execução 100% estática no navegador via Pyodide, compatível com GitHub Pages, sem dependência ou requisições de API a servidores de aplicação backend (RNF01). | Auditoria de rede (Network tab) comprovando ausência de requisições de backend. |
+| CA4.2 | Pyodide inicializado com sucesso via CDN; indicador de status transiciona para `✓ Carregado` (RF11, RNF07). | Inspeção visual do indicador de status. |
+| CA4.3 | Todos os arquivos do pacote `todolist` gravados no virtual filesystem; `sys.path` configurado; `import todolist` bem-sucedido; funções públicas respondendo a partir do JavaScript (Decisão 3.1). | Evidência em console/log de inicialização. |
+| CA4.4 | Comunicação bidirecional JS $\leftrightarrow$ Python funcional para as operações de criação, edição, movimentação e exclusão (RNF02). | Testes de ciclo de vida por operação com recarga de página (`F5`). |
+| CA4.5 | Persistência preventiva: gravação síncrona no `localStorage` antes da confirmação em memória e atualização da interface; timestamp global persistente entre sessões (RF11, RNF04, Decisão 3.2). | Teste com recarga de página comprovando retenção íntegra. |
+| CA4.6 | Falha de gravação (ex.: `QuotaExceededError`) preserva estado anterior em memória e na interface; usuário recebe notificação clara (RNF04, Seção 6.3 REQUISITOS.md). | Teste de falha de gravação simulada. |
 
 ---
 
@@ -357,33 +359,33 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 
 | Req. | Descrição Resumida | Fase | Critério de Aceite | Evidência |
 |------|--------------------|------|--------------------|-----------|
-| RF01 | Quadro Kanban com 3 colunas, contadores e saudação \"Olá!\" | Fase 2, Fase 5 | CA2.1, CA5.2 | Nu HTML Checker; teste funcional das colunas. |
-| RF02 | Criação de tarefa via modal; estado inicial obrigatório `a_fazer` | Fase 1, Fase 5 | CA1.1, CA5.2 | Testes automatizados; teste funcional no navegador. |
-| RF03 | Edição de tarefa via menu `⋮`; preservação de metadados não editáveis | Fase 1, Fase 5 | CA1.3, CA5.2 | Testes automatizados de edição; teste funcional. |
-| RF04 | Movimentação livre entre colunas via drag and drop ou menu acessível | Fase 5 | CA5.1, CA5.2 | Testes manuais por dispositivo. |
-| RF05 | Reordenação manual intra-coluna; metadados conforme regras de Seção 6.2 | Fase 1, Fase 5 | CA1.4, CA5.3 | Testes automatizados; testes manuais com verificação de metadados. |
-| RF06 | Exclusão com confirmação via modal; consistência após persistência | Fase 5 | CA5.2 | Teste de ciclo de vida por operação. |
-| RF07 | Busca em tempo real, `Ctrl + K`, `Esc` contextual | Fase 5 | CA5.4 | Teste manual com casos de acentuação e atalhos. |
-| RF08 | Calendário com marcadores, navegação e popover com scroll/destaque | Fase 5 | CA5.5 | Teste manual documentado. |
-| RF09 | Resumo do Projeto com percentuais e proteção contra divisão por zero | Fase 5 | CA5.6 | Verificação manual com dados controlados. |
-| RF10 | Banner Foco de Hoje baseado na data local do navegador | Fase 5 | CA5.6 | Verificação manual. |
-| RF11 | Status do runtime e timestamp global persistente entre sessões | Fase 4 | CA4.1, CA4.4 | Inspeção visual; teste com recarga de página. |
-| RF12 | Relatórios com métricas dinâmicas calculadas em Python | Fase 6 | CA6.1 | Conferência com dados controlados. |
-| RF13 | Exportação JSON com envelope e tarefas conforme contrato de dados | Fase 6 | CA6.2 | Validação do schema do arquivo exportado. |
-| RF14 | Importação com validação estrita, confirmação e rollback em falhas | Fase 6 | CA6.3, CA6.4, CA6.5, CA6.6 | Testes manuais por cenário. |
-| RF15 | Alternância de tema claro/escuro com persistência da preferência | Fase 3, Fase 5 | CA3.2, CA5.7 | Inspeção visual; teste com recarga de página. |
+| RF01 | Quadro Kanban com 3 colunas, contadores dinâmicos, cabeçalhos estilizados e saudação \"Olá!\" | Fase 2, Fase 3, Fase 5 | CA2.1, CA3.1, CA5.2 | Inspeção DOM/visual dos 3 painéis e contadores; inspeção do banner; testes funcionais do quadro. |
+| RF02 | Criação de tarefa via modal; estado inicial obrigatório `a_fazer` | Fase 1, Fase 2, Fase 5 | CA1.1, CA2.5, CA5.2 | Testes automatizados em `test_models.py`; checklist de teclado; teste funcional no navegador. |
+| RF03 | Edição de tarefa via menu `⋮`; preservação de metadados não editáveis | Fase 1, Fase 2, Fase 5 | CA1.3, CA2.5, CA5.2 | Testes automatizados de edição em `test_services.py`; checklist de teclado; teste funcional. |
+| RF04 | Movimentação livre entre colunas via drag and drop ou menu acessível | Fase 2, Fase 5 | CA2.5, CA5.1, CA5.2 | Checklist de acessibilidade; testes manuais unificados por dispositivo (mouse e touch). |
+| RF05 | Reordenação manual intra-coluna; metadados conforme regras de Seção 6.2 | Fase 1, Fase 5 | CA1.4, CA5.1, CA5.3 | Testes automatizados em `test_services.py`; testes manuais com verificação de metadados. |
+| RF06 | Exclusão com confirmação via modal; consistência após persistência | Fase 2, Fase 5 | CA2.4, CA2.5, CA5.2 | Checklist de modais/teclado; teste de ciclo de vida com persistência e rollback. |
+| RF07 | Busca em tempo real, `Ctrl + K`, `Esc` contextual | Fase 2, Fase 5 | CA2.3, CA5.4 | Checklist de teclado; teste manual com acentuação e atalhos. |
+| RF08 | Calendário com marcadores, navegação e popover com scroll/destaque | Fase 5 | CA5.5 | Teste manual documentado com navegação e scroll suave. |
+| RF09 | Resumo do Projeto com percentuais e proteção contra divisão por zero | Fase 1, Fase 5 | CA1.6, CA5.6 | Testes automatizados em `test_metrics.py`; verificação com dados controlados. |
+| RF10 | Banner Foco de Hoje baseado na data local do navegador | Fase 1, Fase 5 | CA1.6, CA5.6 | Testes automatizados em `test_metrics.py`; verificação manual com dados controlados. |
+| RF11 | Status do runtime e timestamp global persistente entre sessões | Fase 4 | CA4.2, CA4.5 | Inspeção visual do indicador; teste com recarga de página (`F5`). |
+| RF12 | Relatórios com métricas dinâmicas calculadas em Python | Fase 1, Fase 6 | CA1.6, CA6.1 | Testes automatizados em `test_metrics.py`; conferência com dados controlados no modal. |
+| RF13 | Exportação JSON com envelope e tarefas conforme contrato de dados | Fase 1, Fase 6 | CA1.1, CA6.2 | Testes automatizados de schema; validação estrutural do arquivo exportado. |
+| RF14 | Importação com validação estrita, confirmação e rollback em falhas | Fase 1, Fase 6 | CA1.5, CA6.3, CA6.4, CA6.5, CA6.6 | Testes em `test_schema.py`; testes manuais por cenário de importação. |
+| RF15 | Alternância de tema claro/escuro com persistência da preferência | Fase 3, Fase 5 | CA3.2, CA5.7 | Inspeção visual nos dois temas; teste com recarga de página. |
 
 ### 5.2 Requisitos Não Funcionais (RNF01–RNF07)
 
 | Req. | Descrição Resumida | Fase | Critério de Aceite | Evidência |
 |------|--------------------|------|--------------------|-----------|
-| RNF01 | Execução 100% estática, compatível com GitHub Pages | Fase 4 | CA4.1 | Verificação de ausência de requisições a servidores de aplicação. |
-| RNF02 | Lógica central em Python (regras, cálculos, validações) | Fase 1, Fase 4 | CA1.1–CA1.6, CA4.3 | Testes automatizados; teste funcional da ponte JS/Python. |
-| RNF03 | 100% de aprovação dos testes; `percent_covered` $\ge 90\%$; `percent_branches_covered` $\ge 85\%$ | Fase 1, Fase 6 | CA1.7, CA6.8 | Saída de `pytest && python scripts/verify_coverage.py`. |
-| RNF04 | Persistência segura com reversão em falha de gravação | Fase 4, Fase 6 | CA4.4, CA4.5, CA6.6 | Testes de falha simulada; verificação de consistência. |
-| RNF05 | Responsividade nos três breakpoints (Desktop, Tablet, Mobile) | Fase 3 | CA3.3 | Evidência documental de inspeção visual. |
-| RNF06 | Acessibilidade WCAG 2.2 AA: foco, teclado, ARIA, contraste, `prefers-reduced-motion` | Fase 2, Fase 3 | CA2.1–CA2.5, CA3.4, CA3.5 | Nu HTML Checker; relatório de contraste; checklist manual. |
-| RNF07 | Indicador amigável de carregamento do ambiente WebAssembly | Fase 4 | CA4.1 | Inspeção visual do indicador de status. |
+| RNF01 | Execução 100% estática, compatível com GitHub Pages | Fase 4 | CA4.1 | Auditoria de rede (Network tab) comprovando ausência de requisições de backend. |
+| RNF02 | Lógica central em Python (regras, cálculos, validações) | Fase 1, Fase 4 | CA1.1–CA1.6, CA4.4 | Testes automatizados no pytest; teste funcional da ponte JS/Python. |
+| RNF03 | 100% de aprovação dos testes; `percent_covered` $\ge 90\%$; `percent_branches_covered` $\ge 85\%$ | Fase 1, Fase 6 | CA1.7, CA6.8 | Saída oficial de `pytest && python scripts/verify_coverage.py`. |
+| RNF04 | Persistência segura com reversão em falha de gravação | Fase 4, Fase 6 | CA4.5, CA4.6, CA6.6 | Testes de falha simulada (`QuotaExceededError`); verificação de consistência. |
+| RNF05 | Responsividade nos três breakpoints (Desktop, Tablet, Mobile) | Fase 3 | CA3.3 | Evidência documental de inspeção visual nos três breakpoints. |
+| RNF06 | Acessibilidade WCAG 2.2 AA: foco, teclado, ARIA, contraste, `prefers-reduced-motion` | Fase 2, Fase 3 | CA2.2–CA2.6, CA3.4, CA3.5 | Relatório Nu HTML Checker; relatório `check_contrast.py`; checklist de teclado. |
+| RNF07 | Indicador amigável de carregamento do ambiente WebAssembly | Fase 4 | CA4.2 | Inspeção visual do indicador de status (*Inicializando...* $\rightarrow$ *✓ Carregado*). |
 
 ---
 
@@ -400,3 +402,4 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **1.6** | 2026-11-02 | Consolidação integral da Etapa 3: Decisões 3.1 a 3.7 aprovadas, arquitetura modular `src/todolist/`, `pyproject.toml`, Pointer Events e procedimento oficial de validação da Fase 1. | Conclusão e aprovação formal da Etapa 3 (Arquitetura e Planejamento Técnico). |
 | **1.7** | 2026-11-02 | Seis ajustes pontuais à Etapa 4: operação de edição e testes em `services.py` (Fase 1); critérios de acessibilidade modal e foco (Fase 2); três limites de contraste explícitos WCAG 2.2 AA (Fase 3); sequência de quatro etapas de carregamento Pyodide com critério de conclusão (Fase 4); regras de metadados de reordenação e integração menus/formulários (Fase 5); regressão integrada RF01–RF15 e RNF01–RNF07 (Fase 6). | Fechamento das lacunas identificadas na revisão técnica da Etapa 4. |
 | **1.8** | 2026-11-02 | Consolidação documental da Etapa 4: matriz de rastreabilidade RF01–RF15 e RNF01–RNF07 (Seção 5); critérios de aceite verificáveis nas seis fases (CA1.x–CA6.x); correção do focus trap para "quando aplicável" (Fase 2); detalhamento do fluxo de edição em três etapas (preparação, persistência, confirmação) na Fase 1; referências WCAG corrigidas (1.4.3 e 1.4.11 com nomes normativos) em toda a Seção 3.6 e Fases 3; atualização do RNF03 em REQUISITOS.md; atualização de estado e rastreabilidade em ESTADO-ATUAL.md. | Consolidação da Etapa 4 para revisão e aprovação. |
+| **1.9** | 2026-11-02 | Correção das 4 inconsistências da revisão: alinhamento do focus trap na Decisão 3.6 para "quando aplicável"; atribuição estrita da persistência ao JavaScript na Fase 1; criação dos critérios CA2.1 (painéis e contadores) e CA4.1 (execução estática sem backend); remapeamento completo da Matriz de Rastreabilidade para RF01–RF15 e RNF01–RNF07. | Fechamento rigoroso das pendências apontadas na revisão técnica pós-commit 03eae77. |
