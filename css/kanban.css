@@ -1,0 +1,11 @@
+#colunas-kanban > section:nth-child(1) > header h3 { color: var(--color-todo); }
+#colunas-kanban > section:nth-child(2) > header h3 { color: var(--color-progress); }
+#colunas-kanban > section:nth-child(3) > header h3 { color: var(--color-done); }
+#modelo-cartao-tarefa article, [data-task-card] { padding: .9rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-raised); box-shadow: var(--shadow-sm); }
+#modelo-cartao-tarefa h3 { margin-bottom: .45rem; overflow-wrap: anywhere; }
+#modelo-cartao-tarefa p { margin-bottom: .4rem; color: var(--color-text-muted); font-size: .85rem; }
+#modelo-cartao-tarefa details { margin-top: .7rem; }
+#modelo-cartao-tarefa summary { width: fit-content; color: var(--color-primary); cursor: pointer; font-size: .85rem; font-weight: 650; }
+#modelo-cartao-tarefa details ul { display: grid; gap: .35rem; padding-left: 1rem; }
+#modelo-cartao-tarefa details button { min-height: 2.25rem; padding: .35rem .6rem; font-size: .82rem; }
+#foco-hoje { display: inline-grid; min-width: 1.7rem; min-height: 1.7rem; place-items: center; border-radius: 999px; background: #FFFFFF; color: #1E40AF; font-weight: 800; }
