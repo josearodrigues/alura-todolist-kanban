@@ -99,3 +99,21 @@ def test_calcular_relatorio_erros():
     """Testa validações de erro no cálculo de relatórios."""
     with pytest.raises(ValueError):
         calcular_relatorio_completo([], None)
+
+def test_calcular_relatorio_rejeita_limites_de_periodo_invalidos():
+    """Os limites do filtro de conclusão precisam ser datas válidas e ordenadas."""
+    with pytest.raises(ValueError, match="formato YYYY-MM-DD"):
+        calcular_relatorio_completo(
+            [], DATA_HOJE, periodo_conclusao_inicio="02/11/2026"
+        )
+    with pytest.raises(ValueError, match="data inexistente"):
+        calcular_relatorio_completo(
+            [], DATA_HOJE, periodo_conclusao_fim="2026-02-30"
+        )
+    with pytest.raises(ValueError, match="não pode ser posterior"):
+        calcular_relatorio_completo(
+            [],
+            DATA_HOJE,
+            periodo_conclusao_inicio="2026-11-30",
+            periodo_conclusao_fim="2026-11-01",
+        )
