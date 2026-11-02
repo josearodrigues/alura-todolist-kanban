@@ -9,3 +9,16 @@
 #modelo-cartao-tarefa details ul { display: grid; gap: .35rem; padding-left: 1rem; }
 #modelo-cartao-tarefa details button { min-height: 2.25rem; padding: .35rem .6rem; font-size: .82rem; }
 #foco-hoje { display: inline-grid; min-width: 1.7rem; min-height: 1.7rem; place-items: center; border-radius: 999px; background: #FFFFFF; color: #1E40AF; font-weight: 800; }
+
+.badge-prioridade {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.5rem;
+  padding: .15rem .55rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: .75rem;
+  font-weight: 700;
+}
