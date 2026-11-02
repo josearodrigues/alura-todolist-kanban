@@ -51,9 +51,9 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | **Etapa 2 — Planejamento Funcional** | **Concluída e Aprovada** | Especificação consolidada de RF01–RF15, RNF01–RNF07 e regras de negócio. |
 | **Etapa 3 — Arquitetura Técnica** | **Concluída e Aprovada** | Sete decisões técnicas aprovadas, arquitetura modular e critérios de testes definidos. |
 | **Etapa 4 — Plano de Implementação** | **Concluída e Aprovada** | Plano de Implementação (versão 2.1) formalmente aprovado pelo usuário. |
-| **Etapa 5 — Implementação Controlada** | **Em andamento** | Execução autorizada para a Fase 1. Fases 2 a 6 não iniciadas. |
+| **Etapa 5 — Implementação Controlada** | **Em andamento** | Fase 1 concluída; Fase 2 implementada, com validação formal pendente; Fases 3 a 6 não iniciadas. |
 | ↳ *Fase 1: Domínio Python e Testes* | **Concluída e Validada** | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados. Após a revisão corretiva, o procedimento oficial aprovou 48/48 testes, com 96,16% de cobertura de linhas e 92,78% de branches. |
-| ↳ *Fase 2: HTML e Acessibilidade* | Não iniciada | Estrutura semântica `index.html` e validação Nu HTML Checker. |
+| ↳ *Fase 2: HTML e Acessibilidade* | **Implementada; validação pendente** | `index.html` criado com estrutura semântica, três colunas, widgets, formulários, diálogos nativos, controles acessíveis e atalhos básicos. Nu HTML Checker e checklist manual de teclado/foco ainda não executados. |
 | ↳ *Fase 3: CSS e Validação Visual* | Não iniciada | Design system, temas, `check_contrast.py` e versão visual corrigida. |
 | ↳ *Fase 4: WebAssembly e Persistência* | Não iniciada | Carregamento Pyodide no virtual FS e `storage.js` com rollback. |
 | ↳ *Fase 5: Interações (Pointer Events)* | Não iniciada | Drag and drop unificado, touch, menu acessível, busca e calendário. |
@@ -67,9 +67,9 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 - **Planejado:** Aplicação To-Do Kanban estática com Python via WebAssembly (Pyodide), 3 colunas, drag and drop via Pointer Events, calendário integrado, métricas em tempo real e backup JSON.
 - **Aprovado:** Versão 1.7 de Requisitos (RNF06 alinhado à WCAG 2.2 AA), Etapa 3 (Arquitetura Técnica) e Etapa 4 (Plano de Implementação, versão 2.1) formalmente aprovadas.
 - **Implementado:** Fase 1 implementada: pacote Python `src/todolist/` (`models.py`, `services.py`, `metrics.py`, `schema.py`, `__init__.py`), configuração `pyproject.toml`, suíte `tests/` e script `scripts/verify_coverage.py`. Fases 2 a 6 não implementadas.
-- **Testado:** procedimento oficial `pytest && python scripts/verify_coverage.py` executado após a revisão corretiva: 48/48 testes aprovados; cobertura de linhas de 96,16% e cobertura de branches de 92,78%.
-- **Validado:** critérios CA1.1 a CA1.7 da Fase 1 aceitos; CA1.7 comprovado pelos resultados da suíte e das metas de cobertura. Os resultados foram informados pelo usuário após execução local.
-- **Commitado / Enviado ao GitHub:** alterações registradas na branch remota `main`, no histórico que culmina em `0ef5cf4`. O usuário confirmou o `pull` e a sincronização local com esse commit. Nenhuma tag, release ou publicação da aplicação foi criada.
+- **Testado:** Fase 1: procedimento oficial `pytest && python scripts/verify_coverage.py`, com 48/48 testes aprovados, 96,16% de cobertura de linhas e 92,78% de branches. Fase 2: inspeção estática do arquivo e confirmação de três botões de criação, IDs e mecanismos de diálogo/atalho; Nu HTML Checker e testes manuais em navegador ainda pendentes.
+- **Validado:** critérios CA1.1 a CA1.7 aceitos conforme evidências informadas pelo usuário. Na Fase 2, a implementação estrutural foi revisada, mas CA2.2 a CA2.6 ainda não podem ser declarados validados sem o relatório Nu e o checklist manual em navegador.
+- **Commitado / Enviado ao GitHub:** Fase 2 registrada diretamente na branch remota `main`: `e03fd94` (criação de `index.html`) e `92c3eed` (ajustes de rótulos e atalhos). A cópia local precisa sincronizar esses commits. Nenhuma tag, release ou publicação da aplicação foi criada.
 
 ---
 
@@ -88,12 +88,12 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 ## 7. Informações e Pendências de Confirmação
 
 - **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`, commit `0ef5cf4`. O usuário confirmou a sincronização da cópia local com `origin/main`.
-- **Implementação:** Fase 1 do domínio Python concluída e validada (`src/todolist/`, `tests/`, `scripts/verify_coverage.py` e `pyproject.toml`). As fases subsequentes (`js/`, `css/`, `index.html`, `scripts/check_contrast.py`) permanecem não iniciadas e aguardam autorização formal.
+- **Implementação:** Fase 1 concluída e validada; Fase 2 implementada em `index.html`. Pendências da Fase 2: validar o documento no Nu HTML Checker e executar checklist manual de teclado, foco, diálogos e menus em navegador. Fases 3 a 6 permanecem não iniciadas.
 
 ---
 
 ## 8. Próxima Ação Recomendada
 
 1. **Fase 1 encerrada:** implementação e validação concluídas; 48/48 testes aprovados, cobertura de linhas de 96,16% e branches de 92,78%.
-2. **Próxima etapa:** aguardar autorização expressa do usuário para iniciar a Fase 2 (HTML e Acessibilidade).
-3. Manter as Fases 2 a 6 como não iniciadas até suas respectivas autorizações.
+2. **Fase 2:** executar validação Nu HTML Checker e checklist manual de acessibilidade; registrar os resultados antes de declarar os critérios CA2.2–CA2.6 validados.
+3. Após a validação da Fase 2, aguardar a autorização correspondente para iniciar a Fase 3.
