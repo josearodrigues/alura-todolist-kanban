@@ -43,6 +43,8 @@ def criar_tarefa(
     """
     ts = timestamp_injetado if timestamp_injetado is not None else obter_timestamp_utc_atual()
     tid = id_injetado if id_injetado is not None else obter_novo_id()
+    if any(t.get("id") == tid for t in tarefas):
+        raise ValueError(f"Já existe uma tarefa com o ID '{tid}'.")
 
     # Calcular a próxima ordem da coluna 'a_fazer'
     tarefas_a_fazer = [t for t in tarefas if t.get("estado") == "a_fazer"]
@@ -110,7 +112,7 @@ def editar_tarefa(
         raise ValueError(
             f"Campo 'descricao' deve ter no máximo 500 caracteres (após strip). Tamanho: {len(descricao_limpa)}."
         )
-    if prioridade not in PRIORIDADES_VALIDAS:
+    if not isinstance(prioridade, str) or prioridade not in PRIORIDADES_VALIDAS:
         raise ValueError(
             f"Campo 'prioridade' inválido: '{prioridade}'. Valores: {sorted(list(PRIORIDADES_VALIDAS))}."
         )
@@ -198,7 +200,7 @@ def mover_tarefa(
     Reindexa a coluna de origem e a coluna de destino garantindo ordens contíguas
     iniciando em 0. Tarefas reindexadas mantêm suas datas originais.
     """
-    if novo_estado not in ESTADOS_VALIDOS:
+    if not isinstance(novo_estado, str) or novo_estado not in ESTADOS_VALIDOS:
         raise ValueError(
             f"Estado de destino inválido: '{novo_estado}'. Permitidos: {sorted(list(ESTADOS_VALIDOS))}."
         )
