@@ -305,3 +305,71 @@ def test_excluir_tarefa_inexistente():
     """Testa erro ao tentar excluir tarefa inexistente."""
     with pytest.raises(ValueError, match="não encontrada para exclusão"):
         excluir_tarefa([], UUID_1)
+
+def test_criar_tarefa_rejeita_id_duplicado():
+    """A criação não pode introduzir IDs duplicados no quadro."""
+    tarefas, _, _ = criar_tarefa(
+        [], "Primeira tarefa", id_injetado=UUID_1, timestamp_injetado=TS_1
+    )
+    with pytest.raises(ValueError, match="Já existe uma tarefa com o ID"):
+        criar_tarefa(
+            tarefas, "Tarefa duplicada", id_injetado=UUID_1, timestamp_injetado=TS_2
+        )
+
+
+def test_editar_tarefa_nao_aceita_campos_imutaveis():
+    """Campos de identidade e ciclo de vida não fazem parte da API de edição."""
+    tarefas, _, _ = criar_tarefa(
+        [], "Título original", id_injetado=UUID_1, timestamp_injetado=TS_1
+    )
+    with pytest.raises(TypeError, match="unexpected keyword argument"):
+        editar_tarefa(
+            tarefas, UUID_1, "Título novo", "", "media", None, estado="concluida"
+        )
+
+
+def test_transicoes_atualizam_timestamp_global_nas_seis_combinacoes():
+    """Cada transição efetiva retorna o timestamp aplicado à tarefa."""
+    cenarios = [
+        ("a_fazer", "em_andamento"),
+        ("a_fazer", "concluida"),
+        ("em_andamento", "a_fazer"),
+        ("em_andamento", "concluida"),
+        ("concluida", "a_fazer"),
+        ("concluida", "em_andamento"),
+    ]
+    timestamps = [
+        "2026-11-02T13:00:00.000Z",
+        "2026-11-02T14:00:00.000Z",
+        "2026-11-02T15:00:00.000Z",
+        "2026-11-02T16:00:00.000Z",
+        "2026-11-02T17:00:00.000Z",
+        "2026-11-02T18:00:00.000Z",
+    ]
+    for indice, ((origem, destino), timestamp) in enumerate(
+        zip(cenarios, timestamps), start=1
+    ):
+        tarefa_id = f"{indice:08d}-1111-4111-8111-111111111111"
+        tarefa = {
+            "id": tarefa_id,
+            "titulo": "Tarefa de transição",
+            "descricao": "",
+            "estado": origem,
+            "prioridade": "media",
+            "data_criacao": TS_1,
+            "data_limite": None,
+            "data_atualizacao": TS_2 if origem == "concluida" else TS_1,
+            "data_conclusao": TS_2 if origem == "concluida" else None,
+            "ordem": 0,
+        }
+        novas, ts_global, atualizada = mover_tarefa(
+            [tarefa],
+            tarefa_id,
+            destino,
+            timestamp_injetado=timestamp,
+            timestamp_global_atual=TS_1,
+        )
+        assert ts_global == timestamp
+        assert atualizada["data_atualizacao"] == timestamp
+        assert novas[0]["data_atualizacao"] == timestamp
+        assert atualizada["estado"] == destino
