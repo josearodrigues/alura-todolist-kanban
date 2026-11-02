@@ -27,7 +27,7 @@
   - *Branch confirmada:* `main`
   - *Branch remota:* `main`.
   - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits de implementação HTML e atualizações documentais; a pipeline Nu HTML Checker foi adicionada no commit `11f6cdf`; a correção HTML foi registrada em `a6c7495` e o diagnóstico detalhado da pipeline em `58558ad`.
-  - *Situação local/remota:* a branch remota `main` foi verificada no commit `11f6cdf278985cbd39147c41fe9b54d9d1b7d0dd`. A situação da cópia local não foi verificada nesta sessão; sua sincronização permanece sob controle do usuário.
+  - *Situação local/remota:* a branch remota `main` foi verificada após as alterações desta sessão. A situação da cópia local não foi verificada nesta sessão; sua sincronização permanece sob controle do usuário.
   - *Ações realizadas nesta revisão:* correções de código, testes e documentação registradas diretamente na branch `main`. Nenhuma tag, release ou publicação da aplicação foi criada.
 - **Mockup Oficial de Referência:**
   - `docs/design/referencias/todolist-kanban-1.0-mockup.png`: Presente, verificado e preservado intacto em sua forma binária original.
@@ -69,7 +69,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 - **Implementado:** Fase 1 implementada: pacote Python `src/todolist/` (`models.py`, `services.py`, `metrics.py`, `schema.py`, `__init__.py`), configuração `pyproject.toml`, suíte `tests/` e script `scripts/verify_coverage.py`. Fase 2 implementada em `index.html`; workflow `.github/workflows/validar-html.yml` criado para validação Nu HTML Checker. Fases 3 a 6 não iniciadas.
 - **Testado:** Fase 1: procedimento oficial `pytest && python scripts/verify_coverage.py`, com 48/48 testes aprovados, 96,16% de cobertura de linhas e 92,78% de branches. Fase 2: 20 verificações automatizadas em Chromium foram aprovadas, cobrindo estrutura e nomes acessíveis, rótulos de campos, `Ctrl + K`, `Esc`, menus por teclado, abertura/fechamento de diálogos, foco inicial, contenção do foco com `Tab` e `Shift + Tab`, retorno do foco, link de salto e foco visível. Nenhum erro de JavaScript foi observado. Os seis diálogos foram testados individualmente quanto ao foco inicial, contenção bidirecional com `Tab`/`Shift + Tab`, fechamento com `Esc` e restauração do foco. A inspeção com parser HTML local não apontou erros, mas não substitui o Nu HTML Checker.
 - **Validado:** critérios CA1.1 a CA1.7 aceitos conforme evidências informadas pelo usuário. Na Fase 2, CA2.1 foi verificado por inspeção estrutural e automatização no navegador. CA2.2 foi validado pelo Nu HTML Checker na execução `41520632228`, sem erros ou avisos. Os comportamentos previstos em CA2.3 a CA2.6 passaram pelas verificações automatizadas descritas acima; o aceite formal da Fase 2 permanece pendente do checklist manual humano previsto no plano.
-- **Commitado / Enviado ao GitHub:** Fase 2 registrada diretamente na branch remota `main`. O workflow Nu HTML Checker foi adicionado no commit `11f6cdf`. A cópia local ainda precisa ser sincronizada pelo usuário. Nenhuma tag, release ou publicação da aplicação foi criada.
+- **Commitado / Enviado ao GitHub:** Fase 2 registrada diretamente na branch remota `main`. O workflow Nu HTML Checker foi adicionado no commit `11f6cdf`, seus diagnósticos foram aprimorados em `58558ad` e as correções HTML foram registradas em `a6c7495`. A cópia local ainda precisa ser sincronizada pelo usuário. Nenhuma tag, release ou publicação da aplicação foi criada.
 
 ---
 
@@ -87,7 +87,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 7. Informações e Pendências de Confirmação
 
-- **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`, commit `11f6cdf278985cbd39147c41fe9b54d9d1b7d0dd`; estado remoto conferido nesta sessão. A cópia local não foi inspecionada.
+- **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`; estado remoto conferido após as alterações desta sessão. A cópia local não foi inspecionada.
 - **Implementação:** Fase 1 concluída e validada; Fase 2 implementada e submetida a 20 verificações automatizadas de navegador. A pipeline Nu HTML Checker foi executada com sucesso (zero erros e zero avisos); permanece pendente a formalização do checklist manual humano. Fases 3 a 6 permanecem não iniciadas.
 
 ---
