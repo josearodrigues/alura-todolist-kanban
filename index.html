@@ -126,6 +126,7 @@
             <dd><output id="percentual-pendentes">0,0%</output></dd>
           </div>
         </dl>
+        <progress id="progresso-concluidas" max="100" value="0" aria-label="Percentual de tarefas concluídas">0%</progress>
       </section>
 
       <section aria-labelledby="titulo-status-runtime">
@@ -141,7 +142,7 @@
       <article>
         <h3 data-task-title></h3>
         <p data-task-description></p>
-        <p>Prioridade: <span data-task-priority></span></p>
+        <p>Prioridade: <span class="badge-prioridade" data-task-priority></span></p>
         <p>Prazo: <span data-task-due-date></span></p>
         <details>
           <summary>Opções da tarefa</summary>
