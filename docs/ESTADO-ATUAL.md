@@ -25,9 +25,9 @@
 - **Controle de Versão (Git):**
   - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
   - *Branch confirmada:* `main`
-  - *Último commit remoto conhecido:* `03eae77` — `docs: consolidar plano e critérios de aceite`
-  - *Situação remota:* Informação registrada com base na revisão externa do GitHub; a sincronização entre a árvore local e o repositório remoto não foi afirmada nem verificada nesta sessão.
-  - *Ações realizadas:* Nenhuma operação de commit, push, tag ou publicação remota foi executada pelo assistente.
+  - *Último commit remoto verificado antes desta atualização documental:* `950240a` — `docs: corrigir rastreabilidade e critérios de aceite`
+  - *Situação remota:* A referência acima corresponde ao commit verificado imediatamente antes desta atualização documental. A sincronização entre a árvore local e o repositório remoto não foi verificada.
+  - *Ações realizadas nesta revisão:* Correções documentais aplicadas diretamente ao repositório remoto, sem alterações no código da aplicação, tags, releases ou publicação da aplicação.
 - **Mockup Oficial de Referência:**
   - `docs/design/referencias/todolist-kanban-1.0-mockup.png`: Presente, verificado e preservado intacto em sua forma binária original.
 
@@ -37,7 +37,7 @@
 
 A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
 - **`docs/REQUISITOS.md`:** Atualizado (Versão 1.7 — RNF06 alinhado aos critérios normativos de contraste WCAG 2.2 AA).
-- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado e consolidado (Versão 1.9 — eliminação da contradição de focus trap, atribuição de persistência estrita ao JS, CA2.1/CA4.1 adicionados e Matriz de Rastreabilidade rigorosamente associada).
+- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 2.0 — critérios explícitos para atualização dos contadores e execução efetiva no GitHub Pages, além dos ajustes documentais anteriores).
 - **`docs/ESTADO-ATUAL.md`:** Atualizado com o estado operacional corrente (este documento).
 
 ---
@@ -49,7 +49,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | **Etapa 1 — Descoberta e Requisitos** | **Concluída e Aprovada** | Levantamento via método Grill Me; requisitos aprovados. |
 | **Etapa 2 — Planejamento Funcional** | **Concluída e Aprovada** | Especificação consolidada de RF01–RF15, RNF01–RNF07 e regras de negócio. |
 | **Etapa 3 — Arquitetura Técnica** | **Concluída e Aprovada** | Sete decisões técnicas aprovadas, arquitetura modular e critérios de testes definidos. |
-| **Etapa 4 — Plano de Implementação** | **Pendente** | Consolidação documental final realizada (Versão 1.8); pendente de revisão e aprovação formal do usuário antes da codificação. |
+| **Etapa 4 — Plano de Implementação** | **Pendente** | Plano atualizado para a Versão 2.0; aguarda revisão e aprovação formal do usuário antes da codificação. |
 | **Etapa 5 — Implementação Controlada** | **Não iniciada** | Zero código de aplicação implementado. Aguarda autorização expressa. |
 | ↳ *Fase 1: Domínio Python e Testes* | Não iniciada | Pacote `src/todolist/`, `pyproject.toml`, testes e `verify_coverage.py`. |
 | ↳ *Fase 2: HTML e Acessibilidade* | Não iniciada | Estrutura semântica `index.html` e validação Nu HTML Checker. |
@@ -64,12 +64,12 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 ## 5. Matriz de Rastreabilidade
 
 - **Planejado:** Aplicação To-Do Kanban estática com Python via WebAssembly (Pyodide), 3 colunas, drag and drop via Pointer Events, calendário integrado, métricas em tempo real e backup JSON.
-- **Aprovado:** Versão 1.6 de Requisitos (RNF03 formalizado) e Etapa 3 de Arquitetura e Planejamento Técnico formalmente aprovadas.
+- **Aprovado:** Versão 1.7 de Requisitos (RNF06 alinhado à WCAG 2.2 AA) e Etapa 3 de Arquitetura e Planejamento Técnico formalmente aprovadas.
 - **Consolidado para Homologação:** Etapa 4 detalhada com matriz de rastreabilidade (RF01–RF15 e RNF01–RNF07) e critérios de aceite (CA1.1 a CA6.8) documentados no `PLANO-IMPLEMENTACAO.md`.
 - **Implementado:** Zero código de aplicação implementado até o momento.
 - **Testado:** Nenhum teste automatizado executado ainda (arquivos de teste não criados).
 - **Validado:** Auditoria estrutural documental e integridade do mockup oficial.
-- **Commitado / Enviado ao GitHub / Publicado:** Nenhuma nova alteração foi commitada ou publicada nesta sessão.
+- **Commitado / Enviado ao GitHub / Publicado:** Correções documentais desta revisão registradas no histórico remoto do GitHub. Nenhuma implementação ou publicação da aplicação foi realizada.
 
 ---
 
@@ -87,13 +87,13 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 7. Informações e Pendências de Confirmação
 
-- **Ambiente Git:** Repositório remoto, branch `main` e commit de referência `e9d13d4` registrados no histórico do GitHub. O estado da árvore de trabalho local e a sincronização com o remoto não foram avaliados nem alterados nesta sessão.
+- **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`. O commit `950240a` foi verificado imediatamente antes desta atualização documental. O estado da árvore de trabalho local e sua sincronização com o remoto não foram avaliados.
 - **Implementação:** Nenhum código da aplicação foi implementado. Os diretórios previstos (`src/`, `js/`, `css/`, `tests/`, `scripts/`) constam no planejamento técnico aprovado e aguardam autorização formal para início da Fase 1 da implementação.
 
 ---
 
 ## 8. Próxima Ação Recomendada
 
-1. Submeter a consolidação documental da Etapa 4 (Versão 1.8 do `PLANO-IMPLEMENTACAO.md`) à revisão e aprovação formal do usuário.
+1. Submeter a versão 2.0 do `PLANO-IMPLEMENTACAO.md` e as correções associadas à revisão e aprovação formal do usuário.
 2. Manter a Etapa 4 como pendente até aprovação expressa.
 3. Não iniciar a Etapa 5 ou codificação antes de autorização explícita.

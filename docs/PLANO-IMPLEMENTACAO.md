@@ -215,7 +215,7 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
 
 | # | Critério | Evidência |
 |---|----------|-----------|
-| CA2.1 | Estrutura semântica dos 3 painéis (Sidebar, Kanban com 3 colunas e Área de Widgets), cabeçalhos estilizados, botões de ação e contadores dinâmicos de tarefas implementados em HTML (RF01). | Inspeção da árvore DOM e verificação visual dos elementos e contadores. |
+| CA2.1 | Estrutura semântica dos 3 painéis (Sidebar, Kanban com 3 colunas e Área de Widgets), cabeçalhos, botões de ação e contadores implementados em HTML (RF01). | Inspeção da árvore DOM e verificação visual da estrutura, dos cabeçalhos, botões e contadores iniciais. |
 | CA2.2 | HTML validado pelo Nu HTML Checker sem erros de estrutura ou semântica (RNF06). | Relatório do Nu HTML Checker sem erros. |
 | CA2.3 | Todos os controles interativos operáveis via `Tab`, `Shift+Tab`, `Enter` e `Espaço`; `Esc` fecha o componente ativo superior (RF07, RNF06). | Checklist manual documentado. |
 | CA2.4 | Modais com gerenciamento adequado de foco e focus trap quando aplicável; entrada, permanência e saída documentadas (RNF06). | Checklist manual documentado. |
@@ -276,7 +276,7 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
 
 | # | Critério | Evidência |
 |---|----------|-----------|
-| CA4.1 | Execução 100% estática no navegador via Pyodide, compatível com GitHub Pages, sem dependência ou requisições de API a servidores de aplicação backend (RNF01). | Auditoria de rede (Network tab) comprovando ausência de requisições de backend. |
+| CA4.1 | Aplicação publicada e executada com sucesso no GitHub Pages, integralmente estática via Pyodide e sem dependência de backend convencional (RNF01). | Acesso à URL publicada no GitHub Pages, verificação do carregamento e uso da aplicação e auditoria de rede comprovando ausência de requisições a APIs de backend. |
 | CA4.2 | Pyodide inicializado com sucesso via CDN; indicador de status transiciona para `✓ Carregado` (RF11, RNF07). | Inspeção visual do indicador de status. |
 | CA4.3 | Todos os arquivos do pacote `todolist` gravados no virtual filesystem; `sys.path` configurado; `import todolist` bem-sucedido; funções públicas respondendo a partir do JavaScript (Decisão 3.1). | Evidência em console/log de inicialização. |
 | CA4.4 | Comunicação bidirecional JS $\leftrightarrow$ Python funcional para as operações de criação, edição, movimentação e exclusão (RNF02). | Testes de ciclo de vida por operação com recarga de página (`F5`). |
@@ -309,7 +309,7 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
 | # | Critério | Evidência |
 |---|----------|-----------|
 | CA5.1 | Drag and drop via Pointer Events funcional em mouse e toque, diferenciando explicitamente os dois dispositivos; via acessível \"Mover para...\" disponível no menu `⋮` (RF04, RF05, RNF06). | Testes manuais documentados por dispositivo. |
-| CA5.2 | Criação, edição, exclusão e movimentação funcionais, integradas ao domínio Python via ponte JS $\leftrightarrow$ Python (RF02–RF06). | Testes de ciclo de vida por operação. |
+| CA5.2 | Criação, edição, exclusão e movimentação funcionais, integradas ao domínio Python via ponte JS $\leftrightarrow$ Python; contadores das colunas atualizados corretamente após criação, movimentação e exclusão (RF01–RF06). | Testes de ciclo de vida por operação e verificação dos contadores antes e depois de cada operação. |
 | CA5.3 | Reordenação respeita regras aprovadas: `data_atualizacao` atualizada apenas na tarefa diretamente movida; tarefas reindexadas preservam datas originais; timestamp global atualizado somente em reordenação efetiva; no-op não dispara metadados (RF05, Seção 6.2 REQUISITOS.md). | Testes manuais documentados com verificação de metadados. |
 | CA5.4 | Busca em tempo real com normalização de acentos e atalhos `Ctrl + K` e `Esc` funcionais (RF07). | Teste manual com casos de acentuação e atalhos documentados. |
 | CA5.5 | Calendário com marcadores, navegação mensal e popover que aciona scroll suave e destaque no Kanban sem filtrar o quadro (RF08). | Teste manual documentado. |
@@ -359,7 +359,7 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 
 | Req. | Descrição Resumida | Fase | Critério de Aceite | Evidência |
 |------|--------------------|------|--------------------|-----------|
-| RF01 | Quadro Kanban com 3 colunas, contadores dinâmicos, cabeçalhos estilizados e saudação \"Olá!\" | Fase 2, Fase 3, Fase 5 | CA2.1, CA3.1, CA5.2 | Inspeção DOM/visual dos 3 painéis e contadores; inspeção do banner; testes funcionais do quadro. |
+| RF01 | Quadro Kanban com 3 colunas, contadores dinâmicos, cabeçalhos estilizados e saudação \\"Olá!\\" | Fase 2, Fase 3, Fase 5 | CA2.1, CA3.1, CA5.2 | Inspeção DOM/visual dos 3 painéis e cabeçalhos; inspeção do banner; testes funcionais do quadro e dos contadores após criação, movimentação e exclusão. |
 | RF02 | Criação de tarefa via modal; estado inicial obrigatório `a_fazer` | Fase 1, Fase 2, Fase 5 | CA1.1, CA2.5, CA5.2 | Testes automatizados em `test_models.py`; checklist de teclado; teste funcional no navegador. |
 | RF03 | Edição de tarefa via menu `⋮`; preservação de metadados não editáveis | Fase 1, Fase 2, Fase 5 | CA1.3, CA2.5, CA5.2 | Testes automatizados de edição em `test_services.py`; checklist de teclado; teste funcional. |
 | RF04 | Movimentação livre entre colunas via drag and drop ou menu acessível | Fase 2, Fase 5 | CA2.5, CA5.1, CA5.2 | Checklist de acessibilidade; testes manuais unificados por dispositivo (mouse e touch). |
@@ -379,7 +379,7 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 
 | Req. | Descrição Resumida | Fase | Critério de Aceite | Evidência |
 |------|--------------------|------|--------------------|-----------|
-| RNF01 | Execução 100% estática, compatível com GitHub Pages | Fase 4 | CA4.1 | Auditoria de rede (Network tab) comprovando ausência de requisições de backend. |
+| RNF01 | Execução 100% estática, compatível com GitHub Pages | Fase 4 | CA4.1 | Aplicação acessada e executada na URL publicada do GitHub Pages; auditoria de rede sem requisições a APIs de backend. |
 | RNF02 | Lógica central em Python (regras, cálculos, validações) | Fase 1, Fase 4 | CA1.1–CA1.6, CA4.4 | Testes automatizados no pytest; teste funcional da ponte JS/Python. |
 | RNF03 | 100% de aprovação dos testes; `percent_covered` $\ge 90\%$; `percent_branches_covered` $\ge 85\%$ | Fase 1, Fase 6 | CA1.7, CA6.8 | Saída oficial de `pytest && python scripts/verify_coverage.py`. |
 | RNF04 | Persistência segura com reversão em falha de gravação | Fase 4, Fase 6 | CA4.5, CA4.6, CA6.6 | Testes de falha simulada (`QuotaExceededError`); verificação de consistência. |
@@ -403,3 +403,4 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **1.7** | 2026-11-02 | Seis ajustes pontuais à Etapa 4: operação de edição e testes em `services.py` (Fase 1); critérios de acessibilidade modal e foco (Fase 2); três limites de contraste explícitos WCAG 2.2 AA (Fase 3); sequência de quatro etapas de carregamento Pyodide com critério de conclusão (Fase 4); regras de metadados de reordenação e integração menus/formulários (Fase 5); regressão integrada RF01–RF15 e RNF01–RNF07 (Fase 6). | Fechamento das lacunas identificadas na revisão técnica da Etapa 4. |
 | **1.8** | 2026-11-02 | Consolidação documental da Etapa 4: matriz de rastreabilidade RF01–RF15 e RNF01–RNF07 (Seção 5); critérios de aceite verificáveis nas seis fases (CA1.x–CA6.x); correção do focus trap para "quando aplicável" (Fase 2); detalhamento do fluxo de edição em três etapas (preparação, persistência, confirmação) na Fase 1; referências WCAG corrigidas (1.4.3 e 1.4.11 com nomes normativos) em toda a Seção 3.6 e Fases 3; atualização do RNF03 em REQUISITOS.md; atualização de estado e rastreabilidade em ESTADO-ATUAL.md. | Consolidação da Etapa 4 para revisão e aprovação. |
 | **1.9** | 2026-11-02 | Correção das 4 inconsistências da revisão: alinhamento do focus trap na Decisão 3.6 para "quando aplicável"; atribuição estrita da persistência ao JavaScript na Fase 1; criação dos critérios CA2.1 (painéis e contadores) e CA4.1 (execução estática sem backend); remapeamento completo da Matriz de Rastreabilidade para RF01–RF15 e RNF01–RNF07. | Fechamento rigoroso das pendências apontadas na revisão técnica pós-commit 03eae77. |
+| **2.0** | 2026-11-02 | Refinamento dos critérios RF01 e RNF01: validação dos contadores após operações do quadro e comprovação de execução efetiva na hospedagem publicada do GitHub Pages. | Tornar as evidências de aceite diretamente verificáveis e alinhadas aos requisitos aprovados. |
