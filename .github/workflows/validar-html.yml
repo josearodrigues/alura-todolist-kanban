@@ -1,4 +1,4 @@
-name: Validar HTML
+name: Validar HTML e contraste
 
 on:
   push:
@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - "index.html"
+      - "css/**"
+      - "scripts/check_contrast.py"
       - ".github/workflows/validar-html.yml"
   pull_request:
     branches:
@@ -27,6 +29,9 @@ jobs:
     steps:
       - name: Baixar código
         uses: actions/checkout@v4
+
+      - name: Auditar contraste WCAG 2.2 AA
+        run: python scripts/check_contrast.py
 
       - name: Validar index.html
         id: nu
