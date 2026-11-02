@@ -89,7 +89,7 @@
             <header>
               <h3 id="titulo-a-fazer">A Fazer</h3>
               <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-a-fazer">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Adicionar tarefa na coluna A Fazer">Adicionar tarefa</button>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Criar tarefa a partir da coluna A Fazer; será criada em A Fazer">Adicionar tarefa</button>
             </header>
             <ul id="lista-a-fazer" aria-label="Tarefas a fazer" aria-live="polite"></ul>
             <p id="vazio-a-fazer">Nenhuma tarefa nesta coluna.</p>
@@ -99,7 +99,7 @@
             <header>
               <h3 id="titulo-em-andamento">Em Andamento</h3>
               <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-em-andamento">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Adicionar tarefa na coluna Em Andamento">Adicionar tarefa</button>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Criar tarefa a partir da coluna Em Andamento; será criada em A Fazer">Adicionar tarefa</button>
             </header>
             <ul id="lista-em-andamento" aria-label="Tarefas em andamento" aria-live="polite"></ul>
             <p id="vazio-em-andamento">Nenhuma tarefa nesta coluna.</p>
@@ -109,7 +109,7 @@
             <header>
               <h3 id="titulo-concluidas">Concluídas</h3>
               <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-concluidas">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Adicionar tarefa na coluna Concluídas">Adicionar tarefa</button>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Criar tarefa a partir da coluna Concluídas; será criada em A Fazer">Adicionar tarefa</button>
             </header>
             <ul id="lista-concluidas" aria-label="Tarefas concluídas" aria-live="polite"></ul>
             <p id="vazio-concluidas">Nenhuma tarefa nesta coluna.</p>
@@ -161,7 +161,7 @@
         <p>Prioridade: <span data-task-priority></span></p>
         <p>Prazo: <span data-task-due-date></span></p>
         <details>
-          <summary aria-label="Abrir opções da tarefa">Opções da tarefa</summary>
+          <summary>Opções da tarefa</summary>
           <ul>
             <li><button type="button" data-dialog-open="dialog-editar-tarefa">Editar tarefa</button></li>
             <li>
