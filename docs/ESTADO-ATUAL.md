@@ -26,7 +26,7 @@
   - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
   - *Branch confirmada:* `main`
   - *Branch remota:* `main`.
-  - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits `e03fd94`, `92c3eed`, `a957eeb`, `94932ff`, `b793581`, `6ab629d` e `bfa0f1a`; as atualizações de estado foram registradas em `ab8d161` e `3c31e33`.
+  - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits `e03fd94`, `92c3eed`, `a957eeb`, `94932ff`, `b793581`, `6ab629d` e `bfa0f1a`; o estado foi complementado em atualizações documentais subsequentes.
   - *Situação local/remota:* a branch remota `main` foi verificada no commit `bfa0f1a`. A situação da cópia local não foi verificada nesta sessão; sua sincronização permanece sob controle do usuário.
   - *Ações realizadas nesta revisão:* correções de código, testes e documentação registradas diretamente na branch `main`. Nenhuma tag, release ou publicação da aplicação foi criada.
 - **Mockup Oficial de Referência:**
