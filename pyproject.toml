@@ -1,3 +1,15 @@
+[project]
+name = "alura-todolist-kanban"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.2.0",
+    "pytest-cov==7.1.0",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
