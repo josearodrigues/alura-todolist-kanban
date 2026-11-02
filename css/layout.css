@@ -67,3 +67,27 @@ main > section[aria-labelledby="saudacao"] p { margin: 0; color: #EFF6FF; }
   #aplicacao > aside:last-of-type { grid-template-columns: 1fr; padding: .8rem; }
   #aplicacao > aside:last-of-type section:last-child { grid-column: auto; }
 }
+
+#resumo-projeto progress {
+  display: block;
+  width: 100%;
+  height: .65rem;
+  margin-top: .9rem;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-border);
+  accent-color: var(--color-primary);
+}
+#resumo-projeto progress::-webkit-progress-bar {
+  border-radius: 999px;
+  background: var(--color-border);
+}
+#resumo-projeto progress::-webkit-progress-value {
+  border-radius: 999px;
+  background: var(--color-primary);
+}
+#resumo-projeto progress::-moz-progress-bar {
+  border-radius: 999px;
+  background: var(--color-primary);
+}
