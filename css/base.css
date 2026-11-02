@@ -18,7 +18,7 @@ label { display: inline-block; margin-bottom: .35rem; font-weight: 650; }
 #aplicacao > aside { background: var(--color-surface); }
 #aplicacao > aside:first-of-type { background: var(--color-sidebar); color: #FFFFFF; }
 #aplicacao > aside:first-of-type a { color: #FFFFFF; }
-#aplicacao > aside:first-of-type button { color: #FFFFFF; border-color: rgb(255 255 255 / 24%); background: rgb(255 255 255 / 9%); }
+#aplicacao > aside:first-of-type button { color: #FFFFFF; border-color: #94A3B8; background: rgb(255 255 255 / 9%); }
 #aplicacao > aside:first-of-type button:hover:not(:disabled) { background: rgb(255 255 255 / 17%); }
 h1, h2, h3, p { margin-top: 0; }
 h1 { font-size: clamp(1.8rem, 3vw, 2.55rem); line-height: 1.15; letter-spacing: -.04em; }
