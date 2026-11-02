@@ -70,7 +70,7 @@
           >
           <p id="ajuda-busca">Atalho: Ctrl + K para ir à busca. Esc limpa a busca ou fecha o componente aberto.</p>
         </div>
-        <button type="button" disabled aria-disabled="true">Alternar tema</button>
+        <button type="button" disabled>Alternar tema</button>
       </header>
 
       <section aria-labelledby="saudacao">
@@ -156,7 +156,7 @@
   <template id="modelo-cartao-tarefa">
     <li>
       <article>
-        <h4 data-task-title></h4>
+        <h3 data-task-title></h3>
         <p data-task-description></p>
         <p>Prioridade: <span data-task-priority></span></p>
         <p>Prazo: <span data-task-due-date></span></p>
@@ -198,6 +198,7 @@
       <p>
         <label for="nova-tarefa-prioridade">Prioridade</label>
         <select id="nova-tarefa-prioridade" name="prioridade" required>
+          <option value="" disabled>Selecione a prioridade</option>
           <option value="baixa">Baixa</option>
           <option value="media" selected>Média</option>
           <option value="alta">Alta</option>
@@ -208,7 +209,7 @@
         <input id="nova-tarefa-prazo" name="data_limite" type="date">
       </p>
       <p>A tarefa será criada no estado A Fazer.</p>
-      <button type="button" disabled aria-disabled="true">Salvar tarefa (integração pendente)</button>
+      <button type="button" disabled>Salvar tarefa (integração pendente)</button>
       <button type="button" data-dialog-close>Cancelar</button>
     </form>
   </dialog>
@@ -230,6 +231,7 @@
       <p>
         <label for="editar-tarefa-prioridade">Prioridade</label>
         <select id="editar-tarefa-prioridade" name="prioridade" required>
+          <option value="" disabled selected>Selecione a prioridade</option>
           <option value="baixa">Baixa</option>
           <option value="media">Média</option>
           <option value="alta">Alta</option>
@@ -239,7 +241,7 @@
         <label for="editar-tarefa-prazo">Data limite (opcional)</label>
         <input id="editar-tarefa-prazo" name="data_limite" type="date">
       </p>
-      <button type="button" disabled aria-disabled="true">Salvar alterações (integração pendente)</button>
+      <button type="button" disabled>Salvar alterações (integração pendente)</button>
       <button type="button" data-dialog-close>Cancelar</button>
     </form>
   </dialog>
@@ -247,7 +249,7 @@
   <dialog id="dialog-excluir-tarefa" aria-labelledby="titulo-excluir-tarefa">
     <h2 id="titulo-excluir-tarefa">Confirmar exclusão</h2>
     <p>Tem certeza de que deseja excluir a tarefa <strong id="titulo-tarefa-exclusao">selecionada</strong>? Esta ação não poderá ser desfeita.</p>
-    <button type="button" disabled aria-disabled="true">Confirmar exclusão (integração pendente)</button>
+    <button type="button" disabled>Confirmar exclusão (integração pendente)</button>
     <button type="button" data-dialog-close>Cancelar</button>
   </dialog>
 
@@ -265,7 +267,7 @@
         <input id="arquivo-importacao" name="arquivo" type="file" accept="application/json,.json">
       </p>
       <p>A validação e a confirmação da substituição serão habilitadas na etapa de backup.</p>
-      <button type="button" disabled aria-disabled="true">Validar arquivo (integração pendente)</button>
+      <button type="button" disabled>Validar arquivo (integração pendente)</button>
       <button type="button" data-dialog-close>Cancelar</button>
     </form>
   </dialog>
@@ -273,7 +275,7 @@
   <dialog id="dialog-exportar" aria-labelledby="titulo-exportar">
     <h2 id="titulo-exportar">Exportar dados</h2>
     <p>O download do backup JSON será habilitado na etapa de backup.</p>
-    <button type="button" disabled aria-disabled="true">Exportar JSON (integração pendente)</button>
+    <button type="button" disabled>Exportar JSON (integração pendente)</button>
     <button type="button" data-dialog-close>Fechar</button>
   </dialog>
 
