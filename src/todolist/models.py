@@ -113,13 +113,13 @@ class Tarefa:
         self.descricao = descricao_limpa
 
         # 4. estado: ["a_fazer", "em_andamento", "concluida"]
-        if self.estado not in ESTADOS_VALIDOS:
+        if not isinstance(self.estado, str) or self.estado not in ESTADOS_VALIDOS:
             raise ValueError(
                 f"Campo 'estado' inválido: '{self.estado}'. Valores permitidos: {sorted(list(ESTADOS_VALIDOS))}."
             )
 
         # 5. prioridade: ["baixa", "media", "alta"]
-        if self.prioridade not in PRIORIDADES_VALIDAS:
+        if not isinstance(self.prioridade, str) or self.prioridade not in PRIORIDADES_VALIDAS:
             raise ValueError(
                 f"Campo 'prioridade' inválido: '{self.prioridade}'. Valores permitidos: {sorted(list(PRIORIDADES_VALIDAS))}."
             )
