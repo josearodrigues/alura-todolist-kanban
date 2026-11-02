@@ -89,7 +89,7 @@
             <header>
               <h3 id="titulo-a-fazer">A Fazer</h3>
               <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-a-fazer">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa em A Fazer</button>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa</button>
             </header>
             <ul id="lista-a-fazer" aria-label="Tarefas a fazer" aria-live="polite"></ul>
             <p id="vazio-a-fazer">Nenhuma tarefa nesta coluna.</p>
@@ -99,7 +99,7 @@
             <header>
               <h3 id="titulo-em-andamento">Em Andamento</h3>
               <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-em-andamento">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa em Em Andamento</button>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa</button>
             </header>
             <ul id="lista-em-andamento" aria-label="Tarefas em andamento" aria-live="polite"></ul>
             <p id="vazio-em-andamento">Nenhuma tarefa nesta coluna.</p>
@@ -109,7 +109,7 @@
             <header>
               <h3 id="titulo-concluidas">Concluídas</h3>
               <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-concluidas">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa em Concluídas</button>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa</button>
             </header>
             <ul id="lista-concluidas" aria-label="Tarefas concluídas" aria-live="polite"></ul>
             <p id="vazio-concluidas">Nenhuma tarefa nesta coluna.</p>
@@ -301,9 +301,13 @@
       });
 
       document.addEventListener("keydown", (event) => {
+        const openDialog = [...document.querySelectorAll("dialog[open]")].at(-1);
+
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-          event.preventDefault();
-          search.focus();
+          if (!openDialog) {
+            event.preventDefault();
+            search.focus();
+          }
           return;
         }
 
@@ -311,7 +315,6 @@
           return;
         }
 
-        const openDialog = [...document.querySelectorAll("dialog[open]")].at(-1);
         if (openDialog) {
           event.preventDefault();
           openDialog.close();
