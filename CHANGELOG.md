@@ -2,7 +2,7 @@
 
 Este arquivo registra alterações relevantes do projeto em ordem cronológica inversa. Os registros descrevem o que foi implementado e validado, sem antecipar funcionalidades planejadas.
 
-## [Não lançado]
+## [Não lançado] — 2026-11-02
 
 ### Fase 3 — CSS e validação visual (implementação)
 
@@ -15,11 +15,9 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 - Verificação matemática independente das 23 combinações previstas no script: todas atingiram os limites definidos; a execução confirmatória do script pelo workflow ainda precisa ser conferida.
 - Permanecem pendentes a inspeção visual humana nos seis cenários responsivos/temas e a evidência visual de referência atualizada. O PNG original permanece preservado.
 
-### Fase 2 — HTML e acessibilidade
+### Fase 2 — HTML e acessibilidade — 2026-11-02
 
 - Atualizado o README com roteiro de inspeção visual da Fase 3 e instruções para executar a auditoria de contraste.
-
- — 2026-11-02
 
 ### Adicionado
 - Estrutura HTML semântica da aplicação, com as três colunas do Kanban, áreas de apoio, formulários e diálogos nativos.
@@ -37,7 +35,7 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 
 ### Pendente
 - Checklist manual de acessibilidade da Fase 2 pelo usuário.
-- Fases 3 a 6, conforme o plano de implementação.
+- Validação visual da Fase 3 nos seis cenários (três breakpoints × dois temas), confirmação da execução da auditoria no workflow e produção/inspeção da referência visual corrigida.\n- Fases 4 a 6, conforme o plano de implementação.
 
 ## Histórico anterior
 
