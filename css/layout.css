@@ -1,0 +1,67 @@
+body { padding: 1rem; }
+#aplicacao { display: grid; grid-template-columns: 15rem minmax(0, 1fr) 19rem; gap: 1rem; max-width: 1800px; min-height: calc(100vh - 2rem); margin: 0 auto; }
+#aplicacao > aside, main { border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+#aplicacao > aside { padding: 1.25rem; }
+#aplicacao > aside:first-of-type { display: flex; flex-direction: column; gap: 2rem; }
+#aplicacao > aside:first-of-type header p:first-child { margin-bottom: 0; font-size: 1.2rem; font-weight: 800; letter-spacing: -.03em; }
+#aplicacao > aside:first-of-type header p:last-child { margin: 0; color: #CBD5E1; }
+nav ul, #aplicacao > aside:first-of-type section ul { display: grid; gap: .45rem; padding: 0; list-style: none; }
+nav a { display: block; padding: .7rem .8rem; border-radius: var(--radius-sm); text-decoration: none; }
+nav a[aria-current="page"], nav a:hover { background: rgb(255 255 255 / 14%); }
+#aplicacao > aside:first-of-type section { margin-top: auto; }
+#aplicacao > aside:first-of-type section h2 { color: #CBD5E1; font-size: .78rem; text-transform: uppercase; letter-spacing: .09em; }
+main { padding: clamp(1rem, 2.2vw, 2rem); background: var(--color-bg); }
+main > header { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+main > header > div { width: min(100%, 34rem); }
+main > header p { margin: .35rem 0 0; color: var(--color-text-muted); font-size: .82rem; }
+main > section[aria-labelledby="saudacao"] { margin-bottom: 2rem; padding: 1.5rem; border-radius: var(--radius-lg); background: linear-gradient(125deg, var(--color-primary), #1E40AF); color: #FFFFFF; box-shadow: var(--shadow-md); }
+main > section[aria-labelledby="saudacao"] h1 { margin-bottom: .4rem; }
+main > section[aria-labelledby="saudacao"] p { margin: 0; color: #EFF6FF; }
+#quadro-kanban > header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+#quadro-kanban > header p { color: var(--color-text-muted); font-size: .85rem; }
+#colunas-kanban { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .85rem; align-items: start; }
+#colunas-kanban > section { min-width: 0; padding: .9rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+#colunas-kanban > section > header { display: grid; grid-template-columns: 1fr auto; gap: .4rem; align-items: center; }
+#colunas-kanban > section > header h3 { margin: 0; }
+#colunas-kanban > section > header p { margin: 0; color: var(--color-text-muted); }
+#colunas-kanban > section > header button { grid-column: 1 / -1; width: 100%; }
+#colunas-kanban > section:nth-child(1) { border-top: 4px solid var(--color-todo); }
+#colunas-kanban > section:nth-child(2) { border-top: 4px solid var(--color-progress); }
+#colunas-kanban > section:nth-child(3) { border-top: 4px solid var(--color-done); }
+#colunas-kanban ul[aria-live] { display: grid; gap: .7rem; padding: 0; list-style: none; }
+#colunas-kanban > section > p { color: var(--color-text-muted); font-size: .85rem; }
+#aplicacao > aside:last-of-type { display: grid; align-content: start; gap: 1rem; }
+#aplicacao > aside:last-of-type section { padding: 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+#aplicacao > aside:last-of-type h2 { margin-bottom: .8rem; }
+#aplicacao > aside:last-of-type p { color: var(--color-text-muted); font-size: .88rem; }
+#resumo-projeto dl { display: grid; gap: .65rem; margin: 0; }
+#resumo-projeto dl > div { display: flex; justify-content: space-between; gap: 1rem; }
+#resumo-projeto dt { color: var(--color-text-muted); }
+#resumo-projeto dd { margin: 0; font-weight: 750; font-variant-numeric: tabular-nums; }
+@media (min-width: 1200px) { #aplicacao { grid-template-columns: 15rem minmax(0, 1fr) 19rem; } }
+@media (min-width: 768px) and (max-width: 1199px) {
+  #aplicacao { grid-template-columns: 13rem minmax(0, 1fr); }
+  #aplicacao > aside:last-of-type { grid-column: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #aplicacao > aside:last-of-type section:last-child { grid-column: 1 / -1; }
+  #colunas-kanban { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; }
+  #colunas-kanban > section { padding: .65rem; }
+}
+@media (max-width: 767px) {
+  body { padding: .5rem; }
+  #aplicacao { display: flex; flex-direction: column; min-height: auto; gap: .65rem; }
+  #aplicacao > aside, main { border-radius: var(--radius-md); }
+  #aplicacao > aside:first-of-type { gap: .75rem; padding: .9rem; }
+  #aplicacao > aside:first-of-type header { display: flex; align-items: baseline; gap: .5rem; }
+  #aplicacao > aside:first-of-type header p:last-child { margin-left: auto; }
+  #aplicacao > aside:first-of-type nav ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .25rem; margin: 0; }
+  nav a { padding: .55rem .35rem; text-align: center; font-size: .8rem; }
+  #aplicacao > aside:first-of-type section { display: none; }
+  main { padding: .9rem; }
+  main > header { align-items: stretch; flex-direction: column; margin-bottom: 1rem; }
+  main > section[aria-labelledby="saudacao"] { margin-bottom: 1rem; padding: 1.1rem; }
+  #quadro-kanban > header { display: block; }
+  #colunas-kanban { grid-template-columns: 1fr; gap: .7rem; }
+  #colunas-kanban > section { padding: .85rem; }
+  #aplicacao > aside:last-of-type { grid-template-columns: 1fr; padding: .8rem; }
+  #aplicacao > aside:last-of-type section:last-child { grid-column: auto; }
+}
