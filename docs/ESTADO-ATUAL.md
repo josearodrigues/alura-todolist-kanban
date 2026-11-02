@@ -87,7 +87,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 7. Informações e Pendências de Confirmação
 
-- **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`, último commit verificado: `3c31e33`. A cópia local não foi inspecionada.
+- **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`; estado remoto conferido nesta sessão. A cópia local não foi inspecionada.
 - **Implementação:** Fase 1 concluída e validada; Fase 2 implementada e submetida a 20 verificações automatizadas de navegador. Permanecem pendentes a validação Nu HTML Checker e a formalização do checklist manual humano. Fases 3 a 6 permanecem não iniciadas.
 
 ---
