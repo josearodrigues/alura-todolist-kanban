@@ -53,13 +53,13 @@ jobs:
             [.messages[]? | select(.type == "error" or .type == "fatal")] as $errors |
             [.messages[]? | select(.type == "info" and (.subType // "") == "warning")] as $warnings |
             "- Erros: \($errors | length)\n- Avisos: \($warnings | length)"
-          ' nu-report.json >> "$GITHUB_STEP_SUMMARY"
+          ' nu-report.json | tee -a "$GITHUB_STEP_SUMMARY"
 
           jq -r '
             .messages[]? |
             select(.type == "error" or .type == "fatal" or (.type == "info" and (.subType // "") == "warning")) |
             "- **\(.type)** — \(.message) (linha \(.lastLine // "n/d"), coluna \(.lastColumn // "n/d"))"
-          ' nu-report.json >> "$GITHUB_STEP_SUMMARY"
+          ' nu-report.json | tee -a "$GITHUB_STEP_SUMMARY"
 
           if jq -e '[.messages[]? | select(.type == "error" or .type == "fatal")] | length == 0' nu-report.json > /dev/null; then
             echo "Validação concluída: nenhum erro HTML encontrado."
