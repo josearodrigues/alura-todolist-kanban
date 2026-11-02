@@ -13,6 +13,12 @@
   --color-todo: #3B82F6;
   --color-progress: #F59E0B;
   --color-done: #22C55E;
+  --color-todo-text: #1D4ED8;
+  --color-progress-text: #92400E;
+  --color-done-text: #166534;
+  --color-todo-indicator: #3B82F6;
+  --color-progress-indicator: #B45309;
+  --color-done-indicator: #15803D;
   --color-danger: #B91C1C;
   --color-focus: #7C3AED;
   --color-overlay: rgb(15 23 42 / 58%);
@@ -45,6 +51,12 @@
   --color-todo: #60A5FA;
   --color-progress: #FBBF24;
   --color-done: #4ADE80;
+  --color-todo-text: #60A5FA;
+  --color-progress-text: #FBBF24;
+  --color-done-text: #4ADE80;
+  --color-todo-indicator: #60A5FA;
+  --color-progress-indicator: #FBBF24;
+  --color-done-indicator: #4ADE80;
   --color-danger: #F87171;
   --color-focus: #C4B5FD;
   --color-overlay: rgb(2 6 23 / 76%);
