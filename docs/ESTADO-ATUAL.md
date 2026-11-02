@@ -25,7 +25,7 @@
 - **Controle de Versão (Git):**
   - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
   - *Branch confirmada:* `main`
-  - *Último commit remoto verificado antes desta atualização documental:* `950240a` — `docs: corrigir rastreabilidade e critérios de aceite`
+  - *Último commit remoto verificado antes desta atualização documental:* `e4347b4` — `docs: refinar critérios de aceite e atualizar estado`
   - *Situação remota:* A referência acima corresponde ao commit verificado imediatamente antes desta atualização documental. A sincronização entre a árvore local e o repositório remoto não foi verificada.
   - *Ações realizadas nesta revisão:* Correções documentais aplicadas diretamente ao repositório remoto, sem alterações no código da aplicação, tags, releases ou publicação da aplicação.
 - **Mockup Oficial de Referência:**
@@ -37,7 +37,7 @@
 
 A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
 - **`docs/REQUISITOS.md`:** Atualizado (Versão 1.7 — RNF06 alinhado aos critérios normativos de contraste WCAG 2.2 AA).
-- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 2.0 — critérios explícitos para atualização dos contadores e execução efetiva no GitHub Pages, além dos ajustes documentais anteriores).
+- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 2.1 — critérios explícitos para botões de criação por coluna, comportamento contextual de `Esc` e rastreabilidade das seis transições de estado; inclui os ajustes anteriores de contadores e GitHub Pages).
 - **`docs/ESTADO-ATUAL.md`:** Atualizado com o estado operacional corrente (este documento).
 
 ---
@@ -49,7 +49,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | **Etapa 1 — Descoberta e Requisitos** | **Concluída e Aprovada** | Levantamento via método Grill Me; requisitos aprovados. |
 | **Etapa 2 — Planejamento Funcional** | **Concluída e Aprovada** | Especificação consolidada de RF01–RF15, RNF01–RNF07 e regras de negócio. |
 | **Etapa 3 — Arquitetura Técnica** | **Concluída e Aprovada** | Sete decisões técnicas aprovadas, arquitetura modular e critérios de testes definidos. |
-| **Etapa 4 — Plano de Implementação** | **Pendente** | Plano atualizado para a Versão 2.0; aguarda revisão e aprovação formal do usuário antes da codificação. |
+| **Etapa 4 — Plano de Implementação** | **Pendente** | Plano atualizado para a Versão 2.1; aguarda revisão e aprovação formal do usuário antes da codificação. |
 | **Etapa 5 — Implementação Controlada** | **Não iniciada** | Zero código de aplicação implementado. Aguarda autorização expressa. |
 | ↳ *Fase 1: Domínio Python e Testes* | Não iniciada | Pacote `src/todolist/`, `pyproject.toml`, testes e `verify_coverage.py`. |
 | ↳ *Fase 2: HTML e Acessibilidade* | Não iniciada | Estrutura semântica `index.html` e validação Nu HTML Checker. |
@@ -94,6 +94,6 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 8. Próxima Ação Recomendada
 
-1. Submeter a versão 2.0 do `PLANO-IMPLEMENTACAO.md` e as correções associadas à revisão e aprovação formal do usuário.
+1. Submeter a versão 2.1 do `PLANO-IMPLEMENTACAO.md` e as correções associadas à revisão e aprovação formal do usuário.
 2. Manter a Etapa 4 como pendente até aprovação expressa.
 3. Não iniciar a Etapa 5 ou codificação antes de autorização explícita.
