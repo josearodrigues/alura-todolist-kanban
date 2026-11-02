@@ -392,3 +392,17 @@ def test_tarefa_validacoes_ordem():
             data_conclusao=None,
             ordem="0",
         )
+
+def test_tarefa_rejeita_estado_e_prioridade_nao_hashable():
+    """Entradas não hashable devem produzir ValueError, nunca TypeError."""
+    dados_base = {
+        "id": UUID_VALIDO, "titulo": "Título válido", "descricao": "",
+        "estado": "a_fazer", "prioridade": "media",
+        "data_criacao": TS_CRIACAO, "data_limite": None,
+        "data_atualizacao": TS_CRIACAO, "data_conclusao": None, "ordem": 0,
+    }
+    for campo in ("estado", "prioridade"):
+        dados = dict(dados_base)
+        dados[campo] = []
+        with pytest.raises(ValueError, match=f"Campo '{campo}' inválido"):
+            Tarefa.from_dict(dados)
