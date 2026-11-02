@@ -26,7 +26,7 @@
   - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
   - *Branch confirmada:* `main`
   - *Branch remota:* `main`.
-  - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits de implementação HTML e atualizações documentais; a pipeline Nu HTML Checker foi adicionada no commit `11f6cdf`.
+  - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits de implementação HTML e atualizações documentais; a pipeline Nu HTML Checker foi adicionada no commit `11f6cdf`; a correção HTML foi registrada em `a6c7495` e o diagnóstico detalhado da pipeline em `58558ad`.
   - *Situação local/remota:* a branch remota `main` foi verificada no commit `11f6cdf278985cbd39147c41fe9b54d9d1b7d0dd`. A situação da cópia local não foi verificada nesta sessão; sua sincronização permanece sob controle do usuário.
   - *Ações realizadas nesta revisão:* correções de código, testes e documentação registradas diretamente na branch `main`. Nenhuma tag, release ou publicação da aplicação foi criada.
 - **Mockup Oficial de Referência:**
@@ -53,7 +53,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | **Etapa 4 — Plano de Implementação** | **Concluída e Aprovada** | Plano de Implementação (versão 2.1) formalmente aprovado pelo usuário. |
 | **Etapa 5 — Implementação Controlada** | **Em andamento** | Fase 1 concluída; Fase 2 implementada, com validação formal pendente; Fases 3 a 6 não iniciadas. |
 | ↳ *Fase 1: Domínio Python e Testes* | **Concluída e Validada** | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados. Após a revisão corretiva, o procedimento oficial aprovou 48/48 testes, com 96,16% de cobertura de linhas e 92,78% de branches. |
-| ↳ *Fase 2: HTML e Acessibilidade* | **Implementada; validação formal parcial** | `index.html` contém estrutura semântica, três colunas, widgets, formulários, seis diálogos nativos, template de cartão, nomes acessíveis, atalhos e contenção explícita do foco nos diálogos. Foram aprovadas 20 verificações automatizadas gerais em Chromium; os seis diálogos também foram exercitados individualmente. Pipeline `.github/workflows/validar-html.yml` criada para submeter `index.html` ao Nu HTML Checker em pushes/PRs relevantes e sob acionamento manual. A execução ainda não foi confirmada; permanecem pendentes o resultado Nu e o checklist manual humano. |
+| ↳ *Fase 2: HTML e Acessibilidade* | **Implementada; validação formal parcial** | `index.html` contém estrutura semântica, três colunas, widgets, formulários, seis diálogos nativos, template de cartão, nomes acessíveis, atalhos e contenção explícita do foco nos diálogos. Foram aprovadas 20 verificações automatizadas gerais em Chromium; os seis diálogos também foram exercitados individualmente. Pipeline `.github/workflows/validar-html.yml` criada para submeter `index.html` ao Nu HTML Checker em pushes/PRs relevantes e sob acionamento manual. Execução `41520632228` concluída com sucesso: zero erros e zero avisos. Permanece pendente o checklist manual humano. |
 | ↳ *Fase 3: CSS e Validação Visual* | Não iniciada | Design system, temas, `check_contrast.py` e versão visual corrigida. |
 | ↳ *Fase 4: WebAssembly e Persistência* | Não iniciada | Carregamento Pyodide no virtual FS e `storage.js` com rollback. |
 | ↳ *Fase 5: Interações (Pointer Events)* | Não iniciada | Drag and drop unificado, touch, menu acessível, busca e calendário. |
@@ -68,7 +68,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 - **Aprovado:** Versão 1.7 de Requisitos (RNF06 alinhado à WCAG 2.2 AA), Etapa 3 (Arquitetura Técnica) e Etapa 4 (Plano de Implementação, versão 2.1) formalmente aprovadas.
 - **Implementado:** Fase 1 implementada: pacote Python `src/todolist/` (`models.py`, `services.py`, `metrics.py`, `schema.py`, `__init__.py`), configuração `pyproject.toml`, suíte `tests/` e script `scripts/verify_coverage.py`. Fase 2 implementada em `index.html`; workflow `.github/workflows/validar-html.yml` criado para validação Nu HTML Checker. Fases 3 a 6 não iniciadas.
 - **Testado:** Fase 1: procedimento oficial `pytest && python scripts/verify_coverage.py`, com 48/48 testes aprovados, 96,16% de cobertura de linhas e 92,78% de branches. Fase 2: 20 verificações automatizadas em Chromium foram aprovadas, cobrindo estrutura e nomes acessíveis, rótulos de campos, `Ctrl + K`, `Esc`, menus por teclado, abertura/fechamento de diálogos, foco inicial, contenção do foco com `Tab` e `Shift + Tab`, retorno do foco, link de salto e foco visível. Nenhum erro de JavaScript foi observado. Os seis diálogos foram testados individualmente quanto ao foco inicial, contenção bidirecional com `Tab`/`Shift + Tab`, fechamento com `Esc` e restauração do foco. A inspeção com parser HTML local não apontou erros, mas não substitui o Nu HTML Checker.
-- **Validado:** critérios CA1.1 a CA1.7 aceitos conforme evidências informadas pelo usuário. Na Fase 2, CA2.1 foi verificado por inspeção estrutural e automatização no navegador. Os comportamentos previstos em CA2.3 a CA2.6 passaram pelas verificações automatizadas descritas acima, mas o aceite formal permanece pendente do relatório Nu (CA2.2) e do checklist manual humano previsto no plano.
+- **Validado:** critérios CA1.1 a CA1.7 aceitos conforme evidências informadas pelo usuário. Na Fase 2, CA2.1 foi verificado por inspeção estrutural e automatização no navegador. CA2.2 foi validado pelo Nu HTML Checker na execução `41520632228`, sem erros ou avisos. Os comportamentos previstos em CA2.3 a CA2.6 passaram pelas verificações automatizadas descritas acima; o aceite formal da Fase 2 permanece pendente do checklist manual humano previsto no plano.
 - **Commitado / Enviado ao GitHub:** Fase 2 registrada diretamente na branch remota `main`. O workflow Nu HTML Checker foi adicionado no commit `11f6cdf`. A cópia local ainda precisa ser sincronizada pelo usuário. Nenhuma tag, release ou publicação da aplicação foi criada.
 
 ---
@@ -88,12 +88,12 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 ## 7. Informações e Pendências de Confirmação
 
 - **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`, commit `11f6cdf278985cbd39147c41fe9b54d9d1b7d0dd`; estado remoto conferido nesta sessão. A cópia local não foi inspecionada.
-- **Implementação:** Fase 1 concluída e validada; Fase 2 implementada e submetida a 20 verificações automatizadas de navegador. A pipeline Nu HTML Checker foi criada, mas sua execução e o resultado ainda precisam ser confirmados; também permanece pendente a formalização do checklist manual humano. Fases 3 a 6 permanecem não iniciadas.
+- **Implementação:** Fase 1 concluída e validada; Fase 2 implementada e submetida a 20 verificações automatizadas de navegador. A pipeline Nu HTML Checker foi executada com sucesso (zero erros e zero avisos); permanece pendente a formalização do checklist manual humano. Fases 3 a 6 permanecem não iniciadas.
 
 ---
 
 ## 8. Próxima Ação Recomendada
 
 1. **Fase 1 encerrada:** implementação e validação concluídas; 48/48 testes aprovados, cobertura de linhas de 96,16% e branches de 92,78%.
-2. **Fase 2:** pendência de validação formal: obter relatório Nu HTML Checker sem erros e completar o checklist manual humano previsto nos critérios CA2.3–CA2.6. O acesso ao serviço Nu e a instalação local do validador não estavam disponíveis neste ambiente; não declarar a fase formalmente encerrada antes dessas evidências.
+2. **Fase 2:** CA2.2 validado pela pipeline Nu HTML Checker (execução `41520632228`: zero erros e zero avisos). Completar o checklist manual humano previsto nos critérios CA2.3–CA2.6; não declarar a fase formalmente encerrada antes dessa evidência.
 3. Após a validação da Fase 2, aguardar a autorização correspondente para iniciar a Fase 3.
