@@ -8,7 +8,7 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fase 1 autorizada]
+- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fases 1 e 2 implementadas; Fase 3 em validação]
 - **Etapa 6 — Validação final e homologação:** [Pendente]
 
 ---
@@ -252,6 +252,8 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
 | CA3.3 | Responsividade verificada nos três breakpoints: Desktop $\ge 1200\text{px}$, Tablet $768\text{px}$–$1199\text{px}$, Mobile $< 768\text{px}$ (RNF05). | Evidência documental de inspeção visual. |
 | CA3.4 | Texto normal com razão $\ge 4{,}5:1$ (WCAG 2.2, 1.4.3), texto grande com razão $\ge 3{,}0:1$ (WCAG 2.2, 1.4.3) e componentes não textuais relevantes com razão $\ge 3{,}0:1$ (WCAG 2.2, 1.4.11) nos dois temas (RNF06). | Relatório gerado por `check_contrast.py`. |
 | CA3.5 | Suporte a `prefers-reduced-motion` aplicado nos elementos com animação (RNF06). | Inspeção visual com preferência ativa. |
+
+> **Registro de execução — 2026-11-02:** folhas CSS modulares, alternância de tema, layout responsivo, badge de prioridade, barra de progresso e suporte a movimento reduzido implementados. `scripts/check_contrast.py` foi criado e a auditoria matemática independente das 23 combinações configuradas resultou em zero reprovações. O workflow foi ampliado para executar o script e validar HTML em alterações CSS/HTML; a execução confirmatória ainda precisa ser consultada. A inspeção visual nos três breakpoints e nos dois temas, bem como a referência visual atualizada, permanecem pendentes. A Fase 2 ainda possui checklist manual pendente; seu início não foi considerado formalmente concluído.
 
 ---
 
