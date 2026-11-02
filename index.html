@@ -56,7 +56,7 @@
       </section>
     </aside>
 
-    <main id="conteudo-principal">
+    <main id="conteudo-principal" tabindex="-1">
       <header aria-label="Cabeçalho do quadro">
         <div>
           <label for="busca-tarefas">Buscar tarefas</label>
@@ -148,7 +148,7 @@
       <section aria-labelledby="titulo-status-runtime">
         <h2 id="titulo-status-runtime">Status da aplicação</h2>
         <p id="status-runtime" role="status" aria-live="polite">Python: aguardando inicialização.</p>
-        <p>Última alteração: <time id="ultima-alteracao">Ainda não registrada</time></p>
+        <p>Última alteração: <span id="ultima-alteracao">Ainda não registrada</span></p>
       </section>
     </aside>
   </div>
@@ -159,7 +159,7 @@
         <h4 data-task-title></h4>
         <p data-task-description></p>
         <p>Prioridade: <span data-task-priority></span></p>
-        <p>Prazo: <time data-task-due-date></time></p>
+        <p>Prazo: <span data-task-due-date></span></p>
         <details>
           <summary aria-label="Abrir opções da tarefa">Opções da tarefa</summary>
           <ul>
