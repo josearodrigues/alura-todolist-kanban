@@ -23,16 +23,18 @@ PAIRS = (
     ColorPair("Claro", "Texto sobre botão primário", "#FFFFFF", "#2563EB", 4.5, "1.4.3"),
     ColorPair("Claro", "Texto do banner", "#FFFFFF", "#1E40AF", 4.5, "1.4.3"),
     ColorPair("Claro", "Borda de coluna A Fazer", "#3B82F6", "#FFFFFF", 3.0, "1.4.11"),
-    ColorPair("Claro", "Borda de coluna Em Andamento", "#B45309", "#FFFFFF", 3.0, "1.4.11"),
-    ColorPair("Claro", "Borda de coluna Concluídas", "#15803D", "#FFFFFF", 3.0, "1.4.11"),
+    ColorPair("Claro", "Título da coluna Em Andamento", "#92400E", "#FFFFFF", 4.5, "1.4.3"),
+    ColorPair("Claro", "Indicador da coluna Em Andamento", "#B45309", "#FFFFFF", 3.0, "1.4.11"),
+    ColorPair("Claro", "Título da coluna Concluídas", "#166534", "#FFFFFF", 4.5, "1.4.3"),
+    ColorPair("Claro", "Indicador da coluna Concluídas", "#15803D", "#FFFFFF", 3.0, "1.4.11"),
     ColorPair("Escuro", "Texto principal sobre superfície", "#E5EDF8", "#1E293B", 4.5, "1.4.3"),
     ColorPair("Escuro", "Texto secundário sobre superfície", "#CBD5E1", "#1E293B", 4.5, "1.4.3"),
     ColorPair("Escuro", "Texto principal sobre fundo", "#E5EDF8", "#0F172A", 4.5, "1.4.3"),
     ColorPair("Escuro", "Texto sobre sidebar", "#FFFFFF", "#0B1220", 4.5, "1.4.3"),
     ColorPair("Escuro", "Texto sobre botão primário", "#FFFFFF", "#2563EB", 4.5, "1.4.3"),
-    ColorPair("Escuro", "Borda de coluna A Fazer", "#60A5FA", "#1E293B", 3.0, "1.4.11"),
-    ColorPair("Escuro", "Borda de coluna Em Andamento", "#FBBF24", "#1E293B", 3.0, "1.4.11"),
-    ColorPair("Escuro", "Borda de coluna Concluídas", "#4ADE80", "#1E293B", 3.0, "1.4.11"),
+    ColorPair("Escuro", "Título e indicador da coluna A Fazer", "#60A5FA", "#1E293B", 4.5, "1.4.3"),
+    ColorPair("Escuro", "Título e indicador da coluna Em Andamento", "#FBBF24", "#1E293B", 4.5, "1.4.3"),
+    ColorPair("Escuro", "Título e indicador da coluna Concluídas", "#4ADE80", "#1E293B", 4.5, "1.4.3"),
 )
 
 
