@@ -89,7 +89,7 @@
             <header>
               <h3 id="titulo-a-fazer">A Fazer</h3>
               <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-a-fazer">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa</button>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Adicionar tarefa na coluna A Fazer">Adicionar tarefa</button>
             </header>
             <ul id="lista-a-fazer" aria-label="Tarefas a fazer" aria-live="polite"></ul>
             <p id="vazio-a-fazer">Nenhuma tarefa nesta coluna.</p>
@@ -99,7 +99,7 @@
             <header>
               <h3 id="titulo-em-andamento">Em Andamento</h3>
               <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-em-andamento">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa</button>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Adicionar tarefa na coluna Em Andamento">Adicionar tarefa</button>
             </header>
             <ul id="lista-em-andamento" aria-label="Tarefas em andamento" aria-live="polite"></ul>
             <p id="vazio-em-andamento">Nenhuma tarefa nesta coluna.</p>
@@ -109,7 +109,7 @@
             <header>
               <h3 id="titulo-concluidas">Concluídas</h3>
               <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-concluidas">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer">Adicionar tarefa</button>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Adicionar tarefa na coluna Concluídas">Adicionar tarefa</button>
             </header>
             <ul id="lista-concluidas" aria-label="Tarefas concluídas" aria-live="polite"></ul>
             <p id="vazio-concluidas">Nenhuma tarefa nesta coluna.</p>
@@ -246,7 +246,7 @@
 
   <dialog id="dialog-excluir-tarefa" aria-labelledby="titulo-excluir-tarefa">
     <h2 id="titulo-excluir-tarefa">Confirmar exclusão</h2>
-    <p>Tem certeza de que deseja excluir esta tarefa? Esta ação não poderá ser desfeita.</p>
+    <p>Tem certeza de que deseja excluir a tarefa <strong id="titulo-tarefa-exclusao">selecionada</strong>? Esta ação não poderá ser desfeita.</p>
     <button type="button" disabled aria-disabled="true">Confirmar exclusão (integração pendente)</button>
     <button type="button" data-dialog-close>Cancelar</button>
   </dialog>
@@ -304,8 +304,8 @@
         const openDialog = [...document.querySelectorAll("dialog[open]")].at(-1);
 
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+          event.preventDefault();
           if (!openDialog) {
-            event.preventDefault();
             search.focus();
           }
           return;
@@ -321,7 +321,8 @@
           return;
         }
 
-        const openMenu = [...document.querySelectorAll("details[open]")].at(-1);
+        const activeMenu = document.activeElement.closest?.("details[open]");
+        const openMenu = activeMenu || [...document.querySelectorAll("details[open]")].at(-1);
         if (openMenu) {
           event.preventDefault();
           const summary = openMenu.querySelector(":scope > summary");
