@@ -23,8 +23,12 @@
   - *URL Canônica:* `https://github.com/josearodrigues/alura-todolist-kanban`
   - *Relação de Nomenclatura:* A distinção entre o nome da pasta de trabalho local (`alura-kanban-python`) e o repositório remoto (`alura-todolist-kanban`) é intencional e preservada, sem exigência de renomeação.
 - **Controle de Versão (Git):**
-  - *Branch atual e commit confirmado:* Pendentes de verificação via terminal devido a restrições operacionais do sandbox nesta sessão.
-  - *Ações realizadas:* Nenhuma operação de commit, push, tag ou publicação remota foi executada.
+  - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
+  - *Branch confirmada:* `main`
+  - *Último commit confirmado:* `e9d13d4` — `docs: consolidar arquitetura e planejamento técnico`
+  - *Situação remota:* Alterações documentais enviadas ao GitHub.
+  - *Árvore de trabalho local:* Não afirmada como verificada nesta sessão.
+  - *Ações realizadas:* Nenhuma nova operação de commit, push, tag ou publicação remota foi executada pelo assistente.
 - **Mockup Oficial de Referência:**
   - `docs/design/referencias/todolist-kanban-1.0-mockup.png`: Presente, verificado e preservado intacto em sua forma binária original.
 
@@ -75,7 +79,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 2. **Decisão 3.2 (Persistência):** Documento JSON único no `localStorage` com persistência preventiva: validação e gravação síncrona antes da confirmação em memória e atualização visual; em caso de falha, rollback em memória e notificação ao usuário.
 3. **Decisão 3.3 (Domínio Python):** Abordagem híbrida no pacote `src/todolist/`: entidade `Tarefa` estruturada com `@dataclass` e validações defensivas explícitas, combinada com serviços funcionais sem efeitos colaterais e com suporte a injeção determinística de datas e identificadores.
 4. **Decisão 3.4 (Identificadores e Invariantes):** UUID v4 nativo em string canônica, contiguidade ordinal estrita por coluna iniciando em zero (sem normalização silenciosa na importação) e 8 invariantes temporais em formato ISO 8601 UTC com milissegundos.
-5. **Decisão 3.5 (Estratégia de Testes):** Procedimento oficial `pytest && python scripts/verify_coverage.py`, exigindo 100% de aprovação de testes, $\ge 90,0\%$ de declarações (`percent_statements_covered`) e $\ge 85,0\%$ de ramos (`percent_branches_covered`) via `coverage.json`.
+5. **Decisão 3.5 (Estratégia de Testes):** Procedimento oficial `pytest && python scripts/verify_coverage.py`, exigindo 100% de aprovação de testes, $\ge 90,0\%$ de declarações (`percent_covered`) e $\ge 85,0\%$ de ramos (`percent_branches_covered`) via `coverage.json`.
 6. **Decisão 3.6 (Frontend e Acessibilidade):** Validação de HTML pelo Nu HTML Checker (v.Nu local), auditoria matemática de contraste via script `check_contrast.py` (WCAG 2.2 AA), checklist manual estruturado de teclado e adoção de **Pointer Events** para unificar mouse, toque e caneta no drag and drop.
 7. **Decisão 3.7 (Arquitetura Modular):** Organização completa em pastas com `pyproject.toml` na raiz, pacote `src/todolist/`, módulos JavaScript ES6+ desacoplados, CSS modular e scripts de suporte.
 
@@ -83,13 +87,15 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 7. Informações e Pendências de Confirmação
 
-- **Ambiente Git:** O status exato da árvore de trabalho e do histórico do Git local não pôde ser auditado via comando de terminal devido ao bloqueio da interface sandbox nesta sessão. Nenhuma instrução Git foi executada.
-- **Implementação:** Nenhum arquivo de código foi implementado; os diretórios de código (`src/`, `js/`, `css/`, `tests/`, `scripts/`) permanecem no planejamento aguardando a autorização para a Fase 1.
+- **Ambiente Git:** Repositório remoto, branch `main` e commit `e9d13d4` confirmados no GitHub. O estado da árvore de trabalho local não foi afirmado como verificado.
+- **Implementação:** Nenhum código da aplicação foi implementado. Os diretórios previstos (`src/`, `js/`, `css/`, `tests/`, `scripts/`) constam no planejamento técnico aprovado e aguardam autorização formal para início da Fase 1 da implementação.
 
 ---
 
 ## 8. Próxima Ação Recomendada
 
-- **Apresentar a consolidação documental conjunta para revisão do usuário.**
-- **Aguardar a avaliação formal do usuário sobre a conclusão documental da Etapa 3.**
-- **Solicitar autorização expressa para o início da Etapa 4 (Plano de Implementação Detalhado) ou autorização para a Fase 1 da implementação.**
+1. Registrar as Etapas 1, 2 e 3 como concluídas e formalmente aprovadas.
+2. Manter a Etapa 4 (Plano de Implementação Detalhado) como pendente.
+3. Manter a Etapa 5 (Implementação Controlada) e a Etapa 6 (Validação Final) como não iniciadas, dependentes de autorização explícita do usuário.
+4. Concluir a revisão e consolidação pontual da documentação da Etapa 3.
+5. Após a confirmação do usuário, proceder com o planejamento detalhado da Etapa 4, sem iniciar automaticamente a implementação.

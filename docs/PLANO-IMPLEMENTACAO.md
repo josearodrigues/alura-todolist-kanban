@@ -65,7 +65,7 @@ Esta seção registra as sete decisões técnicas formalmente aprovadas que defi
 ### Decisão Técnica 3.5: Estratégia de Testes Automatizados e Metas do RNF03
 - **Critérios Formais de Aprovação:**
   - **100% de Aprovação:** Zero falhas e zero erros na suíte `pytest`.
-  - **Cobertura de Linhas:** $\ge 90,0\%$ de declarações (`percent_statements_covered` no `coverage.json`).
+  - **Cobertura de Linhas:** $\ge 90,0\%$ de declarações (`percent_covered` no `coverage.json`).
   - **Cobertura de Ramos:** $\ge 85,0\%$ de branches (`percent_branches_covered` no `coverage.json`).
 - **Configuração no `pyproject.toml`:** Centralização das opções do pytest e coverage sem limites arbitrários sobre métricas combinadas:
   ```toml
@@ -136,7 +136,7 @@ Esta seção registra as sete decisões técnicas formalmente aprovadas que defi
 │
 ├── scripts/                     # Scripts de suporte e validação local
 │   ├── check_contrast.py        # Validação matemática de contraste de cores (WCAG 2.2 AA)
-│   └── verify_coverage.py       # Validação estrita de percent_statements_covered (>=90%) e percent_branches_covered (>=85%)
+│   └── verify_coverage.py       # Validação estrita de percent_covered (>=90%) e percent_branches_covered (>=85%)
 │
 └── docs/                        # Tríade documental de governança
     ├── REQUISITOS.md            # Catálogo de requisitos e regras de negócio
