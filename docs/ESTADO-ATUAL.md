@@ -25,9 +25,10 @@
 - **Controle de Versão (Git):**
   - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
   - *Branch confirmada:* `main`
-  - *Último commit remoto verificado antes desta atualização documental:* `e4347b4` — `docs: refinar critérios de aceite e atualizar estado`
+  - *Branch remota:* `main`.
+  - *Histórico remoto:* correções da Fase 1 foram registradas diretamente no GitHub após o commit `f351004`; a sincronização da cópia local não foi verificada.
   - *Situação remota:* A referência acima corresponde ao commit verificado imediatamente antes desta atualização documental. A sincronização entre a árvore local e o repositório remoto não foi verificada.
-  - *Ações realizadas nesta revisão:* Correções documentais aplicadas diretamente ao repositório remoto, sem alterações no código da aplicação, tags, releases ou publicação da aplicação.
+  - *Ações realizadas nesta revisão:* correções de código, testes e documentação registradas diretamente na branch `main`. Nenhuma tag, release ou publicação da aplicação foi criada.
 - **Mockup Oficial de Referência:**
   - `docs/design/referencias/todolist-kanban-1.0-mockup.png`: Presente, verificado e preservado intacto em sua forma binária original.
 
@@ -37,7 +38,7 @@
 
 A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
 - **`docs/REQUISITOS.md`:** Atualizado (Versão 1.7 — RNF06 alinhado aos critérios normativos de contraste WCAG 2.2 AA).
-- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 2.1 — critérios explícitos para botões de criação por coluna, comportamento contextual de `Esc` e rastreabilidade das seis transições de estado; inclui os ajustes anteriores de contadores e GitHub Pages).
+- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 2.1 — plano aprovado; situação da Etapa 4 e autorização da Fase 1 alinhadas ao estado real, com registro da revisão corretiva).
 - **`docs/ESTADO-ATUAL.md`:** Atualizado com o estado operacional corrente (este documento).
 
 ---
@@ -51,7 +52,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | **Etapa 3 — Arquitetura Técnica** | **Concluída e Aprovada** | Sete decisões técnicas aprovadas, arquitetura modular e critérios de testes definidos. |
 | **Etapa 4 — Plano de Implementação** | **Concluída e Aprovada** | Plano de Implementação (versão 2.1) formalmente aprovado pelo usuário. |
 | **Etapa 5 — Implementação Controlada** | **Em andamento** | Execução autorizada para a Fase 1. Fases 2 a 6 não iniciadas. |
-| ↳ *Fase 1: Domínio Python e Testes* | Em andamento (Implementada e Testada) | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados; 41 testes aprovados (100%), cobertura de linhas 96,05% e branches 92,47%; aguarda revisão formal do usuário. |
+| ↳ *Fase 1: Domínio Python e Testes* | Em andamento (Implementada e Testada) | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados; 41 testes aprovados na execução anterior à revisão corretiva. Foram adicionados 6 casos de teste e alterados os módulos de domínio; a suíte e as metas de cobertura precisam ser executadas novamente antes do aceite final. |
 | ↳ *Fase 2: HTML e Acessibilidade* | Não iniciada | Estrutura semântica `index.html` e validação Nu HTML Checker. |
 | ↳ *Fase 3: CSS e Validação Visual* | Não iniciada | Design system, temas, `check_contrast.py` e versão visual corrigida. |
 | ↳ *Fase 4: WebAssembly e Persistência* | Não iniciada | Carregamento Pyodide no virtual FS e `storage.js` com rollback. |
@@ -66,9 +67,9 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 - **Planejado:** Aplicação To-Do Kanban estática com Python via WebAssembly (Pyodide), 3 colunas, drag and drop via Pointer Events, calendário integrado, métricas em tempo real e backup JSON.
 - **Aprovado:** Versão 1.7 de Requisitos (RNF06 alinhado à WCAG 2.2 AA), Etapa 3 (Arquitetura Técnica) e Etapa 4 (Plano de Implementação, versão 2.1) formalmente aprovadas.
 - **Implementado:** Fase 1 implementada: pacote Python `src/todolist/` (`models.py`, `services.py`, `metrics.py`, `schema.py`, `__init__.py`), configuração `pyproject.toml`, suíte `tests/` e script `scripts/verify_coverage.py`. Fases 2 a 6 não implementadas.
-- **Testado:** 41 testes automatizados executados via `pytest` com 100% de aprovação (zero falhas e zero erros). Cobertura total obtida de 96,05% de declarações (`percent_covered`) e 92,47% de ramos (`percent_branches_covered`).
-- **Validado:** Procedimento oficial `pytest && python scripts/verify_coverage.py` aprovado com sucesso; critérios CA1.1 a CA1.7 comprovados.
-- **Commitado / Enviado ao GitHub / Publicado:** Nenhuma operação Git de commit, push, tag ou publicação realizada nesta sessão.
+- **Testado:** antes da revisão corretiva, 41 testes passaram com cobertura de 96,05% de declarações e 92,47% de ramos. Após as correções, foram acrescentados 6 testes; a execução atualizada ainda está pendente.
+- **Validado:** CA1.7 foi comprovado na execução anterior às correções. O aceite final de CA1.1 a CA1.7 permanece pendente da nova execução do procedimento oficial após as alterações.
+- **Commitado / Enviado ao GitHub:** correções registradas diretamente na branch remota `main` por commits do GitHub. A sincronização da árvore local não foi verificada. Nenhuma tag, release ou publicação da aplicação foi criada.
 
 ---
 
@@ -86,12 +87,13 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 7. Informações e Pendências de Confirmação
 
-- **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`. O commit `950240a` foi verificado imediatamente antes desta atualização documental. O estado da árvore de trabalho local e sua sincronização com o remoto não foram avaliados.
+- **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`. Houve alterações remotas nesta revisão; o estado da árvore de trabalho local e sua sincronização com o remoto não foram avaliados.
 - **Implementação:** Fase 1 do domínio Python implementada (`src/todolist/`, `tests/`, `scripts/verify_coverage.py` e `pyproject.toml`). Os diretórios e arquivos das fases subsequentes (`js/`, `css/`, `index.html`, `scripts/check_contrast.py`) não foram criados e aguardam autorização formal da Fase 2.
 
 ---
 
 ## 8. Próxima Ação Recomendada
 
-1. Submeter os resultados de execução da Fase 1 à revisão formal do usuário.
-2. Manter as Fases 2 a 6 da Etapa 5 como não iniciadas até autorização expressa do usuário.
+1. Sincronizar a cópia local com a branch `main` remota e executar `pytest && python scripts/verify_coverage.py`.
+2. Revisar os resultados atualizados e, se as metas forem atendidas, encerrar formalmente a Fase 1.
+3. Manter as Fases 2 a 6 da Etapa 5 como não iniciadas até autorização expressa do usuário.
