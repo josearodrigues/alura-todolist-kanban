@@ -373,3 +373,13 @@ def test_transicoes_atualizam_timestamp_global_nas_seis_combinacoes():
         assert atualizada["data_atualizacao"] == timestamp
         assert novas[0]["data_atualizacao"] == timestamp
         assert atualizada["estado"] == destino
+
+def test_servicos_rejeitam_enums_nao_string():
+    """Serviços também devem normalizar tipos inválidos para ValueError."""
+    tarefas, _, _ = criar_tarefa(
+        [], "Tarefa válida", id_injetado=UUID_1, timestamp_injetado=TS_1
+    )
+    with pytest.raises(ValueError, match="Estado de destino inválido"):
+        mover_tarefa(tarefas, UUID_1, [], timestamp_global_atual=TS_1)
+    with pytest.raises(ValueError, match="Campo 'prioridade' inválido"):
+        editar_tarefa(tarefas, UUID_1, "Novo título", "", [], None)
