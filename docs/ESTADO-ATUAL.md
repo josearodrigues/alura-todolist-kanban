@@ -26,7 +26,7 @@
   - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
   - *Branch confirmada:* `main`
   - *Branch remota:* `main`.
-  - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits `e03fd94`, `92c3eed`, `a957eeb`, `94932ff` e das correções posteriores `b793581`, `6ab629d` e `bfa0f1a`.
+  - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits `e03fd94`, `92c3eed`, `a957eeb`, `94932ff`, `b793581`, `6ab629d` e `bfa0f1a`; as atualizações de estado foram registradas em `ab8d161` e `3c31e33`.
   - *Situação local/remota:* a branch remota `main` foi verificada no commit `bfa0f1a`. A situação da cópia local não foi verificada nesta sessão; sua sincronização permanece sob controle do usuário.
   - *Ações realizadas nesta revisão:* correções de código, testes e documentação registradas diretamente na branch `main`. Nenhuma tag, release ou publicação da aplicação foi criada.
 - **Mockup Oficial de Referência:**
@@ -87,7 +87,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 7. Informações e Pendências de Confirmação
 
-- **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`, último commit verificado antes desta atualização documental: `bfa0f1a`. A cópia local não foi inspecionada.
+- **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch `main`, último commit verificado: `3c31e33`. A cópia local não foi inspecionada.
 - **Implementação:** Fase 1 concluída e validada; Fase 2 implementada e submetida a 20 verificações automatizadas de navegador. Permanecem pendentes a validação Nu HTML Checker e a formalização do checklist manual humano. Fases 3 a 6 permanecem não iniciadas.
 
 ---
