@@ -215,3 +215,19 @@ def test_validar_envelope_rejeita_ordem_nao_contigua_por_coluna():
     valido, msg = validar_envelope_backup(env)
     assert valido is False
     assert "sequência de ordem inválida" in msg
+
+def test_validar_envelope_rejeita_enum_nao_hashable_sem_excecao():
+    """Enum com tipo incompatível é rejeitado pelo validador do backup."""
+    tarefa = criar_tarefa_valida(UUID_1, "a_fazer", 0)
+    tarefa["estado"] = []
+    envelope = {
+        "versao_schema": VERSAO_SCHEMA_ESPERADA,
+        "aplicacao": APLICACAO_ESPERADA,
+        "data_exportacao": TS_EXPORT,
+        "total_tarefas": 1,
+        "tarefas": [tarefa],
+    }
+    valido, mensagem = validar_envelope_backup(envelope)
+    assert valido is False
+    assert "Erro na tarefa de índice 0" in mensagem
+    assert "Campo 'estado' inválido" in mensagem
