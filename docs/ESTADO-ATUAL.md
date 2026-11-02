@@ -52,7 +52,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | **Etapa 3 — Arquitetura Técnica** | **Concluída e Aprovada** | Sete decisões técnicas aprovadas, arquitetura modular e critérios de testes definidos. |
 | **Etapa 4 — Plano de Implementação** | **Concluída e Aprovada** | Plano de Implementação (versão 2.1) formalmente aprovado pelo usuário. |
 | **Etapa 5 — Implementação Controlada** | **Em andamento** | Execução autorizada para a Fase 1. Fases 2 a 6 não iniciadas. |
-| ↳ *Fase 1: Domínio Python e Testes* | Em andamento (Implementada e Testada) | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados; 41 testes aprovados na execução anterior à revisão corretiva. Foram adicionados 7 casos de teste e alterados os módulos de domínio; a suíte e as metas de cobertura precisam ser executadas novamente antes do aceite final. |
+| ↳ *Fase 1: Domínio Python e Testes* | Em andamento (Implementada; validação pendente após revisão corretiva) | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados; 41 testes aprovados na execução anterior à revisão corretiva. Foram adicionados 7 casos de teste e alterados os módulos de domínio; a suíte e as metas de cobertura precisam ser executadas novamente antes do aceite final. |
 | ↳ *Fase 2: HTML e Acessibilidade* | Não iniciada | Estrutura semântica `index.html` e validação Nu HTML Checker. |
 | ↳ *Fase 3: CSS e Validação Visual* | Não iniciada | Design system, temas, `check_contrast.py` e versão visual corrigida. |
 | ↳ *Fase 4: WebAssembly e Persistência* | Não iniciada | Carregamento Pyodide no virtual FS e `storage.js` com rollback. |
