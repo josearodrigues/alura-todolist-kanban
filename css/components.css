@@ -1,0 +1,16 @@
+dialog { width: min(34rem, calc(100vw - 2rem)); max-width: calc(100vw - 2rem); max-height: min(88vh, 48rem); overflow: auto; padding: 1.4rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-md); }
+dialog::backdrop { background: var(--color-overlay); backdrop-filter: blur(3px); }
+dialog header { margin-bottom: 1rem; }
+dialog header p, dialog > p { color: var(--color-text-muted); }
+dialog form > p { margin-bottom: 1rem; }
+dialog form > p:last-of-type { display: flex; flex-wrap: wrap; gap: .6rem; }
+dialog button:not(:disabled) { margin-right: .25rem; }
+dialog button[type="submit"], .button-primary { border-color: var(--color-primary); background: var(--color-primary); color: var(--color-primary-contrast); }
+dialog button[type="submit"]:hover:not(:disabled), .button-primary:hover:not(:disabled) { background: var(--color-primary-hover); }
+#status-runtime { font-weight: 650; }
+#ultima-alteracao { color: var(--color-text); font-weight: 600; }
+@media (max-width: 767px) {
+  dialog { padding: 1rem; }
+  dialog form > p:last-of-type { flex-direction: column; }
+  dialog form > p:last-of-type button { width: 100%; }
+}
