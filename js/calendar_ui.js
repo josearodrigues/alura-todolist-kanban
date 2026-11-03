@@ -44,6 +44,7 @@ export function initializeCalendar({ getTasks, onFocusTask }) {
       if(day.getMonth()!==month.getMonth()) button.classList.add("muted-day","outside-month");
       if(key===today) button.classList.add("today-day");
       if(tasks.length) button.classList.add("has-task");
+      if(tasks.some(task => task.estado === "concluida")) button.classList.add("has-completed-task");
       button.setAttribute("aria-label",new Intl.DateTimeFormat("pt-BR",{dateStyle:"full"}).format(day)+": "+tasks.length+" tarefa(s)");
       button.textContent=String(day.getDate());
       if(tasks.length){const marker=document.createElement("i");marker.setAttribute("aria-hidden","true");button.append(marker);}
