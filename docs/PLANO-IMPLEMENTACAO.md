@@ -8,8 +8,8 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Fases 1 a 6 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; CA6.1–CA6.8 aprovados; Fase 7 com implementação inicial gravada; validação automatizada e manual pendentes]
-- **Etapa 6 — Validação final e homologação:** [Pendente — após os testes específicos da Fase 7, executar regressão integrada RF01–RF16 e RNF01–RNF07, validar workflows GitHub e realizar validação de segurança]
+- **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Fases 1 a 7 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; CA6.1–CA6.8 aprovados; CA7.1–CA7.9 aprovados nos cenários testados; 65 testes automatizados aprovados; regressão funcional RF01–RF16 aprovada nos cenários executados]
+- **Etapa 6 — Validação final e homologação:** [Em andamento — regressão funcional RF01–RF16 executada e aprovada nos cenários testados; concluir verificação direcionada de RNF01–RNF07, validar workflows GitHub e realizar validação de segurança]
 
 ---
 
@@ -405,7 +405,7 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 ### Fase 7 — Seleção e Exclusão Coletiva de Tarefas
 
 - **Objetivo:** permitir a seleção de múltiplas tarefas em todo o quadro Kanban e sua exclusão em uma única operação, com confirmação explícita, persistência preventiva e integridade dos dados.
-- **Implementação registrada na branch `fase-7-selecao-exclusao-coletiva`:** serviço Python `excluir_tarefas()`, exportação pública, integração Pyodide/API `deleteTasks`, controles de seleção nos cartões, barra contextual, diálogo de confirmação e estilos responsivos. Testes unitários adicionados para exclusão em colunas distintas e reindexação de múltiplas tarefas na mesma coluna; ainda não executados nesta sessão.
+- **Implementação registrada na branch `fase-7-selecao-exclusao-coletiva`:** serviço Python `excluir_tarefas()`, exportação pública, integração Pyodide/API `deleteTasks`, controles de seleção nos cartões, barra contextual, diálogo de confirmação e estilos responsivos. **Validação:** 65 testes automatizados aprovados; cobertura de linhas 95,83% e branches 92,54%. CA7.1–CA7.9 aprovados pelo usuário nos cenários testados. A regressão funcional RF01–RF16 também foi aprovada nos cenários executados. RNF01–RNF07, workflows e segurança mantêm as pendências descritas no estado atual.
 - **Modelo de interface aprovado:**
   - Exibir um cabeçalho contextual quando o modo de seleção estiver ativo.
   - Disponibilizar nesse cabeçalho: selecionar todas as tarefas, desselecionar todas, exibir a quantidade selecionada e excluir as tarefas selecionadas.
@@ -526,3 +526,23 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **3.1** | 2026-11-03 | Validação manual pelo usuário da mensagem amigável na rejeição de JSON inválido: schema diferente de 1.0, chave inválida e valor inválido; importação válida também aprovada. | Registrar a conclusão do ajuste de usabilidade e liberar a sequência para CA6.8. |
 | **3.0** | 2026-11-03 | Correção da rastreabilidade da Fase 6: CA6.7 registrado como aprovado; ajuste de usabilidade separado para mensagens de rejeição de JSON inválido, com detalhes técnicos restritos ao console. | Refletir corretamente a pendência de interface sem reabrir o critério de cancelamento. |
 | **2.9** | 2026-11-03 | Reorganização dos critérios de homologação da Fase 6 para refletir os cenários executados: CA6.4–CA6.6 para rejeição de arquivos inválidos, CA6.7 para cancelamento, CA6.8 para falha de persistência, CA6.9 para regressão integrada e CA6.10 para workflows. | Corrigir a rastreabilidade entre os testes efetivamente executados, os critérios de aceite e as pendências restantes.
+
+
+## Atualização de validação — Fase 7 e regressão funcional (2026-11-03)
+
+- CA7.1–CA7.9: aprovados nos cenários manuais executados pelo usuário, incluindo seleção, confirmação/cancelamento, exclusão, persistência, rollback, ordenação/metadados, teclado e viewport móvel de 375 px.
+- CA7.8: procedimento `pytest && python scripts/verify_coverage.py` aprovado com 65 testes; cobertura de linhas 95,83% (meta ≥90%) e branches 92,54% (meta ≥85%).
+- CA7.10: regressão funcional RF01–RF16 aprovada nos cenários executados. A aprovação não representa homologação integral de RNF01–RNF07.
+- RNF01: auditoria de rede abrangente no GitHub Pages ainda pendente; evidência anterior parcial.
+- RNF02: revisão direcionada da centralização da lógica de negócio em Python ainda pendente.
+- RNF03: metas locais atingidas; falta evidência do workflow GitHub no estado final.
+- RNF04: rollback por falha de persistência validado na Fase 7; evidências anteriores da Fase 4 e Fase 6 permanecem válidas.
+- RNF05: reteste visual integrado de sidebar e banner de vencidas nos breakpoints oficiais pendente.
+- RNF06: completar verificações WCAG 2.2 AA pertinentes; teclado testado não equivale a auditoria completa nem a teste com leitor de tela.
+- RNF07: confirmar indicador de inicialização no estado atual pendente.
+- CA7.11 (workflows GitHub) e CA7.12 (validação de segurança) permanecem pendentes.
+- Situação da cópia local não inspecionada nesta atualização.
+
+| Versão | Data | Alterações Registradas | Justificativa |
+| :--- | :--- | :--- | :--- |
+| **3.5** | 2026-11-03 | Atualização do estado da Fase 7: CA7.1–CA7.9 aprovados nos cenários testados; 65 testes aprovados, cobertura de linhas 95,83% e branches 92,54%; regressão funcional RF01–RF16 aprovada nos cenários executados; registro das pendências RNF01–RNF07, workflows e segurança. | Atualizar o plano com evidências efetivamente confirmadas e separar regressão funcional da homologação não funcional. |
