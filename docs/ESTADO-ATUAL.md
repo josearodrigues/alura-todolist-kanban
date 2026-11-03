@@ -58,13 +58,13 @@
 - **Testes automatizados:** execução local informada pelo usuário: 60 testes aprovados; cobertura de linhas de 96,10% (meta mínima de 90%) e cobertura de branches de 92,72% (meta mínima de 85%). O script de verificação de cobertura concluiu com sucesso.
 - **Homologação manual:** CA6.1–CA6.7 aprovados, incluindo a preservação das 30 tarefas nos cenários de rejeição e o cancelamento sem alteração dos dados. Na validação posterior do ajuste de usabilidade, o usuário aprovou a importação válida e a mensagem amigável para schema diferente de 1.0, chave inválida e valor inválido. Detalhes na Seção 12.
 - **Homologação manual:** CA6.8 aprovado em 2026-11-03. Durante a importação de um backup válido diferente do estado atual, foi simulada falha de `Storage.prototype.setItem` com `QuotaExceededError`. A aplicação informou que a substituição não foi concluída. As comparações `JSON.stringify(window.kanbanApp.getState()) === window.estadoAntesCA68` e `localStorage.getItem("kanban_app_state") === window.storageAntesCA68` retornaram `true`; o usuário confirmou que o quadro visual permaneceu inalterado. O método original de `Storage.prototype.setItem` e as variáveis temporárias foram restaurados/removidos ao final.
-- **Pendências:** CA6.9 (regressão integrada RF01–RF15 e RNF01–RNF07) e CA6.10 (conferência dos workflows GitHub).
+- **Situação da Fase 6:** CA6.1–CA6.8 aprovados. CA6.9 (regressão integrada) e CA6.10 (workflows) foram transferidos para o encerramento do projeto, após os testes específicos da Fase 7; não bloqueiam o início da Fase 7.
 
 ## 3. Estado da Governança Documental
 
 A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
 - **`docs/REQUISITOS.md`:** Atualizado (Versão 1.8 — inclusão do RF16 para seleção e exclusão coletiva).
-- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 2.8 — inclusão da Fase 7, planejada e aprovada; implementação ainda não iniciada).
+- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 3.3 — Fase 7 e critérios finais CA7.10–CA7.12; regressão integrada, workflows e validação de segurança transferidos para o encerramento do projeto).
 - **`docs/ESTADO-ATUAL.md`:** Atualizado com o estado operacional corrente (este documento).
 - **`README.md`:** Atualizado com tecnologias, estrutura do projeto, instruções de execução, testes, roteiro manual da Fase 2 e roteiro de inspeção visual da Fase 3.
 - **`CHANGELOG.md`:** Registra as alterações implementadas por fase.
@@ -86,9 +86,9 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | ↳ *Fase 3: CSS e Validação Visual* | **Implementada; inspeção visual manual concluída** | Refinamentos visuais e mocks estáticos mantidos. Navegação lateral recolhível em telas de até 960 px, com fechamento por `Esc`, clique no fundo e seleção de seção, restauração e contenção de foco; ícone `⋮` ajustado visualmente, sem ativar o menu contextual. Usuário aprovou Desktop, Tablet (1024 × 768) e Mobile (390 × 844), nos temas Claro e Escuro. Teste manual de `prefers-reduced-motion` também aprovado. Workflow `41553398236`: 25 combinações de contraste aprovadas, zero reprovações e Nu HTML Checker sem erros/avisos. CA3.1–CA3.5 considerados atendidos conforme as evidências registradas; não implica validação funcional das telas demonstrativas. |
 | ↳ *Fase 4: WebAssembly e Persistência* | **Implementada; validação funcional concluída, CA4.1 parcialmente verificado** | Pyodide 314.0.7 e importação dos cinco módulos confirmados. Criação, edição, movimentação e exclusão executadas pela API JS/Python; persistência, timestamp e recuperação após recarga confirmados nas quatro operações. Falhas simuladas nas quatro operações preservaram memória e armazenamento; notificação visual observada na criação. CA4.2–CA4.6 atendidos conforme as evidências registradas. No GitHub Pages, o usuário confirmou o carregamento e observou, no filtro Fetch/XHR durante a carga, uma requisição ao CDN jsDelivr para `pyodide-lock.json` (HTTP 200), sem chamadas a APIs de backend nessa amostra. Como a auditoria ficou restrita ao filtro e ao período observado, CA4.1 permanece parcialmente verificado, não homologado integralmente. |
 | ↳ *Fase 5: Interações (Pointer Events)* | **Implementada; validação manual parcial** | CA5.2 a CA5.7 aprovados nos cenários exercitados, exceto CA5.1, que permanece parcial por falta de teste de toque. Mouse e alternativa acessível pelo menu foram aprovados. CA5.5 aprovado no cenário exercitado. Após observação de usabilidade com 10 tarefas no mesmo dia, foi implementada rolagem vertical interna no popover; validação visual com listas extensas e em viewport móvel ainda pendente. Correção do menu contextual, datas relativas, destaque de vencidas e remoção da mensagem transitória de carregamento foram implementados e validados pelo usuário. A implementação da Fase 5 está concluída; aceite integral aguarda teste de toque em CA5.1. |
-| ↳ *Fase 6: Relatórios e Backup JSON* | **Implementada; homologação parcial** | CA6.1–CA6.8 aprovados nos cenários documentados; mensagem amigável para rejeição de JSON inválido implementada e validada pelo usuário. CA6.9 (regressão integrada) e CA6.10 (workflows) permanecem pendentes. Testes automatizados locais informados: 60 aprovados, cobertura de linhas 96,10% e branches 92,72%. Consulte a Seção 12. |
+| ↳ *Fase 6: Relatórios e Backup JSON* | **Implementada; CA6.1–CA6.8 aprovados** | Mensagem amigável para rejeição de JSON inválido implementada e validada pelo usuário. CA6.9 e CA6.10 transferidos para o encerramento do projeto como CA7.10 e CA7.11; não bloqueiam a Fase 7. Testes automatizados locais informados: 60 aprovados, cobertura de linhas 96,10% e branches 92,72%. Consulte a Seção 12. |
 | ↳ *Fase 7: Seleção e Exclusão Coletiva* | **Planejada e aprovada; implementação não iniciada** | Seleção múltipla de tarefas em quaisquer colunas e exclusão coletiva com confirmação. Checkbox será controle de seleção, independente do tick de conclusão. Inclui contagem, limpeza da seleção, persistência preventiva, rollback e testes. Não contempla movimentação ou outras operações coletivas. |
-| **Etapa 6 — Validação Final** | **Não iniciada** | Homologação integrada e testes de aceitação. |
+| **Etapa 6 — Validação Final** | **Pendente; após a Fase 7** | CA7.10 regressão integrada RF01–RF16 e RNF01–RNF07; CA7.11 workflows GitHub; CA7.12 validação de segurança com escopo documentado. |
 
 ---
 
@@ -130,9 +130,9 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 8. Próxima Ação Recomendada
 
-1. Executar CA6.9: regressão integrada RF01–RF15 e RNF01–RNF07.
-4. Conferir e registrar os workflows GitHub (CA6.10).
-5. Após a homologação da Fase 6, preparar a integração da branch de trabalho à `main`, limpeza das branches temporárias e abertura da branch da Fase 7; as operações Git serão executadas pelo usuário.
+1. Iniciar a Fase 7 — Seleção e Exclusão Coletiva, conforme escopo aprovado e critérios CA7.1–CA7.9.
+2. Manter a regressão integrada (CA7.10), a validação dos workflows (CA7.11) e a validação de segurança (CA7.12) para o encerramento, após os testes específicos da Fase 7.
+3. Após concluir e homologar a Fase 7 e as validações finais, preparar a integração à `main` e a limpeza das branches temporárias. As operações Git serão orientadas, mas executadas pelo usuário.
 ---
 
 ## 9. Registro de Validação Local — Fase 4 (2026-11-03)
@@ -232,6 +232,15 @@ Os resultados abaixo foram informados pelo usuário durante a execução dos tes
 ### Limites e pendências
 
 - **CA6.8 — Falha de persistência/rollback:** aprovado no cenário de falha simulada durante a importação, conforme evidências registradas na tabela.
-- **CA6.9 — Regressão integrada:** pendente; executar e registrar a regressão RF01–RF15 e RNF01–RNF07.
-- **CA6.10 — Workflows:** pendente; conferir os resultados dos workflows GitHub associados à branch da Fase 6.
+- **CA6.9 e CA6.10:** transferidos para o encerramento do projeto como CA7.10 (regressão integrada) e CA7.11 (workflows), após a implementação e os testes específicos da Fase 7.
 - A execução local informada de 60 testes, com 96,10% de cobertura de linhas e 92,72% de branches, permanece registrada separadamente; não substitui os critérios manuais pendentes nem a conferência dos workflows.
+
+
+## 13. Replanejamento do encerramento do projeto — 2026-11-03
+
+- CA6.1–CA6.8 permanecem aprovados; a Fase 6 não fica bloqueada pela regressão integrada ou pela validação dos workflows.
+- CA6.9 e CA6.10 foram transferidos para o encerramento, após os testes específicos da Fase 7, como CA7.10 e CA7.11.
+- **CA7.10:** regressão integrada RF01–RF16 e RNF01–RNF07, reutilizando evidências anteriores válidas e concentrando novos testes nos impactos, integrações e lacunas. Não repetir indiscriminadamente todos os testes de aceite.
+- **CA7.11:** executar e validar os workflows GitHub no estado final, registrando workflow, branch, commit e resultado. Não declarar aprovação sem evidência no GitHub Actions.
+- **CA7.12:** validação de segurança com escopo, método, evidências, achados, severidade, correções e retestes documentados. A conclusão deve refletir apenas o escopo efetivamente avaliado; não denominar pentest ou auditoria abrangente sem cobertura correspondente.
+- Pendências de acessibilidade e compatibilidade já registradas (toque em CA5.1, leitor de tela, zoom de 200% inconclusivo, rolagem do popover com mais de 10 tarefas e viewport móvel, e auditoria de rede RNF01 parcial) não foram convertidas em aprovações e devem ser reavaliadas conforme impacto e escopo da regressão final.
