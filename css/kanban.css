@@ -282,3 +282,10 @@
 .task-card.is-completed { --priority-color: #22a05a; }
 .task-card.is-completed .task-content h3 { color: #55607f; }
 :root[data-theme="dark"] .task-card.is-completed .task-content h3 { color: #8d9abf; }
+
+
+/* Reticências verticais sólidas, conforme o ícone do mockup. */
+.task-more .ui-icon {
+  width: 20px;
+  height: 20px;
+}
