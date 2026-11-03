@@ -128,14 +128,10 @@ def _kanban_dispatch(payload_json):
 
     if operacao == "confirmar_importacao":
         timestamp_importacao = todolist.obter_timestamp_utc_atual()
-        envelope = todolist.gerar_envelope_backup(dados["tarefas"], timestamp_importacao)
-        valido, mensagem = todolist.validar_envelope_backup(envelope)
-        if not valido:
-            raise ValueError(mensagem)
-        return json.dumps({
-            "tarefas": envelope["tarefas"],
-            "timestamp_ultima_alteracao": timestamp_importacao,
-        }, ensure_ascii=False)
+        estado_candidato = todolist.preparar_estado_importado(
+            dados["tarefas"], timestamp_importacao
+        )
+        return json.dumps(estado_candidato, ensure_ascii=False)
 
     if operacao == "validar_estado":
         estado = dados.get("estado", {})
