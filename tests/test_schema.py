@@ -324,3 +324,11 @@ def test_preparar_importacao_backup_com_timestamp_opcional_valido():
 
     assert estado["tarefas"] == []
     assert estado["timestamp_ultima_alteracao"] == TS_EXPORT
+
+
+def test_preparar_importacao_backup_rejeita_conteudo_que_nao_e_texto():
+    """O serviço exige conteúdo textual para interpretar o documento JSON."""
+    from todolist.schema import preparar_importacao_backup
+
+    with pytest.raises(ValueError, match="deve ser texto"):
+        preparar_importacao_backup(None)
