@@ -115,7 +115,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 8. Próxima Ação Recomendada
 
-1. Remover a mensagem transitória “Carregando tarefas...” conforme decisão do usuário, preservando o indicador de status do Pyodide; validar a inicialização e a ausência do deslocamento vertical do Kanban.
+1. Validar no navegador a remoção da mensagem transitória “Carregando tarefas...”: confirmar que o quadro não sofre deslocamento vertical e que o indicador de status do Pyodide continua funcionando.
 2. Registrar a limitação já observada em navegadores móveis antigos de forma genérica, sem identificar aparelho ou versão; a causa não foi comprovada e a investigação de compatibilidade não integra a próxima ação imediata.
 3. Manter toque/caneta como não testados em CA5.1; avaliar o popover com grande volume de tarefas somente se houver necessidade ou indício de problema.
 4. Não declarar a Fase 5 concluída enquanto houver critérios pendentes.
@@ -181,6 +181,6 @@ Os resultados abaixo foram informados e confirmados pelo usuário durante a vali
 | CA5.7 — tema | Preferência de tema preservada após recarga. | Aprovado. |
 | Datas e vencimentos nos cartões | Datas de vencimento nas tarefas pendentes; data de conclusão nas concluídas; rótulos relativos para ontem/hoje/amanhã; destaque de tarefas pendentes vencidas. | Usuário confirmou testes de datas anteriores, ontem, hoje e amanhã, data de conclusão e destaque de vencidas. Ajuste visual da etiqueta “Vencida” para 14 px e prevenção de quebra de linha implementados; commit `a4e466d` confirmado visualmente pelo usuário. |
 | Limitação de compatibilidade | Inicialização em navegador móvel antigo. | Falha de inicialização observada; causa específica não comprovada. Registrar genericamente, sem aparelho/versão; investigação e adaptação fora do escopo imediato. |
-| Carregamento inicial | Mensagem transitória “Carregando tarefas...” e indicador de status do Pyodide. | Usuário decidiu remover a mensagem transitória por provocar deslocamento vertical do Kanban. Remoção ainda pendente; preservar o indicador de status do Pyodide (RNF07). |
+| Carregamento inicial | Mensagem transitória “Carregando tarefas...” e indicador de status do Pyodide. | Usuário decidiu remover a mensagem transitória por provocar deslocamento vertical do Kanban. A mensagem e suas referências foram removidas de `index.html`, `js/kanban_ui.js` e `js/app.js`; validação manual após recarga ainda pendente. O indicador de status do Pyodide foi preservado (RNF07). |
 
 **Estado de validação:** CA5.2, CA5.3, CA5.4, CA5.6 e CA5.7 aprovados nos cenários exercitados. CA5.5 aprovado nos cenários exercitados, com grande volume no popover não testado. CA5.1 permanece parcial porque toque/caneta não foram testados. Não há aceite integral da Fase 5. A mensagem transitória de carregamento ainda precisa ser removida; o indicador de status do Pyodide deve ser preservado.
