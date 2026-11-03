@@ -4,6 +4,23 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 
 ## [Não lançado] — 2026-11-03
 
+### Fase 3 — Mocks visuais e refinamento
+
+- Substituídos caracteres Unicode por ícones SVG consistentes na navegação, busca, tema, calendário e resumo.
+- Criado avatar ilustrativo sem iniciais ou identidade de usuário; removido `JD`.
+- Rodapé ajustado para atravessar a largura total da aplicação.
+- Reforçadas as cores de destaque, tipografia, cartões e hierarquia visual nos temas claro e escuro.
+- Incluídos sete cartões demonstrativos, calendário estático de novembro/2026, resumo coerente (7 tarefas, 28,6% concluídas e 71,4% pendentes) e status/última atualização de exemplo.
+- Dados demonstrativos não são persistidos nem ativam operações; servem como referência visual para a futura integração.
+- Corrigidos atributos ARIA inválidos identificados na primeira execução do Nu HTML Checker.
+- Commits da revisão: `9c2bd97`, `740aa60` e `98078d1`.
+
+### Validado
+- Workflow `41553398236`: 25 combinações de contraste aprovadas, zero reprovações; Nu HTML Checker com zero erros e zero avisos.
+
+### Pendente
+- Inspeção visual nos três breakpoints e nos dois temas, incluindo `prefers-reduced-motion`; CA3.1–CA3.3 e CA3.5 aguardam inspeção visual.
+
 ### Fase 3 — Revisão visual
 
 - Reorganizada a estrutura de `index.html` para aproximar a interface do mockup oficial: sidebar e navegação, banner `Olá!`, três colunas, cartões, painel de informações e rodapé.
