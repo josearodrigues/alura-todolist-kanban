@@ -239,6 +239,7 @@ async function inicializarAplicacao() {
     relatoriosUI = initializeReportsUI({
       getReport: (dataLocal, inicio, fim) => window.kanbanApp.getReport(dataLocal, inicio, fim),
     });
+    if (document.getElementById("dialog-relatorios")?.open) void relatoriosUI.refresh();
     initializeBackupUI({ actions: window.kanbanApp, notify: notificarUsuario });
     kanbanUI = createKanbanUI({
       getState: () => estadoAtual,
