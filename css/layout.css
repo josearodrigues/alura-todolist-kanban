@@ -48,13 +48,13 @@
   font-size: 13px;
 }
 .app-footer p { margin: 0; }
-.app-footer b { padding: 0 3px; color: var(--muted); }
-.app-footer .footer-credit { display: flex; align-items: center; gap: 6px; }
-.app-footer .footer-bolt { color: #f59e0b; font-size: 18px; line-height: 1; }
-.app-footer .footer-heart { color: #ef4444; font-size: 14px; line-height: 1; }
-.app-footer .footer-meta { display: flex; align-items: center; gap: 16px; white-space: nowrap; }
-.app-footer .footer-meta i { display: block; height: 20px; border-left: 1px solid var(--border); }
-.app-footer .footer-refresh { color: var(--muted); font-size: 20px; line-height: 1; }
+.app-footer b { padding: 0 3px; color: var(--muted); font-weight: 400; }
+.app-footer .footer-credit { display: flex; align-items: center; gap: 0; font-family: var(--font); font-size: 13px; font-weight: 400; }
+.app-footer .footer-bolt { margin-right: 4px; color: #f59e0b; font-size: 18px; line-height: 1; }
+.app-footer .footer-heart { margin: 0 6px 0 0; color: #ef4444; font-size: 14px; line-height: 1; }
+.app-footer .footer-meta { display: flex; align-items: center; gap: 16px; white-space: nowrap; font-family: var(--font); font-size: 13px; font-weight: 400; }
+.app-footer .footer-meta i { display: inline-block; width: 1px; height: 20px; border: 0; background: #2b3558; }
+.app-footer .footer-refresh { color: #2b3558; font-size: 20px; line-height: 1; }
 .page-view { padding: 8px 0 30px; }
 .page-view[hidden] { display: none !important; }
 .page-heading { display: flex; align-items: center; justify-content: space-between; margin: 10px 0 22px; }
