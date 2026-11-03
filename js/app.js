@@ -6,6 +6,7 @@ import {
   calculateReport,
   createBackup,
   validateBackup,
+  prepareImportedState,
 } from "./pyodide_bridge.js";
 import { createKanbanUI } from "./kanban_ui.js";
 import { initializeDragDrop } from "./drag_drop.js";
@@ -200,6 +201,7 @@ function publicarApiAplicacao() {
     getReport: (dataLocal, periodoInicio, periodoFim) => calculateReport(estadoAtual, dataLocal, periodoInicio, periodoFim),
     createBackup: () => createBackup(estadoAtual),
     validateBackup: (conteudo) => validateBackup(conteudo),
+    prepareImportedState: (tarefas) => prepareImportedState(tarefas),
     validateState,
   });
 }
