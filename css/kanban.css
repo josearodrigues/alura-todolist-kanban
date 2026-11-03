@@ -9,10 +9,11 @@
 .primary-nav button:hover { background: rgb(255 255 255 / 9%); }
 .primary-nav button[aria-current="page"] { background: var(--primary); color: #fff; box-shadow: 0 2px 8px rgb(47 111 228 / 35%); }
 .primary-nav button[aria-current="page"] .ui-icon { color: #fff; }
-.about-card { margin-top: 24px; padding: 16px; border: 1px solid rgb(255 255 255 / 14%); border-radius: 12px; background: rgb(255 255 255 / 5%); }
-.about-card h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font-size: 15px; font-weight: 600; }
+.sidebar-divider { flex: none; border: 0; border-top: 1px solid rgb(255 255 255 / 14%); margin: 22px 14px; }
+.about-card { flex: none; padding: 16px; border: 1px solid rgb(255 255 255 / 14%); border-radius: 12px; background: rgb(255 255 255 / 5%); }
+.about-card h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font-size: 15px; line-height: 1.2; font-weight: 700; }
 .about-card h2 .about-icon { width: 24px; height: 24px; color: #fcd98b; }
-.about-card p { margin: 0 0 10px; padding-left: 4px; color: #c6d0ee; font-size: 13px; line-height: 1.5; }
+.about-card p { margin: 0; padding-left: 4px; color: #c6d0ee; font-size: 13px; line-height: 1.5; }
 .about-card a { display: inline-block; margin-top: 10px; padding-left: 4px; color: #7fb1ff; font-size: 13px; text-decoration: underline; }
 .sidebar-mascot { display: grid; place-items: center; margin-top: auto; min-height: 115px; padding-top: 20px; color: #93c5fd; }
 .robot-face { display: grid; place-items: center; width: 76px; height: 62px; border: 4px solid #93c5fd; border-radius: 22px 22px 17px 17px; background: #e0f2fe; color: #0f172a; box-shadow: inset 0 -7px #bfdbfe; font-size: 23px; }
@@ -146,6 +147,8 @@
 
 /* Barra superior ocupa a área principal, incluindo o alinhamento sobre o painel lateral. */
 .topbar {
+  position: relative;
+  z-index: 2;
   width: calc(100% + 296px);
   justify-content: flex-start;
 }
