@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual (03/11/2026):** Fase 1 concluída e validada. Fase 2 implementada; checklist manual pendente. Fase 3 recebeu refinamento visual e mocks estáticos de tarefas, calendário, resumo e status. Workflow `41553398236` aprovado (25 combinações de contraste, zero reprovações; HTML sem erros/avisos). Inspeção visual nos três breakpoints e nos dois temas ainda pendente. Fases 4 a 6 não iniciadas; a aplicação ainda não foi publicada para uso final no GitHub Pages.
+> **Estado atual (03/11/2026):** Fase 1 concluída e validada. Fase 2 implementada; checklist manual parcialmente executado: navegação/ativação por teclado, `Ctrl + K`, foco e `Esc` no diálogo Nova Tarefa aprovados. Menu contextual pendente porque o controle `⋮` está desativado; nomes acessíveis não foram testados com leitor de tela. Fase 3 recebeu refinamento visual e mocks estáticos de tarefas, calendário, resumo e status. Workflow `41553398236` aprovado (25 combinações de contraste, zero reprovações; HTML sem erros/avisos). Inspeção visual nos três breakpoints e nos dois temas ainda pendente. Fases 4 a 6 não iniciadas; a aplicação ainda não foi publicada para uso final no GitHub Pages.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
@@ -150,7 +150,7 @@ O procedimento oficial exige aprovação integral dos testes, cobertura de linha
 - **20 verificações automatizadas gerais em Chromium aprovadas**.
 - Os seis diálogos foram exercitados individualmente quanto ao foco inicial, contenção do foco, fechamento por `Esc` e restauração do foco.
 - Nu HTML Checker: **zero erros e zero avisos** na execução [41520632228](https://github.com/josearodrigues/alura-todolist-kanban/actions/runs/41520632228).
-- Checklist manual de acessibilidade ainda pendente.
+- Checklist manual de acessibilidade parcialmente executado em 03/11/2026; resultados e pendências estão registrados abaixo.
 
 Os resultados acima registram as evidências já obtidas; não representam uma nova execução dos testes nesta atualização documental. A validação automatizada não substitui a inspeção manual prevista no plano.
 
@@ -193,23 +193,36 @@ Esses itens descrevem o escopo aprovado, não funcionalidades já concluídas. A
 
 A estrutura atual inclui navegação semântica, link para pular ao conteúdo principal, rótulos associados aos campos, nomes acessíveis, foco visível, atalho de busca e diálogos nativos.
 
-Para concluir a verificação manual desta fase:
+### Resultados da verificação manual — 03/11/2026
 
-1. Use `Tab` e `Shift + Tab` para percorrer os controles.
-2. Use `Enter` ou `Espaço` para ativar os controles apropriados.
-3. Pressione `Ctrl + K` e confirme o foco no campo de busca.
-4. Abra cada diálogo e verifique o foco inicial, a permanência do foco dentro dele e o retorno ao controle de origem.
-5. Pressione `Esc` para fechar o diálogo ou menu contextual ativo.
-6. Verifique a abertura e o fechamento do menu contextual pelo teclado.
-7. Confira os rótulos dos campos e os nomes acessíveis dos controles.
+| Verificação | Resultado | Observação |
+|---|---|---|
+| `Tab` e `Shift + Tab` | **Aprovado** | Navegação nos controles testados. |
+| `Enter` e `Espaço` | **Aprovado** | Ativação dos controles apropriados testados. |
+| `Ctrl + K` | **Aprovado** | Foco direcionado ao campo de busca. |
+| Diálogo Nova Tarefa: foco inicial, contenção e restauração | **Aprovado** | Confirmado pelo usuário nesse diálogo. |
+| `Esc` no diálogo Nova Tarefa | **Aprovado** | O diálogo foi fechado. |
+| `Esc` no menu contextual | **Pendente** | Menu contextual indisponível/desativado. |
+| Navegação por teclado no menu contextual | **Pendente** | Controle `⋮` desativado; não foi possível abrir o menu. |
+| Rótulos e identificação visual | **Sem problema visual observado** | Não equivale a teste com leitor de tela. |
+| Nomes acessíveis com leitor de tela | **Não testado** | Requer validação específica com tecnologia assistiva. |
 
-Registre cada item como **Aprovado**, **Reprovado** ou **Não aplicável**, anotando o comportamento observado. O roteiro também está descrito no plano de implementação. A inspeção visual completa será realizada após a Fase 3.
+O checklist foi executado parcialmente. Não declarar a Fase 2 integralmente validada enquanto as pendências dos critérios CA2.3–CA2.6 não forem resolvidas ou justificadas. O ícone do menu `⋮` também foi apontado pelo usuário como divergente do mockup; a correção visual fica registrada para a etapa apropriada.
+
+### Itens ainda previstos no roteiro
+
+- Abrir e testar os demais diálogos individualmente, verificando foco inicial, contenção e retorno ao controle de origem.
+- Verificar o comportamento contextual de `Esc` na busca e nos demais componentes ativos, conforme CA2.3.
+- Verificar menus contextuais e formulários de criação/edição por teclado, conforme CA2.5.
+- Inspecionar foco visível, estados e nomes acessíveis; realizar teste com leitor de tela se aplicável ao critério de aceite.
+
+A inspeção visual completa da Fase 3 será realizada separadamente, após a conclusão das pendências da Fase 2.
 
 ---
 
 ## Limitações Conhecidas
 
-- A inspeção visual final nos breakpoints e nos dois temas ainda está pendente.
+- A inspeção visual final nos breakpoints e nos dois temas ainda está pendente; Desktop e Tablet (1024 × 768) já foram aprovados, e Mobile aguarda nova conferência após a correção da navegação lateral.
 - O domínio Python está implementado e testado, mas ainda não está integrado ao navegador por Pyodide.
 - Persistência no navegador, movimentação interativa, busca funcional, calendário, relatórios e backup ainda não foram implementados.
 - Os controles correspondentes às funcionalidades não integradas permanecem desabilitados.

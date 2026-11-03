@@ -8,12 +8,12 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fases 1 e 2 implementadas; Fase 3 em validação]
+- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fase 1 validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspeção visual aprovada]
 - **Etapa 6 — Validação final e homologação:** [Pendente]
 
 ---
 
-## 2. Revisão corretiva da interface — Fase 3 (2026-11-03)\n\nA revisão visual foi ajustada com base nas divergências apontadas pelo usuário e no mockup oficial. Foram refinados cabeçalho, navegação lateral, cartões, estados, calendário, resumo, status demonstrativo e rodapé. A implementação permanece estática: setas do calendário e indicadores são visuais, sem integração funcional. A validação automatizada de HTML e contraste foi executada no workflow `41558220193` com sucesso; o workflow `41558291161`, acionado pelo ajuste de datas Hoje/Amanhã, concluiu com sucesso, sem falhas na validação automatizada. A inspeção manual nos seis cenários responsivos/temas permanece obrigatória antes do aceite da Fase 3.\n\n## 3. Revisão visual e telas demonstrativas — 2026-11-03\n\nA tela principal foi realinhada à referência visual oficial: barra superior, três colunas e descrições, calendário mensal com barra de navegação, resumo com métricas agregadas (concluídas e pendentes) e rodapé completo. Foram criadas telas estáticas para Calendário, Relatórios, Importar/Exportar e Configurações. Os controles de navegação entre telas funcionam apenas para apresentação dos mocks; a navegação entre meses, relatórios dinâmicos, importação/exportação e preferências adicionais permanecem não funcionais e serão tratadas nas fases previstas. O workflow `41560866108` aprovou HTML e contraste no commit `db37ac91`. A inspeção visual manual nos breakpoints/temas e o aceite da Fase 3 permanecem pendentes.\n\n## 3. Consolidação da Etapa 3 — Arquitetura e Planejamento Técnico
+## 2. Revisão corretiva e validação visual — Fase 3 (2026-11-03)\n\nA interface foi refinada conforme o mockup oficial, incluindo cabeçalho, navegação, cartões, calendário, resumo, status demonstrativo e rodapé. As telas secundárias permanecem mocks estáticos; suas funcionalidades serão implementadas nas fases previstas. Na branch `revisao-visual-d83bbee`, foi adicionada navegação lateral recolhível para telas de até 960 px, com fechamento por `Esc`, clique no fundo e seleção de seção, além de gerenciamento de foco. O ícone `⋮` foi ajustado visualmente, mas o menu contextual continua desativado.\n\nA inspeção manual foi aprovada pelo usuário nos três breakpoints — Desktop, Tablet (1024 × 768) e Mobile (390 × 844) — nos temas Claro e Escuro. O usuário também confirmou o comportamento com `prefers-reduced-motion` ativo. O workflow `41553398236` aprovou 25 combinações de contraste, sem reprovações, e o Nu HTML Checker sem erros ou avisos. Portanto, os critérios visuais CA3.1–CA3.3 e de movimento reduzido CA3.5 estão aprovados conforme as evidências disponíveis; CA3.4 possui evidência automatizada. Isso não representa validação funcional das telas demonstrativas.\n\n## 3. Consolidação da Etapa 3 — Arquitetura e Planejamento Técnico
 
 Esta seção registra as sete decisões técnicas formalmente aprovadas que definem a arquitetura da aplicação.
 
@@ -212,6 +212,24 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
      - Indicador de foco visível e inequívoco em todos os elementos focáveis.
      - Nomes acessíveis em botões e campos; estados não comunicados exclusivamente por cor.
 
+#### Registro da verificação manual — 2026-11-03
+
+Checklist executado pelo usuário na aplicação local, com resultados informados nesta sessão:
+
+| Verificação | Resultado | Observação |
+|---|---|---|
+| `Tab` e `Shift + Tab` | Aprovado | Navegação nos controles testados. |
+| `Enter` e `Espaço` | Aprovado | Ativação dos controles apropriados testados. |
+| `Ctrl + K` | Aprovado | Foco direcionado ao campo de busca. |
+| Diálogo Nova Tarefa: foco inicial, contenção e restauração | Aprovado | Comportamentos confirmados pelo usuário nesse diálogo. |
+| `Esc` no diálogo Nova Tarefa | Aprovado | O diálogo foi fechado. |
+| `Esc` no menu contextual | Pendente | Menu contextual indisponível/desativado. |
+| Navegação por teclado no menu contextual | Pendente | Controle `⋮` desativado; não foi possível abrir o menu. |
+| Rótulos e identificação visual dos controles | Sem problema visual observado | Não equivale a teste com leitor de tela. |
+| Nomes acessíveis com leitor de tela | Não testado | Exige validação específica com tecnologia assistiva. |
+
+**Resultado da Fase 2:** validação manual parcial. Os resultados aprovados acima não cobrem todos os critérios CA2.3–CA2.6. O menu contextual também apresenta divergência visual em relação ao mockup (desenho do ícone `⋮`), registrada para correção na etapa apropriada, sem alteração nesta validação.
+
 #### Critérios de Aceite — Fase 2
 
 | # | Critério | Evidência |
@@ -255,7 +273,7 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
 
 > **Registro de execução — 2026-11-02:** folhas CSS modulares, alternância de tema, layout responsivo, badge de prioridade, barra de progresso e suporte a movimento reduzido implementados. `scripts/check_contrast.py` foi criado. A auditoria confirmatória pelo workflow deve ser consultada após cada alteração visual relevante.
 
-> **Registro de execução — 2026-11-03:** além da reorganização inicial da interface, foram refinados os ícones de navegação, resumo e tema; criado avatar ilustrativo sem iniciais/login; ajustado o rodapé para ocupar toda a largura; reforçadas as cores e a hierarquia tipográfica. Foram adicionados sete cartões de demonstração (3 A Fazer, 2 Em Andamento e 2 Concluídas), calendário estático de novembro/2026, resumo coerente com os cartões (7 tarefas; 28,6% concluídas; 71,4% pendentes) e indicadores de status/última atualização explicitamente identificados como exemplos. Os dados são HTML estático, sem persistência ou operações; servem como referência de apresentação para os componentes que serão integrados nas fases posteriores. Commits `9c2bd97`, `740aa60` e `98078d1`, além dos commits visuais anteriores, na branch `main`. O workflow `41553398236` concluiu com sucesso: 25 combinações de contraste aprovadas, zero reprovações, Nu HTML Checker com zero erros e zero avisos. A execução anterior `41553256719` identificou atributos ARIA inválidos nos cartões; corrigidos em `98078d1`. A inspeção manual nos três breakpoints e nos dois temas ainda não foi realizada; CA3.4 aprovado e CA3.1–CA3.3/CA3.5 pendentes. A Fase 2 ainda possui checklist manual pendente.
+> **Registro de execução — 2026-11-03:** interface e telas demonstrativas estáticas refinadas; navegação lateral mobile recolhível implementada e testada pelo usuário nos temas Claro e Escuro. O usuário aprovou a inspeção visual em Desktop, Tablet (1024 × 768) e Mobile (390 × 844), nos dois temas, e confirmou o teste com `prefers-reduced-motion` ativo. Workflow `41553398236`: 25 combinações de contraste aprovadas, zero reprovações e Nu HTML Checker sem erros/avisos. O ícone `⋮` foi corrigido visualmente, mas não há confirmação isolada de sua aparência; o menu contextual permanece desativado. A Fase 2 ainda possui checklist manual parcial pendente.
 
 ---
 
@@ -409,4 +427,4 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **1.8** | 2026-11-02 | Consolidação documental da Etapa 4: matriz de rastreabilidade RF01–RF15 e RNF01–RNF07 (Seção 5); critérios de aceite verificáveis nas seis fases (CA1.x–CA6.x); correção do focus trap para "quando aplicável" (Fase 2); detalhamento do fluxo de edição em três etapas (preparação, persistência, confirmação) na Fase 1; referências WCAG corrigidas (1.4.3 e 1.4.11 com nomes normativos) em toda a Seção 3.6 e Fases 3; atualização do RNF03 em REQUISITOS.md; atualização de estado e rastreabilidade em ESTADO-ATUAL.md. | Consolidação da Etapa 4 para revisão e aprovação. |
 | **1.9** | 2026-11-02 | Correção das 4 inconsistências da revisão: alinhamento do focus trap na Decisão 3.6 para "quando aplicável"; atribuição estrita da persistência ao JavaScript na Fase 1; criação dos critérios CA2.1 (painéis e contadores) e CA4.1 (execução estática sem backend); remapeamento completo da Matriz de Rastreabilidade para RF01–RF15 e RNF01–RNF07. | Fechamento rigoroso das pendências apontadas na revisão técnica pós-commit 03eae77. |
 | **2.0** | 2026-11-02 | Refinamento dos critérios RF01 e RNF01: validação dos contadores após operações do quadro e comprovação de execução efetiva na hospedagem publicada do GitHub Pages. | Tornar as evidências de aceite diretamente verificáveis e alinhadas aos requisitos aprovados. |
-| **2.1** | 2026-11-02 | Ajustes finais de rastreabilidade e critérios: CA2.1 explicita botão de criação em cada coluna; CA2.3 detalha o comportamento contextual de `Esc`; RF04 passa a referenciar as seis transições de estado e seus testes em CA1.2. | Fechar lacunas entre os requisitos aprovados, critérios de aceite e evidências previstas. |
+| **2.1** | 2026-11-02 | Ajustes finais de rastreabilidade e critérios: CA2.1 explicita botão de criação em cada coluna; CA2.3 detalha o comportamento contextual de `Esc`; RF04 passa a referenciar as seis transições de estado e seus testes em CA1.2. | Fechar lacunas entre os requisitos aprovados, critérios de aceite e evidências previstas. |\n| **2.2** | 2026-11-03 | Registro da conclusão da inspeção visual da Fase 3 nos três breakpoints e nos dois temas, incluindo o teste manual de `prefers-reduced-motion` e a correção da navegação mobile. | Atualizar os critérios de aceite com as evidências efetivamente confirmadas pelo usuário. |
