@@ -128,3 +128,11 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 **Limites desta validação:** os testes foram executados diretamente pela API no console do navegador porque os controles funcionais da interface estão previstos para a Fase 5. A falha de persistência foi simulada apenas durante criação. A operação de substituição/importação ainda não foi testada. O teste visual da notificação identificou sobreposição da barra de status. Não houve validação no GitHub Pages nesta etapa.
 
+
+
+## Revisão da composição da interface — 2026-11-03
+
+- Removida a barra inferior da aplicação. O crédito tecnológico e a versão foram transferidos para a área inferior do painel esquerdo (sidebar).
+- O timestamp funcional da última alteração permanece exclusivamente no cartão Status da Aplicação, conforme RF11. O texto estático “Sem alterações” e o ícone decorativo de atualização do antigo rodapé foram eliminados.
+- A reserva de espaço e os estilos específicos da barra inferior foram removidos. A sidebar mantém os créditos também quando aberta como navegação móvel.
+- Implementação registrada na branch `fase-4-pyodide-persistencia`; inspeção visual e validação responsiva desta alteração ainda pendentes.
