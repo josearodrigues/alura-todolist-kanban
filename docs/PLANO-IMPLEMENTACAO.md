@@ -8,7 +8,7 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fase 1 validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspeção visual aprovada; Fase 4 implementada e validada funcionalmente pela API, com CA4.1 parcialmente verificado; Fases 5 e 6 pendentes]
+- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fases 1 a 4 conforme evidências registradas; Fase 5 com implementação inicial na branch `fase-5-interacoes`, aguardando validação local; Fase 6 pendente]
 - **Etapa 6 — Validação final e homologação:** [Pendente]
 
 ---
@@ -318,6 +318,7 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 ---
 
 ### Fase 5 — Interações: Drag and Drop, Menus, Modais e Calendário
+- **Estado da implementação (2026-11-03):** implementação inicial registrada na branch `fase-5-interacoes`. Módulos `js/kanban_ui.js`, `js/drag_drop.js` e `js/calendar_ui.js` criados; `js/app.js`, `js/pyodide_bridge.js`, `index.html` e `css/kanban.css` integrados/atualizados. Formulários e menus conectados à API `window.kanbanApp`; busca com normalização de acentos; calendário mensal com marcadores e popover; métricas de resumo e Foco de Hoje consultam o domínio Python. O workflow passou a incluir verificação de sintaxe dos módulos ES e execução na branch de trabalho. **Nenhum teste local de navegador ou execução bem-sucedida do workflow foi confirmado; CA5.1–CA5.7 permanecem pendentes de validação.**
 - **Objetivo:** Implementar as interações dinâmicas da interface: movimentação unificada por arrastar e soltar (Pointer Events), ação acessível "Mover para...", busca em tempo real com atalhos de teclado e calendário integrado com popover.
 - **Arquivos Previstos:** `js/drag_drop.js`, `js/kanban_ui.js`, `js/calendar_ui.js`.
 - **Atividades:**
