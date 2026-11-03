@@ -118,7 +118,34 @@
 .completed-meta { color: #2a6b44; font-size: 14px; font-weight: 400; }
 :root[data-theme="dark"] .completed-meta { color: #7ee2a8; }
 .task-party { flex: none; align-self: center; font-size: 24px; line-height: 1; }
-.completed-check { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--done); color: #fff; font-size: 14px; font-weight: 700; }
+/* Prioridade do cartão: cor lateral distinta para cada nível. */
+.task-card:has(.badge-prioridade.priority-alta) { border-left-color: #f59e0b; }
+.task-card:has(.badge-prioridade.priority-media) { border-left-color: #2fb35c; }
+.task-card:has(.badge-prioridade.priority-baixa) { border-left-color: #2563eb; }
+.task-card.is-completed { border-left-color: #22a05a; }
+
+/* Nas tarefas concluídas, o checkbox mantém sua semântica sem o círculo visual. */
+.task-card.is-completed .task-check {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.task-card.is-completed .task-check:checked {
+  border: 0;
+  background: transparent;
+}
+.task-card.is-completed .task-check:checked::after {
+  top: 3px;
+  left: 8px;
+  width: 8px;
+  height: 14px;
+  border-color: #22a05a;
+  border-width: 0 3px 3px 0;
+}
+:root[data-theme="dark"] .task-card.is-completed .task-check:checked::after {
+  border-color: #7ee2a8;
+}
+.completed-check { display: none; }
 .empty-state { padding: 18px 8px; color: var(--muted); text-align: center; font-size: 13px; }
 @media (max-width: 1280px) {
   .kanban-column { padding: 14px 10px; }
