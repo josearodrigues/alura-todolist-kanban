@@ -240,6 +240,7 @@ A inspeção visual completa da Fase 3 será realizada separadamente, após a co
 - **Fase 4:** implementada e validada funcionalmente; CA4.1 parcialmente verificado.
 - **Fase 5:** implementação registrada na branch `fase-5-interacoes`; validação manual parcial. CA5.2, CA5.3, CA5.4, CA5.6 e CA5.7 aprovados nos cenários exercitados; CA5.1 parcial (toque/caneta não testados). Pendente: teste de drag and drop por toque previsto em CA5.1.
 - **Fase 6:** implementada na branch `fase-6-relatorios-backup`; validação automatizada e homologação manual pendentes.
+- **Fase 7:** implementação inicial na branch `fase-7-selecao-exclusao-coletiva`; testes automatizados, workflows e homologação manual pendentes.
 - **Validação final:** pendente.
 - **Publicação no GitHub Pages:** ainda não realizada.
 
