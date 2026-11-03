@@ -24,6 +24,10 @@ const rotuloData = (valor, dataSomente = false) => {
 export function createKanbanUI({ getState, actions, notify, onStateRendered = () => {} }) {
   let termo = "";
   let selecionada = null;
+  const tarefasSelecionadas = new Set();
+  const barraSelecao = document.getElementById("barra-selecao");
+  const quantidadeSelecionada = document.getElementById("quantidade-selecionada");
+  const dialogoExclusaoColetiva = document.getElementById("dialog-exclusao-coletiva");
   const busca = document.getElementById("busca-tarefas");
   const nova = document.getElementById("dialog-nova-tarefa");
   const editar = document.getElementById("dialog-editar-tarefa");
@@ -51,6 +55,11 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     const checkbox = el("input", "task-check");
     checkbox.type = "checkbox"; checkbox.checked = tarefa.estado === "concluida"; checkbox.disabled = true;
     checkbox.setAttribute("aria-label", checkbox.checked ? "Tarefa concluída" : "Tarefa não concluída");
+    const selecao = el("input", "task-select");
+    selecao.type = "checkbox";
+    selecao.checked = tarefasSelecionadas.has(tarefa.id);
+    selecao.dataset.taskSelect = tarefa.id;
+    selecao.setAttribute("aria-label", "Selecionar tarefa: " + tarefa.titulo);
     const conteudo = el("div", "task-content");
     conteudo.append(el("h3", "", tarefa.titulo));
     if (tarefa.descricao) conteudo.append(el("p", "", tarefa.descricao));
@@ -80,7 +89,7 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
         meta.append(alerta);
       }
     }
-    conteudo.append(meta); card.append(checkbox, conteudo);
+    conteudo.append(meta); card.append(selecao, checkbox, conteudo);
     {
       const menu = el("details", "task-menu");
       const summary = el("summary", "task-more", "Opções da tarefa");
@@ -130,6 +139,20 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
 
   }
 
+  function atualizarBarraSelecao() {
+    const quantidade = tarefasSelecionadas.size;
+    if (quantidadeSelecionada) quantidadeSelecionada.textContent = String(quantidade);
+    if (barraSelecao) barraSelecao.hidden = quantidade === 0;
+    const botaoExcluir = document.getElementById("excluir-selecionadas");
+    if (botaoExcluir) botaoExcluir.disabled = quantidade === 0;
+  }
+
+  function limparSelecao() {
+    tarefasSelecionadas.clear();
+    atualizarBarraSelecao();
+    document.querySelectorAll("[data-task-select]").forEach((controle) => { controle.checked = false; });
+  }
+
   function render(state = getState()) {
     for (const [estado, listaId, contadorId, vazioId] of ESTADOS) {
       const lista = document.getElementById(listaId); if (!lista) continue;
@@ -139,8 +162,38 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
       const contador = document.getElementById(contadorId); if (contador) contador.textContent = String(tarefas.length);
       const vazio = document.getElementById(vazioId); if (vazio) vazio.hidden = tarefas.length > 0;
     }
-    void atualizarIndicadores(); aplicarBusca(); onStateRendered(state);
+    void atualizarIndicadores(); aplicarBusca(); atualizarBarraSelecao(); onStateRendered(state);
   }
+
+  document.addEventListener("change", (event) => {
+    const controle = event.target.closest("[data-task-select]");
+    if (!controle) return;
+    const id = controle.dataset.taskSelect;
+    if (controle.checked) tarefasSelecionadas.add(id);
+    else tarefasSelecionadas.delete(id);
+    atualizarBarraSelecao();
+  });
+
+  document.getElementById("selecionar-todas")?.addEventListener("click", () => {
+    getState().tarefas.forEach((tarefa) => tarefasSelecionadas.add(tarefa.id));
+    document.querySelectorAll("[data-task-select]").forEach((controle) => { controle.checked = true; });
+    atualizarBarraSelecao();
+  });
+  document.getElementById("desselecionar-todas")?.addEventListener("click", limparSelecao);
+  document.getElementById("excluir-selecionadas")?.addEventListener("click", () => {
+    if (!tarefasSelecionadas.size || !dialogoExclusaoColetiva) return;
+    document.getElementById("quantidade-exclusao-coletiva").textContent = String(tarefasSelecionadas.size);
+    dialogoExclusaoColetiva.showModal();
+  });
+  dialogoExclusaoColetiva?.querySelector("[data-confirm-bulk-delete]")?.addEventListener("click", async () => {
+    const ids = [...tarefasSelecionadas];
+    if (!ids.length) return;
+    if (await executar(() => actions.deleteTasks({ tarefas_ids: ids }))) {
+      dialogoExclusaoColetiva.close();
+      limparSelecao();
+      notify(ids.length + " tarefa(s) excluída(s) com sucesso.");
+    }
+  });
 
   async function executar(operacao) {
     try {
