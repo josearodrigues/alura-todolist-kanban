@@ -336,3 +336,17 @@
 .task-card.is-completed .task-more { display: grid; }
 
 .calendar-day.has-completed-task::after, .full-day.has-completed-task::after { background: var(--done); }
+
+
+/* O submenu deve exibir o rótulo textual, não o ícone do menu principal. */
+.task-card .task-move-menu > summary {
+  display: block;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+.task-card .task-move-menu > summary::before {
+  content: none;
+}
