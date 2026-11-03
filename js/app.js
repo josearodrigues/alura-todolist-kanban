@@ -245,7 +245,7 @@ async function inicializarAplicacao() {
     kanbanUI = createKanbanUI({
       getState: () => estadoAtual,
       actions: window.kanbanApp,
-      notify: (mensagem) => notificarUsuario(mensagem),
+      notify: (mensagem, tipo) => notificarUsuario(mensagem, tipo),
       onStateRendered: () => calendarioUI?.render(),
     });
     kanbanUI.render(estadoAtual);
