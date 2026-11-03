@@ -4,6 +4,13 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 
 ## [Não lançado] — 2026-11-03
 
+### Fase 6 — homologação parcial
+
+- Registrada a aprovação de CA6.1–CA6.6, incluindo a confirmação de preservação das 30 tarefas após rejeição de JSON com valor malformado.
+- Registrado CA6.7 (cancelamento da importação) como executado e funcionalmente aprovado; permanece pendente apenas a substituição da mensagem técnica por uma mensagem clara e amigável ao usuário.
+- Permanecem pendentes CA6.8 (falha de persistência/rollback), CA6.9 (regressão integrada RF01–RF15 e RNF01–RNF07) e CA6.10 (conferência dos workflows GitHub).
+- A execução local informada de 60 testes, com 96,10% de cobertura de linhas e 92,72% de branches, foi preservada como evidência automatizada já obtida.
+
 ### Fase 6 — relatórios e backup JSON (implementação)
 
 - Criado `js/reports_ui.js` para apresentar no modal Relatórios os indicadores calculados pelo núcleo Python, com filtro opcional por data de conclusão e opção de limpar o período.
