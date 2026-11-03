@@ -76,6 +76,7 @@ _funcoes_kanban = (
     "calcular_relatorio_completo",
     "obter_timestamp_utc_atual",
     "preparar_importacao_backup",
+    "preparar_estado_importado",
 )
 all(callable(getattr(todolist, nome, None)) for nome in _funcoes_kanban)
 `);
