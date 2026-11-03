@@ -112,89 +112,40 @@
         </div>
         <div class="focus-card">
           <span>Foco de hoje:</span>
-          <strong><output id="foco-hoje">3</output> tarefas</strong>
+          <strong><output id="foco-hoje">0</output> tarefas</strong>
           <span class="target-icon" aria-hidden="true">🎯</span>
         </div>
       </section>
 
       <section id="quadro-kanban" class="board" data-view-panel="quadro" aria-label="Quadro Kanban de tarefas">
-        <div id="colunas-kanban">
+        <div id="colunas-kanban" aria-busy="true">
           <section class="kanban-column todo-column" aria-labelledby="titulo-a-fazer">
             <header class="column-heading">
-              <div class="column-title"><span class="column-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#icon-circle"></use></svg></span><h3 id="titulo-a-fazer">A Fazer</h3><output id="contador-a-fazer" class="column-count">3</output></div>
+              <div class="column-title"><span class="column-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#icon-circle"></use></svg></span><h3 id="titulo-a-fazer">A Fazer</h3><output id="contador-a-fazer" class="column-count">0</output></div>
               <p>Tarefas que ainda precisam ser feitas</p>
               <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
-            <ul id="lista-a-fazer" aria-label="Tarefas a fazer" aria-live="polite"><li><article class="task-card">
-  <input class="task-check" type="checkbox"  disabled aria-label="Tarefa não concluída">
-  <div class="task-content">
-    <h3 data-task-title>Revisar requisitos do Kanban</h3><p data-task-description>Conferir os critérios de aceitação da interface.</p>
-    <div class="task-meta"><span class="badge-prioridade priority-alta">Alta</span><span class="task-due"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> <time datetime="2026-11-02">Hoje</time></span></div>
-  </div>
-  <button type="button" class="task-more" disabled aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></button>
-</article></li><li><article class="task-card">
-  <input class="task-check" type="checkbox"  disabled aria-label="Tarefa não concluída">
-  <div class="task-content">
-    <h3 data-task-title>Definir fluxo de criação</h3><p data-task-description>Documentar os campos e as validações da tarefa.</p>
-    <div class="task-meta"><span class="badge-prioridade priority-media">Média</span><span class="task-due"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> <time datetime="2026-11-03">Amanhã</time></span></div>
-  </div>
-  <button type="button" class="task-more" disabled aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></button>
-</article></li><li><article class="task-card">
-  <input class="task-check" type="checkbox"  disabled aria-label="Tarefa não concluída">
-  <div class="task-content">
-    <h3 data-task-title>Preparar checklist de acessibilidade</h3><p data-task-description>Revisar foco, teclado e contraste.</p>
-    <div class="task-meta"><span class="badge-prioridade priority-baixa">Baixa</span><span class="task-due"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> <time datetime="2026-11-03">Amanhã</time></span></div>
-  </div>
-  <button type="button" class="task-more" disabled aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></button>
-</article></li></ul>
+            <ul id="lista-a-fazer" aria-label="Tarefas a fazer" aria-live="polite"></ul>
             <p id="vazio-a-fazer" class="empty-state" hidden>Nenhuma tarefa nesta coluna.</p>
           </section>
 
           <section class="kanban-column progress-column" aria-labelledby="titulo-em-andamento">
             <header class="column-heading">
-              <div class="column-title"><span class="column-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#icon-play"></use></svg></span><h3 id="titulo-em-andamento">Em Andamento</h3><output id="contador-em-andamento" class="column-count">2</output></div>
+              <div class="column-title"><span class="column-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#icon-play"></use></svg></span><h3 id="titulo-em-andamento">Em Andamento</h3><output id="contador-em-andamento" class="column-count">0</output></div>
               <p>Tarefas em execução</p>
               <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
-            <ul id="lista-em-andamento" aria-label="Tarefas em andamento" aria-live="polite"><li><article class="task-card">
-  <input class="task-check" type="checkbox"  disabled aria-label="Tarefa não concluída">
-  <div class="task-content">
-    <h3 data-task-title>Construir calendário mensal</h3><p data-task-description>Montar a visão de datas e prazos.</p>
-    <div class="task-meta"><span class="badge-prioridade priority-alta">Alta</span><span class="task-due"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> <time datetime="2026-11-02">Hoje</time></span></div>
-  </div>
-  <button type="button" class="task-more" disabled aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></button>
-</article></li><li><article class="task-card">
-  <input class="task-check" type="checkbox"  disabled aria-label="Tarefa não concluída">
-  <div class="task-content">
-    <h3 data-task-title>Validar responsividade mobile</h3><p data-task-description>Conferir os componentes em telas menores.</p>
-    <div class="task-meta"><span class="badge-prioridade priority-media">Média</span><span class="task-due"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> <time datetime="2026-11-03">Amanhã</time></span></div>
-  </div>
-  <button type="button" class="task-more" disabled aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></button>
-</article></li></ul>
+            <ul id="lista-em-andamento" aria-label="Tarefas em andamento" aria-live="polite"></ul>
             <p id="vazio-em-andamento" class="empty-state" hidden>Nenhuma tarefa nesta coluna.</p>
           </section>
 
           <section class="kanban-column done-column" aria-labelledby="titulo-concluidas">
             <header class="column-heading">
-              <div class="column-title"><span class="column-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></span><h3 id="titulo-concluidas">Concluídas</h3><output id="contador-concluidas" class="column-count">2</output></div>
+              <div class="column-title"><span class="column-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></span><h3 id="titulo-concluidas">Concluídas</h3><output id="contador-concluidas" class="column-count">0</output></div>
               <p>Tarefas finalizadas</p>
               <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
-            <ul id="lista-concluidas" aria-label="Tarefas concluídas" aria-live="polite"><li><article class="task-card is-completed">
-  <input class="task-check" type="checkbox" checked disabled aria-label="Tarefa concluída">
-  <div class="task-content">
-    <h3 data-task-title>Estruturar domínio Python</h3><p data-task-description>Modelos, serviços e regras de negócio.</p>
-    <div class="task-meta completed-meta"><span class="completed-check" aria-hidden="true">✓</span> Concluída em 02/11/2026</div>
-  </div>
-  <button type="button" class="task-more" disabled aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></button>
-</article></li><li><article class="task-card is-completed">
-  <input class="task-check" type="checkbox" checked disabled aria-label="Tarefa concluída">
-  <div class="task-content">
-    <h3 data-task-title>Documentar regras de negócio</h3><p data-task-description>Consolidar estados e invariantes das tarefas.</p>
-    <div class="task-meta completed-meta"><span class="completed-check" aria-hidden="true">✓</span> Concluída em 02/11/2026</div>
-  </div>
-  <button type="button" class="task-more" disabled aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></button>
-</article></li></ul>
+            <ul id="lista-concluidas" aria-label="Tarefas concluídas" aria-live="polite"></ul>
             <p id="vazio-concluidas" class="empty-state" hidden>Nenhuma tarefa nesta coluna.</p>
           </section>
         </div>
@@ -329,35 +280,38 @@
     </form>
   </dialog>
 
-  <dialog id="dialog-editar-tarefa" aria-labelledby="titulo-editar-tarefa">
-    <header>
+  <dialog id="dialog-editar-tarefa" aria-labelledby="titulo-editar-tarefa" aria-describedby="descricao-editar-tarefa">
+    <header class="new-task-header">
       <h2 id="titulo-editar-tarefa">Editar tarefa</h2>
-      <p>Altere somente os campos editáveis da tarefa.</p>
+      <p id="descricao-editar-tarefa">Altere os dados da tarefa e salve as alterações.</p>
     </header>
-    <form>
-      <p>
-        <label for="editar-tarefa-titulo">Título (obrigatório)</label>
-        <input id="editar-tarefa-titulo" name="titulo" type="text" minlength="3" maxlength="100" required>
+    <form class="new-task-form">
+      <p class="new-task-field new-task-title">
+        <label for="editar-tarefa-titulo">Título da tarefa <b class="required-mark">*</b></label>
+        <input id="editar-tarefa-titulo" name="titulo" type="text" minlength="3" maxlength="100" placeholder="Título da tarefa..." required>
       </p>
-      <p>
-        <label for="editar-tarefa-descricao">Descrição (opcional)</label>
-        <textarea id="editar-tarefa-descricao" name="descricao" maxlength="500"></textarea>
-      </p>
-      <p>
-        <label for="editar-tarefa-prioridade">Prioridade</label>
-        <select id="editar-tarefa-prioridade" name="prioridade" required>
-          <option value="" disabled selected>Selecione a prioridade</option>
-          <option value="baixa">Baixa</option>
-          <option value="media">Média</option>
-          <option value="alta">Alta</option>
-        </select>
-      </p>
-      <p>
-        <label for="editar-tarefa-prazo">Data limite (opcional)</label>
-        <input id="editar-tarefa-prazo" name="data_limite" type="date">
-      </p>
-      <button type="submit">Salvar alterações</button>
-      <button type="button" data-dialog-close>Cancelar</button>
+      <div class="new-task-fields">
+        <p class="new-task-field">
+          <label for="editar-tarefa-prioridade">Prioridade:</label>
+          <select id="editar-tarefa-prioridade" name="prioridade" required>
+            <option value="alta">🔥 Alta</option>
+            <option value="media">🟢 Média</option>
+            <option value="baixa">🔵 Baixa</option>
+          </select>
+        </p>
+        <p class="new-task-field">
+          <label for="editar-tarefa-prazo">Vencimento <span>(opcional)</span></label>
+          <input id="editar-tarefa-prazo" name="data_limite" type="date">
+        </p>
+        <p class="new-task-field new-task-description">
+          <label for="editar-tarefa-descricao">Descrição <span>(opcional)</span></label>
+          <textarea id="editar-tarefa-descricao" name="descricao" maxlength="500" placeholder="Adicione mais detalhes..."></textarea>
+        </p>
+      </div>
+      <div class="new-task-actions">
+        <button type="button" data-dialog-close>Cancelar</button>
+        <button type="submit" class="new-task-submit">✓ Salvar alterações</button>
+      </div>
     </form>
   </dialog>
 
