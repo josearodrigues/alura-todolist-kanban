@@ -78,3 +78,38 @@ dialog ul { padding-left: 20px; }
 :root[data-theme="dark"] .summary-total strong { color: #93C5FD; }
 :root[data-theme="dark"] .runtime-card { border-color: #475569; }
 :root[data-theme="dark"] .runtime-card h2 .runtime-dot { background: #A5B4FC; box-shadow: 0 0 0 4px #303C59; }
+
+
+/* Painel lateral e widgets alinhados ao mockup. */
+.calendar-card h2 { background:linear-gradient(110deg,#fff,#f8fbff); color:#172554; }
+.calendar-card h2 .ui-icon { color:#2563eb; }
+.calendar-nav { margin-left:auto; color:#243b67; font-size:25px; letter-spacing:5px; line-height:1; }
+.calendar-widget { padding:14px 16px 16px; }
+.calendar-month { justify-content:center; margin-bottom:14px; font-size:16px; }
+.calendar-month-note { display:none; }
+.calendar-grid { gap:5px; }
+.calendar-weekdays { font-size:13px; }
+.calendar-day { min-height:34px; font-size:14px; }
+.calendar-day.selected-day { border-radius:50%; }
+.summary-card h2 { background:linear-gradient(110deg,#fff,#f8fbff); color:#172554; }
+.summary-card h2 .ui-icon { color:#2563eb; }
+.summary-total { display:none; }
+.summary-metric { padding:7px 16px 3px; }
+.summary-metric > div { display:flex; justify-content:space-between; align-items:center; margin:0; font-size:14px; font-weight:500; }
+.metric-name { gap:9px; }
+.metric-name b { color:#172554; font-weight:800; }
+.metric-dot { width:12px; height:12px; }
+.pending-dot { background:#2563eb; }
+.progress-dot { background:#f59e0b; }
+.done-dot { background:#16a34a; }
+.summary-bar { display:flex; height:12px; margin:12px 16px 4px; overflow:hidden; border-radius:20px; background:#e2e8f0; }
+.summary-bar span:nth-child(1) { width:42.9%; background:#2563eb; }
+.summary-bar span:nth-child(2) { width:28.6%; background:#f59e0b; }
+.summary-bar span:nth-child(3) { width:28.5%; background:#16a34a; }
+.runtime-card h2 { background:transparent; color:#172554; }
+.runtime-card h2 .ui-icon { color:#2563eb; }
+.runtime-card .runtime-complete { display:flex; align-items:center; gap:12px; margin:8px 16px; font-size:15px; }
+.runtime-check { display:grid; place-items:center; width:42px; height:42px; border-radius:50%; background:#16a34a; color:white; font-size:25px; font-weight:800; }
+.runtime-complete strong { display:block; margin-top:3px; color:#16a34a; font-weight:600; }
+.demo-disclaimer { margin:0 16px 8px; color:var(--muted); font-size:10px; }
+.runtime-card .last-updated { display:none; }
