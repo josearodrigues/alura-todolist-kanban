@@ -93,6 +93,13 @@ def _kanban_dispatch(payload_json):
     tarefas = dados.get("tarefas", [])
     timestamp_atual = dados.get("timestamp_ultima_alteracao")
 
+    if operacao == "metricas":
+        data_local = dados["data_local_referencia"]
+        return json.dumps({
+            "resumo": todolist.calcular_resumo_projeto(tarefas),
+            "foco_hoje": todolist.calcular_foco_hoje(tarefas, data_local),
+        }, ensure_ascii=False)
+
     if operacao == "validar_estado":
         estado = dados.get("estado", {})
         if not isinstance(estado, dict) or set(estado) != {"tarefas", "timestamp_ultima_alteracao"}:
@@ -189,6 +196,14 @@ async function executarPython(operacao, dados) {
 export async function validateState(estado) {
   await executarPython("validar_estado", { estado });
   return true;
+}
+
+export async function calculateMetrics(estado, dataLocalReferencia) {
+  return executarPython("metricas", {
+    tarefas: estado.tarefas,
+    timestamp_ultima_alteracao: estado.timestamp_ultima_alteracao,
+    data_local_referencia: dataLocalReferencia,
+  });
 }
 
 export async function executeDomainOperation(operacao, estado, dados) {
