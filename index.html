@@ -118,6 +118,14 @@
       </section>
 
       <section id="quadro-kanban" class="board" data-view-panel="quadro" aria-label="Quadro Kanban de tarefas">
+        <section id="barra-selecao" class="selection-toolbar" aria-label="Ações para tarefas selecionadas" aria-live="polite" hidden>
+          <p><strong id="quantidade-selecionada">0</strong> tarefa(s) selecionada(s)</p>
+          <div class="selection-actions">
+            <button type="button" id="selecionar-todas">Selecionar todas</button>
+            <button type="button" id="desselecionar-todas">Desselecionar todas</button>
+            <button type="button" id="excluir-selecionadas" class="selection-delete" disabled>Excluir selecionadas</button>
+          </div>
+        </section>
         <div id="colunas-kanban" aria-busy="true">
           <section class="kanban-column todo-column" aria-labelledby="titulo-a-fazer">
             <header class="column-heading">
@@ -311,6 +319,18 @@
     <p>Tem certeza de que deseja excluir a tarefa <strong id="titulo-tarefa-exclusao">selecionada</strong>? Esta ação não poderá ser desfeita.</p>
     <button type="button" data-confirm-delete>Confirmar exclusão</button>
     <button type="button" data-dialog-close>Cancelar</button>
+  </dialog>
+
+  <dialog id="dialog-exclusao-coletiva" aria-labelledby="titulo-exclusao-coletiva" aria-describedby="descricao-exclusao-coletiva">
+    <header class="new-task-header">
+      <h2 id="titulo-exclusao-coletiva">Confirmar exclusão coletiva</h2>
+      <p id="descricao-exclusao-coletiva">Esta ação não poderá ser desfeita.</p>
+    </header>
+    <p>Você está prestes a excluir <strong id="quantidade-exclusao-coletiva">0</strong> tarefa(s) selecionada(s).</p>
+    <div class="new-task-actions">
+      <button type="button" data-dialog-close>Cancelar</button>
+      <button type="button" data-confirm-bulk-delete class="selection-delete">Confirmar exclusão</button>
+    </div>
   </dialog>
 
   <dialog id="dialog-relatorios" class="report-dialog" aria-labelledby="titulo-relatorios" aria-describedby="descricao-relatorios">
