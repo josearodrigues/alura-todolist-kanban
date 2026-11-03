@@ -1,6 +1,17 @@
 # Changelog
 
-Este arquivo registra alterações relevantes do projeto em ordem cronológica inversa. Os registros descrevem o que foi implementado e validado, sem antecipar funcionalidades planejadas.
+Este arquivo registra decisões aprovadas, alterações implementadas e resultados validados em ordem cronológica inversa. Cada entrada distingue planejamento, implementação e validação efetivamente realizados.
+
+## [Não lançado] — 2026-11-03
+
+### Fase 7 — decisões aprovadas e contrato técnico (implementação não iniciada)
+
+- Aprovado o cabeçalho contextual de seleção, com ações para selecionar todas, desselecionar todas, exibir a quantidade selecionada e excluir as tarefas selecionadas.
+- A seleção individual será feita nos cartões e abrangerá todas as colunas e estados, inclusive tarefas concluídas; o checkbox de seleção será independente do indicador de conclusão e o menu individual permanecerá independente.
+- A exclusão coletiva exigirá confirmação explícita com a quantidade. Cancelamento preserva dados e seleção. A seleção será temporária no frontend, fora do `localStorage` e do backup, e só será limpa após persistência bem-sucedida.
+- Formalizado o contrato de `excluir_tarefas()`: rejeitar lista vazia, IDs duplicados e IDs inexistentes; validar todos antes de excluir; não permitir exclusão parcial; não mutar a entrada; reindexar somente colunas afetadas com `reindexar_coluna()`; preservar metadados restantes exceto `ordem`; gerar timestamp global único; retornar novo estado e tarefas excluídas.
+- Em falha de persistência, dados, ordenação, interface e seleção deverão permanecer preservados. Exclusão parcial, idempotência adicional e demais operações coletivas permanecem fora do escopo.
+- **Estado:** somente decisões e documentação atualizadas; nenhuma implementação ou teste da Fase 7 foi realizado.
 
 ## [Não lançado] — 2026-11-03
 
@@ -31,7 +42,7 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 - A substituição usa o fluxo transacional existente, que persiste antes de confirmar memória e interface e tenta restaurar o documento anterior em falha de renderização.
 - Atualizados `index.html` e `css/components.css`: Relatórios abre como modal; Importar/Exportar permanece como tela com ações próprias e modal de confirmação com contadores.
 - Ampliados os testes unitários de schema e criados workflows para sintaxe/HTML/contraste e para `pytest` com metas RNF03.
-- **Validação:** CA6.1–CA6.7 aprovados. A mensagem amigável para rejeição de JSON inválido foi validada pelo usuário nos cenários de schema incompatível, chave inválida e valor inválido; a importação válida também foi aprovada. CA6.8 (falha de persistência/rollback), CA6.9 (regressão integrada) e CA6.10 (conferência dos workflows) continuam pendentes.
+- **Validação:** CA6.1–CA6.8 aprovados. A mensagem amigável para rejeição de JSON inválido foi validada pelo usuário nos cenários de schema incompatível, chave inválida e valor inválido; a importação válida também foi aprovada. CA6.9 (regressão integrada) e CA6.10 (conferência dos workflows) foram transferidos para o encerramento do projeto como CA7.10 e CA7.11, respectivamente.
 
 ### Fase 5 — implementação inicial
 
