@@ -40,3 +40,15 @@
   #aplicacao { padding: 0 14px; }
   .app-footer { margin: 0 -14px; padding: 14px; }
 }
+
+
+/* Rodapé e distribuição horizontal próximos à referência visual. */
+.app-footer { font-size:15px; color:#172554; }
+.app-footer p:first-child > span { color:#64748b; font-size:15px; }
+.app-footer b { color:#ef4444; }
+.footer-updated { display:flex; align-items:center; gap:10px; padding-left:18px; border-left:1px solid #94a3b8; }
+.footer-updated span { font-size:22px; color:#64748b; }
+@media (max-width:767px) {
+  .app-footer { font-size:13px; }
+  .footer-updated { justify-content:center; border-left:0; padding-left:0; }
+}
