@@ -107,7 +107,8 @@ export function initializeBackupUI({ actions, notify }) {
     confirmationStatus.dataset.state = "loading";
 
     try {
-      const resultado = await actions.replaceState(estadoCandidato);
+      const estadoConfirmado = await actions.prepareImportedState(estadoCandidato.tarefas);
+      const resultado = await actions.replaceState(estadoConfirmado);
       if (!resultado.success) {
         confirmationStatus.textContent = "A substituição não foi concluída. Os dados anteriores permanecem preservados.";
         confirmationStatus.dataset.state = "error";
