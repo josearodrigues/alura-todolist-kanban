@@ -123,7 +123,7 @@ def gerar_envelope_backup(
 
 def preparar_importacao_backup(
     conteudo_json: str,
-    timestamp_importacao: str,
+    timestamp_importacao: str = None,
 ) -> Dict[str, Any]:
     """Lê, valida estritamente e prepara o estado de uma importação (RF14).
 
@@ -159,7 +159,8 @@ def preparar_importacao_backup(
     if not valido:
         raise ValueError(mensagem)
 
-    validar_iso_utc_ms(timestamp_importacao, "timestamp_importacao")
+    if timestamp_importacao is not None:
+        validar_iso_utc_ms(timestamp_importacao, "timestamp_importacao")
     return {
         "tarefas": [dict(tarefa) for tarefa in envelope["tarefas"]],
         "timestamp_ultima_alteracao": timestamp_importacao,
