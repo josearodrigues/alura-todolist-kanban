@@ -295,7 +295,14 @@
 .task-move-menu > summary { display: block; width: auto; height: auto; overflow: visible; padding: 8px 10px; color: var(--text); font-size: 13px; cursor: pointer; list-style: none; }
 .task-move-menu > summary::before { content: none; }
 .task-move-menu > ul { top: 0; right: calc(100% + 4px); }
-.task-menu .danger-action { color: #b91c1c; }
+.task-menu .danger-action {
+  background: #dc2626;
+  color: #fff;
+}
+.task-menu .danger-action:hover {
+  background: #b91c1c;
+  color: #fff;
+}
 .task-card.is-calendar-focus { outline: 3px solid var(--primary); outline-offset: 3px; }
 .calendar-day, .full-day { position: relative; border: 0; background: transparent; cursor: pointer; font: inherit; }
 .calendar-day.has-task::after, .full-day.has-task::after { content: ""; position: absolute; bottom: 2px; left: 50%; width: 5px; height: 5px; border-radius: 50%; background: var(--primary); transform: translateX(-50%); }
