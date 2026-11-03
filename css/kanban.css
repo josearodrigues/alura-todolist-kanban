@@ -143,11 +143,60 @@
 .task-more:hover:not(:disabled) { background: var(--surface-soft); }
 .task-more:focus-visible { outline-offset: 1px; }
 
-/* Alinhamento da barra superior com o limite do painel lateral. */
-.topbar { width: 100%; }
-.search-wrap { flex: 1 1 auto; width: auto; max-width: none; }
-.topbar-actions { flex: none; margin-left: auto; }
+/* Barra superior ocupa a área principal, incluindo o alinhamento sobre o painel lateral. */
+.topbar {
+  width: calc(100% + 296px);
+  justify-content: flex-start;
+}
+.search-wrap {
+  flex: 1 1 auto;
+  width: auto;
+  max-width: 700px;
+}
+.topbar-actions {
+  display: flex;
+  flex: 0 0 278px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-left: auto;
+}
+.connection-status { gap: 8px; }
+.connection-check {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #1fb85a;
+  color: #fff;
+}
+.connection-check .ui-icon {
+  width: 14px;
+  height: 14px;
+  stroke: #fff;
+  stroke-width: 3;
+}
+.connection-dot {
+  display: block;
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #1bb556;
+}
+.connection-status::after { content: none; }
+@media (max-width: 1280px) {
+  .topbar { width: 100%; }
+  .topbar-actions {
+    flex: none;
+    width: auto;
+    justify-content: flex-end;
+  }
+}
 @media (max-width: 767px) {
-  .search-wrap { flex: none; width: 100%; }
+  .topbar { width: 100%; }
+  .search-wrap { flex: none; width: 100%; max-width: none; }
   .topbar-actions { width: 100%; justify-content: flex-end; }
 }
