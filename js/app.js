@@ -242,6 +242,9 @@ async function inicializarAplicacao() {
     });
     console.info("Aplicação inicializada. API disponível em window.kanbanApp.");
   } catch (erroRuntime) {
+    const carregamento = document.getElementById("kanban-loading");
+    if (carregamento) carregamento.textContent = "Não foi possível carregar as tarefas. Verifique sua conexão e recarregue a página.";
+    document.getElementById("colunas-kanban")?.setAttribute("aria-busy", "false");
     atualizarStatusRuntime("error", erroRuntime.message);
     notificarUsuario(
       `Não foi possível inicializar o núcleo Python. Verifique sua conexão e recarregue a página. ${erroRuntime.message}`,
