@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual (03/11/2026):** Fase 1 concluída e validada. Fase 2 implementada; checklist manual parcialmente executado: navegação/ativação por teclado, `Ctrl + K`, foco e `Esc` no diálogo Nova Tarefa aprovados. Menu contextual pendente porque o controle `⋮` está desativado; nomes acessíveis não foram testados com leitor de tela. Fase 3 recebeu refinamento visual e mocks estáticos de tarefas, calendário, resumo e status. Workflow `41553398236` aprovado (25 combinações de contraste, zero reprovações; HTML sem erros/avisos). Inspeção visual nos três breakpoints e nos dois temas ainda pendente. Fases 4 a 6 não iniciadas; a aplicação ainda não foi publicada para uso final no GitHub Pages.
+> **Estado atual (03/11/2026):** Fases 1 e 3 implementadas e validadas conforme registros do projeto. A Fase 2 está implementada, com validação manual parcial. A implementação da Fase 4 foi registrada na branch `fase-4-pyodide-persistencia`: Pyodide 314.0.7, ponte JavaScript ↔ Python e persistência preventiva no `localStorage`. A validação local do runtime, do ciclo de vida das tarefas, da recarga e da falha simulada de armazenamento permanece pendente. As Fases 5 e 6 não foram iniciadas; a aplicação ainda não foi homologada para publicação final no GitHub Pages.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
@@ -35,12 +35,12 @@ As funcionalidades de interação e persistência ainda não integradas permanec
 | HTML5 | Estrutura semântica da interface |
 | CSS3 modular | Design system, temas claro/escuro e layout responsivo (Fase 3) |
 | Python (script padrão) | Auditoria matemática das combinações de contraste WCAG 2.2 AA |
-| JavaScript | Comportamentos mínimos de teclado e abertura/fechamento dos diálogos nesta fase |
+| JavaScript ES Modules | Ponte com Pyodide, persistência local e coordenação da inicialização (Fase 4) |
 | HTML Dialog | Estrutura nativa dos diálogos |
 | GitHub Actions | Automação da validação de HTML |
 | Nu HTML Checker | Verificação de conformidade do HTML |
 | GitHub Pages | Hospedagem estática prevista para a aplicação final |
-| Pyodide / WebAssembly | Execução de Python no navegador, prevista para a Fase 4 |
+| Pyodide 314.0.7 / WebAssembly | Execução de Python 3.14.2 no navegador via CDN (Fase 4) |
 
 A tabela distingue tecnologias já utilizadas daquelas previstas na arquitetura e nas próximas fases. A alternância de tema claro/escuro foi implementada na Fase 3 e salva a preferência visual no navegador; isso não representa a implementação da persistência das tarefas.
 

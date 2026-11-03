@@ -8,12 +8,18 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fase 1 validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspeção visual aprovada]
+- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fase 1 validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspeção visual aprovada; Fase 4 implementada e validada funcionalmente pela API, com CA4.1 parcialmente verificado; Fases 5 e 6 pendentes]
 - **Etapa 6 — Validação final e homologação:** [Pendente]
 
 ---
 
-## 2. Revisão corretiva e validação visual — Fase 3 (2026-11-03)\n\nA interface foi refinada conforme o mockup oficial, incluindo cabeçalho, navegação, cartões, calendário, resumo, status demonstrativo e rodapé. As telas secundárias permanecem mocks estáticos; suas funcionalidades serão implementadas nas fases previstas. Na branch `revisao-visual-d83bbee`, foi adicionada navegação lateral recolhível para telas de até 960 px, com fechamento por `Esc`, clique no fundo e seleção de seção, além de gerenciamento de foco. O ícone `⋮` foi ajustado visualmente, mas o menu contextual continua desativado.\n\nA inspeção manual foi aprovada pelo usuário nos três breakpoints — Desktop, Tablet (1024 × 768) e Mobile (390 × 844) — nos temas Claro e Escuro. O usuário também confirmou o comportamento com `prefers-reduced-motion` ativo. O workflow `41553398236` aprovou 25 combinações de contraste, sem reprovações, e o Nu HTML Checker sem erros ou avisos. Portanto, os critérios visuais CA3.1–CA3.3 e de movimento reduzido CA3.5 estão aprovados conforme as evidências disponíveis; CA3.4 possui evidência automatizada. Isso não representa validação funcional das telas demonstrativas.\n\n## 3. Consolidação da Etapa 3 — Arquitetura e Planejamento Técnico
+## 2. Revisão corretiva e validação visual — Fase 3 (2026-11-03)
+
+A interface foi refinada conforme o mockup oficial, incluindo cabeçalho, navegação, cartões, calendário, resumo, status demonstrativo e rodapé. As telas secundárias permanecem mocks estáticos; suas funcionalidades serão implementadas nas fases previstas. Na branch `revisao-visual-d83bbee`, foi adicionada navegação lateral recolhível para telas de até 960 px, com fechamento por `Esc`, clique no fundo e seleção de seção, além de gerenciamento de foco. O ícone `⋮` foi ajustado visualmente, mas o menu contextual continua desativado.
+
+A inspeção manual foi aprovada pelo usuário nos três breakpoints — Desktop, Tablet (1024 × 768) e Mobile (390 × 844) — nos temas Claro e Escuro. O usuário também confirmou o comportamento com `prefers-reduced-motion` ativo. O workflow `41553398236` aprovou 25 combinações de contraste, sem reprovações, e o Nu HTML Checker sem erros ou avisos. Portanto, os critérios visuais CA3.1–CA3.3 e de movimento reduzido CA3.5 estão aprovados conforme as evidências disponíveis; CA3.4 possui evidência automatizada. Isso não representa validação funcional das telas demonstrativas.
+
+## 3. Consolidação da Etapa 3 — Arquitetura e Planejamento Técnico
 
 Esta seção registra as sete decisões técnicas formalmente aprovadas que definem a arquitetura da aplicação.
 
@@ -278,6 +284,8 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 ---
 
 ### Fase 4 — Integração WebAssembly e Persistência Segura com Garantia de Rollback
+- **Estado:** Implementação registrada na branch `fase-4-pyodide-persistencia`; validação funcional da API concluída em 2026-11-03. O usuário executou criação, edição, movimentação e exclusão, conferiu persistência e timestamp, confirmou o indicador `✓ Carregado` e verificou recuperação após recarga para as quatro operações. Falhas simuladas nas quatro operações comprovaram rollback. No GitHub Pages, o usuário confirmou o carregamento. Na auditoria limitada ao filtro Fetch/XHR durante a carga, foi observada uma requisição ao CDN jsDelivr (`pyodide-lock.json`, HTTP 200), sem chamadas a APIs de backend nessa amostra. CA4.1 permanece parcialmente verificado, pois essa observação não representa auditoria completa de todo o tráfego de rede. A interface continua demonstrativa; sua integração funcional é atividade da Fase 5.
+- **Runtime selecionado:** Pyodide 314.0.7 (Python 3.14.2), versão oficial disponível pelo CDN.
 - **Objetivo:** Inicializar o runtime WebAssembly via Pyodide, carregar os módulos Python no virtual filesystem, estabelecer a ponte bidirecional JS $\leftrightarrow$ Python e implementar o motor de persistência consistente no `localStorage`.
 - **Arquivos Previstos:** `js/pyodide_bridge.js`, `js/storage.js`, `js/app.js`.
 - **Atividades:**
@@ -291,9 +299,10 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
   - Implementar o tratamento de falhas de gravação (reversão do estado em memória e na tela).
 - **Dependências:** Conclusão das Fases 1, 2 e 3.
 - **Critérios e Evidências de Conclusão:**
-  1. Evidência de que a sequência de carregamento Pyodide foi concluída com sucesso: o indicador de status transiciona visualmente para `✓ Carregado` e as funções do pacote `todolist` respondem conforme esperado a partir do JavaScript.
-  2. Testes de ciclo de vida e persistência executados separadamente para criação, edição, movimentação e exclusão, com recarga da página (`F5`) comprovando retenção íntegra e atualização sincronizada do timestamp.
-  3. Teste de falha de gravação simulada comprovando preservação do estado anterior e notificação de erro ao usuário.
+  1. Console confirmou Pyodide 314.0.7, carregamento dos cinco módulos e importação de `todolist`; o usuário confirmou visualmente o indicador `✓ Carregado` (CA4.2).
+  2. Criação, edição, movimentação e exclusão foram executadas pela API JS/Python, com persistência e timestamp conferidos no `localStorage`. Recuperação após recarga confirmada para as quatro operações; as verificações após edição, movimentação e exclusão foram apresentadas pelo usuário no console nesta sessão.
+  3. Falha de gravação simulada nas quatro operações: em todas, memória e armazenamento preservaram o estado anterior. A notificação de erro foi observada no teste de criação.
+  4. Execução no GitHub Pages confirmada pelo usuário. No filtro Fetch/XHR, durante o carregamento, foi observada uma requisição ao CDN jsDelivr para `pyodide-lock.json` (HTTP 200), sem chamadas a APIs de backend nessa amostra. A auditoria é limitada ao filtro e ao período observado; CA4.1 permanece parcialmente verificado.
 
 #### Critérios de Aceite — Fase 4
 
@@ -427,4 +436,8 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **1.8** | 2026-11-02 | Consolidação documental da Etapa 4: matriz de rastreabilidade RF01–RF15 e RNF01–RNF07 (Seção 5); critérios de aceite verificáveis nas seis fases (CA1.x–CA6.x); correção do focus trap para "quando aplicável" (Fase 2); detalhamento do fluxo de edição em três etapas (preparação, persistência, confirmação) na Fase 1; referências WCAG corrigidas (1.4.3 e 1.4.11 com nomes normativos) em toda a Seção 3.6 e Fases 3; atualização do RNF03 em REQUISITOS.md; atualização de estado e rastreabilidade em ESTADO-ATUAL.md. | Consolidação da Etapa 4 para revisão e aprovação. |
 | **1.9** | 2026-11-02 | Correção das 4 inconsistências da revisão: alinhamento do focus trap na Decisão 3.6 para "quando aplicável"; atribuição estrita da persistência ao JavaScript na Fase 1; criação dos critérios CA2.1 (painéis e contadores) e CA4.1 (execução estática sem backend); remapeamento completo da Matriz de Rastreabilidade para RF01–RF15 e RNF01–RNF07. | Fechamento rigoroso das pendências apontadas na revisão técnica pós-commit 03eae77. |
 | **2.0** | 2026-11-02 | Refinamento dos critérios RF01 e RNF01: validação dos contadores após operações do quadro e comprovação de execução efetiva na hospedagem publicada do GitHub Pages. | Tornar as evidências de aceite diretamente verificáveis e alinhadas aos requisitos aprovados. |
-| **2.1** | 2026-11-02 | Ajustes finais de rastreabilidade e critérios: CA2.1 explicita botão de criação em cada coluna; CA2.3 detalha o comportamento contextual de `Esc`; RF04 passa a referenciar as seis transições de estado e seus testes em CA1.2. | Fechar lacunas entre os requisitos aprovados, critérios de aceite e evidências previstas. |\n| **2.2** | 2026-11-03 | Registro da conclusão da inspeção visual da Fase 3 nos três breakpoints e nos dois temas, incluindo o teste manual de `prefers-reduced-motion` e a correção da navegação mobile. | Atualizar os critérios de aceite com as evidências efetivamente confirmadas pelo usuário. |
+| **2.1** | 2026-11-02 | Ajustes finais de rastreabilidade e critérios: CA2.1 explicita botão de criação em cada coluna; CA2.3 detalha o comportamento contextual de `Esc`; RF04 passa a referenciar as seis transições de estado e seus testes em CA1.2. | Fechar lacunas entre os requisitos aprovados, critérios de aceite e evidências previstas. |
+| **2.2** | 2026-11-03 | Registro da conclusão da inspeção visual da Fase 3 nos três breakpoints e nos dois temas, incluindo o teste manual de `prefers-reduced-motion` e a correção da navegação mobile. | Atualizar os critérios de aceite com as evidências efetivamente confirmadas pelo usuário. |
+| **2.3** | 2026-11-03 | Atualização do estado de validação da Fase 4 com os testes executados pelo usuário: ciclo de vida das quatro operações, persistência e falhas simuladas com rollback. | Evitar repetição de testes já realizados e manter explícitas as evidências e pendências reais da homologação. |
+| **2.4** | 2026-11-03 | Registro da recuperação após recarga para criação, edição, movimentação e exclusão; confirmação do indicador Pyodide carregado e execução no GitHub Pages. Auditoria de rede do CA4.1 permanece pendente. | Atualizar os critérios da Fase 4 com as confirmações apresentadas pelo usuário, sem repetir testes já realizados. |
+| **2.5** | 2026-11-03 | Consolidação da validação funcional da API da Fase 4; registro da auditoria Fetch/XHR no GitHub Pages (requisição ao CDN jsDelivr, HTTP 200, sem chamada a backend na amostra); explicitação de que a interface demonstrativa será integrada na Fase 5. | Distinguir validação do motor Python da integração da interface e registrar o alcance real da auditoria de rede. |

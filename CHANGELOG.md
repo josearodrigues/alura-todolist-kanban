@@ -2,6 +2,22 @@
 
 Este arquivo registra alterações relevantes do projeto em ordem cronológica inversa. Os registros descrevem o que foi implementado e validado, sem antecipar funcionalidades planejadas.
 
+## [Não lançado] — 2026-11-03
+
+### Fase 4 — validação local parcial
+
+- Registrados os testes do usuário para criação, edição, movimentação e exclusão via API JS/Python, com conferência de persistência no `localStorage`.
+- Falhas simuladas de gravação nas quatro operações preservaram o estado anterior em memória e no armazenamento; notificação visual observada no cenário de criação.
+- Recuperação após recarga confirmada após criação. Permanecem pendentes a confirmação visual do indicador de runtime, evidência de recarga após as demais operações e homologação no GitHub Pages com auditoria de rede.
+- Nenhuma publicação ou integração à `main` realizada nesta atualização.
+
+### Simplificação da composição da interface
+
+- Removida a barra inferior; crédito tecnológico e versão transferidos para a parte inferior da sidebar.
+- Mantido o timestamp funcional somente no cartão Status da Aplicação. Removidos o timestamp estático e o ícone decorativo do rodapé.
+- Removidos os estilos e a reserva de espaço associados à barra inferior.
+- Validação visual/responsiva desta alteração pendente.
+
 ## [Não lançado] — 2026-11-03\n\n### Revisão de fidelidade ao mockup e telas do menu\n\n- Reposicionado visualmente o indicador “Aplicação Online” na barra superior, mantendo a alternância de tema à direita e removendo a identificação ilustrativa do cabeçalho.\n- Restauradas as descrições das colunas e os ícones de estado; refinado o mascote da barra lateral.\n- Calendário com cabeçalho azul-marinho, mês e setas visuais; grade corrigida para novembro de 2025; criado painel de calendário em tela própria.\n- Resumo corrigido para 2 concluídas (29%) e 5 pendentes (71%), com pendentes agregando A Fazer e Em Andamento e duas barras de progresso.\n- Rodapé restaurado com o crédito completo de Python, Pyodide, Alura e Google for Startups; versão e última atualização à direita.\n- Criadas telas demonstrativas estáticas de Relatórios, Importar/Exportar e Configurações. Não foram implementadas operações funcionais dessas áreas.\n- Workflow `41560866108` aprovado no commit `db37ac91`: Nu HTML Checker e auditoria de contraste sem falhas.\n\n\n### Fase 3 — Correções visuais solicitadas\n\n- Cabeçalho atualizado com indicador “Aplicação online” e ícone de confirmação; removido o avatar do cabeçalho e reposicionado o avatar na barra lateral.\n- Ampliados os ícones de navegação, estados, seleção circular das tarefas, títulos, descrições, prioridades e prazos; o menu de cada cartão passou a usar três pontos verticais.\n- Cartões concluídos passaram a exibir confirmação e data de conclusão.\n- Calendário recebeu cabeçalho claro, identificação do mês e setas visuais de navegação.\n- Resumo passou a exibir quantidade e percentual por estado, com barra segmentada.\n- Status Pyodide apresentado como indicador demonstrativo; rodapé ampliado e última atualização alinhada à direita.\n- Ajustados rótulos de prazo para Hoje/Amanhã. Nenhuma integração funcional da Fase 4 foi iniciada.\n- Commits: `5267b09`, `b587491`, `dd27bbc`, `82aa222` e `fcf7994`.\n\n### Validado\n- Workflows `41558220193` e `41558291161` aprovados: HTML e contraste sem falhas.
 
 ### Fase 3 — Mocks visuais e refinamento
