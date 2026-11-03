@@ -200,3 +200,13 @@ dialog input:focus-visible, dialog textarea:focus-visible, dialog select:focus-v
 @media (prefers-reduced-motion: reduce) {
   .report-dialog, #dialog-importar, #dialog-exportar, #dialog-confirmar-importacao { scroll-behavior:auto; }
 }
+
+
+/* Diálogo de confirmação da exclusão coletiva — Fase 7. */
+#dialog-exclusao-coletiva { width: min(520px, calc(100% - 28px)); }
+#dialog-exclusao-coletiva .new-task-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+#dialog-exclusao-coletiva .new-task-actions button { margin: 0; }
+@media (max-width: 767px) {
+  #dialog-exclusao-coletiva .new-task-actions { flex-direction: column-reverse; }
+  #dialog-exclusao-coletiva .new-task-actions button { width: 100%; }
+}
