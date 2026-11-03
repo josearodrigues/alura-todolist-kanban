@@ -33,6 +33,7 @@ from todolist.schema import (
     VERSAO_SCHEMA_ESPERADA,
     gerar_envelope_backup,
     validar_envelope_backup,
+    preparar_importacao_backup,
 )
 
 __all__ = [
@@ -56,6 +57,7 @@ __all__ = [
     "calcular_relatorio_completo",
     "validar_envelope_backup",
     "gerar_envelope_backup",
+    "preparar_importacao_backup",
     "VERSAO_SCHEMA_ESPERADA",
     "APLICACAO_ESPERADA",
     "CAMPOS_OBRIGATORIOS_ENVELOPE",
