@@ -21,7 +21,7 @@ Este projeto é independente, não é um produto oficial da Alura ou do Google e
 - **Validação automatizada:** testes Python com pytest e workflow do GitHub Actions para o Nu HTML Checker.
 - **Documentação de engenharia:** requisitos, decisões arquiteturais, plano de implementação, estado atual e histórico de alterações.
 
-A implementação da Fase 5 ainda aguarda testes locais de aceitação, especialmente drag and drop por mouse e toque, formulários, busca, calendário e persistência do tema. Relatórios detalhados e backup JSON permanecem reservados à Fase 6.
+A Fase 5 já foi exercitada manualmente nos cenários descritos em `docs/ESTADO-ATUAL.md`; permanecem pendentes o teste por toque/caneta e a remoção da mensagem transitória de carregamento. Relatórios detalhados e importação/exportação permanecem reservados à Fase 6.
 
 ---
 
@@ -86,7 +86,7 @@ alura-todolist-kanban/
 - **`.github/workflows/`:** automação da validação HTML.
 - **`index.html`:** estrutura atual da interface web.
 
-Os módulos JavaScript da Fase 4 e da implementação inicial da Fase 5 estão presentes. A validação funcional em navegador da Fase 5 ainda precisa ser concluída.
+Os módulos JavaScript da Fase 4 e da Fase 5 estão presentes. A validação funcional em navegador da Fase 5 foi realizada parcialmente; consulte `docs/ESTADO-ATUAL.md` para os critérios aprovados e pendentes.
 
 ---
 
@@ -114,7 +114,7 @@ http://127.0.0.1:8000
 
 O servidor disponibiliza os arquivos estáticos localmente e fica restrito ao próprio computador. Para encerrá-lo, volte ao terminal e pressione `Ctrl+C`.
 
-**Importante:** a aplicação carrega tarefas a partir do `localStorage`. Em um navegador sem estado salvo, o quadro inicia vazio. O Pyodide carrega os módulos Python no navegador; criação, edição, movimentação e exclusão usam a ponte JS/Python e a persistência preventiva da Fase 4. A implementação da interface da Fase 5 ainda não foi homologada por testes manuais.
+**Importante:** a aplicação carrega tarefas a partir do `localStorage`. Em um navegador sem estado salvo, o quadro inicia vazio. O Pyodide carrega os módulos Python no navegador; criação, edição, movimentação e exclusão usam a ponte JS/Python e a persistência preventiva. A interface da Fase 5 foi validada manualmente de forma parcial; consulte o estado atual para os limites da validação.
 
 ---
 
