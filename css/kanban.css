@@ -333,3 +333,5 @@
 
 .task-card.is-completed .task-menu { display: block; }
 .task-card.is-completed .task-more { display: grid; }
+
+.calendar-day.has-completed-task::after, .full-day.has-completed-task::after { background: var(--done); }
