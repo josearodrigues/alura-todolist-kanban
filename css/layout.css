@@ -148,3 +148,35 @@
   .setting-row > span { text-align: left; }
   body { padding-bottom: 82px; }
 }
+
+/* Rodapé alinhado ao padrão visual de referência. */
+.app-footer { justify-content: space-between; }
+.footer-credit {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  white-space: nowrap;
+}
+.footer-bolt { color: #f59e0b; font-size: 18px; line-height: 1; }
+.footer-heart { color: #ef4444; font-size: 15px; line-height: 1; }
+.footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  white-space: nowrap;
+}
+.footer-meta > i {
+  display: block;
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+}
+.footer-refresh { color: var(--muted); font-size: 20px; line-height: 1; }
+@media (max-width: 767px) {
+  .app-footer { justify-content: center; }
+  .footer-credit, .footer-meta { justify-content: center; flex-wrap: wrap; white-space: normal; }
+  .footer-meta { gap: 8px; }
+  .footer-meta > i { display: none; }
+}
