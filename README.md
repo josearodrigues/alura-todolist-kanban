@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual (03/11/2026):** Fase 1 concluída e validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspecionada; Fase 4 implementada e validada funcionalmente pela API JS/Python, com CA4.1 parcialmente verificado. A implementação da Fase 5 está concluída na branch `fase-5-interacoes`; a validação manual dos critérios está quase completa. CA5.2 a CA5.7 aprovados nos cenários exercitados; CA5.1 aguarda teste de drag and drop por toque. Mouse e alternativa pelo menu foram aprovados. Caneta não testada. A Fase 6 não foi iniciada.
+> **Estado atual (03/11/2026):** Fase 1 concluída e validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspecionada; Fase 4 implementada e validada funcionalmente pela API JS/Python, com CA4.1 parcialmente verificado. A implementação da Fase 5 está concluída na branch `fase-5-interacoes`, com pendência de homologação por toque em CA5.1. A Fase 6 está implementada na branch `fase-6-relatorios-backup`; execução automatizada e homologação manual dos critérios CA6.1–CA6.7 ainda pendentes.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
@@ -21,7 +21,7 @@ Este projeto é independente, não é um produto oficial da Alura ou do Google e
 - **Validação automatizada:** testes Python com pytest e workflow do GitHub Actions para o Nu HTML Checker.
 - **Documentação de engenharia:** requisitos, decisões arquiteturais, plano de implementação, estado atual e histórico de alterações.
 
-A Fase 5 já foi exercitada manualmente nos cenários descritos em `docs/ESTADO-ATUAL.md`; permanece pendente o teste por toque exigido em CA5.1. A mensagem transitória de carregamento foi removida e validada. Relatórios detalhados e importação/exportação permanecem reservados à Fase 6.
+A Fase 5 já foi exercitada manualmente nos cenários descritos em `docs/ESTADO-ATUAL.md`; permanece pendente o teste por toque exigido em CA5.1. A mensagem transitória de carregamento foi removida e validada. Relatórios dinâmicos, exportação JSON e importação com validação estrita e substituição transacional foram implementados na Fase 6; consulte `docs/ESTADO-ATUAL.md` para o estado de validação.
 
 ---
 
@@ -167,7 +167,7 @@ Os resultados acima registram as evidências já obtidas; não representam uma n
 | 3. CSS e validação visual | Design system, temas, responsividade, mocks e contraste WCAG 2.2 AA | Implementada; inspeção visual aprovada conforme registro |
 | 4. WebAssembly e persistência | Integração Pyodide, execução Python no navegador e persistência local | Implementada e validada funcionalmente; CA4.1 parcialmente verificado |
 | 5. Interações | Movimentação, reordenação, busca e calendário | Implementação inicial registrada; testes locais/manuais pendentes |
-| 6. Relatórios e backup JSON | Relatórios, exportação e importação com validação e consistência | Não iniciada |
+| 6. Relatórios e backup JSON | Relatórios, exportação e importação com validação e consistência | Implementada; validação automatizada e homologação manual pendentes |
 
 Após as seis fases, o plano prevê uma etapa de validação final e homologação. Os critérios detalhados de conclusão estão em [docs/PLANO-IMPLEMENTACAO.md](docs/PLANO-IMPLEMENTACAO.md).
 
