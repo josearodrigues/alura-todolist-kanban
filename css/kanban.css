@@ -100,6 +100,13 @@
 .badge-prioridade.priority-alta { background: #f3c8f1; color: #7a1f8e; }
 .badge-prioridade.priority-media { background: #c8f0d1; color: #17783f; }
 .badge-prioridade.priority-baixa { background: #cadcfb; color: #1d4ea8; }
+/* Paleta do mockup no tema escuro. */
+:root[data-theme="dark"] .badge-prioridade.priority-alta { background: #5a2468; color: #f5c6ff; }
+:root[data-theme="dark"] .badge-prioridade.priority-media { background: #17492f; color: #a8f0c4; }
+:root[data-theme="dark"] .badge-prioridade.priority-baixa { background: #1f3a78; color: #bcd3ff; }
+:root[data-theme="dark"] .task-card:has(.badge-prioridade.priority-alta) { border-left-color: #f59e0b; }
+:root[data-theme="dark"] .task-card:has(.badge-prioridade.priority-media) { border-left-color: #2fb35c; }
+:root[data-theme="dark"] .task-card:has(.badge-prioridade.priority-baixa) { border-left-color: #2563eb; }
 .task-due { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 14px; }
 .task-due .ui-icon { display: none; }
 .task-due::before { content: "📅 "; }
