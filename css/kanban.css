@@ -330,3 +330,6 @@
 @media (prefers-reduced-motion: reduce) {
   .task-card, .kanban-column { scroll-behavior: auto; transition: none !important; }
 }
+
+.task-card.is-completed .task-menu { display: block; }
+.task-card.is-completed .task-more { display: grid; }
