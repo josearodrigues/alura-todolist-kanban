@@ -103,17 +103,17 @@ dialog input:focus-visible, dialog textarea:focus-visible, dialog select:focus-v
 
 /* Notificação de falha transacional da Fase 4. */
 .app-notice {
-  position: fixed;
-  z-index: 2000;
-  inset: auto 1rem 1rem 1rem;
-  max-width: 42rem;
-  margin-inline: auto;
-  padding: 0.875rem 1rem;
+  position: static;
+  max-width: none;
+  margin: 10px 16px 14px;
+  padding: 0.75rem 0.875rem;
   border: 1px solid #b91c1c;
   border-radius: 0.75rem;
   background: #7f1d1d;
   color: #ffffff;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 24%);
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.45;
   font-weight: 600;
 }
 
