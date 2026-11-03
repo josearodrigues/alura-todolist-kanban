@@ -119,3 +119,48 @@ def gerar_envelope_backup(
         "total_tarefas": len(tarefas),
         "tarefas": [dict(t) for t in tarefas],
     }
+
+
+def preparar_importacao_backup(
+    conteudo_json: str,
+    timestamp_importacao: str,
+) -> Dict[str, Any]:
+    """Lê, valida estritamente e prepara o estado de uma importação (RF14).
+
+    Chaves JSON duplicadas e constantes não padronizadas (NaN/Infinity) são
+    rejeitadas. Nenhum estado da aplicação é alterado por esta função.
+    """
+    import json
+
+    if not isinstance(conteudo_json, str):
+        raise ValueError("O conteúdo do backup deve ser texto.")
+
+    def rejeitar_chaves_duplicadas(pares):
+        objeto = {}
+        for chave, valor in pares:
+            if chave in objeto:
+                raise ValueError(f"O JSON contém chave duplicada: '{chave}'.")
+            objeto[chave] = valor
+        return objeto
+
+    def rejeitar_constante(valor):
+        raise ValueError(f"Constante não permitida no JSON: {valor}.")
+
+    try:
+        envelope = json.loads(
+            conteudo_json,
+            object_pairs_hook=rejeitar_chaves_duplicadas,
+            parse_constant=rejeitar_constante,
+        )
+    except (json.JSONDecodeError, TypeError, ValueError) as erro:
+        raise ValueError(f"Arquivo JSON inválido: {erro}") from erro
+
+    valido, mensagem = validar_envelope_backup(envelope)
+    if not valido:
+        raise ValueError(mensagem)
+
+    validar_iso_utc_ms(timestamp_importacao, "timestamp_importacao")
+    return {
+        "tarefas": [dict(tarefa) for tarefa in envelope["tarefas"]],
+        "timestamp_ultima_alteracao": timestamp_importacao,
+    }
