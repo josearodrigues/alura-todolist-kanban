@@ -339,7 +339,7 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
   - **CA5.7:** persistência da preferência de tema após recarga aprovada.
   - **Datas e vencimentos:** rótulos relativos para datas anteriores, ontem, hoje e amanhã; data de conclusão e destaque de tarefas pendentes vencidas confirmados. Ajuste da etiqueta “Vencida” para 14 px e `white-space: nowrap` confirmado visualmente após commit `a4e466d`.
   - **Compatibilidade:** falha de inicialização observada em navegador móvel antigo; causa não comprovada. Registrar genericamente no README e no estado atual, sem identificar aparelho/versão.
-  - **Carregamento:** usuário decidiu remover a mensagem transitória “Carregando tarefas...” por deslocar o quadro; remoção pendente. Preservar o indicador de status do Pyodide.
+  - **Carregamento:** mensagem transitória “Carregando tarefas...” e referências associadas removidas de `index.html`, `js/kanban_ui.js` e `js/app.js`. Verificação estática confirmou ausência das referências e preservação do indicador de status do Pyodide e de `aria-busy`; validação manual após recarga pendente.
 - **Critérios e Evidências de Conclusão:**
   1. Testes de movimentação realizados via mouse e via toque (*touch*), diferenciando-os explicitamente.
   2. Teste da movimentação acessível via menu `⋮`.
