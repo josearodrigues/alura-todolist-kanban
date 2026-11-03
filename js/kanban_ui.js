@@ -18,6 +18,17 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
   const abrir = (dialog) => { if (dialog && !dialog.open) dialog.showModal(); };
   const fechar = (dialog) => { if (dialog?.open) dialog.close(); };
 
+  function fecharMenusContextuais() {
+    document.querySelectorAll(".task-menu[open]").forEach(menu => {
+      menu.querySelectorAll("details[open]").forEach(submenu => { submenu.open = false; });
+      menu.open = false;
+    });
+  }
+
+  [editar, excluir].forEach(dialog => {
+    dialog.addEventListener("close", fecharMenusContextuais);
+  });
+
   function criarCartao(tarefa) {
     const item = el("li");
     const card = el("article", "task-card" + (tarefa.estado === "concluida" ? " is-completed" : ""));
