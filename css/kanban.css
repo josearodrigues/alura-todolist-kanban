@@ -325,7 +325,7 @@
 .calendar-focus-popover header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .calendar-focus-popover header h2 { margin: 0; font-size: 18px; text-transform: capitalize; }
 .calendar-focus-popover header button { min-width: 36px; }
-.calendar-focus-popover ul { display: grid; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+.calendar-focus-popover ul { display: grid; gap: 8px; max-height: min(55dvh, 420px); margin: 16px 0 0; padding: 0 6px 0 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; list-style: none; }
 .calendar-focus-popover li button { width: 100%; text-align: left; }
 .full-day { display: grid; place-items: center; min-height: 46px; border-radius: 8px; color: var(--text); }
 .full-day:hover, .calendar-day:hover { background: var(--surface-soft); }
