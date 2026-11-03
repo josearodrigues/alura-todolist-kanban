@@ -75,6 +75,7 @@ _funcoes_kanban = (
     "gerar_envelope_backup",
     "calcular_relatorio_completo",
     "obter_timestamp_utc_atual",
+    "preparar_importacao_backup",
 )
 all(callable(getattr(todolist, nome, None)) for nome in _funcoes_kanban)
 `);
@@ -122,38 +123,10 @@ def _kanban_dispatch(payload_json):
         return json.dumps(envelope, ensure_ascii=False)
 
     if operacao == "validar_backup":
-        def rejeitar_chave_duplicada(pares):
-            objeto = {}
-            for chave, valor in pares:
-                if chave in objeto:
-                    raise ValueError("O JSON contém chave duplicada: " + str(chave))
-                objeto[chave] = valor
-            return objeto
-
-        def rejeitar_constante_json(valor):
-            raise ValueError("Constante não permitida no JSON: " + str(valor))
-
-        try:
-            envelope = json.loads(
-                dados["conteudo"],
-                object_pairs_hook=rejeitar_chave_duplicada,
-                parse_constant=rejeitar_constante_json,
-            )
-        except (json.JSONDecodeError, TypeError, ValueError) as erro:
-            raise ValueError("Arquivo JSON inválido: " + str(erro)) from erro
-
-        valido, mensagem = todolist.validar_envelope_backup(envelope)
-        if not valido:
-            raise ValueError(mensagem)
-
-        timestamp_importacao = todolist.obter_timestamp_utc_atual()
-        estado_candidato = {
-            "tarefas": envelope["tarefas"],
-            "timestamp_ultima_alteracao": timestamp_importacao,
-        }
-        # Revalidar a estrutura que será persistida antes de entregá-la ao JavaScript.
-        if estado_candidato["tarefas"]:
-            todolist.validar_iso_utc_ms(timestamp_importacao, "timestamp_ultima_alteracao")
+        estado_candidato = todolist.preparar_importacao_backup(
+            dados["conteudo"],
+            todolist.obter_timestamp_utc_atual(),
+        )
         return json.dumps(estado_candidato, ensure_ascii=False)
 
     if operacao == "validar_estado":
