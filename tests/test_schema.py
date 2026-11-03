@@ -231,3 +231,65 @@ def test_validar_envelope_rejeita_enum_nao_hashable_sem_excecao():
     assert valido is False
     assert "Erro na tarefa de índice 0" in mensagem
     assert "Campo 'estado' inválido" in mensagem
+
+
+def test_preparar_importacao_backup_valida_e_atualiza_timestamp_global():
+    """Prepara estado sem mutar dados e usa timestamp da importação efetiva."""
+    import json
+    from todolist.schema import preparar_importacao_backup
+
+    tarefa = criar_tarefa_valida(UUID_1, "a_fazer", 0)
+    envelope = gerar_envelope_backup([tarefa], TS_EXPORT)
+    timestamp_importacao = "2026-11-03T15:30:00.000Z"
+
+    estado = preparar_importacao_backup(
+        json.dumps(envelope),
+        timestamp_importacao,
+    )
+
+    assert estado == {
+        "tarefas": [tarefa],
+        "timestamp_ultima_alteracao": timestamp_importacao,
+    }
+    assert envelope["data_exportacao"] == TS_EXPORT
+
+
+@pytest.mark.parametrize(
+    "conteudo",
+    [
+        "{",
+        '{"versao_schema":"1.0","versao_schema":"1.0"}',
+        '{"valor":NaN}',
+        "null",
+        "[]",
+    ],
+)
+def test_preparar_importacao_backup_rejeita_json_invalido_ou_ambiguo(conteudo):
+    """JSON malformado, chaves duplicadas, constantes e raízes inválidas são rejeitados."""
+    from todolist.schema import preparar_importacao_backup
+
+    with pytest.raises(ValueError):
+        preparar_importacao_backup(conteudo, TS_EXPORT)
+
+
+def test_preparar_importacao_backup_rejeita_envelope_estruturalmente_invalido():
+    """A preparação não contorna o contrato estrito do envelope."""
+    import json
+    from todolist.schema import preparar_importacao_backup
+
+    envelope = gerar_envelope_backup([], TS_EXPORT)
+    envelope["campo_extra"] = True
+
+    with pytest.raises(ValueError, match="campos desconhecidos"):
+        preparar_importacao_backup(json.dumps(envelope), TS_EXPORT)
+
+
+def test_preparar_importacao_backup_rejeita_timestamp_global_invalido():
+    """O timestamp global da importação também respeita ISO 8601 UTC com milissegundos."""
+    import json
+    from todolist.schema import preparar_importacao_backup
+
+    envelope = gerar_envelope_backup([], TS_EXPORT)
+
+    with pytest.raises(ValueError):
+        preparar_importacao_backup(json.dumps(envelope), "03/11/2026")
