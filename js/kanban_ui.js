@@ -110,7 +110,6 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     try {
       const resultado = await operacao();
       if (!resultado?.success) { notify(resultado?.error?.message || "A operação falhou. O estado anterior foi preservado."); return false; }
-      if (resultado.changed) render();
       return true;
     } catch (erro) { notify(erro.message || "Não foi possível concluir a operação."); return false; }
   }
