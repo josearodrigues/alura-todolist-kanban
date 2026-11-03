@@ -208,7 +208,7 @@
           <div class="full-calendar-grid full-calendar-days">
             <span class="full-day outside-month  ">26</span><span class="full-day outside-month  ">27</span><span class="full-day outside-month  ">28</span><span class="full-day outside-month  ">29</span><span class="full-day outside-month  ">30</span><span class="full-day outside-month  ">31</span><span class="full-day   ">1</span><span class="full-day   ">2</span><span class="full-day   ">3</span><span class="full-day   ">4</span><span class="full-day   ">5</span><span class="full-day   has-task">6<i></i></span><span class="full-day   ">7</span><span class="full-day  selected-day has-task">8<i></i></span><span class="full-day   ">9</span><span class="full-day   has-task">10<i></i></span><span class="full-day   ">11</span><span class="full-day   has-task">12<i></i></span><span class="full-day   ">13</span><span class="full-day   has-task">14<i></i></span><span class="full-day   ">15</span><span class="full-day   ">16</span><span class="full-day   has-task">17<i></i></span><span class="full-day   ">18</span><span class="full-day   ">19</span><span class="full-day   ">20</span><span class="full-day   has-task">21<i></i></span><span class="full-day   ">22</span><span class="full-day   ">23</span><span class="full-day   ">24</span><span class="full-day   has-task">25<i></i></span><span class="full-day   ">26</span><span class="full-day   ">27</span><span class="full-day   ">28</span><span class="full-day   ">29</span>
           </div>
-          <p class="mock-disclaimer">Calendário demonstrativo · navegação e seleção serão integradas na Fase 5.</p>
+          <p class="mock-disclaimer"></p>
         </article>
       </section>
       <section class="page-view" data-page-view="relatorios" hidden aria-labelledby="pagina-relatorios-titulo">
@@ -232,7 +232,7 @@
     <aside class="insights-panel" data-board-insights aria-label="Painel de informações">
       <section id="calendario" class="insight-card calendar-card" aria-labelledby="titulo-calendario">
         <h2 id="titulo-calendario"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> Calendário de Tarefas</h2>
-        <div class="calendar-widget" role="group" aria-label="Calendário demonstrativo de novembro de 2026">
+        <div class="calendar-widget" role="group" aria-label="Calendário de tarefas">
           <div class="calendar-month"><button type="button" class="month-arrow" disabled aria-label="Mês anterior">‹</button><span>Novembro 2025</span><button type="button" class="month-arrow" disabled aria-label="Próximo mês">›</button></div>
           <div class="calendar-grid calendar-weekdays" aria-hidden="true"><span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span></div>
           <div class="calendar-grid calendar-days">
@@ -243,15 +243,15 @@
             <span class="calendar-day">23</span><span class="calendar-day">24</span><span class="calendar-day">25</span><span class="calendar-day">26</span><span class="calendar-day">27</span><span class="calendar-day">28</span><span class="calendar-day">29</span>
             <span class="calendar-day">30</span><span class="calendar-day muted-day">1</span><span class="calendar-day muted-day">2</span><span class="calendar-day muted-day">3</span><span class="calendar-day muted-day">4</span><span class="calendar-day muted-day">5</span><span class="calendar-day muted-day">6</span>
           </div>
-          <p class="calendar-legend"><span></span> Dias com tarefas (dados demonstrativos)</p>
+          <p class="calendar-legend"><span></span> Dias com tarefas</p>
         </div>
       </section>
 
       <section id="resumo-projeto" class="insight-card summary-card" aria-labelledby="titulo-resumo">
         <h2 id="titulo-resumo"><span class="summary-emoji" aria-hidden="true">📊</span> Resumo do Projeto</h2>
         <div class="summary-total"><span>Total de Tarefas</span><strong><output id="total-tarefas">7</output></strong></div>
-        <div class="summary-metric"><div><span class="metric-name"><i class="metric-dot done-dot" aria-hidden="true"></i>Concluídas</span><span class="metric-count">2</span><output>29%</output></div><progress class="summary-progress completed-progress" max="100" value="28.6" aria-label="29 por cento concluídas">29%</progress></div>
-        <div class="summary-metric"><div><span class="metric-name">Pendentes</span><span class="metric-count">5</span><output>71%</output></div><progress class="summary-progress pending-progress" max="100" value="71.4" aria-label="71 por cento pendentes">71%</progress></div>
+        <div class="summary-metric"><div><span class="metric-name"><i class="metric-dot done-dot" aria-hidden="true"></i>Concluídas</span><span id="resumo-concluidas" class="metric-count">0</span><output id="percentual-concluidas">0%</output></div><progress id="barra-concluidas" class="summary-progress completed-progress" max="100" value="0" aria-label="0% concluídas">0%</progress></div>
+        <div class="summary-metric"><div><span class="metric-name">Pendentes</span><span id="resumo-pendentes" class="metric-count">0</span><output id="percentual-pendentes">0%</output></div><progress id="barra-pendentes" class="summary-progress pending-progress" max="100" value="0" aria-label="0% pendentes">0%</progress></div>
       </section>
 
       <section class="insight-card runtime-card" aria-labelledby="titulo-status-runtime">
@@ -324,7 +324,7 @@
       <p class="new-task-note">A tarefa será criada no estado A Fazer.</p>
       <div class="new-task-actions">
         <button type="button" data-dialog-close>Cancelar</button>
-        <button type="button" class="new-task-submit" disabled>✓ Adicionar tarefa (integração pendente)</button>
+        <button type="submit" class="new-task-submit">✓ Adicionar tarefa</button>
       </div>
     </form>
   </dialog>
@@ -356,7 +356,7 @@
         <label for="editar-tarefa-prazo">Data limite (opcional)</label>
         <input id="editar-tarefa-prazo" name="data_limite" type="date">
       </p>
-      <button type="button" disabled>Salvar alterações (integração pendente)</button>
+      <button type="submit">Salvar alterações</button>
       <button type="button" data-dialog-close>Cancelar</button>
     </form>
   </dialog>
@@ -364,7 +364,7 @@
   <dialog id="dialog-excluir-tarefa" aria-labelledby="titulo-excluir-tarefa">
     <h2 id="titulo-excluir-tarefa">Confirmar exclusão</h2>
     <p>Tem certeza de que deseja excluir a tarefa <strong id="titulo-tarefa-exclusao">selecionada</strong>? Esta ação não poderá ser desfeita.</p>
-    <button type="button" disabled>Confirmar exclusão (integração pendente)</button>
+    <button type="button" data-confirm-delete>Confirmar exclusão</button>
     <button type="button" data-dialog-close>Cancelar</button>
   </dialog>
 
