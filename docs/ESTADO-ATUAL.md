@@ -25,7 +25,7 @@
 - **Controle de Versão (Git):**
   - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
   - *Branch remota de trabalho:* `fase-6-relatorios-backup`
-  - *Branch remota:* `fase-6-relatorios-backup` (branch de trabalho da Fase 6; comparação remota indica 37 commits à frente da `main`, sem commits atrás).
+  - *Branch remota:* `fase-6-relatorios-backup` (branch de trabalho da Fase 6; comparação remota confirma que está à frente da `main`, sem commits atrás).
   - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits de implementação HTML e atualizações documentais; a pipeline Nu HTML Checker foi adicionada no commit `11f6cdf`; a correção HTML foi registrada em `a6c7495` e o diagnóstico detalhado da pipeline em `58558ad`. A implementação CSS da Fase 3 e a auditoria de contraste foram adicionadas diretamente à `main` nesta sessão.
   - *Situação local/remota:* a branch `fase-6-relatorios-backup` contém a implementação da Fase 6; a `main` permanece sem alterações. A cópia local não foi inspecionada nesta sessão.
   - *Ações realizadas na Fase 5:* módulos de interface, drag and drop e calendário adicionados/atualizados diretamente na branch remota `fase-5-interacoes`; ponte Python/JavaScript ampliada para métricas; workflow ajustado para validar os módulos ES e HTML nessa branch. Nenhuma alteração foi feita na `main`. Nenhuma tag, release ou publicação da aplicação foi criada. Último commit de código da camada de interação: `11e7615` (tratamento de falha de persistência sem notificação duplicada).
