@@ -75,20 +75,24 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     });
   }
 
-  function atualizarIndicadores() {
-    const tarefas = getState().tarefas;
-    const total = tarefas.length;
-    const concluidas = tarefas.filter(t => t.estado === "concluida").length;
-    const pendentes = total - concluidas;
-    const pc = total ? Math.round(concluidas / total * 1000) / 10 : 0;
-    const pp = total ? Math.round((100 - pc) * 10) / 10 : 0;
-    const foco = tarefas.filter(t => t.estado !== "concluida" && t.data_limite && t.data_limite <= dataHoje()).length;
-    const set = (id, valor) => { const node = document.getElementById(id); if (node) node.textContent = String(valor); };
-    set("total-tarefas", total); set("resumo-concluidas", concluidas); set("resumo-pendentes", pendentes);
-    set("percentual-concluidas", pc.toLocaleString("pt-BR") + "%"); set("percentual-pendentes", pp.toLocaleString("pt-BR") + "%"); set("foco-hoje", foco);
-    const bc = document.getElementById("barra-concluidas"), bp = document.getElementById("barra-pendentes");
-    if (bc) { bc.value = pc; bc.setAttribute("aria-label", pc + "% concluídas"); }
-    if (bp) { bp.value = pp; bp.setAttribute("aria-label", pp + "% pendentes"); }
+  async function atualizarIndicadores() {
+    const state = getState();
+    const hoje = dataHoje();
+    try {
+      const metricas = await actions.getMetrics(hoje);
+      const resumo = metricas.resumo;
+      const set = (id, valor) => { const node = document.getElementById(id); if (node) node.textContent = String(valor); };
+      set("total-tarefas", resumo.total);
+      set("resumo-concluidas", resumo.concluidas);
+      set("resumo-pendentes", resumo.pendentes);
+      set("percentual-concluidas", resumo.perc_concluidas.toLocaleString("pt-BR") + "%");
+      set("percentual-pendentes", resumo.perc_pendentes.toLocaleString("pt-BR") + "%");
+      set("foco-hoje", metricas.foco_hoje);
+      const bc = document.getElementById("barra-concluidas"), bp = document.getElementById("barra-pendentes");
+      if (bc) { bc.value = resumo.perc_concluidas; bc.setAttribute("aria-label", resumo.perc_concluidas + "% concluídas"); }
+      if (bp) { bp.value = resumo.perc_pendentes; bp.setAttribute("aria-label", resumo.perc_pendentes + "% pendentes"); }
+    } catch (erro) { notify("Não foi possível atualizar os indicadores: " + erro.message); }
+
   }
 
   function render(state = getState()) {
@@ -99,7 +103,7 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
       const contador = document.getElementById(contadorId); if (contador) contador.textContent = String(tarefas.length);
       const vazio = document.getElementById(vazioId); if (vazio) vazio.hidden = tarefas.length > 0;
     }
-    atualizarIndicadores(); aplicarBusca(); onStateRendered(state);
+    void atualizarIndicadores(); aplicarBusca(); onStateRendered(state);
   }
 
   async function executar(operacao) {
