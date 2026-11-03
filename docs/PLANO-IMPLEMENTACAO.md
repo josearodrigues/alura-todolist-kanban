@@ -535,14 +535,15 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 - CA7.10: regressão funcional RF01–RF16 aprovada nos cenários executados. A aprovação não representa homologação integral de RNF01–RNF07.
 - RNF01: auditoria de rede abrangente no GitHub Pages ainda pendente; evidência anterior parcial.
 - RNF02: revisão direcionada da centralização da lógica de negócio em Python ainda pendente.
-- RNF03: metas locais atingidas; falta evidência do workflow GitHub no estado final.
+- RNF03: workflow Python/cobertura aprovado na `main` (execução `41742344451`, commit `6a967af`): 60 testes, 96,10% de linhas e 92,72% de branches. A execução antecede a Fase 7; falta executá-lo na branch de trabalho.
 - RNF04: rollback por falha de persistência validado na Fase 7; evidências anteriores da Fase 4 e Fase 6 permanecem válidas.
 - RNF05: reteste visual integrado de sidebar e banner de vencidas nos breakpoints oficiais pendente.
 - RNF06: completar verificações WCAG 2.2 AA pertinentes; teclado testado não equivale a auditoria completa nem a teste com leitor de tela.
 - RNF07: confirmar indicador de inicialização no estado atual pendente.
-- CA7.11 (workflows GitHub) e CA7.12 (validação de segurança) permanecem pendentes.
+- CA7.11: parcialmente validado. Workflow HTML/contraste aprovado na branch da Fase 7 (execução `41742982859`, commit `faa12e9`); workflow Python/cobertura aprovado apenas na `main` (execução `41742344451`, commit `6a967af`). Falta executar o workflow Python na branch da Fase 7. CA7.12 (validação de segurança) permanece pendente.
 - Situação da cópia local não inspecionada nesta atualização.
 
 | Versão | Data | Alterações Registradas | Justificativa |
 | :--- | :--- | :--- | :--- |
 | **3.5** | 2026-11-03 | Atualização do estado da Fase 7: CA7.1–CA7.9 aprovados nos cenários testados; 65 testes aprovados, cobertura de linhas 95,83% e branches 92,54%; regressão funcional RF01–RF16 aprovada nos cenários executados; registro das pendências RNF01–RNF07, workflows e segurança. | Atualizar o plano com evidências efetivamente confirmadas e separar regressão funcional da homologação não funcional. |
+| **3.6** | 2026-11-03 | Registro dos workflows GitHub: HTML/contraste aprovado na branch da Fase 7; Python/cobertura aprovado na `main`, commit anterior à Fase 7. CA7.11 marcado como parcialmente validado e RNF03 mantido pendente de execução na branch de trabalho. | Preservar a rastreabilidade entre resultado do CI, branch e commit efetivamente testados, sem atribuir à Fase 7 evidência produzida na `main`. |
