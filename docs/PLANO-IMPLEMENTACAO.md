@@ -405,7 +405,7 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 ### Fase 7 — Seleção e Exclusão Coletiva de Tarefas
 
 - **Objetivo:** permitir a seleção de múltiplas tarefas em todo o quadro Kanban e sua exclusão em uma única operação, com confirmação explícita, persistência preventiva e integridade dos dados.
-- **Implementação registrada na branch `fase-7-selecao-exclusao-coletiva`:** serviço Python `excluir_tarefas()`, exportação pública, integração Pyodide/API `deleteTasks`, controles de seleção nos cartões, barra contextual, diálogo de confirmação e estilos responsivos. Testes unitários adicionados; ainda não executados nesta sessão.
+- **Implementação registrada na branch `fase-7-selecao-exclusao-coletiva`:** serviço Python `excluir_tarefas()`, exportação pública, integração Pyodide/API `deleteTasks`, controles de seleção nos cartões, barra contextual, diálogo de confirmação e estilos responsivos. Testes unitários adicionados para exclusão em colunas distintas e reindexação de múltiplas tarefas na mesma coluna; ainda não executados nesta sessão.
 - **Modelo de interface aprovado:**
   - Exibir um cabeçalho contextual quando o modo de seleção estiver ativo.
   - Disponibilizar nesse cabeçalho: selecionar todas as tarefas, desselecionar todas, exibir a quantidade selecionada e excluir as tarefas selecionadas.
