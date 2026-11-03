@@ -4,14 +4,18 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 
 ## [Não lançado] — 2026-11-03
 
-### Fase 7 — decisões aprovadas e contrato técnico (implementação não iniciada)
+### Fase 7 — implementação inicial
 
 - Aprovado o cabeçalho contextual de seleção, com ações para selecionar todas, desselecionar todas, exibir a quantidade selecionada e excluir as tarefas selecionadas.
 - A seleção individual será feita nos cartões e abrangerá todas as colunas e estados, inclusive tarefas concluídas; o checkbox de seleção será independente do indicador de conclusão e o menu individual permanecerá independente.
 - A exclusão coletiva exigirá confirmação explícita com a quantidade. Cancelamento preserva dados e seleção. A seleção será temporária no frontend, fora do `localStorage` e do backup, e só será limpa após persistência bem-sucedida.
 - Formalizado o contrato de `excluir_tarefas()`: rejeitar lista vazia, IDs duplicados e IDs inexistentes; validar todos antes de excluir; não permitir exclusão parcial; não mutar a entrada; reindexar somente colunas afetadas com `reindexar_coluna()`; preservar metadados restantes exceto `ordem`; gerar timestamp global único; retornar novo estado e tarefas excluídas.
 - Em falha de persistência, dados, ordenação, interface e seleção deverão permanecer preservados. Exclusão parcial, idempotência adicional e demais operações coletivas permanecem fora do escopo.
-- **Estado:** somente decisões e documentação atualizadas; nenhuma implementação ou teste da Fase 7 foi realizado.
+- Implementada a operação Python `excluir_tarefas()` e exportada pela API pública do pacote. A operação valida a lista e todos os IDs antes de alterar o estado, rejeita vazio/duplicidade/inexistência, não muta a entrada, reindexa apenas colunas afetadas e retorna as tarefas excluídas com um timestamp global.
+- Integrada a operação ao dispatcher Pyodide e à API `deleteTasks`, utilizando a persistência preventiva existente.
+- Implementada seleção independente da conclusão nos cartões, barra contextual com selecionar todas/desselecionar todas/contagem/exclusão e confirmação com quantidade.
+- Adicionados testes unitários para cenários válidos e inválidos e ampliados os workflows para a branch da Fase 7.
+- **Validação:** gravações no GitHub confirmadas; execução da suíte, cobertura, workflows e testes manuais ainda pendentes.
 
 ## [Não lançado] — 2026-11-03
 
