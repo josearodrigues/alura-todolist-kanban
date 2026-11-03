@@ -10,10 +10,10 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 - Atualizadas as folhas CSS para compor a nova estrutura, mantendo temas claro/escuro, breakpoints e suporte a movimento reduzido.
 - Ajustados o ícone da alternância de tema e a cor de foco no tema escuro.
 - Preservados os seis diálogos e seus controles ainda desabilitados enquanto as integrações funcionais não forem implementadas.
-- Commits registrados na branch `main`: `d02c4fe` e `b5c3200`.
+- Commits registrados na branch `main`: `d02c4fe`, `b5c3200` e `6861fc8`.
 
 ### Validado
-- Workflow `41550545873` concluído com sucesso; as etapas de auditoria de contraste e validação HTML foram aprovadas.
+- Workflow `41550901785` concluído com sucesso: 25 combinações de contraste aprovadas, zero reprovações, Nu HTML Checker com zero erros e zero avisos.
 
 ### Pendente
 - Inspecionar Desktop, Tablet e Mobile nos temas claro e escuro, incluindo `prefers-reduced-motion`; critérios CA3.1–CA3.5 ainda não aceitos.
