@@ -21,7 +21,6 @@
   --radius: 14px;
   --focus: #7c3aed;
   --font: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
-  --footer-height: 60px;
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
