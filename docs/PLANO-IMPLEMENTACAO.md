@@ -381,7 +381,7 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
   6. Teste de falha de gravação durante a importação comprovando que o estado anterior é preservado e que os novos dados não são apresentados como salvos.
   7. Regressão integrada verificando os requisitos funcionais (RF01–RF15) e não funcionais (RNF01–RNF07) conforme a matriz de rastreabilidade, sem substituir os testes específicos das fases anteriores.
 - **Implementação registrada:** modal de relatórios com filtro de conclusão; exportação JSON; importação estrita com rejeição de chaves duplicadas/constantes inválidas; modal de confirmação com contadores; timestamp global gerado no momento da confirmação; substituição pelo fluxo transacional existente.
-- **Estado de validação:** testes automatizados ampliados e workflows configurados; execução dos workflows e testes manuais CA6.1–CA6.7 ainda precisam ser comprovados. Não declarar a Fase 6 homologada antes dessas evidências.
+- **Estado de validação:** CA6.1–CA6.6 aprovados; CA6.7 (cancelamento) executado e funcionalmente aprovado, com ajuste da mensagem ao usuário pendente. CA6.8–CA6.10 permanecem pendentes. A execução local de 60 testes e as coberturas de 96,10% (linhas) e 92,72% (branches) foi informada pelo usuário; a conferência dos workflows ainda é necessária. Não declarar a Fase 6 homologada antes da conclusão dos critérios pendentes.
 
 #### Critérios de Aceite — Fase 6
 
@@ -390,11 +390,15 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 | CA6.1 | Métricas do modal de relatórios calculadas corretamente pelo núcleo Python: total, por estado, por prioridade, atrasadas, vencem hoje, vencem nos próximos 7 dias e concluídas no período por `data_conclusao` (RF12). | Conferência com conjunto de dados controlado. |
 | CA6.2 | Exportação gera arquivo JSON com envelope de exatamente 5 campos e lista de tarefas com exatamente 10 atributos cada (RF13, Seção 5.1–5.2 REQUISITOS.md). | Validação do schema do arquivo gerado. |
 | CA6.3 | Importação com arquivo válido substitui dados integralmente, exibe modal de confirmação com contadores e atualiza o quadro imediatamente após confirmação (RF14). | Teste manual documentado. |
-| CA6.4 | Importação com campos desconhecidos rejeitada integralmente; estado anterior preservado (RF14). | Teste manual com arquivo inválido. |
-| CA6.5 | Cancelamento da importação não altera nenhum dado (RF14). | Teste manual documentado. |
-| CA6.6 | Falha de gravação durante importação preserva estado anterior em memória e na interface (RNF04, Seção 6.3 REQUISITOS.md). | Teste de falha simulada. |
-| CA6.7 | Regressão integrada de RF01–RF15 e RNF01–RNF07 executada e aprovada conforme a matriz de rastreabilidade (Seção 5 deste documento). | Registro dos resultados da regressão por requisito. |
-| CA6.8 | Metas de cobertura atendidas: `percent_covered` $\ge 90{,}0\%$ e `percent_branches_covered` $\ge 85{,}0\%$ (RNF03). | Saída de `scripts/verify_coverage.py`. |
+| CA6.4 | Arquivo com versão de schema incompatível é rejeitado integralmente e o estado anterior permanece intacto. | Teste manual com versão não suportada. |
+| CA6.5 | JSON com chave malformada é rejeitado integralmente e o estado anterior permanece intacto. | Teste manual com sintaxe inválida na chave. |
+| CA6.6 | JSON com valor malformado é rejeitado integralmente e o estado anterior permanece intacto. | Teste manual com valor inválido; confirmação da preservação dos dados. |
+| CA6.7 | Cancelamento da importação não altera os dados existentes; a interface informa o cancelamento em linguagem clara e amigável. | Teste manual documentado; comportamento funcional aprovado e ajuste da mensagem pendente. |
+| CA6.8 | Falha de gravação durante a importação preserva o estado anterior em memória, na interface e no armazenamento (RNF04). | Teste de falha simulada, com verificação de consistência. |
+| CA6.9 | Regressão integrada de RF01–RF15 e RNF01–RNF07 executada e aprovada conforme a matriz de rastreabilidade. | Registro dos resultados da regressão por requisito. |
+| CA6.10 | Workflows GitHub associados à branch da Fase 6 executados e aprovados. | Evidência das execuções no GitHub Actions. |
+
+**Qualidade automatizada:** o procedimento local `pytest && python scripts/verify_coverage.py` foi informado com 60 testes aprovados, 96,10% de cobertura de linhas e 92,72% de branches. Esses números são registrados como evidência automatizada já obtida, sem substituir CA6.8–CA6.10.
 
 ---
 
@@ -491,3 +495,4 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **2.6** | 2026-11-03 | Registro da validação manual parcial da Fase 5: operações e contadores, busca/atalhos, calendário/popover, resumo, tema e metadados de reordenação/no-op; explicitação das verificações ainda pendentes em CA5.1, CA5.3 e CA5.6. | Preservar evidências confirmadas, evitar repetição de testes e manter o estado real dos critérios de aceite. |
 | **2.7** | 2026-11-03 | Atualização das evidências da Fase 5: conclusão/reabertura e metadados (CA5.3), Foco de Hoje e divisão por zero (CA5.6), correção do menu contextual, datas relativas e destaque de vencidas; registro das pendências de toque/caneta e compatibilidade móvel; implementação de rolagem interna no popover após avaliação de usabilidade; remoção da mensagem de carregamento implementada e validada. | Manter o plano alinhado aos testes efetivamente confirmados e às pendências reais. |
 | **2.8** | 2026-11-03 | Inclusão da Fase 7 — Seleção e Exclusão Coletiva, com escopo restrito à exclusão em lote, requisito RF16, critérios CA7.1–CA7.9, confirmação explícita, persistência preventiva e preservação da seleção em caso de falha. | Incorporar a melhoria de experiência do usuário aprovada, mantendo a homologação da Fase 6 como atividade independente. |
+| **2.9** | 2026-11-03 | Reorganização dos critérios de homologação da Fase 6 para refletir os cenários executados: CA6.4–CA6.6 para rejeição de arquivos inválidos, CA6.7 para cancelamento, CA6.8 para falha de persistência, CA6.9 para regressão integrada e CA6.10 para workflows. | Corrigir a rastreabilidade entre os testes efetivamente executados, os critérios de aceite e as pendências restantes.
