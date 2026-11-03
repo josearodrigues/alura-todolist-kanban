@@ -162,7 +162,7 @@ Os resultados acima registram as evidências já obtidas; não representam uma n
 |---|---|---|
 | 1. Domínio Python e testes | Entidade, regras de negócio, serviços, métricas, schema e testes | Concluída e validada |
 | 2. HTML e acessibilidade | Estrutura semântica, diálogos, teclado, foco e validação HTML | Implementada; checklist manual pendente |
-| 3. CSS e validação visual | Design system, temas, responsividade e contraste WCAG 2.2 AA | Interface reorganizada; workflow e inspeção visual pendentes |
+| 3. CSS e validação visual | Design system, temas, responsividade e contraste WCAG 2.2 AA | Interface reorganizada; workflow aprovado; inspeção visual pendente |
 | 4. WebAssembly e persistência | Integração Pyodide, execução Python no navegador e persistência local | Não iniciada |
 | 5. Interações | Movimentação, reordenação, busca e calendário | Não iniciada |
 | 6. Relatórios e backup JSON | Relatórios, exportação e importação com validação e consistência | Não iniciada |
