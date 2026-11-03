@@ -4,6 +4,16 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 
 ## [Não lançado] — 2026-11-03
 
+### Replanejamento da homologação final
+
+- Mantida a aprovação de CA6.1–CA6.8; a Fase 6 não depende da regressão integrada nem da validação dos workflows para avançar.
+- Transferidos CA6.9 e CA6.10 para o encerramento do projeto, após os testes específicos da Fase 7, como CA7.10 (regressão integrada RF01–RF16 e RNF01–RNF07) e CA7.11 (workflows GitHub).
+- Incluído CA7.12 para validação de segurança com escopo, método, evidências, achados, severidade, correções e retestes documentados.
+- Definido que a regressão final deverá reaproveitar evidências anteriores válidas e concentrar novos testes nos impactos, integrações e lacunas, evitando repetição indiscriminada de testes de aceite.
+- O plano passa a refletir sua natureza evolutiva, preservando rastreabilidade e distinguindo critérios aprovados, transferidos e pendentes.
+
+## [Não lançado] — 2026-11-03
+
 ### Fase 6 — homologação parcial
 
 - Registrada a aprovação de CA6.1–CA6.7, incluindo a preservação dos dados nos cenários de rejeição e o cancelamento da importação sem alterações.
