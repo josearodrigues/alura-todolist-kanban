@@ -57,7 +57,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | ↳ *Fase 1: Domínio Python e Testes* | **Concluída e Validada** | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados. Após a revisão corretiva, o procedimento oficial aprovou 48/48 testes, com 96,16% de cobertura de linhas e 92,78% de branches. |
 | ↳ *Fase 2: HTML e Acessibilidade* | **Implementada; validação manual parcial** | `index.html` contém estrutura semântica, três colunas, widgets, formulários, seis diálogos nativos, template de cartão, nomes acessíveis, atalhos e gerenciamento de foco. Foram aprovadas 20 verificações automatizadas gerais em Chromium; os seis diálogos também foram exercitados individualmente. Nu HTML Checker: execução `41520632228`, zero erros e zero avisos. Na verificação manual desta sessão: `Tab`, `Shift + Tab`, `Enter`, `Espaço`, `Ctrl + K`, foco inicial/contenção/restauração no diálogo Nova Tarefa e fechamento desse diálogo por `Esc` aprovados pelo usuário. Menu contextual não testado: controle `⋮` está desativado; usuário também identificou divergência visual do ícone em relação ao mockup. Inspeção visual dos rótulos/nome dos controles sem problemas aparentes, mas leitor de tela não testado. Validação formal da fase permanece parcial; itens não verificados não são considerados aprovados. |
 | ↳ *Fase 3: CSS e Validação Visual* | **Implementada; inspeção visual manual concluída** | Refinamentos visuais e mocks estáticos mantidos. Navegação lateral recolhível em telas de até 960 px, com fechamento por `Esc`, clique no fundo e seleção de seção, restauração e contenção de foco; ícone `⋮` ajustado visualmente, sem ativar o menu contextual. Usuário aprovou Desktop, Tablet (1024 × 768) e Mobile (390 × 844), nos temas Claro e Escuro. Teste manual de `prefers-reduced-motion` também aprovado. Workflow `41553398236`: 25 combinações de contraste aprovadas, zero reprovações e Nu HTML Checker sem erros/avisos. CA3.1–CA3.5 considerados atendidos conforme as evidências registradas; não implica validação funcional das telas demonstrativas. |
-| ↳ *Fase 4: WebAssembly e Persistência* | Implementação registrada; validação local pendente | Pyodide 314.0.7 via CDN; cinco módulos no virtual FS; ponte JS ↔ Python; estado JSON único em `localStorage`; confirmação pós-gravação e notificação em falha. Arquivos: `js/pyodide_bridge.js`, `js/storage.js`, `js/app.js`, `index.html` e `css/components.css`. CA4.1–CA4.6 ainda não homologados. |
+| ↳ *Fase 4: WebAssembly e Persistência* | **Implementada; validação local parcial** | Pyodide e importação dos cinco módulos confirmados. Criação, edição, movimentação e exclusão executadas pela API JS/Python; gravação no `localStorage` conferida nas quatro operações. Recuperação após recarga confirmada após criação. Falha simulada de gravação na criação preservou memória e armazenamento e exibiu notificação. CA4.2 e CA4.3 demonstrados; CA4.4 e CA4.5 com evidências parciais; CA4.6 parcialmente testado. CA4.1 pendente (GitHub Pages e auditoria de rede). |
 | ↳ *Fase 5: Interações (Pointer Events)* | Não iniciada | Drag and drop unificado, touch, menu acessível, busca e calendário. |
 | ↳ *Fase 6: Relatórios e Backup JSON* | Não iniciada | Modal de relatórios, exportação e importação atômica estrita. |
 | **Etapa 6 — Validação Final** | **Não iniciada** | Homologação integrada e testes de aceitação. |
@@ -89,13 +89,42 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 7. Informações e Pendências de Confirmação
 
-- **Ambiente Git:** Repositório remoto `josearodrigues/alura-todolist-kanban`, branch de trabalho `revisao-visual-d83bbee`; alterações desta sessão registradas diretamente na branch remota. A cópia local não foi inspecionada.
-- **Implementação e validação manual:** Fase 1 concluída e validada. Fase 2 implementada e submetida a 20 verificações automatizadas; Nu HTML Checker sem erros/avisos. Checklist manual parcialmente executado: `Tab`, `Shift + Tab`, `Enter`, `Espaço`, `Ctrl + K`, gerenciamento de foco e `Esc` no diálogo Nova Tarefa aprovados pelo usuário. Menu contextual permanece desativado; leitor de tela não testado. Fase 3: estilos modulares, temas, responsividade e movimento reduzido implementados; workflow `41553398236` aprovado (25 combinações, zero reprovações; HTML sem erros/avisos). Inspeção manual aprovada nos seis cenários de breakpoint/tema e teste de `prefers-reduced-motion` aprovado pelo usuário. Fases 4 a 6 permanecem não iniciadas.
+- **Ambiente Git:** repositório remoto `josearodrigues/alura-todolist-kanban`, branch de trabalho `fase-4-pyodide-persistencia`. A validação descrita abaixo foi executada pelo usuário no navegador local, com a aplicação servida por HTTP. A situação da cópia local foi confirmada pelo usuário como alinhada à branch remota, sem alterações pendentes, antes dos testes.
+- **Fase 4 — implementação:** Pyodide 314.0.7 inicializado; cinco módulos Python carregados no filesystem virtual; pacote `todolist` importado; API disponível em `window.kanbanApp`.
+- **Fase 4 — testes executados:** estado inicial vazio; criação; gravação no `localStorage`; recuperação após recarga; falha simulada de gravação durante criação; edição; persistência da edição; movimentação para `em_andamento`; persistência da movimentação; exclusão; confirmação de zero tarefas em memória e no `localStorage`.
+- **Falha de persistência:** durante a criação, a interceptação temporária de `Storage.prototype.setItem` provocou erro simulado. A tarefa não foi criada, a memória e o `localStorage` permaneceram com o estado anterior e a interface exibiu a mensagem de falha. O método original foi restaurado ao final do teste.
+- **Pendência visual:** a notificação de erro apareceu sobre a barra de status, em cartão vermelho com bordas arredondadas e duas linhas. A posição precisa ser revisada para evitar sobreposição. Nenhuma correção visual foi realizada nesta atualização.
+- **Pendências funcionais:** testar falha de persistência nas operações de edição, movimentação, exclusão e substituição/importação; verificar `replaceState` com estado válido e sua persistência. Não presumir que esses cenários estão aprovados.
+- **Critérios de aceite:** CA4.1 permanece pendente porque a aplicação ainda não foi homologada no GitHub Pages nem houve auditoria de rede. CA4.2 e CA4.3 têm evidências locais. CA4.4 e CA4.5 foram exercitados nas operações do ciclo de vida, mas ainda exigem consolidação das evidências e recarga após cada operação. CA4.6 foi testado somente durante criação, portanto permanece parcial.
 
 ---
 
 ## 8. Próxima Ação Recomendada
 
-1. **Fase 4 — implementação remota registrada:** Pyodide 314.0.7, carregamento dos cinco módulos Python, ponte JS ↔ Python e persistência preventiva em `localStorage` foram implementados na branch `fase-4-pyodide-persistencia`. A gravação antecede a confirmação do estado em memória e a atualização do quadro; falhas são notificadas sem aplicar o candidato.
-2. **Validação pendente com o usuário:** executar a aplicação localmente por servidor HTTP, confirmar carregamento do runtime e importação de `todolist`, testar criação, edição, movimentação e exclusão com recarga da página e simular falha de `localStorage.setItem`. Só depois registrar os critérios CA4 correspondentes como aprovados.
-3. **Fase 5:** não iniciada. Não antecipar drag and drop, busca, calendário ou ativação dos controles dos cartões nesta etapa.
+1. Testar a substituição de estado pela API `replaceState`, usando um estado válido compatível com o schema, e conferir o resultado em memória e no `localStorage`.
+2. Testar falha de gravação durante edição, movimentação e exclusão, verificando em cada caso que memória e armazenamento preservam o estado anterior.
+3. Revisar o posicionamento CSS da notificação de erro, sem alterar o comportamento funcional já testado.
+4. Consolidar as evidências e reavaliar os critérios CA4.1–CA4.6. A Fase 4 só deve ser considerada homologada após atender aos critérios aprovados no plano.
+5. **Fase 5:** não iniciada. Não antecipar drag and drop, busca, calendário ou ativação dos controles dos cartões nesta etapa.
+
+---
+
+## 9. Registro de Validação Local — Fase 4 (2026-11-03)
+
+| Verificação | Evidência observada | Resultado |
+|---|---|---|
+| Inicialização do Pyodide e importação de `todolist` | Console informou Pyodide 314.0.7 e pacote carregado; API disponível em `window.kanbanApp`. | Aprovada |
+| Estado inicial | `getState()` retornou lista vazia e timestamp nulo. | Aprovada |
+| Criação | `createTask` retornou `success: true` e `changed: true`. | Aprovada |
+| Persistência da criação | Documento `kanban_app_state` continha a tarefa e o timestamp global. | Aprovada |
+| Recuperação após recarga | A tarefa foi recuperada após `Ctrl+R` e reinicialização do runtime. | Aprovada |
+| Falha de persistência na criação | Falha simulada impediu a criação; memória e armazenamento mantiveram uma tarefa; mensagem de erro exibida. | Aprovada para este cenário |
+| Edição | `editTask` retornou sucesso com os parâmetros exigidos; metadados não editáveis foram preservados. | Aprovada |
+| Persistência da edição | `localStorage` refletiu o título e timestamp atualizados. | Aprovada |
+| Movimentação | `moveTask` retornou sucesso e estado `em_andamento`. | Aprovada |
+| Persistência da movimentação | `localStorage` refletiu o novo estado e timestamp. | Aprovada |
+| Exclusão | `deleteTask` retornou sucesso. | Aprovada |
+| Persistência da exclusão | Contagem final igual a zero tanto em memória quanto no `localStorage`. | Aprovada |
+
+**Limites desta validação:** os testes foram executados diretamente pela API no console do navegador porque os controles funcionais da interface estão previstos para a Fase 5. A falha de persistência foi simulada apenas durante criação. A operação de substituição/importação ainda não foi testada. O teste visual da notificação identificou sobreposição da barra de status. Não houve validação no GitHub Pages nesta etapa.
+
