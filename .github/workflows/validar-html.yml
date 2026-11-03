@@ -6,6 +6,7 @@ on:
       - main
       - fase-5-interacoes
       - fase-6-relatorios-backup
+      - fase-7-selecao-exclusao-coletiva
     paths:
       - "index.html"
       - "css/**"
@@ -17,6 +18,7 @@ on:
       - main
       - fase-5-interacoes
       - fase-6-relatorios-backup
+      - fase-7-selecao-exclusao-coletiva
     paths:
       - "index.html"
       - "css/**"
