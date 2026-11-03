@@ -80,7 +80,7 @@
 :root[data-theme="dark"] .done-column .add-task { background: #17492f; border-color: #25704a; color: #a8f0c4; }
 .add-task:hover { filter: brightness(.97); }
 .kanban-column ul { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
-.task-card { position: relative; display: flex; align-items: flex-start; gap: 12px; padding: 14px 12px 14px 16px; overflow: hidden; border: 1px solid var(--border); border-left: 5px solid var(--priority-color,#3b82f6); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
+.task-card { position: relative; display: flex; align-items: flex-start; gap: 12px; padding: 14px 12px 14px 16px; overflow: visible; border: 1px solid var(--border); border-left: 5px solid var(--priority-color,#3b82f6); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
 .priority-alta { --priority-color: #f59e0b; }
 .priority-media { --priority-color: #2fb35c; }
 .priority-baixa { --priority-color: #2563eb; }
@@ -307,7 +307,8 @@
 .task-menu button, .task-move-menu button { width: 100%; min-height: 36px; padding: 8px 10px; border: 0; border-radius: 6px; background: transparent; color: var(--text); text-align: left; font-size: 13px; cursor: pointer; }
 .task-menu button:hover, .task-move-menu button:hover { background: var(--surface-soft); }
 .task-move-menu { position: relative; }
-.task-move-menu > summary { padding: 8px 10px; color: var(--text); font-size: 13px; cursor: pointer; list-style: none; }
+.task-move-menu > summary { display: block; width: auto; height: auto; overflow: visible; padding: 8px 10px; color: var(--text); font-size: 13px; cursor: pointer; list-style: none; }
+.task-move-menu > summary::before { content: none; }
 .task-move-menu > ul { top: 0; right: calc(100% + 4px); }
 .task-menu .danger-action { color: #b91c1c; }
 .task-card.is-calendar-focus { outline: 3px solid var(--primary); outline-offset: 3px; }
