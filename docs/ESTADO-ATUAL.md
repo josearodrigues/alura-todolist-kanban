@@ -89,7 +89,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | ↳ *Fase 5: Interações (Pointer Events)* | **Implementada; validação manual parcial** | CA5.2 a CA5.7 aprovados nos cenários exercitados, exceto CA5.1, que permanece parcial por falta de teste de toque. Mouse e alternativa acessível pelo menu foram aprovados. CA5.5 aprovado no cenário exercitado. Após observação de usabilidade com 10 tarefas no mesmo dia, foi implementada rolagem vertical interna no popover; validação visual com listas extensas e em viewport móvel ainda pendente. Correção do menu contextual, datas relativas, destaque de vencidas e remoção da mensagem transitória de carregamento foram implementados e validados pelo usuário. A implementação da Fase 5 está concluída; aceite integral aguarda teste de toque em CA5.1. |
 | ↳ *Fase 6: Relatórios e Backup JSON* | **Implementada; CA6.1–CA6.8 aprovados** | Mensagem amigável para rejeição de JSON inválido implementada e validada pelo usuário. CA6.9 e CA6.10 transferidos para o encerramento do projeto como CA7.10 e CA7.11; não bloqueiam a Fase 7. Testes automatizados locais informados: 60 aprovados, cobertura de linhas 96,10% e branches 92,72%. Consulte a Seção 12. |
 | ↳ *Fase 7: Seleção e Exclusão Coletiva* | **Implementada; CA7.1–CA7.9 aprovados** | Testes automatizados: 65 aprovados; cobertura de linhas 95,83% e branches 92,54%. Validação manual CA7.1–CA7.9 aprovada nos cenários testados, incluindo rollback após `QuotaExceededError`, preservação de seleção e ordenação/metadados. Regressão RF01–RF16 aprovada nos cenários executados. Retestes visuais integrados e validação RNF01–RNF07 ainda têm lacunas registradas. |
-| **Etapa 6 — Validação Final** | **Em andamento** | Regressão funcional RF01–RF16 executada e aprovada nos cenários testados. RNF01–RNF07 ainda requerem verificação direcionada das lacunas; CA7.11 workflows GitHub e CA7.12 validação de segurança permanecem pendentes. |
+| **Etapa 6 — Validação Final** | **Em andamento** | Regressão funcional RF01–RF16 aprovada nos cenários executados. Workflow HTML/contraste aprovado na branch da Fase 7 (commit `faa12e9`). Workflow Python/cobertura aprovado, mas executado na `main` (commit `6a967af`, anterior à Fase 7); RNF03 e CA7.11 permanecem parcialmente validados até execução equivalente na branch de trabalho. RNF01, RNF02, RNF05, RNF06, RNF07 e CA7.12 ainda têm pendências específicas. |
 
 ---
 
@@ -283,11 +283,18 @@ Os resultados abaixo foram informados pelo usuário durante a execução dos tes
 ### Pendências de validação final
 - **RNF01:** auditoria de rede abrangente no GitHub Pages; a evidência anterior é parcial.
 - **RNF02:** revisão direcionada da centralização da lógica de negócio em Python e das integrações.
-- **RNF03:** metas de cobertura atingidas localmente; falta evidência do workflow GitHub no estado final.
+- **RNF03:** workflow Python/cobertura `41742344451` concluiu com sucesso na `main`, commit `6a967af2aca53a5af5fcfed98e3ff1ea44b8d0d9`: 60 testes aprovados, 96,10% de cobertura de linhas e 92,72% de branches. Como essa execução antecede a Fase 7, ela não comprova RNF03 na branch atual; executar o workflow na `fase-7-selecao-exclusao-coletiva`.
 - **RNF04:** cenário de rollback por falha de gravação validado na Fase 7; preservar também as evidências anteriores da Fase 4 e Fase 6.
 - **RNF05:** reteste visual integrado, incluindo sidebar e banner de vencidas, nos breakpoints oficiais.
 - **RNF06:** completar verificações WCAG 2.2 AA pertinentes; os testes de teclado realizados não equivalem a auditoria completa nem a teste com leitor de tela.
 - **RNF07:** confirmar o indicador de inicialização no estado atual da aplicação.
-- **CA7.11:** workflows GitHub ainda não validados nesta rodada.
+- **CA7.11:** validação parcial. Workflow `Validar HTML e contraste` aprovado na branch `fase-7-selecao-exclusao-coletiva`, commit `faa12e9514137f24ce8952652b6ae6d6c3e1a72d` (execução `41742982859`). Workflow `Testes Python e cobertura` aprovado na `main`, commit `6a967af2aca53a5af5fcfed98e3ff1ea44b8d0d9` (execução `41742344451`); falta executá-lo na branch da Fase 7.
 - **CA7.12:** validação de segurança ainda não executada.
 - A situação da cópia local não foi inspecionada nesta atualização documental.
+
+
+## 17. Atualização dos workflows GitHub — 2026-11-03
+
+- **Workflow `Validar HTML e contraste`:** execução `41742982859`, branch `fase-7-selecao-exclusao-coletiva`, commit `faa12e9514137f24ce8952652b6ae6d6c3e1a72d`; conclusão `success`. Sintaxe dos módulos JavaScript, auditoria de contraste WCAG 2.2 AA e Nu HTML Checker aprovados.
+- **Workflow `Testes Python e cobertura`:** execução `41742344451`, branch `main`, commit `6a967af2aca53a5af5fcfed98e3ff1ea44b8d0d9`; conclusão `success`. 60 testes aprovados; cobertura de linhas 96,10% (meta ≥90%) e branches 92,72% (meta ≥85%). Essa execução é anterior à integração da Fase 7 e não valida a versão atual da branch de trabalho.
+- **Conclusão:** CA7.11 parcialmente validado. RNF03 permanece pendente de execução do workflow Python/cobertura na branch `fase-7-selecao-exclusao-coletiva`. A branch `main` não foi alterada nesta atualização documental.
