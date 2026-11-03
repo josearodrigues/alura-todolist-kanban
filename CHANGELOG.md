@@ -7,7 +7,7 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 ### Fase 6 — homologação parcial
 
 - Registrada a aprovação de CA6.1–CA6.7, incluindo a preservação dos dados nos cenários de rejeição e o cancelamento da importação sem alterações.
-- Implementado ajuste de usabilidade em `js/backup_ui.js`: rejeições de JSON inválido agora exibem mensagem objetiva e amigável, enquanto os detalhes técnicos são enviados ao console para diagnóstico. Validação manual no navegador pendente.
+- Implementado ajuste de usabilidade em `js/backup_ui.js`: rejeições de JSON inválido agora exibem mensagem objetiva e amigável, enquanto os detalhes técnicos são enviados ao console para diagnóstico. Validação manual aprovada pelo usuário: importação válida e rejeição de schema diferente de 1.0, chave inválida e valor inválido com mensagem amigável.
 - Permanecem pendentes CA6.8 (falha de persistência/rollback), CA6.9 (regressão integrada RF01–RF15 e RNF01–RNF07) e CA6.10 (conferência dos workflows GitHub).
 - A execução local informada de 60 testes, com 96,10% de cobertura de linhas e 92,72% de branches, foi preservada como evidência automatizada já obtida.
 
@@ -20,7 +20,7 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 - A substituição usa o fluxo transacional existente, que persiste antes de confirmar memória e interface e tenta restaurar o documento anterior em falha de renderização.
 - Atualizados `index.html` e `css/components.css`: Relatórios abre como modal; Importar/Exportar permanece como tela com ações próprias e modal de confirmação com contadores.
 - Ampliados os testes unitários de schema e criados workflows para sintaxe/HTML/contraste e para `pytest` com metas RNF03.
-- **Validação:** CA6.1–CA6.7 aprovados. A mensagem amigável para rejeição de JSON inválido foi implementada, aguardando validação manual no navegador. CA6.8 (falha de persistência/rollback), CA6.9 (regressão integrada) e CA6.10 (conferência dos workflows) continuam pendentes.
+- **Validação:** CA6.1–CA6.7 aprovados. A mensagem amigável para rejeição de JSON inválido foi validada pelo usuário nos cenários de schema incompatível, chave inválida e valor inválido; a importação válida também foi aprovada. CA6.8 (falha de persistência/rollback), CA6.9 (regressão integrada) e CA6.10 (conferência dos workflows) continuam pendentes.
 
 ### Fase 5 — implementação inicial
 
