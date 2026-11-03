@@ -8,7 +8,8 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 
 - Registrada a aprovação de CA6.1–CA6.7, incluindo a preservação dos dados nos cenários de rejeição e o cancelamento da importação sem alterações.
 - Implementado ajuste de usabilidade em `js/backup_ui.js`: rejeições de JSON inválido agora exibem mensagem objetiva e amigável, enquanto os detalhes técnicos são enviados ao console para diagnóstico. Validação manual aprovada pelo usuário: importação válida e rejeição de schema diferente de 1.0, chave inválida e valor inválido com mensagem amigável.
-- Permanecem pendentes CA6.8 (falha de persistência/rollback), CA6.9 (regressão integrada RF01–RF15 e RNF01–RNF07) e CA6.10 (conferência dos workflows GitHub).
+- CA6.8 aprovado em teste manual: falha `QuotaExceededError` simulada durante a importação; mensagem de não conclusão exibida; estado em memória e `localStorage` comparados com os valores anteriores (`true`); quadro visual confirmado inalterado. O método original de `Storage.prototype.setItem` foi restaurado e as variáveis temporárias removidas.
+- Permanecem pendentes CA6.9 (regressão integrada RF01–RF15 e RNF01–RNF07) e CA6.10 (conferência dos workflows GitHub).
 - A execução local informada de 60 testes, com 96,10% de cobertura de linhas e 92,72% de branches, foi preservada como evidência automatizada já obtida.
 
 ### Fase 6 — relatórios e backup JSON (implementação)
