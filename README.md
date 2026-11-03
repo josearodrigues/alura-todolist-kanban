@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual (03/11/2026):** Fase 1 concluída e validada. Fase 2 implementada, com validação automática de HTML aprovada; checklist manual pendente. A interface da Fase 3 foi reorganizada para se aproximar do mockup oficial; workflow `41550901785` aprovado (25 combinações de contraste, zero reprovações; HTML sem erros/avisos); inspeção visual nos três breakpoints e nos dois temas ainda pendente. Fases 4 a 6 não iniciadas. A aplicação ainda não está publicada para uso final no GitHub Pages.
+> **Estado atual (03/11/2026):** Fase 1 concluída e validada. Fase 2 implementada; checklist manual pendente. Fase 3 recebeu refinamento visual e mocks estáticos de tarefas, calendário, resumo e status. Workflow `41553398236` aprovado (25 combinações de contraste, zero reprovações; HTML sem erros/avisos). Inspeção visual nos três breakpoints e nos dois temas ainda pendente. Fases 4 a 6 não iniciadas; a aplicação ainda não foi publicada para uso final no GitHub Pages.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
@@ -14,10 +14,10 @@ Este projeto é independente, não é um produto oficial da Alura ou do Google e
 
 ## O que você encontra neste projeto
 
-- **Quadro Kanban:** estrutura com três colunas — A Fazer, Em Andamento e Concluídas — e contadores.
+- **Quadro Kanban:** estrutura com três colunas — A Fazer, Em Andamento e Concluídas —, contadores e cartões de demonstração estáticos.
 - **Domínio em Python:** entidade de tarefa, validações, regras de transição entre estados, serviços, métricas e validação do contrato JSON.
 - **Acessibilidade estrutural:** HTML semântico, navegação por teclado, nomes acessíveis, foco visível e diálogos nativos.
-- **Planejamento funcional:** requisitos para criação, edição, movimentação, reordenação, busca, calendário, relatórios, importação, exportação e alternância de tema.
+- **Widgets demonstrativos:** sete tarefas de exemplo, calendário estático de novembro/2026, resumo com percentuais coerentes e status/última atualização identificados como dados fictícios.
 - **Validação automatizada:** testes Python com pytest e workflow do GitHub Actions para o Nu HTML Checker.
 - **Documentação de engenharia:** requisitos, decisões arquiteturais, plano de implementação, estado atual e histórico de alterações.
 
@@ -112,7 +112,7 @@ http://127.0.0.1:8000
 
 O servidor disponibiliza os arquivos estáticos localmente e fica restrito ao próprio computador. Para encerrá-lo, volte ao terminal e pressione `Ctrl+C`.
 
-**Importante:** a interface visual foi reorganizada na Fase 3 para se aproximar do mockup oficial. A inspeção visual nos breakpoints e temas ainda precisa ser realizada. O domínio Python no navegador depende da Fase 4; os controles de operações de negócio permanecem desabilitados até as integrações correspondentes.
+**Importante:** os cartões, calendário, resumo e status atualmente exibidos são mocks estáticos para validar a apresentação visual. Não são persistidos nem representam funcionalidades operacionais. A integração com o domínio Python no navegador depende da Fase 4; os controles de operações de negócio permanecem desabilitados até as fases correspondentes.
 
 ---
 
@@ -162,7 +162,7 @@ Os resultados acima registram as evidências já obtidas; não representam uma n
 |---|---|---|
 | 1. Domínio Python e testes | Entidade, regras de negócio, serviços, métricas, schema e testes | Concluída e validada |
 | 2. HTML e acessibilidade | Estrutura semântica, diálogos, teclado, foco e validação HTML | Implementada; checklist manual pendente |
-| 3. CSS e validação visual | Design system, temas, responsividade e contraste WCAG 2.2 AA | Interface reorganizada; workflow aprovado; inspeção visual pendente |
+| 3. CSS e validação visual | Design system, temas, responsividade, mocks e contraste WCAG 2.2 AA | Mocks visuais implementados; workflow `41553398236` aprovado; inspeção visual pendente |
 | 4. WebAssembly e persistência | Integração Pyodide, execução Python no navegador e persistência local | Não iniciada |
 | 5. Interações | Movimentação, reordenação, busca e calendário | Não iniciada |
 | 6. Relatórios e backup JSON | Relatórios, exportação e importação com validação e consistência | Não iniciada |
@@ -209,7 +209,7 @@ Registre cada item como **Aprovado**, **Reprovado** ou **Não aplicável**, anot
 
 ## Limitações Conhecidas
 
-- A interface ainda não possui o layout CSS definitivo.
+- A inspeção visual final nos breakpoints e nos dois temas ainda está pendente.
 - O domínio Python está implementado e testado, mas ainda não está integrado ao navegador por Pyodide.
 - Persistência no navegador, movimentação interativa, busca funcional, calendário, relatórios e backup ainda não foram implementados.
 - Os controles correspondentes às funcionalidades não integradas permanecem desabilitados.
