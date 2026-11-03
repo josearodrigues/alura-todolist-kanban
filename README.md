@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual:** Fase 1 (domínio Python e testes) concluída e validada. Fase 2 (HTML e acessibilidade estrutural) implementada, com validação automática de HTML aprovada; o checklist manual ainda está pendente. A implementação CSS da Fase 3 foi adicionada, mas sua validação visual em diferentes resoluções e a execução confirmada da auditoria automatizada ainda estão pendentes. As Fases 4 a 6 não foram iniciadas. A aplicação ainda não está publicada para uso final no GitHub Pages.
+> **Estado atual (03/11/2026):** Fase 1 concluída e validada. Fase 2 implementada, com validação automática de HTML aprovada; checklist manual pendente. A interface da Fase 3 foi reorganizada para se aproximar do mockup oficial; workflow e inspeção visual nos três breakpoints e nos dois temas ainda pendentes. Fases 4 a 6 não iniciadas. A aplicação ainda não está publicada para uso final no GitHub Pages.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
@@ -112,7 +112,7 @@ http://127.0.0.1:8000
 
 O servidor disponibiliza os arquivos estáticos localmente e fica restrito ao próprio computador. Para encerrá-lo, volte ao terminal e pressione `Ctrl+C`.
 
-**Importante:** nesta etapa, a página apresenta a estrutura HTML e os recursos de acessibilidade implementados. O layout visual definitivo depende da Fase 3; a execução do domínio Python no navegador depende da Fase 4. Os controles de operações de negócio permanecem desabilitados até a integração correspondente.
+**Importante:** a interface visual foi reorganizada na Fase 3 para se aproximar do mockup oficial. A inspeção visual nos breakpoints e temas ainda precisa ser realizada. O domínio Python no navegador depende da Fase 4; os controles de operações de negócio permanecem desabilitados até as integrações correspondentes.
 
 ---
 
@@ -162,7 +162,7 @@ Os resultados acima registram as evidências já obtidas; não representam uma n
 |---|---|---|
 | 1. Domínio Python e testes | Entidade, regras de negócio, serviços, métricas, schema e testes | Concluída e validada |
 | 2. HTML e acessibilidade | Estrutura semântica, diálogos, teclado, foco e validação HTML | Implementada; checklist manual pendente |
-| 3. CSS e validação visual | Design system, temas, responsividade e contraste WCAG 2.2 AA | Implementação CSS concluída; validação visual e execução confirmada da auditoria pendentes |
+| 3. CSS e validação visual | Design system, temas, responsividade e contraste WCAG 2.2 AA | Interface reorganizada; workflow e inspeção visual pendentes |
 | 4. WebAssembly e persistência | Integração Pyodide, execução Python no navegador e persistência local | Não iniciada |
 | 5. Interações | Movimentação, reordenação, busca e calendário | Não iniciada |
 | 6. Relatórios e backup JSON | Relatórios, exportação e importação com validação e consistência | Não iniciada |
@@ -222,7 +222,7 @@ Registre cada item como **Aprovado**, **Reprovado** ou **Não aplicável**, anot
 
 - **Fase 1:** concluída e validada.
 - **Fase 2:** implementada; validação automática de HTML aprovada; checklist manual pendente.
-- **Fase 3:** CSS modular, temas e responsividade implementados; validação visual e execução confirmada do script de contraste pendentes.\n- **Fases 4 a 6:** não iniciadas.
+- **Fase 3:** interface reorganizada para aproximar o mockup; inspeção visual e workflow ainda pendentes.\n- **Fases 4 a 6:** não iniciadas.
 - **Validação final:** pendente.
 - **Publicação no GitHub Pages:** ainda não realizada.
 
