@@ -123,11 +123,19 @@ def _kanban_dispatch(payload_json):
         return json.dumps(envelope, ensure_ascii=False)
 
     if operacao == "validar_backup":
-        estado_candidato = todolist.preparar_importacao_backup(
-            dados["conteudo"],
-            todolist.obter_timestamp_utc_atual(),
-        )
+        estado_candidato = todolist.preparar_importacao_backup(dados["conteudo"])
         return json.dumps(estado_candidato, ensure_ascii=False)
+
+    if operacao == "confirmar_importacao":
+        timestamp_importacao = todolist.obter_timestamp_utc_atual()
+        envelope = todolist.gerar_envelope_backup(dados["tarefas"], timestamp_importacao)
+        valido, mensagem = todolist.validar_envelope_backup(envelope)
+        if not valido:
+            raise ValueError(mensagem)
+        return json.dumps({
+            "tarefas": envelope["tarefas"],
+            "timestamp_ultima_alteracao": timestamp_importacao,
+        }, ensure_ascii=False)
 
     if operacao == "validar_estado":
         estado = dados.get("estado", {})
@@ -238,6 +246,10 @@ export async function calculateReport(estado, dataLocalReferencia, periodoInicio
 
 export async function createBackup(estado) {
   return executarPython("exportar_backup", { tarefas: estado.tarefas });
+}
+
+export async function prepareImportedState(tarefas) {
+  return executarPython("confirmar_importacao", { tarefas });
 }
 
 export async function validateBackup(conteudo) {
