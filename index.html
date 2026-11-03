@@ -14,6 +14,8 @@
 <body>
   <a href="#conteudo-principal">Pular para o conteúdo principal</a>
   <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><path d="M7 4.5v15L19 12 7 4.5Z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="icon-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></symbol>
     <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></symbol>
     <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 20V10h4v10M10 20V4h4v16M16 20v-7h4v7M2 20h20"/></symbol>
@@ -39,11 +41,11 @@
 
       <nav aria-label="Seções da aplicação">
         <ul class="primary-nav">
-          <li><a href="#quadro-kanban" aria-current="page"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-layout"></use></svg><span>Quadro</span></a></li>
-          <li><a href="#calendario"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg><span>Calendário</span></a></li>
-          <li><button type="button" data-dialog-open="dialog-relatorios"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-chart"></use></svg><span>Relatórios</span></button></li>
-          <li><button type="button" data-dialog-open="dialog-importar"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-transfer"></use></svg><span>Importar/Exportar</span></button></li>
-          <li><button type="button" disabled><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg><span>Configurações</span></button></li>
+          <li><button type="button" data-view="quadro" aria-current="page"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-layout"></use></svg><span>Quadro</span></button></li>
+          <li><button type="button" data-view="calendario"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg><span>Calendário</span></button></li>
+          <li><button type="button" data-view="relatorios"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-chart"></use></svg><span>Relatórios</span></button></li>
+          <li><button type="button" data-view="backup"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-transfer"></use></svg><span>Importar/Exportar</span></button></li>
+          <li><button type="button" data-view="configuracoes"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg><span>Configurações</span></button></li>
         </ul>
       </nav>
 
@@ -58,7 +60,6 @@
         <div class="robot-body">▰</div>
       </div>
       <p class="sidebar-quote">“Grandes conquistas começam com boas ideias!” 🚀</p>
-      <span class="profile-avatar sidebar-avatar" aria-hidden="true"><span class="avatar-hair"></span><span class="avatar-face"></span><span class="avatar-body"></span></span>
     </aside>
 
     <main id="conteudo-principal" class="workspace" tabindex="-1">
@@ -76,7 +77,7 @@
         </div>
       </header>
 
-      <section class="welcome-banner" aria-labelledby="saudacao">
+      <section class="welcome-banner" data-view-panel="quadro" aria-labelledby="saudacao">
         
         <div class="welcome-copy">
           <h1 id="saudacao">Olá!</h1>
@@ -89,14 +90,15 @@
         </div>
       </section>
 
-      <section id="quadro-kanban" class="board" aria-labelledby="titulo-quadro">
+      <section id="quadro-kanban" class="board" data-view-panel="quadro" aria-labelledby="titulo-quadro">
         <header class="board-heading">
           <div><h2 id="titulo-quadro">Meu quadro</h2><p>Visualize e organize suas tarefas</p><span class="demo-note">Exemplos visuais · não são salvos</span></div>
         </header>
         <div id="colunas-kanban">
           <section class="kanban-column todo-column" aria-labelledby="titulo-a-fazer">
             <header class="column-heading">
-              <div class="column-title"><span class="column-symbol" aria-hidden="true">▤</span><h3 id="titulo-a-fazer">A Fazer</h3><output id="contador-a-fazer" class="column-count">3</output></div>
+              <div class="column-title"><span class="column-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#icon-circle"></use></svg></span><h3 id="titulo-a-fazer">A Fazer</h3><output id="contador-a-fazer" class="column-count">3</output></div>
+              <p>Tarefas que ainda precisam ser feitas</p>
               <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
             <ul id="lista-a-fazer" aria-label="Tarefas a fazer" aria-live="polite"><li><article class="task-card">
@@ -126,7 +128,8 @@
 
           <section class="kanban-column progress-column" aria-labelledby="titulo-em-andamento">
             <header class="column-heading">
-              <div class="column-title"><span class="column-symbol" aria-hidden="true">▶</span><h3 id="titulo-em-andamento">Em Andamento</h3><output id="contador-em-andamento" class="column-count">2</output></div>
+              <div class="column-title"><span class="column-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#icon-play"></use></svg></span><h3 id="titulo-em-andamento">Em Andamento</h3><output id="contador-em-andamento" class="column-count">2</output></div>
+              <p>Tarefas em execução</p>
               <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
             <ul id="lista-em-andamento" aria-label="Tarefas em andamento" aria-live="polite"><li><article class="task-card">
@@ -150,6 +153,7 @@
           <section class="kanban-column done-column" aria-labelledby="titulo-concluidas">
             <header class="column-heading">
               <div class="column-title"><span class="column-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></span><h3 id="titulo-concluidas">Concluídas</h3><output id="contador-concluidas" class="column-count">2</output></div>
+              <p>Tarefas finalizadas</p>
               <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
             <ul id="lista-concluidas" aria-label="Tarefas concluídas" aria-live="polite"><li><article class="task-card is-completed">
@@ -171,13 +175,45 @@
           </section>
         </div>
       </section>
+
+      <section class="page-view" data-page-view="calendario" hidden aria-labelledby="pagina-calendario-titulo">
+        <header class="page-heading"><div><p class="eyebrow">ORGANIZAÇÃO</p><h1 id="pagina-calendario-titulo">Calendário de Tarefas</h1><p>Visualize os prazos e a distribuição das tarefas ao longo do mês.</p></div></header>
+        <article class="page-card full-calendar">
+          <div class="full-calendar-head"><button type="button" disabled aria-label="Mês anterior">‹</button><h2>Novembro 2025</h2><button type="button" disabled aria-label="Próximo mês">›</button></div>
+          <div class="full-calendar-grid calendar-weekdays"><span>Domingo</span><span>Segunda</span><span>Terça</span><span>Quarta</span><span>Quinta</span><span>Sexta</span><span>Sábado</span></div>
+          <div class="full-calendar-grid full-calendar-days">
+            <span class="full-day outside-month  ">26</span><span class="full-day outside-month  ">27</span><span class="full-day outside-month  ">28</span><span class="full-day outside-month  ">29</span><span class="full-day outside-month  ">30</span><span class="full-day outside-month  ">31</span><span class="full-day   ">1</span><span class="full-day   ">2</span><span class="full-day   ">3</span><span class="full-day   ">4</span><span class="full-day   ">5</span><span class="full-day   has-task">6<i></i></span><span class="full-day   ">7</span><span class="full-day  selected-day has-task">8<i></i></span><span class="full-day   ">9</span><span class="full-day   has-task">10<i></i></span><span class="full-day   ">11</span><span class="full-day   has-task">12<i></i></span><span class="full-day   ">13</span><span class="full-day   has-task">14<i></i></span><span class="full-day   ">15</span><span class="full-day   ">16</span><span class="full-day   has-task">17<i></i></span><span class="full-day   ">18</span><span class="full-day   ">19</span><span class="full-day   ">20</span><span class="full-day   has-task">21<i></i></span><span class="full-day   ">22</span><span class="full-day   ">23</span><span class="full-day   ">24</span><span class="full-day   has-task">25<i></i></span><span class="full-day   ">26</span><span class="full-day   ">27</span><span class="full-day   ">28</span><span class="full-day   ">29</span>
+          </div>
+          <p class="mock-disclaimer">Calendário demonstrativo · navegação e seleção serão integradas na Fase 5.</p>
+        </article>
+      </section>
+      <section class="page-view" data-page-view="relatorios" hidden aria-labelledby="pagina-relatorios-titulo">
+        <header class="page-heading"><div><p class="eyebrow">ACOMPANHAMENTO</p><h1 id="pagina-relatorios-titulo">Relatórios</h1><p>Indicadores gerais para acompanhar o andamento do projeto.</p></div></header>
+        <div class="report-grid">
+          <article class="page-card report-total"><span>Total de tarefas</span><strong>7</strong><small>Registros demonstrativos</small></article>
+          <article class="page-card"><span>Concluídas</span><strong class="report-green">2 <small>29%</small></strong><div class="report-track"><i style="width:28.6%"></i></div></article>
+          <article class="page-card"><span>Pendentes</span><strong class="report-blue">5 <small>71%</small></strong><div class="report-track pending"><i style="width:71.4%"></i></div></article>
+        </div>
+        <article class="page-card report-breakdown"><h2>Distribuição por estado</h2><div><span>A Fazer</span><b>3</b><span>Em Andamento</span><b>2</b><span>Concluídas</span><b>2</b></div><p class="mock-disclaimer">Relatório visual demonstrativo · cálculos dinâmicos serão integrados na Fase 6.</p></article>
+      </section>
+      <section class="page-view" data-page-view="backup" hidden aria-labelledby="pagina-backup-titulo">
+        <header class="page-heading"><div><p class="eyebrow">SEGURANÇA DOS DADOS</p><h1 id="pagina-backup-titulo">Importar / Exportar</h1><p>Faça cópias de segurança ou prepare a restauração dos seus dados.</p></div></header>
+        <div class="backup-grid">
+          <article class="page-card backup-card"><span class="backup-icon">↑</span><h2>Exportar tarefas</h2><p>Gere um arquivo de backup em formato JSON para guardar seus dados.</p><button type="button" disabled>Exportar arquivo JSON</button><small>Disponível na Fase 6</small></article>
+          <article class="page-card backup-card"><span class="backup-icon import">↓</span><h2>Importar tarefas</h2><p>Restaure tarefas a partir de um arquivo JSON previamente exportado.</p><label class="file-mock">Selecionar arquivo <input type="file" accept=".json,application/json" disabled></label><button type="button" disabled>Validar e importar</button><small>Validação e confirmação serão implementadas na Fase 6</small></article>
+        </div>
+      </section>
+      <section class="page-view" data-page-view="configuracoes" hidden aria-labelledby="pagina-configuracoes-titulo">
+        <header class="page-heading"><div><p class="eyebrow">PREFERÊNCIAS</p><h1 id="pagina-configuracoes-titulo">Configurações</h1><p>Preferências de aparência e comportamento da aplicação.</p></div></header>
+        <article class="page-card settings-card"><h2>Aparência</h2><div class="setting-row"><div><strong>Tema da aplicação</strong><p>Alterne entre os temas claro e escuro.</p></div><span>Use o botão de lua/sol no cabeçalho</span></div><div class="setting-row"><div><strong>Movimento reduzido</strong><p>Respeita a preferência de acessibilidade do sistema.</p></div><span>Configurado pelo sistema</span></div><p class="mock-disclaimer">Tela demonstrativa · opções adicionais serão definidas em etapa posterior.</p></article>
+      </section>
     </main>
 
-    <aside class="insights-panel" aria-label="Painel de informações">
+    <aside class="insights-panel" data-board-insights aria-label="Painel de informações">
       <section id="calendario" class="insight-card calendar-card" aria-labelledby="titulo-calendario">
-        <h2 id="titulo-calendario"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> Calendário <span class="calendar-nav" aria-hidden="true">‹　›</span></h2>
+        <h2 id="titulo-calendario"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> Calendário de Tarefas</h2>
         <div class="calendar-widget" role="group" aria-label="Calendário demonstrativo de novembro de 2026">
-          <div class="calendar-month"><span>Novembro de 2026</span></div>
+          <div class="calendar-month"><button type="button" class="month-arrow" disabled aria-label="Mês anterior">‹</button><span>Novembro 2025</span><button type="button" class="month-arrow" disabled aria-label="Próximo mês">›</button></div>
           <div class="calendar-grid calendar-weekdays" aria-hidden="true"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div>
           <div class="calendar-grid calendar-days">
             <span class="calendar-day muted-day">1</span><span class="calendar-day has-task">2<i></i></span><span class="calendar-day selected-day">3</span><span class="calendar-day has-task">4<i></i></span><span class="calendar-day has-task">5<i></i></span><span class="calendar-day has-task">6<i></i></span><span class="calendar-day has-task">7<i></i></span>
@@ -193,10 +229,8 @@
       <section id="resumo-projeto" class="insight-card summary-card" aria-labelledby="titulo-resumo">
         <h2 id="titulo-resumo"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-chart"></use></svg> Resumo do Projeto</h2>
         <div class="summary-total"><span>Total de Tarefas</span><strong><output id="total-tarefas">7</output></strong></div>
-        <div class="summary-metric"><div><span class="metric-name"><i class="metric-dot pending-dot"></i><b>3</b> A Fazer</span><output>42,9%</output></div></div>
-        <div class="summary-metric"><div><span class="metric-name"><i class="metric-dot progress-dot"></i><b>2</b> Em Andamento</span><output>28,6%</output></div></div>
-        <div class="summary-metric"><div><span class="metric-name"><i class="metric-dot done-dot"></i><b>2</b> Concluídas</span><output>28,6%</output></div></div>
-        <div class="summary-bar" role="img" aria-label="42,9 por cento a fazer, 28,6 por cento em andamento e 28,6 por cento concluídas"><span></span><span></span><span></span></div>
+        <div class="summary-metric"><div><span class="metric-name"><i class="metric-dot done-dot"></i><b>2</b> Concluídas</span><output>29%</output></div><progress class="summary-progress completed-progress" max="100" value="28.6" aria-label="29 por cento concluídas">29%</progress></div>
+        <div class="summary-metric"><div><span class="metric-name"><i class="metric-dot pending-dot"></i><b>5</b> Pendentes</span><output>71%</output></div><progress class="summary-progress pending-progress" max="100" value="71.4" aria-label="71 por cento pendentes">71%</progress></div>
       </section>
 
       <section class="insight-card runtime-card" aria-labelledby="titulo-status-runtime">
@@ -208,8 +242,8 @@
     </aside>
 
     <footer class="app-footer">
-      <p>To-Do Kanban <span aria-hidden="true">•</span> v1.0.0 <span aria-hidden="true">•</span> Desenvolvido com <b>♥</b> por Alura</p>
-      <p class="footer-updated"><span aria-hidden="true">◷</span> Última atualização: 02/11/2026 às 16:30</p>
+      <p class="footer-credit"><span aria-hidden="true">ϟ</span> Desenvolvido com Python <b>•</b> Pyodide <b>•</b> <strong>♥</strong> Alura + Google for Startups</p>
+      <p class="footer-updated"><span>Versão 1.0.0</span><i aria-hidden="true"></i><span>Última atualização: 06/11/2025 • 14:30</span><span aria-hidden="true">↻</span></p>
     </footer>
   </div>
 
@@ -382,6 +416,20 @@
       });
 
       document.addEventListener("click", (event) => {
+        const viewButton = event.target.closest("[data-view]");
+        if (viewButton) {
+          const view = viewButton.dataset.view;
+          document.querySelectorAll("[data-view-panel]").forEach((element) => { element.hidden = view !== "quadro"; });
+          document.querySelectorAll("[data-page-view]").forEach((element) => { element.hidden = element.dataset.pageView !== view; });
+          document.querySelector("[data-board-insights]").hidden = view !== "quadro";
+          document.querySelectorAll("[data-view]").forEach((button) => {
+            if (button.dataset.view === view) button.setAttribute("aria-current", "page");
+            else button.removeAttribute("aria-current");
+          });
+          document.querySelector(".workspace").scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+
         const openButton = event.target.closest("[data-dialog-open]");
         if (openButton) {
           const dialog = document.getElementById(openButton.dataset.dialogOpen);
