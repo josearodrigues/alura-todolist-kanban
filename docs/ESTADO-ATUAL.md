@@ -35,13 +35,26 @@
 
 ---
 
-## 2.1 Revisão de fidelidade ao mockup e telas secundárias — 2026-11-03\n\n- Reestabelecida a hierarquia da barra superior: busca à esquerda; indicador verde “Aplicação Online” e alternância de tema à direita; sem avatar/identificação de usuário no cabeçalho; mascote ilustrativo mantido na barra lateral.\n- Saudação preservada como “Olá!” conforme requisito aprovado, com ilustração de mão acenando.\n- Reintroduzidas as descrições das três colunas; refinados ícones, cores e tipografia.\n- Calendário lateral com cabeçalho azul-marinho, mês, setas visuais e grade alinhada a novembro de 2025; criado painel de calendário em tela própria. Os controles de mês estão desabilitados, pois a navegação funcional pertence à Fase 5.\n- Resumo corrigido: 7 tarefas; 2 concluídas (29%) e 5 pendentes (71%), sendo pendentes a soma de A Fazer + Em Andamento. Restauradas duas barras de progresso independentes (concluídas e pendentes).\n- Rodapé recuperou o crédito completo “Desenvolvido com Python • Pyodide • ♥ Alura + Google for Startups”, com versão e última atualização à direita.\n- Criadas telas demonstrativas estáticas para Relatórios, Importar/Exportar e Configurações, além do Calendário. Ações e dados dessas telas não são funcionais; integrações permanecem nas fases previstas.\n- Workflow `41560866108` aprovado no commit `db37ac91`: Nu HTML Checker sem erros/avisos e auditoria de contraste aprovada. Inspeção visual manual e aceite do usuário ainda pendentes.\n\n## 3. Estado da Governança Documental
+## 2.1 Revisão de fidelidade ao mockup e telas secundárias — 2026-11-03
+
+- Reestabelecida a hierarquia da barra superior: busca à esquerda; indicador verde “Aplicação Online” e alternância de tema à direita; sem avatar/identificação de usuário no cabeçalho; mascote ilustrativo mantido na barra lateral.
+- Saudação preservada como “Olá!” conforme requisito aprovado, com ilustração de mão acenando.
+- Reintroduzidas as descrições das três colunas; refinados ícones, cores e tipografia.
+- Calendário lateral com cabeçalho azul-marinho, mês, setas visuais e grade alinhada a novembro de 2025; criado painel de calendário em tela própria. Os controles de mês estão desabilitados, pois a navegação funcional pertence à Fase 5.
+- Resumo corrigido: 7 tarefas; 2 concluídas (29%) e 5 pendentes (71%), sendo pendentes a soma de A Fazer + Em Andamento. Restauradas duas barras de progresso independentes (concluídas e pendentes).
+- Rodapé recuperou o crédito completo “Desenvolvido com Python • Pyodide • ♥ Alura + Google for Startups”, com versão e última atualização à direita.
+- Criadas telas demonstrativas estáticas para Relatórios, Importar/Exportar e Configurações, além do Calendário. Ações e dados dessas telas não são funcionais; integrações permanecem nas fases previstas.
+- Workflow `41560866108` aprovado no commit `db37ac91`: Nu HTML Checker sem erros/avisos e auditoria de contraste aprovada. Inspeção visual manual e aceite do usuário ainda pendentes.
+
+## 3. Estado da Governança Documental
 
 A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
 - **`docs/REQUISITOS.md`:** Atualizado (Versão 1.7 — RNF06 alinhado aos critérios normativos de contraste WCAG 2.2 AA).
 - **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 2.1 — plano aprovado; situação da Etapa 4 e autorização da Fase 1 alinhadas ao estado real, com registro da revisão corretiva).
 - **`docs/ESTADO-ATUAL.md`:** Atualizado com o estado operacional corrente (este documento).
-- **`README.md`:** Atualizado com tecnologias, estrutura do projeto, instruções de execução, testes, roteiro manual da Fase 2 e roteiro de inspeção visual da Fase 3.\n- **`CHANGELOG.md`:** Registra as alterações implementadas por fase.\n- **`LICENSE`:** Licença MIT.
+- **`README.md`:** Atualizado com tecnologias, estrutura do projeto, instruções de execução, testes, roteiro manual da Fase 2 e roteiro de inspeção visual da Fase 3.
+- **`CHANGELOG.md`:** Registra as alterações implementadas por fase.
+- **`LICENSE`:** Licença MIT.
 
 ---
 
