@@ -400,12 +400,44 @@
 
 /* Fase 7 — seleção independente do indicador de conclusão. */
 .task-select {
+  position: relative;
   flex: none;
-  width: 20px;
-  height: 20px;
-  margin: 4px 0 0;
-  accent-color: var(--primary);
+  width: 26px;
+  height: 26px;
+  margin: 2px 0 0;
+  appearance: none;
+  border: 2px solid #b7c0d6;
+  border-radius: 50%;
+  background: #fff;
   cursor: pointer;
+}
+.task-select:checked {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+.task-select:checked::after {
+  position: absolute;
+  top: 0;
+  left: 7px;
+  width: 8px;
+  height: 14px;
+  transform: rotate(45deg);
+  border: solid #fff;
+  border-width: 0 2.5px 2.5px 0;
+  content: "";
+}
+.task-select:hover:not(:checked) { border-color: var(--primary); }
+.task-select:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+:root[data-theme="dark"] .task-select {
+  border-color: #5a6a9c;
+  background: #0d1633;
+}
+:root[data-theme="dark"] .task-select:checked {
+  border-color: var(--primary);
+  background: var(--primary);
 }
 .selection-toolbar {
   display: flex;
