@@ -365,13 +365,13 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 
 ### Fase 6 — Relatórios, Backup JSON (Import/Export) e Homologação Final
 - **Objetivo:** Implementar o modal de relatórios com métricas dinâmicas em Python, o download de backup JSON versionado e a importação com validação atômica preventiva e confirmação explícita.
-- **Arquivos Previstos:** `js/reports_ui.js`, `js/backup_ui.js`.
+- **Arquivos previstos e implementados:** `js/reports_ui.js`, `js/backup_ui.js`, ajustes em `js/app.js`, `js/pyodide_bridge.js`, `index.html`, `css/components.css`, `src/todolist/schema.py`, `src/todolist/__init__.py` e `tests/test_schema.py`; workflows de validação ampliados.
 - **Atividades:**
   - Integrar o modal de relatórios com os cálculos estatísticos do núcleo Python (incluindo filtro por `data_conclusao`).
   - Implementar geração e download do arquivo JSON de backup estruturado (`versao_schema: "1.0"`).
   - Implementar upload e validação de schema antes da substituição de dados.
   - Implementar modal de confirmação com contadores de tarefas (atual vs. nova).
-- **Dependências:** Conclusão de todas as fases anteriores.
+- **Dependências:** Núcleo Python, ponte Pyodide, persistência preventiva e componentes de interface das fases anteriores.
 - **Critérios e Evidências de Conclusão:**
   1. Conferência das métricas do relatório com conjunto de dados controlado.
   2. Validação do schema JSON gerado na exportação.
@@ -379,7 +379,7 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
   4. Teste de importação com campos desconhecidos no envelope ou nas tarefas, demonstrando rejeição integral e preservação dos dados existentes.
   5. Teste de cancelamento da importação comprovando ausência de alteração.
   6. Teste de falha de gravação durante a importação comprovando que o estado anterior é preservado e que os novos dados não são apresentados como salvos.
-  7. Regressão integrada verificando os requisitos funcionais (RF01–RF15) e não funcionais (RNF01–RNF07) conforme a matriz de rastreabilidade, sem substituir os testes específicos das fases anteriores.
+  7. Regressão integrada verificando os requisitos funcionais (RF01–RF15) e não funcionais (RNF01–RNF07) conforme a matriz de rastreabilidade, sem substituir os testes específicos das fases anteriores.\n- **Implementação registrada:** modal de relatórios com filtro de conclusão; exportação JSON; importação estrita com rejeição de chaves duplicadas/constantes inválidas; modal de confirmação com contadores; timestamp global gerado no momento da confirmação; substituição pelo fluxo transacional existente.\n- **Estado de validação:** testes automatizados ampliados e workflows configurados; execução dos workflows e testes manuais CA6.1–CA6.7 ainda precisam ser comprovados. Não declarar a Fase 6 homologada antes dessas evidências.
 
 #### Critérios de Aceite — Fase 6
 
