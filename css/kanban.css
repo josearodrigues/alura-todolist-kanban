@@ -59,3 +59,4 @@
 .empty-state { padding: 14px 5px; color: var(--muted); text-align: center; font-size: 12px; }
 @media (max-width: 900px) { #colunas-kanban { grid-template-columns: 1fr; } .kanban-column { min-height: 0; } }
 @media (max-width: 767px) { .topbar { align-items: stretch; flex-direction: column; } .topbar-actions { justify-content: space-between; } .welcome-banner { flex-wrap: wrap; } .focus-card { margin-left: auto; } }
+.profile-avatar { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #263b5d; color: #fff; font-size: 14px; font-weight: 750; }
