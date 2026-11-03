@@ -312,3 +312,15 @@ def test_preparar_estado_importado_rejeita_tarefas_invalidas():
 
     with pytest.raises(ValueError):
         preparar_estado_importado([tarefa], TS_EXPORT)
+
+
+def test_preparar_importacao_backup_com_timestamp_opcional_valido():
+    """Permite validar envelope com timestamp fornecido sem alterar o arquivo original."""
+    import json
+    from todolist.schema import preparar_importacao_backup
+
+    envelope = gerar_envelope_backup([], TS_EXPORT)
+    estado = preparar_importacao_backup(json.dumps(envelope), TS_EXPORT)
+
+    assert estado["tarefas"] == []
+    assert estado["timestamp_ultima_alteracao"] == TS_EXPORT
