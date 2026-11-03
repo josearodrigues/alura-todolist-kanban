@@ -4,7 +4,7 @@ Implementa a política estrita de rejeição integral em caso de campos
 desconhecidos ou ausentes, sem correções silenciosas (RF13, RF14, Seção 5).
 """
 
-from typing import Any, Dict, List, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 from todolist.models import (
     CAMPOS_OBRIGATORIOS_TAREFA,
     Tarefa,
@@ -123,7 +123,7 @@ def gerar_envelope_backup(
 
 def preparar_importacao_backup(
     conteudo_json: str,
-    timestamp_importacao: str = None,
+    timestamp_importacao: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Lê, valida estritamente e prepara o estado de uma importação (RF14).
 
