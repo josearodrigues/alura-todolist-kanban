@@ -264,7 +264,7 @@ Os resultados abaixo foram informados pelo usuário durante a execução dos tes
 
 - Criada a operação de domínio `excluir_tarefas()`, com validação de lista vazia, tipos inválidos, IDs duplicados e IDs inexistentes antes da exclusão; execução integral sem mutar a entrada; reindexação somente das colunas afetadas; preservação dos metadados restantes, exceto `ordem`; timestamp global único e retorno das tarefas excluídas.
 - Exportada a operação pela API pública do pacote e integrada ao dispatcher Pyodide como `excluir_varias`; adicionada a ação `deleteTasks` na API da aplicação, reutilizando o fluxo de persistência preventiva/rollback existente.
-- Adicionada seleção independente do indicador de conclusão nos cartões, barra contextual com contagem, selecionar todas/desselecionar todas e diálogo de confirmação com quantidade.
+- Adicionada seleção independente do indicador de conclusão nos cartões, barra contextual com contagem, selecionar todas/desselecionar todas e diálogo de confirmação com quantidade. A seleção é reconciliada após alterações persistidas e o foco é restaurado ao quadro após limpar a seleção.
 - Adicionados testes unitários para exclusão em múltiplas colunas, preservação da entrada/metadados, lista vazia, IDs duplicados, inexistentes e tipos inválidos.
 - Atualizados os workflows de interface e Python para considerar a branch da Fase 7.
 - **Validação:** alterações gravadas no GitHub; execução da suíte, cobertura, workflows e testes manuais em navegador ainda não confirmados. CA7.1–CA7.9 não recebem aceite apenas pela implementação.
