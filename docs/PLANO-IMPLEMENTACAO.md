@@ -284,7 +284,7 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 ---
 
 ### Fase 4 — Integração WebAssembly e Persistência Segura com Garantia de Rollback
-- **Estado:** Implementação registrada na branch `fase-4-pyodide-persistencia`; validação local parcial em 2026-11-03. O usuário executou criação, edição, movimentação e exclusão, conferiu persistência e timestamp e simulou falha de gravação nas quatro operações, com rollback comprovado. Permanecem pendentes a confirmação visual do indicador de runtime, evidências de recarga após cada tipo de mutação e homologação no GitHub Pages com auditoria de rede.
+- **Estado:** Implementação registrada na branch `fase-4-pyodide-persistencia`; validação local realizada em 2026-11-03. O usuário executou criação, edição, movimentação e exclusão, conferiu persistência e timestamp, confirmou o indicador `✓ Carregado` e verificou recuperação após recarga para as quatro operações. Falhas simuladas nas quatro operações comprovaram rollback. Execução no GitHub Pages confirmada pelo usuário; auditoria de rede para comprovar ausência de chamadas a APIs de backend permanece pendente.
 - **Runtime selecionado:** Pyodide 314.0.7 (Python 3.14.2), versão oficial disponível pelo CDN.
 - **Objetivo:** Inicializar o runtime WebAssembly via Pyodide, carregar os módulos Python no virtual filesystem, estabelecer a ponte bidirecional JS $\leftrightarrow$ Python e implementar o motor de persistência consistente no `localStorage`.
 - **Arquivos Previstos:** `js/pyodide_bridge.js`, `js/storage.js`, `js/app.js`.
@@ -299,10 +299,10 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
   - Implementar o tratamento de falhas de gravação (reversão do estado em memória e na tela).
 - **Dependências:** Conclusão das Fases 1, 2 e 3.
 - **Critérios e Evidências de Conclusão:**
-  1. Console confirma Pyodide 314.0.7, carregamento dos cinco módulos e importação de `todolist`; falta registrar inspeção visual do indicador `✓ Carregado`.
-  2. O usuário executou criação, edição, movimentação e exclusão pela API JS/Python e conferiu persistência/timestamp no `localStorage`; recuperação após recarga foi confirmada após criação. A recarga após cada uma das demais operações ainda não foi documentada.
+  1. Console confirmou Pyodide 314.0.7, carregamento dos cinco módulos e importação de `todolist`; o usuário confirmou visualmente o indicador `✓ Carregado` (CA4.2).
+  2. Criação, edição, movimentação e exclusão foram executadas pela API JS/Python, com persistência e timestamp conferidos no `localStorage`. Recuperação após recarga confirmada para as quatro operações; as verificações após edição, movimentação e exclusão foram apresentadas pelo usuário no console nesta sessão.
   3. Falha de gravação simulada nas quatro operações: em todas, memória e armazenamento preservaram o estado anterior. A notificação de erro foi observada no teste de criação.
-  4. CA4.1 ainda depende de execução no GitHub Pages e auditoria de rede sem backend.
+  4. Execução no GitHub Pages confirmada pelo usuário; a auditoria de rede para comprovar ausência de chamadas a APIs de backend permanece pendente (parte do CA4.1).
 
 #### Critérios de Aceite — Fase 4
 
@@ -439,3 +439,4 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **2.1** | 2026-11-02 | Ajustes finais de rastreabilidade e critérios: CA2.1 explicita botão de criação em cada coluna; CA2.3 detalha o comportamento contextual de `Esc`; RF04 passa a referenciar as seis transições de estado e seus testes em CA1.2. | Fechar lacunas entre os requisitos aprovados, critérios de aceite e evidências previstas. |
 | **2.2** | 2026-11-03 | Registro da conclusão da inspeção visual da Fase 3 nos três breakpoints e nos dois temas, incluindo o teste manual de `prefers-reduced-motion` e a correção da navegação mobile. | Atualizar os critérios de aceite com as evidências efetivamente confirmadas pelo usuário. |
 | **2.3** | 2026-11-03 | Atualização do estado de validação da Fase 4 com os testes executados pelo usuário: ciclo de vida das quatro operações, persistência e falhas simuladas com rollback. | Evitar repetição de testes já realizados e manter explícitas as evidências e pendências reais da homologação. |
+| **2.4** | 2026-11-03 | Registro da recuperação após recarga para criação, edição, movimentação e exclusão; confirmação do indicador Pyodide carregado e execução no GitHub Pages. Auditoria de rede do CA4.1 permanece pendente. | Atualizar os critérios da Fase 4 com as confirmações apresentadas pelo usuário, sem repetir testes já realizados. |
