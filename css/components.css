@@ -193,3 +193,41 @@ dialog ul { padding-left: 20px; }
 .runtime-complete strong { display:inline-flex; align-items:center; gap:5px; margin:0; color:#16a34a; font-weight:750; white-space:nowrap; }
 .runtime-complete strong .ui-icon { width:18px; height:18px; stroke-width:3; }
 .calendar-legend { display:none; }
+
+
+/* Componentes do painel lateral e diálogos com acabamento consistente. */
+.insight-card { border-radius: 13px; box-shadow: 0 5px 18px rgb(23 37 84 / 7%); }
+.insight-card h2 { min-height: 48px; padding: 13px 15px; font-size: 14px; }
+.calendar-card h2 { background: var(--sidebar); color: #fff; }
+.calendar-card h2 .ui-icon { color: #dbeafe; }
+.calendar-widget { padding: 0 0 12px; }
+.calendar-month { min-height: 42px; font-size: 14px; }
+.calendar-weekdays { font-size: 11px; }
+.calendar-day { min-height: 30px; font-size: 12px; }
+.summary-card h2 { background: var(--surface); color: var(--text); }
+.summary-total { padding: 10px 15px 6px; }
+.summary-total strong { font-size: 22px; }
+.summary-metric { padding: 7px 15px 0; }
+.summary-metric > div { font-size: 12px; }
+.summary-metric output { font-size: 12px; }
+.summary-progress { height: 9px; }
+.runtime-card { background: var(--surface); }
+.runtime-card h2 { background: var(--surface); color: var(--text); }
+.runtime-card .runtime-complete { align-items: center; justify-content: flex-start; gap: 10px; margin: 8px 15px 14px; font-size: 13px; }
+.runtime-complete strong { color: var(--done); font-size: 12px; }
+.runtime-card .last-updated { display: none; }
+dialog {
+  width: min(560px, calc(100% - 28px));
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 24px 70px rgb(15 23 42 / 28%);
+}
+dialog::backdrop { background: rgb(15 23 42 / 58%); }
+dialog input:focus-visible, dialog textarea:focus-visible, dialog select:focus-visible { outline-offset: 1px; }
+:root[data-theme="dark"] .calendar-card h2 { background: var(--sidebar); color: var(--text); }
+:root[data-theme="dark"] .summary-card h2,
+:root[data-theme="dark"] .runtime-card h2 { background: var(--surface); color: var(--text); }
+@media (max-width: 767px) {
+  .insight-card h2 { min-height: 44px; }
+  dialog { padding: 18px; }
+}
