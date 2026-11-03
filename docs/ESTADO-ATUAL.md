@@ -57,7 +57,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | ↳ *Fase 1: Domínio Python e Testes* | **Concluída e Validada** | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados. Após a revisão corretiva, o procedimento oficial aprovou 48/48 testes, com 96,16% de cobertura de linhas e 92,78% de branches. |
 | ↳ *Fase 2: HTML e Acessibilidade* | **Implementada; validação manual parcial** | `index.html` contém estrutura semântica, três colunas, widgets, formulários, seis diálogos nativos, template de cartão, nomes acessíveis, atalhos e gerenciamento de foco. Foram aprovadas 20 verificações automatizadas gerais em Chromium; os seis diálogos também foram exercitados individualmente. Nu HTML Checker: execução `41520632228`, zero erros e zero avisos. Na verificação manual desta sessão: `Tab`, `Shift + Tab`, `Enter`, `Espaço`, `Ctrl + K`, foco inicial/contenção/restauração no diálogo Nova Tarefa e fechamento desse diálogo por `Esc` aprovados pelo usuário. Menu contextual não testado: controle `⋮` está desativado; usuário também identificou divergência visual do ícone em relação ao mockup. Inspeção visual dos rótulos/nome dos controles sem problemas aparentes, mas leitor de tela não testado. Validação formal da fase permanece parcial; itens não verificados não são considerados aprovados. |
 | ↳ *Fase 3: CSS e Validação Visual* | **Implementada; inspeção visual manual concluída** | Refinamentos visuais e mocks estáticos mantidos. Navegação lateral recolhível em telas de até 960 px, com fechamento por `Esc`, clique no fundo e seleção de seção, restauração e contenção de foco; ícone `⋮` ajustado visualmente, sem ativar o menu contextual. Usuário aprovou Desktop, Tablet (1024 × 768) e Mobile (390 × 844), nos temas Claro e Escuro. Teste manual de `prefers-reduced-motion` também aprovado. Workflow `41553398236`: 25 combinações de contraste aprovadas, zero reprovações e Nu HTML Checker sem erros/avisos. CA3.1–CA3.5 considerados atendidos conforme as evidências registradas; não implica validação funcional das telas demonstrativas. |
-| ↳ *Fase 4: WebAssembly e Persistência* | **Implementada; validação local parcial** | Pyodide e importação dos cinco módulos confirmados. Criação, edição, movimentação e exclusão executadas pela API JS/Python; gravação no `localStorage` conferida nas quatro operações. Recuperação após recarga confirmada após criação. Falha simulada de gravação na criação preservou memória e armazenamento e exibiu notificação. CA4.2 e CA4.3 demonstrados; CA4.4 e CA4.5 com evidências parciais; CA4.6 parcialmente testado. CA4.1 pendente (GitHub Pages e auditoria de rede). |
+| ↳ *Fase 4: WebAssembly e Persistência* | **Implementada; validação local parcial** | Pyodide 314.0.7 e importação dos cinco módulos confirmados no console. Criação, edição, movimentação e exclusão executadas pela API JS/Python; persistência e timestamp conferidos no `localStorage`. Recuperação após recarga confirmada após criação. Falha simulada nas quatro operações preservou memória e armazenamento; notificação visual observada no teste de criação. CA4.3 demonstrado; CA4.2 ainda requer confirmação visual do indicador; CA4.4–CA4.6 têm evidências funcionais parciais. CA4.1 pendente (GitHub Pages e auditoria de rede). |
 | ↳ *Fase 5: Interações (Pointer Events)* | Não iniciada | Drag and drop unificado, touch, menu acessível, busca e calendário. |
 | ↳ *Fase 6: Relatórios e Backup JSON* | Não iniciada | Modal de relatórios, exportação e importação atômica estrita. |
 | **Etapa 6 — Validação Final** | **Não iniciada** | Homologação integrada e testes de aceitação. |
@@ -91,21 +91,20 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 - **Ambiente Git:** repositório remoto `josearodrigues/alura-todolist-kanban`, branch de trabalho `fase-4-pyodide-persistencia`. A validação descrita abaixo foi executada pelo usuário no navegador local, com a aplicação servida por HTTP. A situação da cópia local foi confirmada pelo usuário como alinhada à branch remota, sem alterações pendentes, antes dos testes.
 - **Fase 4 — implementação:** Pyodide 314.0.7 inicializado; cinco módulos Python carregados no filesystem virtual; pacote `todolist` importado; API disponível em `window.kanbanApp`.
-- **Fase 4 — testes executados:** estado inicial vazio; criação; gravação no `localStorage`; recuperação após recarga; falha simulada de gravação durante criação; edição; persistência da edição; movimentação para `em_andamento`; persistência da movimentação; exclusão; confirmação de zero tarefas em memória e no `localStorage`.
-- **Falha de persistência:** durante a criação, a interceptação temporária de `Storage.prototype.setItem` provocou erro simulado. A tarefa não foi criada, a memória e o `localStorage` permaneceram com o estado anterior e a interface exibiu a mensagem de falha. O método original foi restaurado ao final do teste.
-- **Pendência visual:** a notificação de erro apareceu sobre a barra de status, em cartão vermelho com bordas arredondadas e duas linhas. A posição precisa ser revisada para evitar sobreposição. Nenhuma correção visual foi realizada nesta atualização.
-- **Pendências funcionais:** testar falha de persistência nas operações de edição, movimentação, exclusão e substituição/importação; verificar `replaceState` com estado válido e sua persistência. Não presumir que esses cenários estão aprovados.
-- **Critérios de aceite:** CA4.1 permanece pendente porque a aplicação ainda não foi homologada no GitHub Pages nem houve auditoria de rede. CA4.2 e CA4.3 têm evidências locais. CA4.4 e CA4.5 foram exercitados nas operações do ciclo de vida, mas ainda exigem consolidação das evidências e recarga após cada operação. CA4.6 foi testado somente durante criação, portanto permanece parcial.
+- **Fase 4 — operações e persistência:** criação, edição, movimentação e exclusão executadas pela API JS/Python. O conteúdo de `kanban_app_state` e o timestamp foram conferidos após as operações. A recuperação após recarga foi confirmada para a tarefa criada.
+- **Fase 4 — falha de persistência:** `Storage.prototype.setItem` foi interceptado temporariamente para simular falha nas quatro operações. Em todos os casos, a alteração foi impedida e o estado anterior permaneceu em memória e no `localStorage`. A notificação de erro foi observada na interface durante o teste de criação; não há confirmação visual independente para as outras três operações.
+- **Fase 4 — critérios de aceite:** CA4.3 demonstrado por evidência no console. CA4.2 ainda requer confirmação visual do indicador `✓ Carregado`. CA4.4 e CA4.5 foram exercitados, mas a recarga foi comprovada após criação, não individualmente após cada operação. CA4.6 tem rollback comprovado nas quatro operações, com notificação visual observada no cenário de criação. CA4.1 permanece pendente: execução no GitHub Pages e auditoria de rede sem backend.
+- **Interface:** notificações de erro reposicionadas no topo; barra inferior removida e créditos/versão transferidos para a sidebar. Tipografia dos créditos compactada e conteúdo organizado em três linhas. Ajustes implementados na branch; validação visual final dos últimos créditos ainda não registrada.
+- **Situação local:** antes da rodada de testes funcionais, o usuário confirmou a branch local alinhada à origem e sem alterações pendentes.
 
 ---
 
 ## 8. Próxima Ação Recomendada
 
-1. Testar a substituição de estado pela API `replaceState`, usando um estado válido compatível com o schema, e conferir o resultado em memória e no `localStorage`.
-2. Testar falha de gravação durante edição, movimentação e exclusão, verificando em cada caso que memória e armazenamento preservam o estado anterior.
-3. Revisar o posicionamento CSS da notificação de erro, sem alterar o comportamento funcional já testado.
-4. Consolidar as evidências e reavaliar os critérios CA4.1–CA4.6. A Fase 4 só deve ser considerada homologada após atender aos critérios aprovados no plano.
-5. **Fase 5:** não iniciada. Não antecipar drag and drop, busca, calendário ou ativação dos controles dos cartões nesta etapa.
+1. Confirmar visualmente o indicador `✓ Carregado` e, se o tempo permitir, registrar recuperação após recarga para edição, movimentação e exclusão. Não repetir os testes de operação e rollback já realizados.
+2. Validar a aplicação no GitHub Pages e auditar a rede para confirmar ausência de chamadas a APIs de backend (CA4.1).
+3. Consolidar os resultados e reavaliar CA4.1–CA4.6. Em seguida, iniciar a Fase 5 conforme o plano aprovado.
+4. Não antecipar `replaceState` nem importação: pertencem à Fase 6.
 
 ---
 
@@ -125,8 +124,11 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | Persistência da movimentação | `localStorage` refletiu o novo estado e timestamp. | Aprovada |
 | Exclusão | `deleteTask` retornou sucesso. | Aprovada |
 | Persistência da exclusão | Contagem final igual a zero tanto em memória quanto no `localStorage`. | Aprovada |
+| Falha de persistência na edição | Estado anterior preservado em memória e no `localStorage` após falha simulada. | Aprovada |
+| Falha de persistência na movimentação | Estado anterior preservado em memória e no `localStorage` após falha simulada. | Aprovada |
+| Falha de persistência na exclusão | Tarefa permaneceu em memória e no `localStorage` após falha simulada. | Aprovada |
 
-**Limites desta validação:** os testes foram executados diretamente pela API no console do navegador porque os controles funcionais da interface estão previstos para a Fase 5. A falha de persistência foi simulada apenas durante criação. A operação de substituição/importação ainda não foi testada. O teste visual da notificação identificou sobreposição da barra de status. Não houve validação no GitHub Pages nesta etapa.
+**Limites desta validação:** os testes foram executados diretamente pela API no console do navegador porque os controles funcionais da interface estão previstos para a Fase 5. A falha de persistência foi simulada nas quatro operações; a notificação visual foi observada no teste de criação. A recuperação após recarga foi confirmada após criação, mas não individualmente após edição, movimentação e exclusão. Não houve validação no GitHub Pages nem auditoria de rede. A substituição de estado/importação não foi testada e permanece reservada à Fase 6.
 
 
 
