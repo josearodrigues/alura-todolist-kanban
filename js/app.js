@@ -257,7 +257,7 @@ async function inicializarAplicacao() {
       estadoAtual = copiarEstado(recuperado.state);
       persistenciaDisponivel = true;
 
-      if (recuperado.exists) renderizarQuadro(estadoAtual);
+      renderizarQuadro(estadoAtual);
       atualizarTimestampInterface(estadoAtual.timestamp_ultima_alteracao);
     } catch (erroPersistencia) {
       persistenciaDisponivel = false;

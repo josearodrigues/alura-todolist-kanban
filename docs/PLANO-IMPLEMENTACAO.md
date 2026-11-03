@@ -278,6 +278,8 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 ---
 
 ### Fase 4 — Integração WebAssembly e Persistência Segura com Garantia de Rollback
+- **Estado:** Implementação registrada na branch `fase-4-pyodide-persistencia`; validação local e homologação dos critérios CA4.1–CA4.6 pendentes.
+- **Runtime selecionado:** Pyodide 314.0.7 (Python 3.14.2), versão oficial disponível pelo CDN.
 - **Objetivo:** Inicializar o runtime WebAssembly via Pyodide, carregar os módulos Python no virtual filesystem, estabelecer a ponte bidirecional JS $\leftrightarrow$ Python e implementar o motor de persistência consistente no `localStorage`.
 - **Arquivos Previstos:** `js/pyodide_bridge.js`, `js/storage.js`, `js/app.js`.
 - **Atividades:**
