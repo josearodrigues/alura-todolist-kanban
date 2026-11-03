@@ -404,21 +404,42 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 
 ### Fase 7 — Seleção e Exclusão Coletiva de Tarefas
 
-- **Objetivo:** permitir que o usuário selecione múltiplas tarefas em diferentes colunas e as exclua em uma única operação, com confirmação explícita e garantia de integridade dos dados.
-- **Escopo aprovado:** seleção/deseleção individual; seleção simultânea entre colunas e estados; indicação da quantidade selecionada; ação para limpar a seleção; confirmação com a quantidade de tarefas; exclusão coletiva. O checkbox será um controle real de seleção e permanecerá independente do indicador visual (tick) de conclusão.
-- **Fora do escopo:** movimentação coletiva, edição coletiva, alteração coletiva de prioridade ou vencimento e qualquer outra operação em lote.
-- **Arquivos previstos:** a definir após inspeção da implementação existente. Áreas potencialmente envolvidas: `js/kanban_ui.js`, `js/app.js`, `js/storage.js`, `src/todolist/services.py`, CSS e testes. A definição final deverá respeitar a arquitetura atual e evitar alterações desnecessárias.
+- **Objetivo:** permitir a seleção de múltiplas tarefas em todo o quadro Kanban e sua exclusão em uma única operação, com confirmação explícita, persistência preventiva e integridade dos dados.
+- **Modelo de interface aprovado:**
+  - Exibir um cabeçalho contextual quando o modo de seleção estiver ativo.
+  - Disponibilizar nesse cabeçalho: selecionar todas as tarefas, desselecionar todas, exibir a quantidade selecionada e excluir as tarefas selecionadas.
+  - Realizar a seleção individual por controle próprio nos cartões.
+  - Abranger todas as colunas e estados, inclusive tarefas concluídas.
+  - Manter o checkbox de seleção independente do indicador visual de conclusão.
+  - Preservar o menu individual de cada cartão, sem acoplá-lo à seleção coletiva.
+  - Solicitar confirmação explícita, informando a quantidade de tarefas que será excluída.
+- **Contrato técnico da operação Python `excluir_tarefas()`:**
+  1. Receber o estado atual e a lista de IDs selecionados.
+  2. Rejeitar lista vazia, IDs duplicados e qualquer ID inexistente.
+  3. Validar todos os IDs antes de produzir a exclusão; não permitir exclusão parcial.
+  4. Executar a exclusão do conjunto em uma única operação, sem chamar `excluir_tarefa()` em sequência.
+  5. Não modificar a estrutura original recebida.
+  6. Reindexar somente as colunas afetadas, reaproveitando `reindexar_coluna()`.
+  7. Preservar os metadados das tarefas restantes, exceto `ordem`.
+  8. Gerar um único timestamp global para a operação.
+  9. Retornar o novo estado e a relação das tarefas excluídas.
+- **Persistência e estado temporário:**
+  - A seleção pertence exclusivamente ao frontend e não será gravada no `localStorage` nem incluída no backup.
+  - Cancelar a confirmação não altera dados nem seleção.
+  - A exclusão só será confirmada na interface e a seleção só será limpa após persistência bem-sucedida.
+  - Em falha de persistência, preservar dados, ordenação, interface e seleção para nova tentativa.
+- **Reuso e inspeção obrigatórios:** analisar a implementação atual de `excluir_tarefa()`, `reindexar_coluna()` e do fluxo `executarOperacao()`/persistência preventiva antes de definir os pontos de integração. Não executar exclusões individuais em sequência sem avaliar os efeitos intermediários.
+- **Fora do escopo:** exclusão parcial, mecanismos adicionais de idempotência, movimentação coletiva, edição coletiva, alteração coletiva de prioridade ou vencimento e quaisquer outras operações em lote.
+- **Arquivos previstos:** confirmar após inspeção dos pontos de integração; áreas candidatas: `js/kanban_ui.js`, `js/app.js`, `js/pyodide_bridge.js`, `index.html`, CSS, `src/todolist/services.py` e testes. Alterar somente os arquivos necessários.
 - **Atividades:**
-  1. Implementar seleção e desseleção de tarefas na interface, inclusive em cartões de tarefas concluídas.
-  2. Manter a seleção temporária no frontend, sem persistir esse estado no backup ou no `localStorage`.
-  3. Exibir a quantidade selecionada e disponibilizar ação para limpar a seleção.
-  4. Apresentar confirmação explícita com a quantidade de tarefas selecionadas; cancelar não altera dados nem seleção.
-  5. Implementar no domínio Python uma operação única de exclusão para o conjunto de IDs selecionados, validando os identificadores e recalculando a ordenação das colunas afetadas.
-  6. Integrar a operação à persistência preventiva existente: somente confirmar a exclusão e limpar a seleção após gravação bem-sucedida.
-  7. Em falha de persistência, preservar integralmente o estado anterior em memória e na interface, mantendo a seleção para nova tentativa.
-  8. Atualizar os cartões e contadores após sucesso, preservando os metadados das tarefas restantes, exceto os índices `ordem` necessários à contiguidade.
-  9. Implementar testes automatizados e validar teclado, foco, feedback e responsividade.
-- **Dependências:** conclusão da integração de persistência da Fase 4 e componentes de interface das Fases 2 e 5. A homologação da Fase 6 permanece uma pendência independente e não será considerada concluída por causa da Fase 7.
+  1. Implementar o estado temporário de seleção e os controles individuais/globais da interface.
+  2. Implementar e testar isoladamente o contrato Python de exclusão coletiva.
+  3. Integrar a operação à ponte JS/Python e à persistência preventiva existente.
+  4. Implementar a confirmação com quantidade; cancelamento preserva dados e seleção.
+  5. Garantir rollback de dados, ordenação, interface e seleção em falha de persistência.
+  6. Atualizar cartões e contadores somente após sucesso.
+  7. Validar teclado, foco, feedback e responsividade.
+- **Dependências:** integração de persistência da Fase 4 e componentes de interface das Fases 2 e 5. A homologação da Fase 6 permanece independente.
 - **Critérios de Aceite:**
 
 | # | Critério | Evidência |
@@ -498,6 +519,7 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **2.6** | 2026-11-03 | Registro da validação manual parcial da Fase 5: operações e contadores, busca/atalhos, calendário/popover, resumo, tema e metadados de reordenação/no-op; explicitação das verificações ainda pendentes em CA5.1, CA5.3 e CA5.6. | Preservar evidências confirmadas, evitar repetição de testes e manter o estado real dos critérios de aceite. |
 | **2.7** | 2026-11-03 | Atualização das evidências da Fase 5: conclusão/reabertura e metadados (CA5.3), Foco de Hoje e divisão por zero (CA5.6), correção do menu contextual, datas relativas e destaque de vencidas; registro das pendências de toque/caneta e compatibilidade móvel; implementação de rolagem interna no popover após avaliação de usabilidade; remoção da mensagem de carregamento implementada e validada. | Manter o plano alinhado aos testes efetivamente confirmados e às pendências reais. |
 | **2.8** | 2026-11-03 | Inclusão da Fase 7 — Seleção e Exclusão Coletiva, com escopo restrito à exclusão em lote, requisito RF16, critérios CA7.1–CA7.9, confirmação explícita, persistência preventiva e preservação da seleção em caso de falha. | Incorporar a melhoria de experiência do usuário aprovada, mantendo a homologação da Fase 6 como atividade independente. |
+| **3.4** | 2026-11-03 | Detalhamento do modelo de interface da Fase 7 e do contrato técnico de `excluir_tarefas()`: validação integral, atomicidade, não mutação da entrada, reindexação seletiva, metadados, timestamp único e integração transacional. | Converter as decisões aprovadas no Grill Me em especificação verificável antes da implementação. |
 | **3.3** | 2026-11-03 | Replanejamento do encerramento: CA6.9 e CA6.10 transferidos para a conclusão do projeto como CA7.10 e CA7.11; inclusão da validação de segurança CA7.12 após os testes específicos da Fase 7. Regressão final deverá reutilizar evidências válidas e priorizar impactos e lacunas. | Evitar regressão prematura antes da última fase funcional e assegurar validação integrada, CI e segurança sobre o estado final. |
 | **3.2** | 2026-11-03 | Validação manual de CA6.8: falha simulada na gravação durante a importação preservou memória, `localStorage` e interface; método original restaurado. | Registrar a evidência do rollback e liberar a sequência para a Fase 7. |
 | **3.1** | 2026-11-03 | Validação manual pelo usuário da mensagem amigável na rejeição de JSON inválido: schema diferente de 1.0, chave inválida e valor inválido; importação válida também aprovada. | Registrar a conclusão do ajuste de usabilidade e liberar a sequência para CA6.8. |
