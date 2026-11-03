@@ -157,7 +157,11 @@
   .full-calendar-grid.calendar-weekdays { font-size: 10px; }
   .setting-row { flex-direction: column; gap: 8px; }
   .setting-row > span { text-align: left; }
-  body { padding-bottom: 82px; }
+  #aplicacao { padding-bottom: 0; }
+  .app-footer {
+    position: static;
+    min-height: 0;
+  }
 }
 
 /* Rodapé alinhado ao padrão visual de referência. */
