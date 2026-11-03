@@ -20,7 +20,7 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 - A substituição usa o fluxo transacional existente, que persiste antes de confirmar memória e interface e tenta restaurar o documento anterior em falha de renderização.
 - Atualizados `index.html` e `css/components.css`: Relatórios abre como modal; Importar/Exportar permanece como tela com ações próprias e modal de confirmação com contadores.
 - Ampliados os testes unitários de schema e criados workflows para sintaxe/HTML/contraste e para `pytest` com metas RNF03.
-- **Validação pendente:** os workflows ainda precisam executar e ser conferidos; os cenários manuais de relatórios, download, importação válida/inválida, cancelamento e falha de persistência ainda não foram homologados.
+- **Validação:** CA6.1–CA6.7 executados, com CA6.1–CA6.6 aprovados e CA6.7 funcionalmente aprovado; permanece pendente apenas o ajuste da mensagem exibida no cancelamento. CA6.8 (falha de persistência/rollback), CA6.9 (regressão integrada) e CA6.10 (conferência dos workflows) continuam pendentes.
 
 ### Fase 5 — implementação inicial
 
