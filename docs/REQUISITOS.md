@@ -162,6 +162,7 @@ A exportação de arquivos JSON oferece um mecanismo de backup externo e portabi
 7. O calendário exibe marcadores, permite navegação e foca cartões no quadro sem filtrar as demais tarefas.
 8. Os relatórios apresentam métricas exatas calculadas por rotinas Python.
 9. A importação substitui dados apenas após validação estrita e confirmação explícita do usuário, rejeitando arquivos com campos desconhecidos.
+10. A seleção e exclusão coletiva permitem remover somente as tarefas selecionadas, com confirmação, persistência bem-sucedida e preservação integral do estado anterior em caso de falha.
 
 ---
 
