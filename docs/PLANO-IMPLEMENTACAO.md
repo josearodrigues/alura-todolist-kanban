@@ -9,7 +9,7 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
 - **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Fases 1 a 6 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; Fase 6 aguarda execução dos workflows e homologação manual CA6.1–CA6.7; Fase 7 planejada e aprovada, implementação não iniciada]
-- **Etapa 6 — Validação final e homologação:** [Pendente — regressão integrada RF01–RF15 e RNF01–RNF07]
+- **Etapa 6 — Validação final e homologação:** [Pendente — regressão integrada RF01–RF16 e RNF01–RNF07 após a implementação e homologação das fases previstas]
 
 ---
 
@@ -158,7 +158,7 @@ Esta seção registra as sete decisões técnicas formalmente aprovadas que defi
 
 ## 3. Fases de Implementação Controlada
 
-A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e verificáveis:
+A execução da Etapa 5 será dividida em sete fases pequenas, sequenciais e verificáveis:
 
 ### Fase 1 — Fundação do Domínio Python e Testes Automatizados
 - **Objetivo:** Construir o pacote `todolist` com regras de negócio, manipulação de estado, cálculos estatísticos e validação estrita de schema JSON em Python puro.
