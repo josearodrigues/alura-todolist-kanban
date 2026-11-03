@@ -123,3 +123,30 @@
 .welcome-banner[hidden], .board[hidden], [data-board-insights][hidden] { display:none !important; }
 .primary-nav button[aria-current="page"] { background:linear-gradient(110deg,#3478ed,#2861c8); box-shadow:0 5px 14px rgb(0 0 0 / 15%); color:#fff; }
 .primary-nav button[aria-current="page"] .ui-icon { color:#fff; }
+
+
+/* Refinamento de proporções inspirado no mockup oficial. */
+#aplicacao {
+  grid-template-columns: 238px minmax(0, 1fr) 292px;
+  grid-template-rows: minmax(calc(100vh - 64px), auto) 64px;
+  column-gap: 22px;
+  padding-right: 22px;
+}
+.sidebar { padding: 30px 17px 24px; }
+.workspace { padding-top: 24px; }
+.insights-panel { gap: 16px; padding-top: 112px; }
+.app-footer { grid-column: 2 / 4; padding: 0 4px; }
+@media (min-width: 1200px) {
+  #aplicacao { grid-template-columns: 238px minmax(0, 1fr) 292px; }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  #aplicacao { grid-template-columns: 205px minmax(0, 1fr); column-gap: 18px; }
+  .workspace { padding-top: 18px; }
+  .insights-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 18px; }
+}
+@media (max-width: 767px) {
+  #aplicacao { padding: 0 12px; }
+  .sidebar { margin: 0 -12px; }
+  .workspace { padding-top: 14px; }
+  .app-footer { margin: 0 -12px; }
+}
