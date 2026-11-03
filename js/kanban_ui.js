@@ -7,6 +7,19 @@ const rotuloPrioridade = { alta: "Alta", media: "Média", baixa: "Baixa" };
 const normalizar = (valor) => String(valor ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
 const el = (tag, classe, texto) => { const node = document.createElement(tag); if (classe) node.className = classe; if (texto !== undefined) node.textContent = texto; return node; };
 const dataHoje = () => { const d = new Date(); return [d.getFullYear(), String(d.getMonth()+1).padStart(2,"0"), String(d.getDate()).padStart(2,"0")].join("-"); };
+const dataLocalISO = (data) => [data.getFullYear(), String(data.getMonth()+1).padStart(2,"0"), String(data.getDate()).padStart(2,"0")].join("-");
+const rotuloData = (valor, dataSomente = false) => {
+  if (!valor) return "";
+  const data = new Date(dataSomente ? valor + "T12:00:00" : valor);
+  if (Number.isNaN(data.getTime())) return "";
+  const chave = dataLocalISO(data);
+  const hoje = dataHoje();
+  const diferenca = Math.round((Date.parse(chave + "T00:00:00Z") - Date.parse(hoje + "T00:00:00Z")) / 86400000);
+  if (diferenca === -1) return "Ontem";
+  if (diferenca === 0) return "Hoje";
+  if (diferenca === 1) return "Amanhã";
+  return new Intl.DateTimeFormat("pt-BR").format(data);
+};
 
 export function createKanbanUI({ getState, actions, notify, onStateRendered = () => {} }) {
   let termo = "";
@@ -31,7 +44,8 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
 
   function criarCartao(tarefa) {
     const item = el("li");
-    const card = el("article", "task-card" + (tarefa.estado === "concluida" ? " is-completed" : ""));
+    const vencida = tarefa.estado !== "concluida" && Boolean(tarefa.data_limite) && tarefa.data_limite < dataHoje();
+    const card = el("article", "task-card" + (tarefa.estado === "concluida" ? " is-completed" : "") + (vencida ? " is-overdue" : ""));
     card.dataset.taskId = tarefa.id;
     card.tabIndex = -1;
     const checkbox = el("input", "task-check");
@@ -43,8 +57,8 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     const meta = el("div", "task-meta" + (checkbox.checked ? " completed-meta" : ""));
     if (checkbox.checked) {
       meta.append(el("span", "completed-check", "✓"));
-      const data = tarefa.data_conclusao ? new Date(tarefa.data_conclusao) : null;
-      meta.append(document.createTextNode(data && !Number.isNaN(data.getTime()) ? "Concluída em " + new Intl.DateTimeFormat("pt-BR").format(data) : "Concluída"));
+      const data = tarefa.data_conclusao ? rotuloData(tarefa.data_conclusao) : "";
+      meta.append(document.createTextNode(data ? "Concluída em " + data : "Concluída"));
     } else {
       meta.append(el("span", "badge-prioridade priority-" + tarefa.prioridade, rotuloPrioridade[tarefa.prioridade] || tarefa.prioridade));
       if (tarefa.data_limite) {
@@ -52,8 +66,11 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("class", "ui-icon"); svg.setAttribute("aria-hidden", "true");
         const use = document.createElementNS("http://www.w3.org/2000/svg", "use"); use.setAttribute("href", "#icon-calendar"); svg.append(use);
-        const time = el("time", "", new Intl.DateTimeFormat("pt-BR").format(new Date(tarefa.data_limite + "T12:00:00")));
-        time.dateTime = tarefa.data_limite; prazo.append(svg, document.createTextNode(" "), time); meta.append(prazo);
+        const time = el("time", "", rotuloData(tarefa.data_limite, true));
+        time.dateTime = tarefa.data_limite;
+        prazo.append(svg, document.createTextNode(" "), time);
+        if (vencida) prazo.append(el("span", "overdue-label", "Vencida"));
+        meta.append(prazo);
       }
     }
     conteudo.append(meta); card.append(checkbox, conteudo);
