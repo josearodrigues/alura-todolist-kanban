@@ -450,3 +450,5 @@
   .selection-actions { display: grid; grid-template-columns: 1fr; }
   .selection-actions button { width: 100%; }
 }
+
+#quadro-kanban:focus { outline: 2px solid var(--primary); outline-offset: 4px; }
