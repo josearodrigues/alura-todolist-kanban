@@ -379,7 +379,9 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
   4. Teste de importação com campos desconhecidos no envelope ou nas tarefas, demonstrando rejeição integral e preservação dos dados existentes.
   5. Teste de cancelamento da importação comprovando ausência de alteração.
   6. Teste de falha de gravação durante a importação comprovando que o estado anterior é preservado e que os novos dados não são apresentados como salvos.
-  7. Regressão integrada verificando os requisitos funcionais (RF01–RF15) e não funcionais (RNF01–RNF07) conforme a matriz de rastreabilidade, sem substituir os testes específicos das fases anteriores.\n- **Implementação registrada:** modal de relatórios com filtro de conclusão; exportação JSON; importação estrita com rejeição de chaves duplicadas/constantes inválidas; modal de confirmação com contadores; timestamp global gerado no momento da confirmação; substituição pelo fluxo transacional existente.\n- **Estado de validação:** testes automatizados ampliados e workflows configurados; execução dos workflows e testes manuais CA6.1–CA6.7 ainda precisam ser comprovados. Não declarar a Fase 6 homologada antes dessas evidências.
+  7. Regressão integrada verificando os requisitos funcionais (RF01–RF15) e não funcionais (RNF01–RNF07) conforme a matriz de rastreabilidade, sem substituir os testes específicos das fases anteriores.
+- **Implementação registrada:** modal de relatórios com filtro de conclusão; exportação JSON; importação estrita com rejeição de chaves duplicadas/constantes inválidas; modal de confirmação com contadores; timestamp global gerado no momento da confirmação; substituição pelo fluxo transacional existente.
+- **Estado de validação:** testes automatizados ampliados e workflows configurados; execução dos workflows e testes manuais CA6.1–CA6.7 ainda precisam ser comprovados. Não declarar a Fase 6 homologada antes dessas evidências.
 
 #### Critérios de Aceite — Fase 6
 
