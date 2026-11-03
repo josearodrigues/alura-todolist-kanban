@@ -387,20 +387,22 @@ def test_servicos_rejeitam_enums_nao_string():
 def test_excluir_tarefas_multiplas_colunas_preserva_metadados_e_entrada():
     from todolist.services import excluir_tarefas
 
+    uuid_4 = "44444444-4444-4444-8444-444444444444"
     tarefas = [
         {"id": UUID_1, "titulo": "Tarefa 1", "descricao": "", "estado": "a_fazer", "prioridade": "media", "data_criacao": TS_1, "data_limite": None, "data_atualizacao": TS_1, "data_conclusao": None, "ordem": 0},
         {"id": UUID_2, "titulo": "Tarefa 2", "descricao": "", "estado": "a_fazer", "prioridade": "alta", "data_criacao": TS_1, "data_limite": None, "data_atualizacao": TS_2, "data_conclusao": None, "ordem": 1},
         {"id": UUID_3, "titulo": "Tarefa 3", "descricao": "", "estado": "concluida", "prioridade": "baixa", "data_criacao": TS_1, "data_limite": None, "data_atualizacao": TS_3, "data_conclusao": TS_3, "ordem": 0},
+        {"id": uuid_4, "titulo": "Tarefa 4", "descricao": "", "estado": "a_fazer", "prioridade": "baixa", "data_criacao": TS_1, "data_limite": None, "data_atualizacao": TS_3, "data_conclusao": None, "ordem": 2},
     ]
     original = [dict(tarefa) for tarefa in tarefas]
     novas, timestamp, excluidas = excluir_tarefas(tarefas, [UUID_1, UUID_3], timestamp_injetado=TS_2)
     assert tarefas == original
     assert timestamp == TS_2
     assert [t["id"] for t in excluidas] == [UUID_1, UUID_3]
-    assert [t["id"] for t in novas] == [UUID_2]
-    assert novas[0]["ordem"] == 0
-    assert novas[0]["data_atualizacao"] == TS_2
-    assert novas[0]["prioridade"] == "alta"
+    assert [t["id"] for t in novas] == [UUID_2, uuid_4]
+    assert [t["ordem"] for t in novas] == [0, 1]
+    assert [t["data_atualizacao"] for t in novas] == [TS_2, TS_3]
+    assert [t["prioridade"] for t in novas] == ["alta", "baixa"]
 
 
 @pytest.mark.parametrize("ids, mensagem", [
