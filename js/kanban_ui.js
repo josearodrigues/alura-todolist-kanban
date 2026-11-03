@@ -154,6 +154,10 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
   }
 
   function render(state = getState()) {
+    const idsAtuais = new Set(state.tarefas.map((tarefa) => tarefa.id));
+    for (const id of tarefasSelecionadas) {
+      if (!idsAtuais.has(id)) tarefasSelecionadas.delete(id);
+    }
     for (const [estado, listaId, contadorId, vazioId] of ESTADOS) {
       const lista = document.getElementById(listaId); if (!lista) continue;
       const tarefas = state.tarefas.filter(t => t.estado === estado).sort((a,b) => a.ordem-b.ordem);
@@ -191,7 +195,7 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     if (await executar(() => actions.deleteTasks({ tarefas_ids: ids }))) {
       dialogoExclusaoColetiva.close();
       limparSelecao();
-      notify(ids.length + " tarefa(s) excluída(s) com sucesso.");
+      notify(ids.length + " tarefa(s) excluída(s) com sucesso.", "success");
     }
   });
 
