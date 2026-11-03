@@ -113,3 +113,77 @@ dialog ul { padding-left: 20px; }
 .runtime-complete strong { display:block; margin-top:3px; color:#16a34a; font-weight:600; }
 .demo-disclaimer { margin:0 16px 8px; color:var(--muted); font-size:10px; }
 .runtime-card .last-updated { display:none; }
+
+
+/* Fidelidade ao mockup de referência — calendário e resumo */
+.connection-status { display:inline-flex; align-items:center; gap:8px; padding:10px 15px; border:1px solid #86d9aa; border-radius:24px; background:#e6f8ed; color:#166534; font-size:13px; font-weight:750; }
+.connection-status::after { content:""; width:8px; height:8px; border-radius:50%; background:#16a34a; }
+.connection-status .ui-icon { width:20px; height:20px; padding:3px; border-radius:50%; background:#16a34a; color:#fff; stroke-width:3; }
+.topbar-actions { margin-left:auto; gap:18px; }
+.theme-toggle { width:46px; height:46px; border:1px solid #d7def0; border-radius:50%; background:#fff; color:#263b5d; box-shadow:0 2px 7px rgb(23 37 84 / 10%); }
+.theme-toggle .ui-icon { width:24px; height:24px; }
+.column-heading > p { display:block; min-height:0; margin:7px 0 13px; color:#25395d; font-size:15px; line-height:1.35; }
+.column-symbol { width:38px; height:38px; }
+.todo-column .column-symbol { background:#3b82f6; }
+.progress-column .column-symbol { background:#f59e0b; }
+.done-column .column-symbol { background:#22a45a; }
+.column-symbol .ui-icon { width:22px; height:22px; }
+.column-count { min-width:36px; height:36px; border:3px solid #fff; background:rgb(255 255 255 / 70%); color:#172554; font-size:17px; box-shadow:0 1px 4px rgb(23 37 84 / 12%); }
+.calendar-card { min-height:0; }
+.calendar-card h2 { padding:15px 16px; border:0; background:#172b4d; color:#fff; font-size:15px; }
+.calendar-card h2 .ui-icon { color:#e2ecff; }
+.calendar-widget { padding:0 0 13px; }
+.calendar-month { display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:48px; margin:0; padding:0 14px; background:#172b4d; color:#fff; font-size:16px; font-weight:800; }
+.calendar-month > span { flex:1; text-align:center; }
+.month-arrow { display:grid; place-items:center; width:32px; height:32px; padding:0; border:0; background:transparent; color:#fff; font-size:29px; line-height:1; }
+.month-arrow:disabled { opacity:1; cursor:default; }
+.calendar-grid { gap:3px; padding:0 12px; }
+.calendar-weekdays { margin:13px 0 6px; color:#172b4d; font-size:13px; font-weight:800; }
+.calendar-days { row-gap:3px; }
+.calendar-day { min-height:34px; border-radius:50%; font-size:14px; }
+.calendar-day.has-task { background:transparent; color:#172b4d; }
+.calendar-day.has-task i { bottom:3px; width:4px; height:4px; background:#2563eb; }
+.calendar-day.selected-day { background:#3478ed; color:#fff; }
+.calendar-legend { margin:8px 14px 0; font-size:10px; }
+.summary-card { padding-bottom:15px; }
+.summary-card h2 { padding:15px 16px; border-bottom:1px solid #e2e8f0; background:#fff; color:#172554; }
+.summary-card h2 .ui-icon { color:#3478ed; }
+.summary-total { display:flex; align-items:center; justify-content:space-between; margin:0; padding:12px 16px 7px; background:transparent; color:#172554; font-size:15px; font-weight:500; }
+.summary-total strong { color:#172554; font-size:23px; font-weight:850; }
+.summary-metric { display:block; padding:7px 16px 0; }
+.summary-metric > div { display:flex; justify-content:space-between; align-items:center; margin:0 0 7px; color:#172554; font-size:14px; font-weight:500; }
+.summary-metric output { color:#172554; font-size:13px; font-weight:700; }
+.metric-name { gap:7px; }
+.metric-name b { font-weight:800; }
+.metric-dot { width:17px; height:17px; }
+.done-dot { background:#16a34a; }
+.pending-dot { background:#3478ed; }
+.summary-progress { display:block; width:100%; height:11px; margin:0 0 7px; border:0; border-radius:20px; background:#e6eaf5; }
+.summary-progress::-webkit-progress-bar { border-radius:20px; background:#e6eaf5; }
+.completed-progress::-webkit-progress-value { border-radius:20px; background:#22b45b; }
+.pending-progress::-webkit-progress-value { border-radius:20px; background:#3478ed; }
+.completed-progress::-moz-progress-bar { border-radius:20px; background:#22b45b; }
+.pending-progress::-moz-progress-bar { border-radius:20px; background:#3478ed; }
+.summary-bar { display:none; }
+.runtime-card { border-color:#cbd8f2; background:#fff; }
+.runtime-card h2 { padding:13px 16px 7px; color:#172554; }
+.runtime-card .runtime-complete { margin:8px 16px; font-size:14px; }
+.runtime-check { width:14px; height:14px; background:#22a45a; font-size:11px; }
+.runtime-complete strong { display:inline; margin:0 0 0 12px; color:#16a34a; }
+.demo-disclaimer { display:none; }
+.runtime-card .last-updated { display:block; margin:8px 16px 12px; font-size:12px; }
+.footer-credit { display:flex; align-items:center; gap:6px; font-size:15px; font-weight:650; color:#172554; }
+.footer-credit > span { color:#f59e0b; font-size:25px; }
+.footer-credit b { color:#64748b; padding:0; }
+.footer-credit strong { color:#ef4444; font-size:21px; }
+.footer-updated { display:flex; align-items:center; gap:16px; color:#172554; font-size:14px; font-weight:600; }
+.footer-updated i { display:block; height:22px; border-left:1px solid #64748b; }
+.footer-updated span:last-child { font-size:20px; color:#2563eb; }
+:root[data-theme="dark"] .connection-status { border-color:#276749; background:#143b2b; color:#bbf7d0; }
+:root[data-theme="dark"] .theme-toggle { border-color:#64748b; background:#29364d; color:#fef3c7; }
+:root[data-theme="dark"] .calendar-card h2, :root[data-theme="dark"] .calendar-month { background:#0b1220; color:#e5edf8; }
+:root[data-theme="dark"] .calendar-weekdays, :root[data-theme="dark"] .calendar-day { color:#e5edf8; }
+:root[data-theme="dark"] .calendar-day.has-task { color:#bfdbfe; }
+:root[data-theme="dark"] .summary-card h2, :root[data-theme="dark"] .summary-total, :root[data-theme="dark"] .summary-metric > div, :root[data-theme="dark"] .summary-metric output { background:var(--surface); color:#e5edf8; }
+:root[data-theme="dark"] .runtime-card, :root[data-theme="dark"] .runtime-card h2 { background:var(--surface); color:#e5edf8; }
+:root[data-theme="dark"] .footer-credit, :root[data-theme="dark"] .footer-updated { color:#e5edf8; }
