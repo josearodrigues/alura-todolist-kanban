@@ -245,8 +245,8 @@
 
       <section class="insight-card runtime-card" aria-labelledby="titulo-status-runtime">
         <h2 id="titulo-status-runtime"><span class="runtime-dot" aria-hidden="true"></span> Status da Aplicação</h2>
-        <p id="status-runtime" class="status-line" role="status" aria-live="polite"><span>Pyodide (Python)</span><span class="loaded" id="pyodide-status">✓ Carregado</span></p>
-        <p class="status-line small"><span>Última atualização: <time id="ultima-alteracao" datetime="2025-11-06T14:30">06/11/2025 • 14:30</time></span><span class="info" role="img" aria-label="Informações sobre a última atualização">i</span></p>
+        <p id="status-runtime" class="status-line" role="status" aria-live="polite"><span>Pyodide (Python)</span><span id="pyodide-status">Inicializando...</span></p>
+        <p class="status-line small"><span>Última atualização: <time id="ultima-alteracao">Sem alterações</time></span><span class="info" role="img" aria-label="Informações sobre a última atualização">i</span></p>
       </section>
     </aside>
 
@@ -260,7 +260,7 @@
       <div class="footer-meta">
         <span>Versão 1.0.0</span>
         <i aria-hidden="true"></i>
-        <time datetime="2025-11-06T14:30">Última atualização: 06/11/2025 • 14:30</time>
+        <time>Sem alterações</time>
         <span class="footer-refresh" aria-hidden="true">⟳</span>
       </div>
     </footer>
@@ -397,215 +397,6 @@
     <button type="button" data-dialog-close>Fechar</button>
   </dialog>
 
-  <script>
-    (() => {
-      const search = document.getElementById("busca-tarefas");
-      const themeButton = document.getElementById("alternar-tema");
-      const themeStorageKey = "kanban-theme";
-      const sidebar = document.getElementById("sidebar");
-      const mobileNavButton = document.getElementById("mobile-nav-toggle");
-      const mobileNavBackdrop = document.getElementById("mobile-nav-backdrop");
-      const mobileNavMedia = window.matchMedia("(max-width: 960px)");
-
-      const setMobileNav = (open, restoreFocus = false) => {
-        if (!mobileNavMedia.matches) {
-          sidebar.classList.remove("is-open");
-          sidebar.inert = false;
-          sidebar.setAttribute("aria-hidden", "false");
-          mobileNavBackdrop.hidden = true;
-          mobileNavButton.setAttribute("aria-expanded", "false");
-          mobileNavButton.setAttribute("aria-label", "Abrir navegação");
-          return;
-        }
-
-        sidebar.classList.toggle("is-open", open);
-        sidebar.inert = !open;
-        sidebar.setAttribute("aria-hidden", String(!open));
-        mobileNavBackdrop.hidden = !open;
-        mobileNavButton.setAttribute("aria-expanded", String(open));
-        mobileNavButton.setAttribute("aria-label", open ? "Fechar navegação" : "Abrir navegação");
-
-        if (open) {
-          sidebar.querySelector("[data-view]")?.focus();
-        } else if (restoreFocus) {
-          mobileNavButton.focus();
-        }
-      };
-
-      setMobileNav(false);
-      mobileNavMedia.addEventListener("change", () => setMobileNav(false));
-
-      const applyTheme = (theme, persist = false) => {
-        const isDark = theme === "dark";
-        document.documentElement.dataset.theme = isDark ? "dark" : "light";
-        themeButton.setAttribute("aria-pressed", String(isDark));
-        
-        themeButton.setAttribute(
-          "aria-label",
-          isDark ? "Ativar tema claro" : "Ativar tema escuro"
-        );
-        if (persist) {
-          try {
-            localStorage.setItem(themeStorageKey, theme);
-          } catch {
-            // A preferência continua ativa nesta sessão se o armazenamento estiver indisponível.
-          }
-        }
-      };
-
-      let savedTheme = null;
-      try {
-        savedTheme = localStorage.getItem(themeStorageKey);
-      } catch {
-        // A preferência do sistema será usada como alternativa.
-      }
-      const preferredTheme = savedTheme === "light" || savedTheme === "dark"
-        ? savedTheme
-        : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      applyTheme(preferredTheme);
-
-      themeButton.addEventListener("click", () => {
-        const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-        applyTheme(nextTheme, true);
-      });
-
-      mobileNavButton.addEventListener("click", () => {
-        setMobileNav(mobileNavButton.getAttribute("aria-expanded") !== "true");
-      });
-      mobileNavBackdrop.addEventListener("click", () => setMobileNav(false, true));
-
-      document.addEventListener("click", (event) => {
-        const viewButton = event.target.closest("[data-view]");
-        if (viewButton) {
-          const view = viewButton.dataset.view;
-          document.querySelectorAll("[data-view-panel]").forEach((element) => { element.hidden = view !== "quadro"; });
-          document.querySelectorAll("[data-page-view]").forEach((element) => { element.hidden = element.dataset.pageView !== view; });
-          document.querySelector("[data-board-insights]").hidden = view !== "quadro";
-          document.querySelectorAll("[data-view]").forEach((button) => {
-            if (button.dataset.view === view) button.setAttribute("aria-current", "page");
-            else button.removeAttribute("aria-current");
-          });
-          document.querySelector(".workspace").scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-          if (mobileNavMedia.matches && mobileNavButton.getAttribute("aria-expanded") === "true") {
-            setMobileNav(false, true);
-          }
-          return;
-        }
-
-        const openButton = event.target.closest("[data-dialog-open]");
-        if (openButton) {
-          const dialog = document.getElementById(openButton.dataset.dialogOpen);
-          if (dialog instanceof HTMLDialogElement && !dialog.open) {
-            dialog.showModal();
-          }
-          return;
-        }
-
-        const closeButton = event.target.closest("[data-dialog-close]");
-        if (closeButton) {
-          const dialog = closeButton.closest("dialog");
-          if (dialog instanceof HTMLDialogElement && dialog.open) {
-            dialog.close();
-          }
-        }
-      });
-
-      document.addEventListener("keydown", (event) => {
-        const openDialog = [...document.querySelectorAll("dialog[open]")].at(-1);
-
-        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-          event.preventDefault();
-          if (!openDialog) {
-            search.focus();
-          }
-          return;
-        }
-
-        if (event.key === "Tab" && mobileNavMedia.matches && mobileNavButton.getAttribute("aria-expanded") === "true") {
-          const focusable = [...sidebar.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')]
-            .filter((element) => element.getClientRects().length > 0 && !element.closest("[inert]"));
-          const first = focusable[0];
-          const last = focusable[focusable.length - 1];
-
-          if (first && last && event.shiftKey && (document.activeElement === first || !sidebar.contains(document.activeElement))) {
-            event.preventDefault();
-            last.focus();
-          } else if (first && last && !event.shiftKey && (document.activeElement === last || !sidebar.contains(document.activeElement))) {
-            event.preventDefault();
-            first.focus();
-          }
-          return;
-        }
-
-        if (event.key === "Tab" && openDialog) {
-          const focusableElements = [
-            ...openDialog.querySelectorAll(
-              'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [contenteditable="true"], summary, [tabindex]:not([tabindex="-1"])'
-            )
-          ].filter((element) =>
-            element.getClientRects().length > 0 &&
-            getComputedStyle(element).visibility !== "hidden" &&
-            !element.closest("[inert]")
-          );
-
-          const firstElement = focusableElements[0];
-          const lastElement = focusableElements[focusableElements.length - 1];
-
-          if (!firstElement) {
-            event.preventDefault();
-            openDialog.focus();
-            return;
-          }
-
-          if (
-            event.shiftKey &&
-            (document.activeElement === firstElement || !openDialog.contains(document.activeElement))
-          ) {
-            event.preventDefault();
-            lastElement.focus();
-          } else if (
-            !event.shiftKey &&
-            (document.activeElement === lastElement || !openDialog.contains(document.activeElement))
-          ) {
-            event.preventDefault();
-            firstElement.focus();
-          }
-          return;
-        }
-
-        if (event.key !== "Escape") {
-          return;
-        }
-
-        if (openDialog) {
-          event.preventDefault();
-          openDialog.close();
-          return;
-        }
-
-        if (mobileNavMedia.matches && mobileNavButton.getAttribute("aria-expanded") === "true") {
-          event.preventDefault();
-          setMobileNav(false, true);
-          return;
-        }
-
-        const activeMenu = document.activeElement.closest?.("details[open]");
-        const openMenu = activeMenu || [...document.querySelectorAll("details[open]")].at(-1);
-        if (openMenu) {
-          event.preventDefault();
-          const summary = openMenu.querySelector(":scope > summary");
-          openMenu.open = false;
-          summary?.focus();
-          return;
-        }
-
-        if (document.activeElement === search && search.value !== "") {
-          event.preventDefault();
-          search.value = "";
-          search.dispatchEvent(new Event("input", { bubbles: true }));
-        }
-      });
-    })();
-  </script>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>

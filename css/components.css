@@ -99,3 +99,28 @@ dialog input:focus-visible, dialog textarea:focus-visible, dialog select:focus-v
   #dialog-nova-tarefa .new-task-actions { align-items: stretch; flex-direction: column-reverse; }
   #dialog-nova-tarefa .new-task-actions button { width: 100%; }
 }
+
+
+/* Notificação de falha transacional da Fase 4. */
+.app-notice {
+  position: fixed;
+  z-index: 2000;
+  inset: auto 1rem 1rem 1rem;
+  max-width: 42rem;
+  margin-inline: auto;
+  padding: 0.875rem 1rem;
+  border: 1px solid #b91c1c;
+  border-radius: 0.75rem;
+  background: #7f1d1d;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 24%);
+  font-weight: 600;
+}
+
+.app-notice[hidden] {
+  display: none;
+}
+
+#pyodide-status.runtime-error {
+  color: #b91c1c;
+}
