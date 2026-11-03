@@ -46,7 +46,7 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
       }
     }
     conteudo.append(meta); card.append(checkbox, conteudo);
-    if (!checkbox.checked) {
+    {
       const menu = el("details", "task-menu");
       const summary = el("summary", "task-more", "Opções da tarefa");
       summary.setAttribute("aria-label", "Opções de " + tarefa.titulo); menu.append(summary);
@@ -153,6 +153,8 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     if (acao.dataset.taskAction === "delete") abrirExclusao(card.dataset.taskId);
     if (acao.dataset.taskAction === "move") {
       const destino = ESTADOS.find(item => item[0] === acao.dataset.moveTo);
+      const tarefaAtual = getState().tarefas.find(t => t.id === card.dataset.taskId);
+      if (!destino || tarefaAtual?.estado === destino[0]) return;
       const lista = document.getElementById(destino[1]);
       const ordem = lista.querySelectorAll(".task-card").length;
       await executar(() => actions.moveTask({ tarefa_id: card.dataset.taskId, novo_estado: destino[0], nova_ordem: ordem }));
