@@ -56,7 +56,7 @@
 - `tests/test_schema.py`: novos testes de preparação e validação estrita da importação.
 - `.github/workflows/validar-html.yml`: inclui a branch da Fase 6 e a sintaxe dos novos módulos JavaScript. `.github/workflows/testes-python.yml`: executa `pytest && python scripts/verify_coverage.py` em Python 3.14.
 - **Testes automatizados:** execução local informada pelo usuário: 60 testes aprovados; cobertura de linhas de 96,10% (meta mínima de 90%) e cobertura de branches de 92,72% (meta mínima de 85%). O script de verificação de cobertura concluiu com sucesso.
-- **Homologação manual:** CA6.1–CA6.6 aprovados, incluindo a preservação das 30 tarefas após rejeição de valor JSON malformado (CA6.6). CA6.7 (cancelamento da importação) executado e aprovado funcionalmente; permanece apenas um ajuste de usabilidade para substituir a mensagem técnica por uma mensagem clara ao usuário. Detalhes na Seção 12.
+- **Homologação manual:** CA6.1–CA6.7 aprovados, incluindo a preservação das 30 tarefas nos cenários de rejeição e o cancelamento sem alteração dos dados. Permanece um ajuste de usabilidade na rejeição de JSON inválido: substituir o traceback técnico por mensagem clara ao usuário, mantendo detalhes no console. Detalhes na Seção 12.
 - **Pendências:** a partir de CA6.8, todos os critérios permanecem pendentes: falha de persistência/rollback, regressão integrada e conferência dos workflows, conforme a sequência atualizada no plano.
 
 ## 3. Estado da Governança Documental
@@ -85,7 +85,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | ↳ *Fase 3: CSS e Validação Visual* | **Implementada; inspeção visual manual concluída** | Refinamentos visuais e mocks estáticos mantidos. Navegação lateral recolhível em telas de até 960 px, com fechamento por `Esc`, clique no fundo e seleção de seção, restauração e contenção de foco; ícone `⋮` ajustado visualmente, sem ativar o menu contextual. Usuário aprovou Desktop, Tablet (1024 × 768) e Mobile (390 × 844), nos temas Claro e Escuro. Teste manual de `prefers-reduced-motion` também aprovado. Workflow `41553398236`: 25 combinações de contraste aprovadas, zero reprovações e Nu HTML Checker sem erros/avisos. CA3.1–CA3.5 considerados atendidos conforme as evidências registradas; não implica validação funcional das telas demonstrativas. |
 | ↳ *Fase 4: WebAssembly e Persistência* | **Implementada; validação funcional concluída, CA4.1 parcialmente verificado** | Pyodide 314.0.7 e importação dos cinco módulos confirmados. Criação, edição, movimentação e exclusão executadas pela API JS/Python; persistência, timestamp e recuperação após recarga confirmados nas quatro operações. Falhas simuladas nas quatro operações preservaram memória e armazenamento; notificação visual observada na criação. CA4.2–CA4.6 atendidos conforme as evidências registradas. No GitHub Pages, o usuário confirmou o carregamento e observou, no filtro Fetch/XHR durante a carga, uma requisição ao CDN jsDelivr para `pyodide-lock.json` (HTTP 200), sem chamadas a APIs de backend nessa amostra. Como a auditoria ficou restrita ao filtro e ao período observado, CA4.1 permanece parcialmente verificado, não homologado integralmente. |
 | ↳ *Fase 5: Interações (Pointer Events)* | **Implementada; validação manual parcial** | CA5.2 a CA5.7 aprovados nos cenários exercitados, exceto CA5.1, que permanece parcial por falta de teste de toque. Mouse e alternativa acessível pelo menu foram aprovados. CA5.5 aprovado no cenário exercitado. Após observação de usabilidade com 10 tarefas no mesmo dia, foi implementada rolagem vertical interna no popover; validação visual com listas extensas e em viewport móvel ainda pendente. Correção do menu contextual, datas relativas, destaque de vencidas e remoção da mensagem transitória de carregamento foram implementados e validados pelo usuário. A implementação da Fase 5 está concluída; aceite integral aguarda teste de toque em CA5.1. |
-| ↳ *Fase 6: Relatórios e Backup JSON* | **Implementada; homologação parcial** | CA6.1–CA6.6 aprovados; CA6.7 (cancelamento) executado e aprovado funcionalmente, com ajuste de mensagem amigável pendente; CA6.8 em diante pendentes. Testes automatizados locais: 60 aprovados, cobertura de linhas 96,10% e branches 92,72%. Consulte a Seção 12. |
+| ↳ *Fase 6: Relatórios e Backup JSON* | **Implementada; homologação parcial** | CA6.1–CA6.7 aprovados; ajuste de usabilidade na mensagem de rejeição de JSON inválido implementado, aguardando validação; CA6.8–CA6.10 pendentes. Testes automatizados locais informados: 60 aprovados, cobertura de linhas 96,10% e branches 92,72%. Consulte a Seção 12. |
 | ↳ *Fase 7: Seleção e Exclusão Coletiva* | **Planejada e aprovada; implementação não iniciada** | Seleção múltipla de tarefas em quaisquer colunas e exclusão coletiva com confirmação. Checkbox será controle de seleção, independente do tick de conclusão. Inclui contagem, limpeza da seleção, persistência preventiva, rollback e testes. Não contempla movimentação ou outras operações coletivas. |
 | **Etapa 6 — Validação Final** | **Não iniciada** | Homologação integrada e testes de aceitação. |
 
@@ -129,7 +129,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 8. Próxima Ação Recomendada
 
-1. Implementar a mensagem amigável pendente no cancelamento da importação (CA6.7), sem alterar o comportamento funcional aprovado.
+1. Validar no navegador a mensagem amigável para rejeição de JSON inválido, confirmando que os dados atuais permanecem preservados.
 2. Executar CA6.8: simular falha de persistência de forma controlada e comprovar preservação integral do estado anterior.
 3. Executar CA6.9: regressão integrada RF01–RF15 e RNF01–RNF07.
 4. Conferir e registrar os workflows GitHub (CA6.10).
@@ -222,12 +222,12 @@ Os resultados abaixo foram informados pelo usuário durante a execução dos tes
 | CA6.4 — Schema incompatível | Arquivo com `versao_schema: "9.9"` foi rejeitado; a validação informou que a versão esperada é `"1.0"`. O usuário confirmou que as 30 tarefas permaneceram intactas. | **Aprovado pelo usuário** |
 | CA6.5 — Chave JSON malformada | Chave com aspas incorretas foi rejeitada pelo parser (`JSONDecodeError: Expecting ':' delimiter`, linha 21, coluna 17). O usuário confirmou que as 30 tarefas permaneceram intactas. | **Aprovado pelo usuário** |
 | CA6.6 — Valor JSON malformado | Valor contendo caractere de controle inválido foi rejeitado pelo parser (`JSONDecodeError: Invalid control character`, linha 22, coluna 85); o usuário confirmou que as 30 tarefas permaneceram intactas após a rejeição. | **Aprovado pelo usuário** |
-| CA6.7 — Cancelamento da importação | Cenário de cancelamento executado; o comportamento funcional foi aprovado. A mensagem apresentada ao usuário ainda é técnica e precisa ser substituída por uma comunicação clara e amigável. | **Executado; ajuste de usabilidade pendente** |
+| CA6.7 — Cancelamento da importação | Cenário de cancelamento executado; os dados existentes permaneceram inalterados. Critério funcional aprovado. | **Aprovado pelo usuário** |
 
 ### Observação de usabilidade
 
-- **Erros de importação:** nos cenários de rejeição, a interface exibiu traceback completo do Pyodide/Python. O tratamento deve apresentar mensagem objetiva ao usuário, mantendo detalhes técnicos apenas para diagnóstico.
-- **Cancelamento (CA6.7):** substituir a mensagem técnica atual por uma mensagem simples que informe que a importação foi cancelada e que os dados existentes foram mantidos. Não alterar o comportamento funcional já aprovado.
+- **Rejeição de JSON inválido (usabilidade):** nos cenários de rejeição, a interface exibia traceback completo do Pyodide/Python. A mensagem apresentada ao usuário deve ser objetiva e amigável; detalhes técnicos permanecem disponíveis no console para diagnóstico. O tratamento foi implementado em `js/backup_ui.js`; validação manual no navegador pendente.
+- **Cancelamento (CA6.7):** comportamento funcional aprovado; não há ajuste pendente neste critério.
 
 ### Limites e pendências
 
