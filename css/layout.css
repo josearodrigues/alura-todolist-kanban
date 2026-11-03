@@ -180,3 +180,19 @@
   .footer-meta { gap: 8px; }
   .footer-meta > i { display: none; }
 }
+
+
+/* Larguras desktop alinhadas à composição do mockup de referência. */
+@media (min-width: 1281px) {
+  #aplicacao {
+    grid-template-columns: 235px minmax(0, 1fr) 314px;
+  }
+
+  .workspace {
+    padding-right: 26px;
+  }
+
+  .insights-panel {
+    padding-right: 18px;
+  }
+}
