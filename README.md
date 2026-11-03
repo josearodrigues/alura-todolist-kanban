@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual (03/11/2026):** Fase 1 concluída e validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspecionada; Fase 4 implementada e validada funcionalmente pela API JS/Python, com CA4.1 parcialmente verificado. A Fase 5 está implementada na branch `fase-5-interacoes` e possui validação manual parcial: operações, movimentação com mouse, busca, calendário, métricas, metadados, datas relativas e tema foram verificados nos cenários exercitados. Toque/caneta ainda não testados; a Fase 5 não está concluída. A Fase 6 não foi iniciada.
+> **Estado atual (03/11/2026):** Fase 1 concluída e validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspecionada; Fase 4 implementada e validada funcionalmente pela API JS/Python, com CA4.1 parcialmente verificado. A implementação da Fase 5 está concluída na branch `fase-5-interacoes`; a validação manual dos critérios está quase completa. CA5.2 a CA5.7 aprovados nos cenários exercitados; CA5.1 aguarda teste de drag and drop por toque. Mouse e alternativa pelo menu foram aprovados. Caneta não testada. A Fase 6 não foi iniciada.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
@@ -21,7 +21,7 @@ Este projeto é independente, não é um produto oficial da Alura ou do Google e
 - **Validação automatizada:** testes Python com pytest e workflow do GitHub Actions para o Nu HTML Checker.
 - **Documentação de engenharia:** requisitos, decisões arquiteturais, plano de implementação, estado atual e histórico de alterações.
 
-A Fase 5 já foi exercitada manualmente nos cenários descritos em `docs/ESTADO-ATUAL.md`; permanecem pendentes o teste por toque/caneta e a remoção da mensagem transitória de carregamento. Relatórios detalhados e importação/exportação permanecem reservados à Fase 6.
+A Fase 5 já foi exercitada manualmente nos cenários descritos em `docs/ESTADO-ATUAL.md`; permanece pendente o teste por toque exigido em CA5.1. A mensagem transitória de carregamento foi removida e validada. Relatórios detalhados e importação/exportação permanecem reservados à Fase 6.
 
 ---
 
@@ -226,7 +226,7 @@ A inspeção visual completa da Fase 3 será realizada separadamente, após a co
 
 - A Fase 5 ainda não recebeu aceite integral: movimentação por toque/caneta não foi testada; o popover com grande volume de tarefas também não foi exercitado.
 - Foi observada falha de inicialização em navegador móvel antigo. A causa não foi comprovada; a limitação será mantida registrada de forma genérica, sem identificar aparelho ou versão. A investigação de compatibilidade não integra a próxima ação imediata.
-- A mensagem transitória “Carregando tarefas...” foi removida para evitar deslocamento vertical do Kanban; a validação manual após recarga ainda está pendente. O indicador de status do Pyodide foi preservado.
+- A mensagem transitória “Carregando tarefas...” foi removida para evitar deslocamento vertical do Kanban; o usuário confirmou após recarga o funcionamento do quadro e do indicador de status do Pyodide.
 - Relatórios detalhados e importação/exportação permanecem reservados à Fase 6.
 
 ---
@@ -237,7 +237,7 @@ A inspeção visual completa da Fase 3 será realizada separadamente, após a co
 - **Fase 2:** implementada; validação automática de HTML aprovada; checklist manual pendente.
 - **Fase 3:** implementada; inspeção visual aprovada conforme registro.
 - **Fase 4:** implementada e validada funcionalmente; CA4.1 parcialmente verificado.
-- **Fase 5:** implementação registrada na branch `fase-5-interacoes`; validação manual parcial. CA5.2, CA5.3, CA5.4, CA5.6 e CA5.7 aprovados nos cenários exercitados; CA5.1 parcial (toque/caneta não testados). Pendente: validação manual da remoção da mensagem transitória de carregamento e confirmação do indicador de status do Pyodide.
+- **Fase 5:** implementação registrada na branch `fase-5-interacoes`; validação manual parcial. CA5.2, CA5.3, CA5.4, CA5.6 e CA5.7 aprovados nos cenários exercitados; CA5.1 parcial (toque/caneta não testados). Pendente: teste de drag and drop por toque previsto em CA5.1.
 - **Fase 6:** não iniciada.
 - **Validação final:** pendente.
 - **Publicação no GitHub Pages:** ainda não realizada.
