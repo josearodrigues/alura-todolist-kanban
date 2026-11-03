@@ -8,8 +8,8 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fases 1 a 4 conforme evidências registradas; implementação da Fase 5 concluída na branch `fase-5-interacoes`, com aceite manual parcial pendente do teste de toque previsto em CA5.1; Fase 6 pendente]
-- **Etapa 6 — Validação final e homologação:** [Pendente]
+- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Fases 1 a 6 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; Fase 6 aguarda execução dos workflows e homologação manual CA6.1–CA6.7]
+- **Etapa 6 — Validação final e homologação:** [Pendente — regressão integrada RF01–RF15 e RNF01–RNF07]
 
 ---
 
