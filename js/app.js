@@ -2,13 +2,19 @@ import {
   executeDomainOperation,
   initializePythonRuntime,
   validateState,
+  calculateMetrics,
 } from "./pyodide_bridge.js";
+import { createKanbanUI } from "./kanban_ui.js";
+import { initializeDragDrop } from "./drag_drop.js";
+import { initializeCalendar } from "./calendar_ui.js";
 import { createStorage } from "./storage.js";
 
 const STORAGE = createStorage();
 let estadoAtual = { tarefas: [], timestamp_ultima_alteracao: null };
 let runtimeDisponivel = false;
 let persistenciaDisponivel = false;
+let kanbanUI = null;
+let calendarioUI = null;
 
 function copiarEstado(estado) {
   return {
@@ -96,69 +102,8 @@ function atualizarTimestampInterface(timestamp) {
   });
 }
 
-function criarCartao(tarefa) {
-  const modelo = document.getElementById("modelo-cartao-tarefa");
-  const fragmento = modelo.content.cloneNode(true);
-  const item = fragmento.querySelector("li");
-  const artigo = fragmento.querySelector("article");
-  const prioridade = fragmento.querySelector("[data-task-priority]");
-  const prazo = fragmento.querySelector("[data-task-due-date]");
-
-  artigo.dataset.taskId = tarefa.id;
-  fragmento.querySelector("[data-task-title]").textContent = tarefa.titulo;
-  fragmento.querySelector("[data-task-description]").textContent = tarefa.descricao;
-  prioridade.textContent = { alta: "Alta", media: "Média", baixa: "Baixa" }[tarefa.prioridade];
-  prioridade.classList.add(`priority-${tarefa.prioridade}`);
-
-  if (tarefa.data_limite) {
-    const data = new Date(`${tarefa.data_limite}T12:00:00`);
-    prazo.textContent = new Intl.DateTimeFormat("pt-BR").format(data);
-    prazo.dateTime = tarefa.data_limite;
-  } else {
-    prazo.parentElement.hidden = true;
-  }
-
-  const checkbox = fragmento.querySelector(".task-check");
-  checkbox.checked = tarefa.estado === "concluida";
-  checkbox.disabled = true;
-
-  // A ativação dos comandos do cartão pertence à Fase 5.
-  fragmento.querySelectorAll("button").forEach((controle) => {
-    controle.disabled = true;
-  });
-  fragmento.querySelectorAll("summary").forEach((controle) => {
-    controle.setAttribute("aria-disabled", "true");
-  });
-
-  return item;
-}
-
 function renderizarQuadro(estado) {
-  const colunas = [
-    ["a_fazer", "lista-a-fazer", "contador-a-fazer", "vazio-a-fazer"],
-    ["em_andamento", "lista-em-andamento", "contador-em-andamento", "vazio-em-andamento"],
-    ["concluida", "lista-concluidas", "contador-concluidas", "vazio-concluidas"],
-  ];
-
-  colunas.forEach(([estadoTarefa, listaId, contadorId, vazioId]) => {
-    const lista = document.getElementById(listaId);
-    const contador = document.getElementById(contadorId);
-    if (!lista || !contador) return;
-
-    const tarefas = estado.tarefas
-      .filter((tarefa) => tarefa.estado === estadoTarefa)
-      .sort((a, b) => a.ordem - b.ordem);
-
-    lista.replaceChildren(...tarefas.map(criarCartao));
-    contador.value = String(tarefas.length);
-    contador.textContent = String(tarefas.length);
-
-    const vazio = document.getElementById(vazioId);
-    if (vazio) vazio.hidden = tarefas.length > 0;
-  });
-
-  const total = document.getElementById("total-tarefas");
-  if (total) total.textContent = String(estado.tarefas.length);
+  if (kanbanUI) kanbanUI.render(estado);
 }
 
 async function validarEGravarEstado(candidato) {
@@ -245,6 +190,7 @@ function publicarApiAplicacao() {
         return { success: false, error: erro };
       }
     },
+    getMetrics: (dataLocal) => calculateMetrics(estadoAtual, dataLocal),
     validateState,
   });
 }
@@ -279,6 +225,21 @@ async function inicializarAplicacao() {
     }
 
     publicarApiAplicacao();
+    kanbanUI = createKanbanUI({
+      getState: () => estadoAtual,
+      actions: window.kanbanApp,
+      notify: (mensagem) => notificarUsuario(mensagem),
+      onStateRendered: () => calendarioUI?.render(),
+    });
+    kanbanUI.render(estadoAtual);
+    calendarioUI = initializeCalendar({
+      getTasks: () => estadoAtual.tarefas,
+      onFocusTask: (id) => kanbanUI.focusTask(id),
+    });
+    initializeDragDrop({
+      onMove: (dados) => window.kanbanApp.moveTask(dados),
+      notify: (mensagem) => notificarUsuario(mensagem),
+    });
     console.info("Aplicação inicializada. API disponível em window.kanbanApp.");
   } catch (erroRuntime) {
     atualizarStatusRuntime("error", erroRuntime.message);
