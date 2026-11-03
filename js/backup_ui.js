@@ -88,9 +88,10 @@ export function initializeBackupUI({ actions, notify }) {
 
       if (!confirmationDialog.open) confirmationDialog.showModal();
     } catch (erro) {
-      importStatus.textContent = "Arquivo rejeitado: " + erro.message;
+      console.error("Falha na validação do backup JSON:", erro);
+      importStatus.textContent = "Não foi possível validar este arquivo. Verifique se ele é um backup JSON válido do To-Do List Kanban.";
       importStatus.dataset.state = "error";
-      notify("A importação foi rejeitada. Os dados atuais foram preservados. " + erro.message, "error");
+      notify("Não foi possível importar este arquivo. Verifique se ele é um backup JSON válido do To-Do List Kanban. Seus dados atuais foram preservados.", "error");
     } finally {
       validateButton.disabled = !(fileInput.files && fileInput.files.length);
     }
