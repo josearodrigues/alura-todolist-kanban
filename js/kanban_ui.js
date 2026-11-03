@@ -52,9 +52,7 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     const card = el("article", "task-card" + (tarefa.estado === "concluida" ? " is-completed" : "") + (vencida ? " is-overdue" : ""));
     card.dataset.taskId = tarefa.id;
     card.tabIndex = -1;
-    const checkbox = el("input", "task-check");
-    checkbox.type = "checkbox"; checkbox.checked = tarefa.estado === "concluida"; checkbox.disabled = true;
-    checkbox.setAttribute("aria-label", checkbox.checked ? "Tarefa concluída" : "Tarefa não concluída");
+    const concluida = tarefa.estado === "concluida";
     const selecao = el("input", "task-select");
     selecao.type = "checkbox";
     selecao.checked = tarefasSelecionadas.has(tarefa.id);
@@ -63,8 +61,8 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     const conteudo = el("div", "task-content");
     conteudo.append(el("h3", "", tarefa.titulo));
     if (tarefa.descricao) conteudo.append(el("p", "", tarefa.descricao));
-    const meta = el("div", "task-meta" + (checkbox.checked ? " completed-meta" : ""));
-    if (checkbox.checked) {
+    const meta = el("div", "task-meta" + (concluida ? " completed-meta" : ""));
+    if (concluida) {
       meta.append(el("span", "completed-check", "✓"));
       const data = tarefa.data_conclusao ? rotuloData(tarefa.data_conclusao) : "";
       meta.append(document.createTextNode(data ? "Concluída em " + data : "Concluída"));
@@ -89,7 +87,7 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
         meta.append(alerta);
       }
     }
-    conteudo.append(meta); card.append(selecao, checkbox, conteudo);
+    conteudo.append(meta); card.append(selecao, conteudo);
     {
       const menu = el("details", "task-menu");
       const summary = el("summary", "task-more", "Opções da tarefa");
