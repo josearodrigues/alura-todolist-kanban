@@ -23,7 +23,6 @@
     <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></symbol>
     <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M5 21V10M12 21V3M19 21v-8"/></symbol>
     <symbol id="icon-transfer" viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.5-9.97A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/></symbol>
-    <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></symbol>
     <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"/></symbol>
     <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></symbol>
     <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
@@ -48,7 +47,6 @@
           <li><button type="button" data-view="calendario"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg><span>Calendário</span></button></li>
           <li><button type="button" data-view="relatorios"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-chart"></use></svg><span>Relatórios</span></button></li>
           <li><button type="button" data-view="backup"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-transfer"></use></svg><span>Importar/Exportar</span></button></li>
-          <li><button type="button" data-view="configuracoes"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-settings"></use></svg><span>Configurações</span></button></li>
         </ul>
       </nav>
 
@@ -211,10 +209,6 @@
           <article class="page-card backup-card"><span class="backup-icon import">↓</span><h2>Importar tarefas</h2><p>Restaure tarefas a partir de um arquivo JSON previamente exportado.</p><label class="file-mock">Selecionar arquivo <input type="file" accept=".json,application/json" disabled></label><button type="button" disabled>Validar e importar</button><small>Validação e confirmação serão implementadas na Fase 6</small></article>
         </div>
       </section>
-      <section class="page-view" data-page-view="configuracoes" hidden aria-labelledby="pagina-configuracoes-titulo">
-        <header class="page-heading"><div><p class="eyebrow">PREFERÊNCIAS</p><h1 id="pagina-configuracoes-titulo">Configurações</h1><p>Preferências de aparência e comportamento da aplicação.</p></div></header>
-        <article class="page-card settings-card"><h2>Aparência</h2><div class="setting-row"><div><strong>Tema da aplicação</strong><p>Alterne entre os temas claro e escuro.</p></div><span>Use o botão de lua/sol no cabeçalho</span></div><div class="setting-row"><div><strong>Movimento reduzido</strong><p>Respeita a preferência de acessibilidade do sistema.</p></div><span>Configurado pelo sistema</span></div><p class="mock-disclaimer">Tela demonstrativa · opções adicionais serão definidas em etapa posterior.</p></article>
-      </section>
     </main>
 
     <aside class="insights-panel" data-board-insights aria-label="Painel de informações">
@@ -244,8 +238,8 @@
 
       <section class="insight-card runtime-card" aria-labelledby="titulo-status-runtime">
         <h2 id="titulo-status-runtime"><span class="runtime-dot" aria-hidden="true"></span> Status da Aplicação</h2>
-        <p id="status-runtime" class="runtime-complete" role="status" aria-live="polite"><span>Prévia da interface</span><strong>Demonstrativa</strong></p>
-        <p class="demo-disclaimer">Indicador visual demonstrativo</p>
+        <p id="status-runtime" class="runtime-complete" role="status" aria-live="polite"><span>Pyodide (Python)</span><strong>Previsto na Fase 4</strong></p>
+        <p class="demo-disclaimer">Status demonstrativo · integração ainda não iniciada</p>
         <p class="last-updated">Última atualização (exemplo): <time id="ultima-alteracao" datetime="2026-11-02T16:30:00">02/11/2026 às 16:30</time></p>
       </section>
     </aside>
