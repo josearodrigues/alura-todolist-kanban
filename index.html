@@ -90,7 +90,7 @@
 
       <section id="quadro-kanban" class="board" aria-labelledby="titulo-quadro">
         <header class="board-heading">
-          <div><h2 id="titulo-quadro">Meu quadro</h2><p>Visualize e organize suas tarefas</p></div>
+          <div><h2 id="titulo-quadro">Meu quadro</h2><p>Visualize e organize suas tarefas</p><span class="demo-note">Exemplos visuais · não são salvos</span></div>
         </header>
         <div id="colunas-kanban">
           <section class="kanban-column todo-column" aria-labelledby="titulo-a-fazer">
@@ -105,7 +105,7 @@
     <h3 data-task-title>Revisar requisitos do Kanban</h3><p data-task-description>Conferir os critérios de aceitação da interface.</p>
     <div class="task-meta"><span class="badge-prioridade priority-alta">Alta</span><span class="task-due"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> <time datetime="2026-11-05">05/11/2026</time></span></div>
   </div>
-  <span class="task-more" aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></span>
+  <button type="button" class="task-more" disabled aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></button>
 </article></li><li><article class="task-card">
   <input class="task-check" type="checkbox"  disabled aria-label="Tarefa não concluída">
   <div class="task-content">
@@ -178,7 +178,7 @@
     <aside class="insights-panel" aria-label="Painel de informações">
       <section id="calendario" class="insight-card calendar-card" aria-labelledby="titulo-calendario">
         <h2 id="titulo-calendario"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> Calendário de Tarefas</h2>
-        <div class="calendar-widget" aria-label="Calendário demonstrativo de novembro de 2026">
+        <div class="calendar-widget" role="group" aria-label="Calendário demonstrativo de novembro de 2026">
           <div class="calendar-month"><span>Novembro 2026</span><span class="calendar-month-note">7 tarefas</span></div>
           <div class="calendar-grid calendar-weekdays" aria-hidden="true"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div>
           <div class="calendar-grid calendar-days">
