@@ -129,8 +129,6 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
       const tarefas = state.tarefas.filter(t => t.estado === estado).sort((a,b) => a.ordem-b.ordem);
       lista.replaceChildren(...tarefas.map(criarCartao));
       document.getElementById("colunas-kanban")?.setAttribute("aria-busy", "false");
-      const carregamento = document.getElementById("kanban-loading");
-      if (carregamento) carregamento.hidden = true;
       const contador = document.getElementById(contadorId); if (contador) contador.textContent = String(tarefas.length);
       const vazio = document.getElementById(vazioId); if (vazio) vazio.hidden = tarefas.length > 0;
     }
