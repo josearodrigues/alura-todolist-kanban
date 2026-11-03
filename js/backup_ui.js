@@ -15,11 +15,12 @@ export function initializeBackupUI({ actions, notify }) {
   const newCount = document.getElementById("quantidade-nova-importacao");
   const confirmationStatus = document.getElementById("confirmacao-importacao-status");
   const confirmButton = document.getElementById("confirmar-substituicao-importacao");
+  const cancelConfirmationButton = confirmationDialog?.querySelector("[data-dialog-close]");
 
   if (
     !exportButton || !fileInput || !selectedFile || !validateButton || !importStatus ||
     !importDialog || !exportDialog || !confirmationDialog || !currentCount ||
-    !newCount || !confirmationStatus || !confirmButton
+    !newCount || !confirmationStatus || !confirmButton || !cancelConfirmationButton
   ) {
     throw new Error("A estrutura de importação/exportação está incompleta.");
   }
@@ -103,6 +104,7 @@ export function initializeBackupUI({ actions, notify }) {
     }
 
     confirmButton.disabled = true;
+    cancelConfirmationButton.disabled = true;
     confirmationStatus.textContent = "Gravando e atualizando o quadro...";
     confirmationStatus.dataset.state = "loading";
 
@@ -129,8 +131,13 @@ export function initializeBackupUI({ actions, notify }) {
       notify("Não foi possível importar o backup. " + erro.message, "error");
     } finally {
       confirmButton.disabled = false;
+      cancelConfirmationButton.disabled = false;
     }
   }
+
+  confirmationDialog.addEventListener("cancel", (event) => {
+    if (confirmButton.disabled) event.preventDefault();
+  });
 
   exportButton.addEventListener("click", () => void exportarBackup());
   validateButton.addEventListener("click", () => void validarArquivo());
