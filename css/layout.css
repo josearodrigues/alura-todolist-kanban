@@ -121,7 +121,7 @@
   .setting-row > span { text-align: left; }
 }
 
-.sidebar-mascot { margin-top: 18px; }
+.sidebar .sidebar-mascot { margin-top: 18px; }
 .sidebar-meta {
   margin-top: auto;
   padding-top: 14px;
