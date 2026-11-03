@@ -118,6 +118,7 @@
       </section>
 
       <section id="quadro-kanban" class="board" data-view-panel="quadro" aria-label="Quadro Kanban de tarefas" tabindex="-1">
+        <h2 class="visually-hidden">Tarefas por estado</h2>
         <section id="barra-selecao" class="selection-toolbar" aria-label="Ações para tarefas selecionadas" aria-live="polite" hidden>
           <p><strong id="quantidade-selecionada">0</strong> tarefa(s) selecionada(s)</p>
           <div class="selection-actions">
@@ -207,7 +208,7 @@
       <section class="insight-card runtime-card" aria-labelledby="titulo-status-runtime">
         <h2 id="titulo-status-runtime"><span class="runtime-dot" aria-hidden="true"></span> Status da Aplicação</h2>
         <p id="status-runtime" class="status-line" role="status" aria-live="polite"><span>Pyodide (Python)</span><span id="pyodide-status">Inicializando...</span></p>
-        <p class="status-line small"><span>Última atualização: <time id="ultima-alteracao">Sem alterações</time></span><span class="info" role="img" aria-label="Informações sobre a última atualização">i</span></p>
+        <p class="status-line small"><span>Última atualização: <span id="ultima-alteracao">Sem alterações</span></span><span class="info" role="img" aria-label="Informações sobre a última atualização">i</span></p>
       </section>
     </aside>
 
@@ -258,6 +259,7 @@
         <p class="new-task-field">
           <label for="nova-tarefa-prioridade">Prioridade:</label>
           <select id="nova-tarefa-prioridade" name="prioridade" required>
+            <option value="">Selecione a prioridade</option>
             <option value="alta">🔥 Alta</option>
             <option value="media" selected>🟢 Média</option>
             <option value="baixa">🔵 Baixa</option>
@@ -294,6 +296,7 @@
         <p class="new-task-field">
           <label for="editar-tarefa-prioridade">Prioridade:</label>
           <select id="editar-tarefa-prioridade" name="prioridade" required>
+            <option value="">Selecione a prioridade</option>
             <option value="alta">🔥 Alta</option>
             <option value="media">🟢 Média</option>
             <option value="baixa">🔵 Baixa</option>
@@ -349,16 +352,16 @@
       <p id="relatorios-status" class="report-status" role="status" aria-live="polite">Aguardando cálculo dos indicadores...</p>
     </section>
     <div class="report-grid report-modal-grid">
-      <article class="page-card report-total"><span>Total de tarefas</span><strong data-report-value="total">0</strong><small>Todos os estados</small></article>
-      <article class="page-card"><span>Concluídas</span><strong class="report-green" data-report-value="concluida">0</strong><small>Estado atual</small></article>
-      <article class="page-card"><span>A Fazer</span><strong data-report-value="a_fazer">0</strong><small>Por estado</small></article>
-      <article class="page-card"><span>Em Andamento</span><strong data-report-value="em_andamento">0</strong><small>Por estado</small></article>
+      <div class="page-card report-total"><span>Total de tarefas</span><strong data-report-value="total">0</strong><small>Todos os estados</small></div>
+      <div class="page-card"><span>Concluídas</span><strong class="report-green" data-report-value="concluida">0</strong><small>Estado atual</small></div>
+      <div class="page-card"><span>A Fazer</span><strong data-report-value="a_fazer">0</strong><small>Por estado</small></div>
+      <div class="page-card"><span>Em Andamento</span><strong data-report-value="em_andamento">0</strong><small>Por estado</small></div>
     </div>
     <div class="report-modal-columns">
       <article class="page-card report-breakdown"><h3>Distribuição por prioridade</h3><dl><dt>Baixa</dt><dd data-report-value="baixa">0</dd><dt>Média</dt><dd data-report-value="media">0</dd><dt>Alta</dt><dd data-report-value="alta">0</dd></dl></article>
       <article class="page-card report-breakdown"><h3>Prazos</h3><dl><dt>Atrasadas</dt><dd data-report-value="atrasadas">0</dd><dt>Vencem hoje</dt><dd data-report-value="vencem_hoje">0</dd><dt>Próximos 7 dias</dt><dd data-report-value="proximos_7_dias">0</dd></dl></article>
     </div>
-    <article class="page-card report-completions"><span>Tarefas concluídas no período</span><strong data-report-value="concluidas_no_periodo">0</strong><small>Apuradas exclusivamente por data_conclusao.</small></article>
+    <div class="page-card report-completions"><span>Tarefas concluídas no período</span><strong data-report-value="concluidas_no_periodo">0</strong><small>Apuradas exclusivamente por data_conclusao.</small></div>
   </dialog>
 
   <dialog id="dialog-importar" aria-labelledby="titulo-importar" aria-describedby="descricao-importar">
