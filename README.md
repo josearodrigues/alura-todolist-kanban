@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual (03/11/2026):** Fase 1 concluída e validada. Fase 2 implementada, com validação automática de HTML aprovada; checklist manual pendente. A interface da Fase 3 foi reorganizada para se aproximar do mockup oficial; workflow `41550545873` aprovado; inspeção visual nos três breakpoints e nos dois temas ainda pendente. Fases 4 a 6 não iniciadas. A aplicação ainda não está publicada para uso final no GitHub Pages.
+> **Estado atual (03/11/2026):** Fase 1 concluída e validada. Fase 2 implementada, com validação automática de HTML aprovada; checklist manual pendente. A interface da Fase 3 foi reorganizada para se aproximar do mockup oficial; workflow `41550901785` aprovado (25 combinações de contraste, zero reprovações; HTML sem erros/avisos); inspeção visual nos três breakpoints e nos dois temas ainda pendente. Fases 4 a 6 não iniciadas. A aplicação ainda não está publicada para uso final no GitHub Pages.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
