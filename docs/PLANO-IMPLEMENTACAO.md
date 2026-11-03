@@ -8,7 +8,7 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Fases 1 a 6 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; CA6.1–CA6.8 aprovados; Fase 7 planejada e aprovada, implementação não iniciada]
+- **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Fases 1 a 6 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; CA6.1–CA6.8 aprovados; Fase 7 com implementação inicial gravada; validação automatizada e manual pendentes]
 - **Etapa 6 — Validação final e homologação:** [Pendente — após os testes específicos da Fase 7, executar regressão integrada RF01–RF16 e RNF01–RNF07, validar workflows GitHub e realizar validação de segurança]
 
 ---
@@ -405,6 +405,7 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 ### Fase 7 — Seleção e Exclusão Coletiva de Tarefas
 
 - **Objetivo:** permitir a seleção de múltiplas tarefas em todo o quadro Kanban e sua exclusão em uma única operação, com confirmação explícita, persistência preventiva e integridade dos dados.
+- **Implementação registrada na branch `fase-7-selecao-exclusao-coletiva`:** serviço Python `excluir_tarefas()`, exportação pública, integração Pyodide/API `deleteTasks`, controles de seleção nos cartões, barra contextual, diálogo de confirmação e estilos responsivos. Testes unitários adicionados; ainda não executados nesta sessão.
 - **Modelo de interface aprovado:**
   - Exibir um cabeçalho contextual quando o modo de seleção estiver ativo.
   - Disponibilizar nesse cabeçalho: selecionar todas as tarefas, desselecionar todas, exibir a quantidade selecionada e excluir as tarefas selecionadas.
