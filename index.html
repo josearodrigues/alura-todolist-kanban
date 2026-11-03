@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <meta name="description" content="Quadro Kanban para organização de tarefas pessoais e de projeto.">
   <title>To-Do List Kanban</title>
   <link rel="stylesheet" href="css/variables.css">
@@ -92,9 +95,6 @@
       </section>
 
       <section id="quadro-kanban" class="board" data-view-panel="quadro" aria-labelledby="titulo-quadro">
-        <header class="board-heading">
-          <div><h2 id="titulo-quadro">Meu quadro</h2><p>Visualize e organize suas tarefas</p><span class="demo-note">Exemplos visuais · não são salvos</span></div>
-        </header>
         <div id="colunas-kanban">
           <section class="kanban-column todo-column" aria-labelledby="titulo-a-fazer">
             <header class="column-heading">
@@ -237,7 +237,7 @@
 
       <section class="insight-card runtime-card" aria-labelledby="titulo-status-runtime">
         <h2 id="titulo-status-runtime"><span class="runtime-dot" aria-hidden="true"></span> Status da Aplicação</h2>
-        <p id="status-runtime" class="runtime-complete" role="status" aria-live="polite"><span>Python (Pyodide)</span><strong><svg class="ui-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Concluído</strong></p>
+        <p id="status-runtime" class="runtime-complete" role="status" aria-live="polite"><span>Prévia da interface</span><strong>Demonstrativa</strong></p>
         <p class="demo-disclaimer">Indicador visual demonstrativo</p>
         <p class="last-updated">Última atualização (exemplo): <time id="ultima-alteracao" datetime="2026-11-02T16:30:00">02/11/2026 às 16:30</time></p>
       </section>
@@ -245,7 +245,7 @@
 
     <footer class="app-footer">
       <p class="footer-credit"><span aria-hidden="true">ϟ</span> Desenvolvido com Python <b>•</b> Pyodide <b>•</b> <strong>♥</strong> Alura + Google for Startups</p>
-      <p class="footer-updated"><span>Versão 1.0.0</span><i aria-hidden="true"></i><span>Última atualização: 06/11/2025 • 14:30</span><span aria-hidden="true">↻</span></p>
+      <p class="footer-updated"><span>Desafio 3 · Fase 3</span><i aria-hidden="true"></i><span>Interface demonstrativa</span></p>
     </footer>
   </div>
 
@@ -428,7 +428,7 @@
             if (button.dataset.view === view) button.setAttribute("aria-current", "page");
             else button.removeAttribute("aria-current");
           });
-          document.querySelector(".workspace").scrollTo({ top: 0, behavior: "smooth" });
+          document.querySelector(".workspace").scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
           return;
         }
 
