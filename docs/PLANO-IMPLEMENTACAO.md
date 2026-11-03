@@ -8,8 +8,8 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Fases 1 a 6 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; Fase 6 aguarda CA6.9–CA6.10; Fase 7 planejada e aprovada, implementação não iniciada]
-- **Etapa 6 — Validação final e homologação:** [Pendente — regressão integrada RF01–RF16 e RNF01–RNF07 após a implementação e homologação das fases previstas]
+- **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Fases 1 a 6 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; CA6.1–CA6.8 aprovados; Fase 7 planejada e aprovada, implementação não iniciada]
+- **Etapa 6 — Validação final e homologação:** [Pendente — após os testes específicos da Fase 7, executar regressão integrada RF01–RF16 e RNF01–RNF07, validar workflows GitHub e realizar validação de segurança]
 
 ---
 
@@ -395,8 +395,8 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 | CA6.6 | JSON com valor malformado é rejeitado integralmente e o estado anterior permanece intacto. | Teste manual com valor inválido; confirmação da preservação dos dados. |
 | CA6.7 | Cancelamento da importação não altera os dados existentes. | Teste manual documentado; aprovado pelo usuário. |
 | CA6.8 | Falha de gravação durante a importação preserva o estado anterior em memória, na interface e no armazenamento (RNF04). | **Aprovado pelo usuário:** falha `QuotaExceededError` simulada; mensagem de não conclusão; comparações de memória e `localStorage` retornaram `true`; quadro visual permaneceu inalterado. Método original de `Storage.prototype.setItem` restaurado ao final. |
-| CA6.9 | Regressão integrada de RF01–RF15 e RNF01–RNF07 executada e aprovada conforme a matriz de rastreabilidade. | Registro dos resultados da regressão por requisito. |
-| CA6.10 | Workflows GitHub associados à branch da Fase 6 executados e aprovados. | Evidência das execuções no GitHub Actions. |
+| CA6.9 | Transferido para o encerramento do projeto após os testes específicos da Fase 7; não bloqueia a conclusão da Fase 6. | Será executado como CA7.10, com reaproveitamento de evidências anteriores válidas e testes direcionados aos impactos e lacunas. |
+| CA6.10 | Transferido para o encerramento do projeto após os testes específicos da Fase 7; não bloqueia a conclusão da Fase 6. | Será executado como CA7.11, com evidências do GitHub Actions no estado final. |
 
 **Qualidade automatizada:** o procedimento local `pytest && python scripts/verify_coverage.py` foi informado com 60 testes aprovados, 96,10% de cobertura de linhas e 92,72% de branches. Esses números são registrados como evidência automatizada já obtida, sem substituir CA6.8–CA6.10.
 
@@ -432,6 +432,9 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 | CA7.7 | Manter a ordenação contígua nas colunas afetadas e preservar os metadados das tarefas restantes, exceto `ordem`. | Inspeção do estado persistido antes e depois da exclusão coletiva. |
 | CA7.8 | Testes automatizados aprovados e metas do RNF03 mantidas. | Saída de `pytest && python scripts/verify_coverage.py`. |
 | CA7.9 | Operação acessível por teclado, com foco e feedback adequados, e interface responsiva. | Checklist manual de teclado/acessibilidade e inspeção nos breakpoints Desktop, Tablet e Mobile. |
+| CA7.10 | Após os testes específicos da Fase 7, executar regressão integrada RF01–RF16 e RNF01–RNF07, considerando evidências anteriores válidas e concentrando novos testes nos impactos, integrações e lacunas. | Matriz de rastreabilidade atualizada, resultados por requisito, evidências reutilizadas identificadas e retestes registrados. |
+| CA7.11 | Executar e validar os workflows GitHub no estado final do projeto. | Evidências no GitHub Actions com workflow, branch, commit e resultado de cada execução. |
+| CA7.12 | Realizar validação de segurança com escopo e método definidos, registrar achados, severidade, correções e retestes. | Relatório delimitado ao escopo efetivamente avaliado; não caracterizar como pentest ou auditoria abrangente sem cobertura correspondente. |
 
 ## 5. Matriz de Rastreabilidade de Requisitos
 
@@ -495,7 +498,8 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **2.6** | 2026-11-03 | Registro da validação manual parcial da Fase 5: operações e contadores, busca/atalhos, calendário/popover, resumo, tema e metadados de reordenação/no-op; explicitação das verificações ainda pendentes em CA5.1, CA5.3 e CA5.6. | Preservar evidências confirmadas, evitar repetição de testes e manter o estado real dos critérios de aceite. |
 | **2.7** | 2026-11-03 | Atualização das evidências da Fase 5: conclusão/reabertura e metadados (CA5.3), Foco de Hoje e divisão por zero (CA5.6), correção do menu contextual, datas relativas e destaque de vencidas; registro das pendências de toque/caneta e compatibilidade móvel; implementação de rolagem interna no popover após avaliação de usabilidade; remoção da mensagem de carregamento implementada e validada. | Manter o plano alinhado aos testes efetivamente confirmados e às pendências reais. |
 | **2.8** | 2026-11-03 | Inclusão da Fase 7 — Seleção e Exclusão Coletiva, com escopo restrito à exclusão em lote, requisito RF16, critérios CA7.1–CA7.9, confirmação explícita, persistência preventiva e preservação da seleção em caso de falha. | Incorporar a melhoria de experiência do usuário aprovada, mantendo a homologação da Fase 6 como atividade independente. |
-| **3.2** | 2026-11-03 | Validação manual de CA6.8: falha simulada na gravação durante a importação preservou memória, `localStorage` e interface; método original restaurado. | Registrar a evidência do rollback e liberar a sequência para CA6.9. |
+| **3.3** | 2026-11-03 | Replanejamento do encerramento: CA6.9 e CA6.10 transferidos para a conclusão do projeto como CA7.10 e CA7.11; inclusão da validação de segurança CA7.12 após os testes específicos da Fase 7. Regressão final deverá reutilizar evidências válidas e priorizar impactos e lacunas. | Evitar regressão prematura antes da última fase funcional e assegurar validação integrada, CI e segurança sobre o estado final. |
+| **3.2** | 2026-11-03 | Validação manual de CA6.8: falha simulada na gravação durante a importação preservou memória, `localStorage` e interface; método original restaurado. | Registrar a evidência do rollback e liberar a sequência para a Fase 7. |
 | **3.1** | 2026-11-03 | Validação manual pelo usuário da mensagem amigável na rejeição de JSON inválido: schema diferente de 1.0, chave inválida e valor inválido; importação válida também aprovada. | Registrar a conclusão do ajuste de usabilidade e liberar a sequência para CA6.8. |
 | **3.0** | 2026-11-03 | Correção da rastreabilidade da Fase 6: CA6.7 registrado como aprovado; ajuste de usabilidade separado para mensagens de rejeição de JSON inválido, com detalhes técnicos restritos ao console. | Refletir corretamente a pendência de interface sem reabrir o critério de cancelamento. |
 | **2.9** | 2026-11-03 | Reorganização dos critérios de homologação da Fase 6 para refletir os cenários executados: CA6.4–CA6.6 para rejeição de arquivos inválidos, CA6.7 para cancelamento, CA6.8 para falha de persistência, CA6.9 para regressão integrada e CA6.10 para workflows. | Corrigir a rastreabilidade entre os testes efetivamente executados, os critérios de aceite e as pendências restantes.
