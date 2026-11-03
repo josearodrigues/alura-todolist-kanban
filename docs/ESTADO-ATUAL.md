@@ -57,7 +57,9 @@
 - `.github/workflows/validar-html.yml`: inclui a branch da Fase 6 e a sintaxe dos novos módulos JavaScript. `.github/workflows/testes-python.yml`: executa `pytest && python scripts/verify_coverage.py` em Python 3.14.
 - **Testes automatizados:** execução local informada pelo usuário: 60 testes aprovados; cobertura de linhas de 96,10% (meta mínima de 90%) e cobertura de branches de 92,72% (meta mínima de 85%). O script de verificação de cobertura concluiu com sucesso.
 - **Homologação manual:** CA6.1–CA6.6 aprovados, incluindo a preservação das 30 tarefas após rejeição de valor JSON malformado (CA6.6). CA6.7 (cancelamento da importação) executado e aprovado funcionalmente; permanece apenas um ajuste de usabilidade para substituir a mensagem técnica por uma mensagem clara ao usuário. Detalhes na Seção 12.
-- **Pendências:** a partir de CA6.8, todos os critérios permanecem pendentes: falha de persistência/rollback, regressão integrada e conferência dos workflows, conforme a sequência atualizada no plano.\n\n## 3. Estado da Governança Documental
+- **Pendências:** a partir de CA6.8, todos os critérios permanecem pendentes: falha de persistência/rollback, regressão integrada e conferência dos workflows, conforme a sequência atualizada no plano.
+
+## 3. Estado da Governança Documental
 
 A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
 - **`docs/REQUISITOS.md`:** Atualizado (Versão 1.8 — inclusão do RF16 para seleção e exclusão coletiva).
