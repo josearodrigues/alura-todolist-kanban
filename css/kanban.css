@@ -125,3 +125,20 @@
   .welcome-wave { font-size: 38px; }
   .focus-card { margin-left: auto; }
 }
+
+/* Botão de opções presente no HTML dos cartões. */
+.task-more {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+}
+.task-more .ui-icon { width: 18px; height: 18px; }
+.task-more:hover:not(:disabled) { background: var(--surface-soft); }
+.task-more:focus-visible { outline-offset: 1px; }
