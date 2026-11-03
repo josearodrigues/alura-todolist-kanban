@@ -282,7 +282,7 @@
         const isDark = theme === "dark";
         document.documentElement.dataset.theme = isDark ? "dark" : "light";
         themeButton.setAttribute("aria-pressed", String(isDark));
-        themeButton.textContent = isDark ? "Ativar tema claro" : "Ativar tema escuro";
+        themeButton.textContent = isDark ? "☀" : "☾";
         themeButton.setAttribute(
           "aria-label",
           isDark ? "Ativar tema claro" : "Ativar tema escuro"
