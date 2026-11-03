@@ -187,3 +187,9 @@ dialog ul { padding-left: 20px; }
 :root[data-theme="dark"] .summary-card h2, :root[data-theme="dark"] .summary-total, :root[data-theme="dark"] .summary-metric > div, :root[data-theme="dark"] .summary-metric output { background:var(--surface); color:#e5edf8; }
 :root[data-theme="dark"] .runtime-card, :root[data-theme="dark"] .runtime-card h2 { background:var(--surface); color:#e5edf8; }
 :root[data-theme="dark"] .footer-credit, :root[data-theme="dark"] .footer-updated { color:#e5edf8; }
+
+.runtime-card h2 .runtime-dot { width:14px; height:14px; background:#22b45b; box-shadow:none; }
+.runtime-card .runtime-complete { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:8px 16px; font-size:14px; }
+.runtime-complete strong { display:inline-flex; align-items:center; gap:5px; margin:0; color:#16a34a; font-weight:750; white-space:nowrap; }
+.runtime-complete strong .ui-icon { width:18px; height:18px; stroke-width:3; }
+.calendar-legend { display:none; }
