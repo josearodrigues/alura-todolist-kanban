@@ -25,7 +25,7 @@
     <symbol id="icon-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3ZM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/></symbol>
     <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
     <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
-    <symbol id="icon-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+    <symbol id="icon-more" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="19" r="1.7"/></symbol>
     <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
   </svg>
 
@@ -58,6 +58,7 @@
         <div class="robot-body">▰</div>
       </div>
       <p class="sidebar-quote">“Grandes conquistas começam com boas ideias!” 🚀</p>
+      <span class="profile-avatar sidebar-avatar" aria-hidden="true"><span class="avatar-hair"></span><span class="avatar-face"></span><span class="avatar-body"></span></span>
     </aside>
 
     <main id="conteudo-principal" class="workspace" tabindex="-1">
@@ -69,14 +70,14 @@
           <p id="ajuda-busca" class="visually-hidden">Atalho: Ctrl + K para ir à busca. Esc limpa a busca ou fecha o componente aberto.</p>
         </div>
         <div class="topbar-actions">
-          <span class="connection-status"><span aria-hidden="true">●</span> Prévia da interface</span>
+          <span class="connection-status"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Aplicação online</span>
           <button type="button" id="alternar-tema" class="theme-toggle" aria-pressed="false" aria-label="Ativar tema escuro"><svg class="ui-icon icon-moon" aria-hidden="true"><use href="#icon-moon"></use></svg><svg class="ui-icon icon-sun" aria-hidden="true"><use href="#icon-sun"></use></svg></button>
-          <span class="profile-avatar" aria-hidden="true"><span class="avatar-hair"></span><span class="avatar-face"></span><span class="avatar-body"></span></span>
+          
         </div>
       </header>
 
       <section class="welcome-banner" aria-labelledby="saudacao">
-        <span class="welcome-wave" aria-hidden="true">👋</span>
+        
         <div class="welcome-copy">
           <h1 id="saudacao">Olá!</h1>
           <p>Organize suas tarefas de forma simples e visual.</p>
@@ -95,8 +96,7 @@
         <div id="colunas-kanban">
           <section class="kanban-column todo-column" aria-labelledby="titulo-a-fazer">
             <header class="column-heading">
-              <div class="column-title"><span class="column-symbol" aria-hidden="true">○</span><h3 id="titulo-a-fazer">A Fazer</h3><output id="contador-a-fazer" class="column-count">3</output></div>
-              <p>Tarefas que ainda precisam ser feitas</p>
+              <div class="column-title"><span class="column-symbol" aria-hidden="true">▤</span><h3 id="titulo-a-fazer">A Fazer</h3><output id="contador-a-fazer" class="column-count">3</output></div>
               <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
             <ul id="lista-a-fazer" aria-label="Tarefas a fazer" aria-live="polite"><li><article class="task-card">
@@ -126,8 +126,7 @@
 
           <section class="kanban-column progress-column" aria-labelledby="titulo-em-andamento">
             <header class="column-heading">
-              <div class="column-title"><span class="column-symbol" aria-hidden="true">↗</span><h3 id="titulo-em-andamento">Em Andamento</h3><output id="contador-em-andamento" class="column-count">2</output></div>
-              <p>Tarefas em execução</p>
+              <div class="column-title"><span class="column-symbol" aria-hidden="true">▶</span><h3 id="titulo-em-andamento">Em Andamento</h3><output id="contador-em-andamento" class="column-count">2</output></div>
               <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
             <ul id="lista-em-andamento" aria-label="Tarefas em andamento" aria-live="polite"><li><article class="task-card">
@@ -151,21 +150,20 @@
           <section class="kanban-column done-column" aria-labelledby="titulo-concluidas">
             <header class="column-heading">
               <div class="column-title"><span class="column-symbol" aria-hidden="true"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg></span><h3 id="titulo-concluidas">Concluídas</h3><output id="contador-concluidas" class="column-count">2</output></div>
-              <p>Tarefas finalizadas</p>
               <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
             <ul id="lista-concluidas" aria-label="Tarefas concluídas" aria-live="polite"><li><article class="task-card is-completed">
   <input class="task-check" type="checkbox" checked disabled aria-label="Tarefa concluída">
   <div class="task-content">
     <h3 data-task-title>Estruturar domínio Python</h3><p data-task-description>Modelos, serviços e regras de negócio.</p>
-    <div class="task-meta"><span class="badge-prioridade priority-alta">Alta</span><span class="task-due"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> <time datetime="2026-11-02">02/11/2026</time></span></div>
+    <div class="task-meta completed-meta"><span class="completed-check" aria-hidden="true">✓</span> Concluída em 02/11/2026</div>
   </div>
   <button type="button" class="task-more" disabled aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></button>
 </article></li><li><article class="task-card is-completed">
   <input class="task-check" type="checkbox" checked disabled aria-label="Tarefa concluída">
   <div class="task-content">
     <h3 data-task-title>Documentar regras de negócio</h3><p data-task-description>Consolidar estados e invariantes das tarefas.</p>
-    <div class="task-meta"><span class="badge-prioridade priority-baixa">Baixa</span><span class="task-due"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> <time datetime="2026-11-01">01/11/2026</time></span></div>
+    <div class="task-meta completed-meta"><span class="completed-check" aria-hidden="true">✓</span> Concluída em 02/11/2026</div>
   </div>
   <button type="button" class="task-more" disabled aria-label="Opções indisponíveis na prévia"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-more"></use></svg></button>
 </article></li></ul>
@@ -177,9 +175,9 @@
 
     <aside class="insights-panel" aria-label="Painel de informações">
       <section id="calendario" class="insight-card calendar-card" aria-labelledby="titulo-calendario">
-        <h2 id="titulo-calendario"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> Calendário de Tarefas</h2>
+        <h2 id="titulo-calendario"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg> Calendário <span class="calendar-nav" aria-hidden="true">‹　›</span></h2>
         <div class="calendar-widget" role="group" aria-label="Calendário demonstrativo de novembro de 2026">
-          <div class="calendar-month"><span>Novembro 2026</span><span class="calendar-month-note">7 tarefas</span></div>
+          <div class="calendar-month"><span>Novembro de 2026</span></div>
           <div class="calendar-grid calendar-weekdays" aria-hidden="true"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div>
           <div class="calendar-grid calendar-days">
             <span class="calendar-day muted-day">1</span><span class="calendar-day has-task">2<i></i></span><span class="calendar-day selected-day">3</span><span class="calendar-day has-task">4<i></i></span><span class="calendar-day has-task">5<i></i></span><span class="calendar-day has-task">6<i></i></span><span class="calendar-day has-task">7<i></i></span>
@@ -195,26 +193,23 @@
       <section id="resumo-projeto" class="insight-card summary-card" aria-labelledby="titulo-resumo">
         <h2 id="titulo-resumo"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-chart"></use></svg> Resumo do Projeto</h2>
         <div class="summary-total"><span>Total de Tarefas</span><strong><output id="total-tarefas">7</output></strong></div>
-        <div class="summary-metric">
-          <div><span class="metric-name"><i class="metric-dot done-dot"></i>Concluídas</span><output id="percentual-concluidas">28,6%</output></div>
-          <progress id="progresso-concluidas" max="100" value="28.6" aria-label="Percentual de tarefas concluídas">0%</progress>
-        </div>
-        <div class="summary-metric">
-          <div><span class="metric-name"><i class="metric-dot pending-dot"></i>Pendentes</span><output id="percentual-pendentes">71,4%</output></div>
-          <progress id="progresso-pendentes" max="100" value="71.4" aria-label="Percentual de tarefas pendentes">0%</progress>
-        </div>
+        <div class="summary-metric"><div><span class="metric-name"><i class="metric-dot pending-dot"></i><b>3</b> A Fazer</span><output>42,9%</output></div></div>
+        <div class="summary-metric"><div><span class="metric-name"><i class="metric-dot progress-dot"></i><b>2</b> Em Andamento</span><output>28,6%</output></div></div>
+        <div class="summary-metric"><div><span class="metric-name"><i class="metric-dot done-dot"></i><b>2</b> Concluídas</span><output>28,6%</output></div></div>
+        <div class="summary-bar" role="img" aria-label="42,9 por cento a fazer, 28,6 por cento em andamento e 28,6 por cento concluídas"><span></span><span></span><span></span></div>
       </section>
 
       <section class="insight-card runtime-card" aria-labelledby="titulo-status-runtime">
-        <h2 id="titulo-status-runtime"><span class="runtime-dot demo-dot" aria-hidden="true"></span>Status da Aplicação</h2>
-        <p id="status-runtime" role="status" aria-live="polite">Prévia visual · dados demonstrativos</p>
-        <p class="last-updated">Última atualização (exemplo): <time id="ultima-alteracao" datetime="2026-11-03T14:30:00">03/11/2026 às 14:30</time></p>
+        <h2 id="titulo-status-runtime"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Status da Aplicação</h2>
+        <p id="status-runtime" class="runtime-complete" role="status" aria-live="polite"><span class="runtime-check" aria-hidden="true">✓</span><span>Python (Pyodide)<strong>Concluído</strong></span></p>
+        <p class="demo-disclaimer">Indicador visual demonstrativo</p>
+        <p class="last-updated">Última atualização (exemplo): <time id="ultima-alteracao" datetime="2026-11-02T16:30:00">02/11/2026 às 16:30</time></p>
       </section>
     </aside>
 
     <footer class="app-footer">
-      <p><span aria-hidden="true">ϟ</span> Desenvolvido com Python · Pyodide <b>♥</b> Alura + Google for Startups</p>
-      <p>Versão 1.0.0 <span aria-hidden="true">│</span> Interface em desenvolvimento</p>
+      <p>To-Do Kanban <span aria-hidden="true">•</span> v1.0.0 <span aria-hidden="true">•</span> Desenvolvido com <b>♥</b> por Alura</p>
+      <p class="footer-updated"><span aria-hidden="true">◷</span> Última atualização: 02/11/2026 às 16:30</p>
     </footer>
   </div>
 
