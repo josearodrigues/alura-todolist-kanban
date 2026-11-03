@@ -16,7 +16,7 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 - Workflow `41550901785` concluído com sucesso: 25 combinações de contraste aprovadas, zero reprovações, Nu HTML Checker com zero erros e zero avisos.
 
 ### Pendente
-- Inspecionar Desktop, Tablet e Mobile nos temas claro e escuro, incluindo `prefers-reduced-motion`; critérios CA3.1–CA3.5 ainda não aceitos.
+- Inspecionar Desktop, Tablet e Mobile nos temas claro e escuro, incluindo `prefers-reduced-motion`; CA3.1–CA3.3 e CA3.5 ainda pendentes (CA3.4 aprovado pela auditoria automatizada).
 - A Fase 2 continua com checklist manual pendente; Fases 4 a 6 não iniciadas.
 
 ## [Não lançado] — 2026-11-02
