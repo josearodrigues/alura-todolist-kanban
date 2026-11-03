@@ -42,7 +42,7 @@ function notificarUsuario(mensagem, tipo = "error") {
     aviso = document.createElement("div");
     aviso.id = "app-notice";
     aviso.className = "app-notice";
-    document.body.append(aviso);
+    document.querySelector(".runtime-card")?.append(aviso);
   }
 
   aviso.dataset.type = tipo;
