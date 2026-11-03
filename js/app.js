@@ -183,6 +183,7 @@ function publicarApiAplicacao() {
     editTask: (dados) => executarOperacao("editar", dados),
     moveTask: (dados) => executarOperacao("mover", dados),
     deleteTask: (dados) => executarOperacao("excluir", dados),
+    deleteTasks: (dados) => executarOperacao("excluir_varias", dados),
     replaceState: async (novoEstado) => {
       if (!runtimeDisponivel || !persistenciaDisponivel) {
         throw new Error("O núcleo Python e a persistência ainda não estão disponíveis.");
