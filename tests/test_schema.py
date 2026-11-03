@@ -242,14 +242,11 @@ def test_preparar_importacao_backup_valida_e_atualiza_timestamp_global():
     envelope = gerar_envelope_backup([tarefa], TS_EXPORT)
     timestamp_importacao = "2026-11-03T15:30:00.000Z"
 
-    estado = preparar_importacao_backup(
-        json.dumps(envelope),
-        timestamp_importacao,
-    )
+    estado = preparar_importacao_backup(json.dumps(envelope))
 
     assert estado == {
         "tarefas": [tarefa],
-        "timestamp_ultima_alteracao": timestamp_importacao,
+        "timestamp_ultima_alteracao": None,
     }
     assert envelope["data_exportacao"] == TS_EXPORT
 
@@ -293,3 +290,27 @@ def test_preparar_importacao_backup_rejeita_timestamp_global_invalido():
 
     with pytest.raises(ValueError):
         preparar_importacao_backup(json.dumps(envelope), "03/11/2026")
+
+
+def test_preparar_estado_importado_gera_timestamp_no_momento_da_confirmacao():
+    """O timestamp global é criado somente ao preparar a substituição confirmada."""
+    from todolist.schema import preparar_estado_importado
+
+    tarefa = criar_tarefa_valida(UUID_1, "a_fazer", 0)
+    timestamp_importacao = "2026-11-03T15:30:00.000Z"
+
+    estado = preparar_estado_importado([tarefa], timestamp_importacao)
+
+    assert estado["tarefas"] == [tarefa]
+    assert estado["timestamp_ultima_alteracao"] == timestamp_importacao
+
+
+def test_preparar_estado_importado_rejeita_tarefas_invalidas():
+    """A confirmação revalida o estado candidato antes de persistir."""
+    from todolist.schema import preparar_estado_importado
+
+    tarefa = criar_tarefa_valida(UUID_1, "a_fazer", 0)
+    tarefa["campo_extra"] = True
+
+    with pytest.raises(ValueError):
+        preparar_estado_importado([tarefa], TS_EXPORT)
