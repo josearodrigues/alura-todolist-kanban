@@ -168,8 +168,11 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
   return Object.freeze({
     render,
     focusTask(id) {
+      const painelQuadro = document.querySelector('[data-view-panel="quadro"]');
+      if (painelQuadro?.hidden) document.querySelector('[data-view="quadro"]')?.click();
       const card = [...document.querySelectorAll(".task-card[data-task-id]")].find(node => node.dataset.taskId === id);
       if (!card) return false;
+      if (card.closest("li")?.hidden) card.closest("li").hidden = false;
       card.classList.add("is-calendar-focus");
       card.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
       card.focus({ preventScroll: true });
