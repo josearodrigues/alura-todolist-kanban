@@ -247,13 +247,13 @@
       <p class="footer-credit">
         <span class="footer-bolt" aria-hidden="true">⚡</span>
         Desenvolvido com Python <b>•</b> Pyodide <b>•</b>
-        <span class="footer-heart" aria-hidden="true">♥</span>
+        <span class="footer-heart" aria-hidden="true">❤️</span>
         Alura + Google for Startups
       </p>
       <div class="footer-meta">
         <span>Versão 1.0.0</span>
         <i aria-hidden="true"></i>
-        <span>Última atualização: não informada</span>
+        <time datetime="2025-11-06T14:30">Última atualização: 06/11/2025 • 14:30</time>
         <span class="footer-refresh" aria-hidden="true">⟳</span>
       </div>
     </footer>
@@ -290,35 +290,38 @@
   </template>
 
   <dialog id="dialog-nova-tarefa" aria-labelledby="titulo-nova-tarefa" aria-describedby="descricao-nova-tarefa">
-    <header>
-      <h2 id="titulo-nova-tarefa">Nova tarefa</h2>
+    <header class="new-task-header">
+      <h2 id="titulo-nova-tarefa">Nova Tarefa</h2>
       <p id="descricao-nova-tarefa">Preencha os dados para cadastrar uma tarefa.</p>
     </header>
-    <form>
-      <p>
-        <label for="nova-tarefa-titulo">Título (obrigatório)</label>
-        <input id="nova-tarefa-titulo" name="titulo" type="text" minlength="3" maxlength="100" required>
+    <form class="new-task-form">
+      <p class="new-task-field new-task-title">
+        <label for="nova-tarefa-titulo">Título da tarefa <b class="required-mark">*</b></label>
+        <input id="nova-tarefa-titulo" name="titulo" type="text" minlength="3" maxlength="100" placeholder="Ex: Estudar sobre Pyodide..." required>
       </p>
-      <p>
-        <label for="nova-tarefa-descricao">Descrição (opcional)</label>
-        <textarea id="nova-tarefa-descricao" name="descricao" maxlength="500"></textarea>
-      </p>
-      <p>
-        <label for="nova-tarefa-prioridade">Prioridade</label>
-        <select id="nova-tarefa-prioridade" name="prioridade" required>
-          <option value="" disabled>Selecione a prioridade</option>
-          <option value="baixa">Baixa</option>
-          <option value="media" selected>Média</option>
-          <option value="alta">Alta</option>
-        </select>
-      </p>
-      <p>
-        <label for="nova-tarefa-prazo">Data limite (opcional)</label>
-        <input id="nova-tarefa-prazo" name="data_limite" type="date">
-      </p>
-      <p>A tarefa será criada no estado A Fazer.</p>
-      <button type="button" disabled>Salvar tarefa (integração pendente)</button>
-      <button type="button" data-dialog-close>Cancelar</button>
+      <div class="new-task-fields">
+        <p class="new-task-field">
+          <label for="nova-tarefa-prioridade">Prioridade:</label>
+          <select id="nova-tarefa-prioridade" name="prioridade" required>
+            <option value="baixa">Baixa</option>
+            <option value="media" selected>Média</option>
+            <option value="alta">Alta</option>
+          </select>
+        </p>
+        <p class="new-task-field">
+          <label for="nova-tarefa-prazo">Vencimento <span>(opcional)</span></label>
+          <input id="nova-tarefa-prazo" name="data_limite" type="date">
+        </p>
+        <p class="new-task-field new-task-description">
+          <label for="nova-tarefa-descricao">Descrição <span>(opcional)</span></label>
+          <textarea id="nova-tarefa-descricao" name="descricao" maxlength="500" placeholder="Adicione mais detalhes..."></textarea>
+        </p>
+      </div>
+      <p class="new-task-note">A tarefa será criada no estado A Fazer.</p>
+      <div class="new-task-actions">
+        <button type="button" data-dialog-close>Cancelar</button>
+        <button type="button" class="new-task-submit" disabled>✓ Adicionar tarefa (integração pendente)</button>
+      </div>
     </form>
   </dialog>
 
