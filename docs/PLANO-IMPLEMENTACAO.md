@@ -8,7 +8,7 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fase 1 validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspeção visual aprovada; Fase 4 implementada e validada funcionalmente pela API, com CA4.1 parcialmente verificado; Fases 5 e 6 pendentes]
+- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fases 1 a 4 conforme evidências registradas; implementação da Fase 5 concluída na branch `fase-5-interacoes`, com aceite manual parcial pendente do teste de toque previsto em CA5.1; Fase 6 pendente]
 - **Etapa 6 — Validação final e homologação:** [Pendente]
 
 ---
@@ -318,6 +318,7 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 ---
 
 ### Fase 5 — Interações: Drag and Drop, Menus, Modais e Calendário
+- **Estado da implementação e validação (2026-11-03):** implementação registrada na branch `fase-5-interacoes`. Módulos `js/kanban_ui.js`, `js/drag_drop.js` e `js/calendar_ui.js` criados; `js/app.js`, `js/pyodide_bridge.js`, `index.html` e `css/kanban.css` integrados/atualizados. Formulários e menus conectados à API `window.kanbanApp`; busca com normalização de acentos; calendário mensal com marcadores e popover; métricas de resumo e Foco de Hoje consultam o domínio Python. Workflow `db37ac91`: Nu HTML Checker sem erros/avisos e auditoria de contraste aprovada. Validação manual: CA5.2, CA5.3 (incluindo conclusão/reabertura e metadados), CA5.4, CA5.6 (incluindo Foco de Hoje e quadro vazio) e CA5.7 aprovados nos cenários exercitados; CA5.5 aprovado nos cenários funcionais exercitados. Após teste com 10 tarefas no mesmo dia e observação de ocupação da tela, foi implementada rolagem vertical interna no popover; validação visual com listas extensas e em viewport móvel permanece pendente. CA5.1 permanece parcial: mouse e alternativa pelo menu aprovados; teste por toque não realizado e caneta também não testada. Também foram validados o fechamento do menu contextual ao cancelar/fechar diálogos, as datas relativas/destaque de tarefas vencidas e a remoção da mensagem transitória de carregamento após recarga; o indicador do Pyodide permaneceu funcional. A limitação genérica de navegador móvel antigo está documentada, sem causa comprovada. A implementação da Fase 5 está concluída; o aceite integral aguarda o teste de toque exigido por CA5.1.
 - **Objetivo:** Implementar as interações dinâmicas da interface: movimentação unificada por arrastar e soltar (Pointer Events), ação acessível "Mover para...", busca em tempo real com atalhos de teclado e calendário integrado com popover.
 - **Arquivos Previstos:** `js/drag_drop.js`, `js/kanban_ui.js`, `js/calendar_ui.js`.
 - **Atividades:**
@@ -327,6 +328,18 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
   - Implementar navegação do calendário entre meses, marcadores de tarefas e popover de foco com scroll suave no Kanban.
   - Integrar menus contextuais e formulários de cartão com as operações de criação, edição, movimentação e exclusão do domínio Python.
 - **Dependências:** Conclusão da Fase 4.
+
+- **Registro de validação manual parcial (2026-11-03):**
+  - **CA5.1:** drag and drop com mouse e alternativa `Mover para...` aprovados. Toque e caneta não testados por indisponibilidade de dispositivos.
+  - **CA5.2:** criação, edição de título/descrição/prioridade/vencimento, exclusão, movimentação por menu e mouse e atualização dos contadores confirmadas. Correção posterior fecha menus e submenus contextuais ao fechar/cancelar diálogos; usuário confirmou.
+  - **CA5.3:** reordenação intra-coluna, preservação dos metadados de tarefas reindexadas e no-op aprovados. Movimentação entre estados, conclusão e reabertura também aprovadas: conclusão define `data_conclusao` com o timestamp da operação e reabertura a limpa.
+  - **CA5.4:** busca em tempo real, limpeza, normalização de acentos e caixa, `Ctrl + K` e `Esc` confirmados. Os atalhos já haviam sido aprovados na Fase 2; não foram repetidos nesta rodada.
+  - **CA5.5:** navegação mensal, popover exibindo três tarefas no mesmo dia e foco/destaque temporário no cartão correspondente aprovados. Após observação com 10 tarefas no mesmo dia, implementada rolagem vertical interna na lista do popover; validação visual com mais de 10 itens e em viewport móvel pendente.
+  - **CA5.6:** total, contagens, percentuais, Foco de Hoje pela data local e cenário sem tarefas (sem divisão por zero) aprovados.
+  - **CA5.7:** persistência da preferência de tema após recarga aprovada.
+  - **Datas e vencimentos:** rótulos relativos para datas anteriores, ontem, hoje e amanhã; data de conclusão e destaque de tarefas pendentes vencidas confirmados. Ajuste da etiqueta “Vencida” para 14 px e `white-space: nowrap` confirmado visualmente após commit `a4e466d`.
+  - **Compatibilidade:** falha de inicialização observada em navegador móvel antigo; causa não comprovada. Registrar genericamente no README e no estado atual, sem identificar aparelho/versão.
+  - **Carregamento:** mensagem transitória “Carregando tarefas...” e referências associadas removidas de `index.html`, `js/kanban_ui.js` e `js/app.js`. Verificação estática e teste manual após recarga confirmaram ausência da mensagem, funcionamento do quadro sem deslocamento vertical e preservação do indicador de status do Pyodide e de `aria-busy`.
 - **Critérios e Evidências de Conclusão:**
   1. Testes de movimentação realizados via mouse e via toque (*touch*), diferenciando-os explicitamente.
   2. Teste da movimentação acessível via menu `⋮`.
@@ -441,3 +454,5 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **2.3** | 2026-11-03 | Atualização do estado de validação da Fase 4 com os testes executados pelo usuário: ciclo de vida das quatro operações, persistência e falhas simuladas com rollback. | Evitar repetição de testes já realizados e manter explícitas as evidências e pendências reais da homologação. |
 | **2.4** | 2026-11-03 | Registro da recuperação após recarga para criação, edição, movimentação e exclusão; confirmação do indicador Pyodide carregado e execução no GitHub Pages. Auditoria de rede do CA4.1 permanece pendente. | Atualizar os critérios da Fase 4 com as confirmações apresentadas pelo usuário, sem repetir testes já realizados. |
 | **2.5** | 2026-11-03 | Consolidação da validação funcional da API da Fase 4; registro da auditoria Fetch/XHR no GitHub Pages (requisição ao CDN jsDelivr, HTTP 200, sem chamada a backend na amostra); explicitação de que a interface demonstrativa será integrada na Fase 5. | Distinguir validação do motor Python da integração da interface e registrar o alcance real da auditoria de rede. |
+| **2.6** | 2026-11-03 | Registro da validação manual parcial da Fase 5: operações e contadores, busca/atalhos, calendário/popover, resumo, tema e metadados de reordenação/no-op; explicitação das verificações ainda pendentes em CA5.1, CA5.3 e CA5.6. | Preservar evidências confirmadas, evitar repetição de testes e manter o estado real dos critérios de aceite. |
+| **2.7** | 2026-11-03 | Atualização das evidências da Fase 5: conclusão/reabertura e metadados (CA5.3), Foco de Hoje e divisão por zero (CA5.6), correção do menu contextual, datas relativas e destaque de vencidas; registro das pendências de toque/caneta e compatibilidade móvel; implementação de rolagem interna no popover após avaliação de usabilidade; remoção da mensagem de carregamento implementada e validada. | Manter o plano alinhado aos testes efetivamente confirmados e às pendências reais. |

@@ -4,18 +4,22 @@ on:
   push:
     branches:
       - main
+      - fase-5-interacoes
     paths:
       - "index.html"
       - "css/**"
       - "scripts/check_contrast.py"
+      - "js/**"
       - ".github/workflows/validar-html.yml"
   pull_request:
     branches:
       - main
+      - fase-5-interacoes
     paths:
       - "index.html"
       - "css/**"
       - "scripts/check_contrast.py"
+      - "js/**"
       - ".github/workflows/validar-html.yml"
   workflow_dispatch:
 
@@ -31,6 +35,15 @@ jobs:
     steps:
       - name: Baixar código
         uses: actions/checkout@v4
+
+      - name: Verificar sintaxe dos módulos JavaScript
+        run: |
+          node --input-type=module --check < js/app.js
+          node --input-type=module --check < js/pyodide_bridge.js
+          node --input-type=module --check < js/storage.js
+          node --input-type=module --check < js/kanban_ui.js
+          node --input-type=module --check < js/drag_drop.js
+          node --input-type=module --check < js/calendar_ui.js
 
       - name: Auditar contraste WCAG 2.2 AA
         run: python scripts/check_contrast.py

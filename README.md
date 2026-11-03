@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual (03/11/2026):** Fases 1 e 3 implementadas e validadas conforme registros do projeto. A Fase 2 está implementada, com validação manual parcial. A implementação da Fase 4 foi registrada na branch `fase-4-pyodide-persistencia`: Pyodide 314.0.7, ponte JavaScript ↔ Python e persistência preventiva no `localStorage`. A validação local do runtime, do ciclo de vida das tarefas, da recarga e da falha simulada de armazenamento permanece pendente. As Fases 5 e 6 não foram iniciadas; a aplicação ainda não foi homologada para publicação final no GitHub Pages.
+> **Estado atual (03/11/2026):** Fase 1 concluída e validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspecionada; Fase 4 implementada e validada funcionalmente pela API JS/Python, com CA4.1 parcialmente verificado. A implementação da Fase 5 está concluída na branch `fase-5-interacoes`; a validação manual dos critérios está quase completa. CA5.2 a CA5.7 aprovados nos cenários exercitados; CA5.1 aguarda teste de drag and drop por toque. Mouse e alternativa pelo menu foram aprovados. Caneta não testada. A Fase 6 não foi iniciada.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
@@ -14,14 +14,14 @@ Este projeto é independente, não é um produto oficial da Alura ou do Google e
 
 ## O que você encontra neste projeto
 
-- **Quadro Kanban:** estrutura com três colunas — A Fazer, Em Andamento e Concluídas —, contadores e cartões de demonstração estáticos.
+- **Quadro Kanban:** três colunas com cartões renderizados a partir do estado persistido, contadores dinâmicos e menus para editar, mover e excluir tarefas.
 - **Domínio em Python:** entidade de tarefa, validações, regras de transição entre estados, serviços, métricas e validação do contrato JSON.
 - **Acessibilidade estrutural:** HTML semântico, navegação por teclado, nomes acessíveis, foco visível e diálogos nativos.
-- **Widgets demonstrativos:** sete tarefas de exemplo, calendário estático de novembro/2026, resumo com percentuais coerentes e status/última atualização identificados como dados fictícios.
+- **Interações da Fase 5:** busca por título e descrição com normalização de acentos; drag and drop por Pointer Events; movimentação pelo menu contextual; calendário mensal com marcadores e popover; resumo e Foco de Hoje calculados pelo domínio Python.
 - **Validação automatizada:** testes Python com pytest e workflow do GitHub Actions para o Nu HTML Checker.
 - **Documentação de engenharia:** requisitos, decisões arquiteturais, plano de implementação, estado atual e histórico de alterações.
 
-As funcionalidades de interação e persistência ainda não integradas permanecem desabilitadas na interface. A lista acima não significa que todos esses recursos estejam disponíveis nesta etapa.
+A Fase 5 já foi exercitada manualmente nos cenários descritos em `docs/ESTADO-ATUAL.md`; permanece pendente o teste por toque exigido em CA5.1. A mensagem transitória de carregamento foi removida e validada. Relatórios detalhados e importação/exportação permanecem reservados à Fase 6.
 
 ---
 
@@ -79,12 +79,14 @@ alura-todolist-kanban/
 
 - **`src/todolist/`:** pacote Python com o modelo de domínio, serviços, métricas e validação do schema.
 - **`tests/`:** testes automatizados do domínio.
-- **`css/`:** tokens de design, estilos base, layout responsivo, quadro Kanban e componentes.\n- **`scripts/`:** ferramentas auxiliares de validação, incluindo a verificação de cobertura e a auditoria de contraste.
+- **`css/`:** tokens de design, estilos base, layout responsivo, quadro Kanban e componentes.
+- **`js/`:** inicialização da aplicação, ponte Pyodide, persistência, renderização Kanban, drag and drop e calendário.
+- **`scripts/`:** ferramentas auxiliares de validação, incluindo a verificação de cobertura e a auditoria de contraste.
 - **`docs/`:** requisitos, plano de implementação, estado operacional e referência visual aprovada.
 - **`.github/workflows/`:** automação da validação HTML.
 - **`index.html`:** estrutura atual da interface web.
 
-A arquitetura prevê módulos JavaScript e CSS separados nas fases correspondentes. Eles não devem ser considerados componentes já implementados.
+Os módulos JavaScript da Fase 4 e da Fase 5 estão presentes. A validação funcional em navegador da Fase 5 foi realizada parcialmente; consulte `docs/ESTADO-ATUAL.md` para os critérios aprovados e pendentes.
 
 ---
 
@@ -112,7 +114,7 @@ http://127.0.0.1:8000
 
 O servidor disponibiliza os arquivos estáticos localmente e fica restrito ao próprio computador. Para encerrá-lo, volte ao terminal e pressione `Ctrl+C`.
 
-**Importante:** os cartões, calendário, resumo e status atualmente exibidos são mocks estáticos para validar a apresentação visual. Não são persistidos nem representam funcionalidades operacionais. A integração com o domínio Python no navegador depende da Fase 4; os controles de operações de negócio permanecem desabilitados até as fases correspondentes.
+**Importante:** a aplicação carrega tarefas a partir do `localStorage`. Em um navegador sem estado salvo, o quadro inicia vazio. O Pyodide carrega os módulos Python no navegador; criação, edição, movimentação e exclusão usam a ponte JS/Python e a persistência preventiva. A interface da Fase 5 foi validada manualmente de forma parcial; consulte o estado atual para os limites da validação.
 
 ---
 
@@ -162,9 +164,9 @@ Os resultados acima registram as evidências já obtidas; não representam uma n
 |---|---|---|
 | 1. Domínio Python e testes | Entidade, regras de negócio, serviços, métricas, schema e testes | Concluída e validada |
 | 2. HTML e acessibilidade | Estrutura semântica, diálogos, teclado, foco e validação HTML | Implementada; checklist manual pendente |
-| 3. CSS e validação visual | Design system, temas, responsividade, mocks e contraste WCAG 2.2 AA | Mocks visuais implementados; workflow `41553398236` aprovado; inspeção visual pendente |
-| 4. WebAssembly e persistência | Integração Pyodide, execução Python no navegador e persistência local | Não iniciada |
-| 5. Interações | Movimentação, reordenação, busca e calendário | Não iniciada |
+| 3. CSS e validação visual | Design system, temas, responsividade, mocks e contraste WCAG 2.2 AA | Implementada; inspeção visual aprovada conforme registro |
+| 4. WebAssembly e persistência | Integração Pyodide, execução Python no navegador e persistência local | Implementada e validada funcionalmente; CA4.1 parcialmente verificado |
+| 5. Interações | Movimentação, reordenação, busca e calendário | Implementação inicial registrada; testes locais/manuais pendentes |
 | 6. Relatórios e backup JSON | Relatórios, exportação e importação com validação e consistência | Não iniciada |
 
 Após as seis fases, o plano prevê uma etapa de validação final e homologação. Os critérios detalhados de conclusão estão em [docs/PLANO-IMPLEMENTACAO.md](docs/PLANO-IMPLEMENTACAO.md).
@@ -222,12 +224,10 @@ A inspeção visual completa da Fase 3 será realizada separadamente, após a co
 
 ## Limitações Conhecidas
 
-- A inspeção visual final nos breakpoints e nos dois temas ainda está pendente; Desktop e Tablet (1024 × 768) já foram aprovados, e Mobile aguarda nova conferência após a correção da navegação lateral.
-- O domínio Python está implementado e testado, mas ainda não está integrado ao navegador por Pyodide.
-- Persistência no navegador, movimentação interativa, busca funcional, calendário, relatórios e backup ainda não foram implementados.
-- Os controles correspondentes às funcionalidades não integradas permanecem desabilitados.
-- O checklist manual da Fase 2 ainda precisa ser executado.
-- A aplicação final ainda não foi homologada nem publicada no GitHub Pages.
+- A Fase 5 ainda não recebeu aceite integral: movimentação por toque/caneta não foi testada; o popover com grande volume de tarefas também não foi exercitado.
+- Foi observada falha de inicialização em navegador móvel antigo. A causa não foi comprovada; a limitação será mantida registrada de forma genérica, sem identificar aparelho ou versão. A investigação de compatibilidade não integra a próxima ação imediata.
+- A mensagem transitória “Carregando tarefas...” foi removida para evitar deslocamento vertical do Kanban; o usuário confirmou após recarga o funcionamento do quadro e do indicador de status do Pyodide.
+- Relatórios detalhados e importação/exportação permanecem reservados à Fase 6.
 
 ---
 
@@ -235,7 +235,10 @@ A inspeção visual completa da Fase 3 será realizada separadamente, após a co
 
 - **Fase 1:** concluída e validada.
 - **Fase 2:** implementada; validação automática de HTML aprovada; checklist manual pendente.
-- **Fase 3:** interface reorganizada para aproximar o mockup; workflow aprovado; inspeção visual pendente.\n- **Fases 4 a 6:** não iniciadas.
+- **Fase 3:** implementada; inspeção visual aprovada conforme registro.
+- **Fase 4:** implementada e validada funcionalmente; CA4.1 parcialmente verificado.
+- **Fase 5:** implementação registrada na branch `fase-5-interacoes`; validação manual parcial. CA5.2, CA5.3, CA5.4, CA5.6 e CA5.7 aprovados nos cenários exercitados; CA5.1 parcial (toque/caneta não testados). Pendente: teste de drag and drop por toque previsto em CA5.1.
+- **Fase 6:** não iniciada.
 - **Validação final:** pendente.
 - **Publicação no GitHub Pages:** ainda não realizada.
 

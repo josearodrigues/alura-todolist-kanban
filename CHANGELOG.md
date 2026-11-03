@@ -4,6 +4,16 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 
 ## [Não lançado] — 2026-11-03
 
+### Fase 5 — implementação inicial
+
+- Criados `js/kanban_ui.js`, `js/drag_drop.js` e `js/calendar_ui.js` para renderização dinâmica, menus de cartão, movimentação por Pointer Events e calendário mensal com marcadores e popover.
+- Integrados os formulários de criação, edição e exclusão e o menu acessível “Mover para...” às operações de `window.kanbanApp`, preservando a persistência preventiva da Fase 4.
+- Implementada busca em tempo real por título e descrição, com normalização de acentos; os atalhos `Ctrl + K` e `Esc` existentes foram mantidos.
+- Indicadores de resumo e Foco de Hoje passaram a consultar as funções Python pela ponte JS/Python, usando a data local do navegador.
+- Atualizado o workflow para verificar sintaxe dos módulos ES, HTML e contraste na branch `fase-5-interacoes`.
+- **Validação pendente:** não foram confirmados testes locais/manuais de navegador nem resultado de execução do workflow nesta sessão. CA5.1–CA5.7 não devem ser considerados concluídos até a obtenção das evidências previstas.
+
+
 ### Fase 4 — validação local parcial
 
 - Registrados os testes do usuário para criação, edição, movimentação e exclusão via API JS/Python, com conferência de persistência no `localStorage`.

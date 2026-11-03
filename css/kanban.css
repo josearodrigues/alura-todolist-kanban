@@ -80,7 +80,7 @@
 :root[data-theme="dark"] .done-column .add-task { background: #17492f; border-color: #25704a; color: #a8f0c4; }
 .add-task:hover { filter: brightness(.97); }
 .kanban-column ul { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
-.task-card { position: relative; display: flex; align-items: flex-start; gap: 12px; padding: 14px 12px 14px 16px; overflow: hidden; border: 1px solid var(--border); border-left: 5px solid var(--priority-color,#3b82f6); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
+.task-card { position: relative; display: flex; align-items: flex-start; gap: 12px; padding: 14px 12px 14px 16px; overflow: visible; border: 1px solid var(--border); border-left: 5px solid var(--priority-color,#3b82f6); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
 .priority-alta { --priority-color: #f59e0b; }
 .priority-media { --priority-color: #2fb35c; }
 .priority-baixa { --priority-color: #2563eb; }
@@ -110,6 +110,12 @@
 .task-due { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 14px; }
 .task-due .ui-icon { display: none; }
 .task-due::before { content: "📅 "; }
+.task-card.is-overdue { border-color: #dc2626; border-left-color: #dc2626; background: #fff7f7; }
+.task-due.is-overdue { color: #b91c1c; font-weight: 700; }
+.overdue-label { display: inline-flex; flex: none; align-items: center; white-space: nowrap; margin-left: 4px; padding: 2px 6px; border-radius: 999px; background: #dc2626; color: #fff; font-size: 14px; font-weight: 800; letter-spacing: 0; }
+:root[data-theme="dark"] .task-card.is-overdue { border-color: #7f1d1d; border-left-color: #f87171; background: #321b25; }
+:root[data-theme="dark"] .task-due.is-overdue { color: #fca5a5; }
+:root[data-theme="dark"] .overdue-label { background: #ef4444; color: #fff; }
 .task-card details { position: relative; flex: none; }
 .task-card details > summary { display: grid; place-items: center; width: 28px; height: 30px; overflow: hidden; border-radius: 7px; color: var(--muted); font-size: 0; cursor: pointer; list-style: none; }
 .task-card details > summary::-webkit-details-marker { display: none; }
@@ -288,4 +294,65 @@
 .task-more .ui-icon {
   width: 20px;
   height: 20px;
+}
+
+
+
+/* Interações da Fase 5: cartões, menus e alvos de movimentação. */
+.task-card[data-task-id] { cursor: grab; }
+.task-card[data-task-id]:active { cursor: grabbing; }
+.task-card.is-dragging { opacity: .42; outline: 2px dashed var(--primary); }
+.kanban-column.drop-target { outline: 2px dashed var(--primary); outline-offset: -5px; background: var(--surface-soft); }
+.task-card[hidden], .kanban-column li[hidden] { display: none !important; }
+.task-menu { position: relative; flex: none; }
+.task-menu > summary { display: grid; place-items: center; width: 30px; height: 32px; border-radius: 7px; color: var(--muted); cursor: pointer; list-style: none; }
+.task-menu > summary::-webkit-details-marker, .task-move-menu > summary::-webkit-details-marker { display: none; }
+.task-menu > summary::before { content: "⋮"; font-size: 23px; line-height: 1; }
+.task-menu > ul, .task-move-menu > ul { position: absolute; z-index: 20; top: 32px; right: 0; min-width: 178px; margin: 0; padding: 5px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); box-shadow: 0 8px 22px rgb(15 23 42 / 18%); list-style: none; }
+.task-menu li, .task-move-menu li { margin: 0; padding: 0; list-style: none; }
+.task-menu button, .task-move-menu button { width: 100%; min-height: 36px; padding: 8px 10px; border: 0; border-radius: 6px; background: transparent; color: var(--text); text-align: left; font-size: 13px; cursor: pointer; }
+.task-menu button:hover, .task-move-menu button:hover { background: var(--surface-soft); }
+.task-move-menu { position: relative; }
+.task-move-menu > summary { display: block; width: auto; height: auto; overflow: visible; padding: 8px 10px; color: var(--text); font-size: 13px; cursor: pointer; list-style: none; }
+.task-move-menu > summary::before { content: none; }
+.task-move-menu > ul { top: 0; right: calc(100% + 4px); }
+.task-menu .danger-action { color: #b91c1c; }
+.task-card.is-calendar-focus { outline: 3px solid var(--primary); outline-offset: 3px; }
+.calendar-day, .full-day { position: relative; border: 0; background: transparent; cursor: pointer; font: inherit; }
+.calendar-day.has-task::after, .full-day.has-task::after { content: ""; position: absolute; bottom: 2px; left: 50%; width: 5px; height: 5px; border-radius: 50%; background: var(--primary); transform: translateX(-50%); }
+.calendar-day.today-day, .full-day.today-day { outline: 2px solid var(--primary); outline-offset: 1px; }
+.calendar-focus-popover { width: min(420px, calc(100% - 28px)); }
+.calendar-focus-popover header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.calendar-focus-popover header h2 { margin: 0; font-size: 18px; text-transform: capitalize; }
+.calendar-focus-popover header button { min-width: 36px; }
+.calendar-focus-popover ul { display: grid; gap: 8px; max-height: min(55dvh, 420px); margin: 16px 0 0; padding: 0 6px 0 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; list-style: none; }
+.calendar-focus-popover li button { width: 100%; text-align: left; }
+.full-day { display: grid; place-items: center; min-height: 46px; border-radius: 8px; color: var(--text); }
+.full-day:hover, .calendar-day:hover { background: var(--surface-soft); }
+:root[data-theme="dark"] .full-day, :root[data-theme="dark"] .calendar-day { color: var(--text); }
+@media (pointer: coarse) {
+  .task-card[data-task-id] { touch-action: none; }
+  .task-menu > summary { min-width: 40px; min-height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .task-card, .kanban-column { scroll-behavior: auto; transition: none !important; }
+}
+
+.task-card.is-completed .task-menu { display: block; }
+.task-card.is-completed .task-more { display: grid; }
+
+.calendar-day.has-completed-task::after, .full-day.has-completed-task::after { background: var(--done); }
+
+
+/* O submenu deve exibir o rótulo textual, não o ícone do menu principal. */
+.task-card .task-move-menu > summary {
+  display: block;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+.task-card .task-move-menu > summary::before {
+  content: none;
 }

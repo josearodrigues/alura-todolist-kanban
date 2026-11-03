@@ -67,37 +67,37 @@ dialog details { margin-top: 12px; }
 dialog ul { padding-left: 20px; }
 dialog input:focus-visible, dialog textarea:focus-visible, dialog select:focus-visible { outline-offset: 1px; }
 /* Modal Nova Tarefa: composição inspirada no formulário de referência. */
-#dialog-nova-tarefa { width: min(620px, calc(100% - 28px)); padding: 18px; }
-#dialog-nova-tarefa .new-task-header h2 { margin: 0 0 6px; color: var(--text); font-size: 27px; font-weight: 800; line-height: 1.2; }
-#dialog-nova-tarefa .new-task-header p { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
-#dialog-nova-tarefa .new-task-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; margin: 0; }
-#dialog-nova-tarefa .new-task-field label { color: var(--text); font-size: 14px; font-weight: 600; }
-#dialog-nova-tarefa .new-task-field label span { color: var(--muted); font-size: 12px; font-weight: 400; }
-#dialog-nova-tarefa .required-mark { color: #e03535; }
-#dialog-nova-tarefa .new-task-field input,
-#dialog-nova-tarefa .new-task-field textarea,
-#dialog-nova-tarefa .new-task-field select { width: 100%; min-height: 42px; padding: 9px 14px; border: 1px solid var(--control-border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 14px; }
-#dialog-nova-tarefa .new-task-title { margin-bottom: 14px; }
-#dialog-nova-tarefa .new-task-title input { min-height: 46px; }
-#dialog-nova-tarefa .new-task-fields { display: grid; grid-template-columns: 1fr 1.2fr; gap: 14px; }
-#dialog-nova-tarefa .new-task-description { grid-column: 1 / -1; }
-#dialog-nova-tarefa .new-task-field textarea { min-height: 76px; resize: vertical; }
-#dialog-nova-tarefa .new-task-note { margin: 14px 0 0; color: var(--muted); font-size: 12px; }
-#dialog-nova-tarefa .new-task-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; }
-#dialog-nova-tarefa .new-task-actions button { min-height: 42px; margin: 0; padding: 8px 18px; border: 1px solid var(--control-border); border-radius: 8px; background: var(--surface-soft); color: var(--text); font-size: 14px; font-weight: 600; }
-#dialog-nova-tarefa .new-task-actions .new-task-submit { min-height: 44px; border-color: var(--primary); background: var(--primary); color: #fff; font-size: 14px; }
-#dialog-nova-tarefa .new-task-actions button:disabled { opacity: .58; cursor: not-allowed; }
-#dialog-nova-tarefa .new-task-field input:focus-visible,
-#dialog-nova-tarefa .new-task-field textarea:focus-visible,
-#dialog-nova-tarefa .new-task-field select:focus-visible { outline-offset: 1px; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) { width: min(620px, calc(100% - 28px)); padding: 18px; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-header h2 { margin: 0 0 6px; color: var(--text); font-size: 27px; font-weight: 800; line-height: 1.2; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-header p { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; margin: 0; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-field label { color: var(--text); font-size: 14px; font-weight: 600; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-field label span { color: var(--muted); font-size: 12px; font-weight: 400; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .required-mark { color: #e03535; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-field input,
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-field textarea,
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-field select { width: 100%; min-height: 42px; padding: 9px 14px; border: 1px solid var(--control-border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 14px; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-title { margin-bottom: 14px; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-title input { min-height: 46px; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-fields { display: grid; grid-template-columns: 1fr 1.2fr; gap: 14px; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-description { grid-column: 1 / -1; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-field textarea { min-height: 76px; resize: vertical; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-note { margin: 14px 0 0; color: var(--muted); font-size: 12px; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-actions button { min-height: 42px; margin: 0; padding: 8px 18px; border: 1px solid var(--control-border); border-radius: 8px; background: var(--surface-soft); color: var(--text); font-size: 14px; font-weight: 600; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-actions .new-task-submit { min-height: 44px; border-color: var(--primary); background: var(--primary); color: #fff; font-size: 14px; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-actions button:disabled { opacity: .58; cursor: not-allowed; }
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-field input:focus-visible,
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-field textarea:focus-visible,
+:is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-field select:focus-visible { outline-offset: 1px; }
 
 @media (max-width: 767px) {
   .insight-card h2 { min-height: 48px; }
   dialog { padding: 18px; }
-  #dialog-nova-tarefa .new-task-fields { grid-template-columns: 1fr; }
-  #dialog-nova-tarefa .new-task-description { grid-column: auto; }
-  #dialog-nova-tarefa .new-task-actions { align-items: stretch; flex-direction: column-reverse; }
-  #dialog-nova-tarefa .new-task-actions button { width: 100%; }
+  :is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-fields { grid-template-columns: 1fr; }
+  :is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-description { grid-column: auto; }
+  :is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-actions { align-items: stretch; flex-direction: column-reverse; }
+  :is(#dialog-nova-tarefa, #dialog-editar-tarefa) .new-task-actions button { width: 100%; }
 }
 
 
