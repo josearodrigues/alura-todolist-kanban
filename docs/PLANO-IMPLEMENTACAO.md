@@ -278,7 +278,7 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 ---
 
 ### Fase 4 — Integração WebAssembly e Persistência Segura com Garantia de Rollback
-- **Estado:** Implementação registrada na branch `fase-4-pyodide-persistencia`; validação local e homologação dos critérios CA4.1–CA4.6 pendentes.
+- **Estado:** Implementação registrada na branch `fase-4-pyodide-persistencia`; validação local parcial em 2026-11-03. O usuário executou criação, edição, movimentação e exclusão, conferiu persistência e timestamp e simulou falha de gravação nas quatro operações, com rollback comprovado. Permanecem pendentes a confirmação visual do indicador de runtime, evidências de recarga após cada tipo de mutação e homologação no GitHub Pages com auditoria de rede.
 - **Runtime selecionado:** Pyodide 314.0.7 (Python 3.14.2), versão oficial disponível pelo CDN.
 - **Objetivo:** Inicializar o runtime WebAssembly via Pyodide, carregar os módulos Python no virtual filesystem, estabelecer a ponte bidirecional JS $\leftrightarrow$ Python e implementar o motor de persistência consistente no `localStorage`.
 - **Arquivos Previstos:** `js/pyodide_bridge.js`, `js/storage.js`, `js/app.js`.
@@ -293,9 +293,10 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
   - Implementar o tratamento de falhas de gravação (reversão do estado em memória e na tela).
 - **Dependências:** Conclusão das Fases 1, 2 e 3.
 - **Critérios e Evidências de Conclusão:**
-  1. Evidência de que a sequência de carregamento Pyodide foi concluída com sucesso: o indicador de status transiciona visualmente para `✓ Carregado` e as funções do pacote `todolist` respondem conforme esperado a partir do JavaScript.
-  2. Testes de ciclo de vida e persistência executados separadamente para criação, edição, movimentação e exclusão, com recarga da página (`F5`) comprovando retenção íntegra e atualização sincronizada do timestamp.
-  3. Teste de falha de gravação simulada comprovando preservação do estado anterior e notificação de erro ao usuário.
+  1. Console confirma Pyodide 314.0.7, carregamento dos cinco módulos e importação de `todolist`; falta registrar inspeção visual do indicador `✓ Carregado`.
+  2. O usuário executou criação, edição, movimentação e exclusão pela API JS/Python e conferiu persistência/timestamp no `localStorage`; recuperação após recarga foi confirmada após criação. A recarga após cada uma das demais operações ainda não foi documentada.
+  3. Falha de gravação simulada nas quatro operações: em todas, memória e armazenamento preservaram o estado anterior. A notificação de erro foi observada no teste de criação.
+  4. CA4.1 ainda depende de execução no GitHub Pages e auditoria de rede sem backend.
 
 #### Critérios de Aceite — Fase 4
 
@@ -430,3 +431,4 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **1.9** | 2026-11-02 | Correção das 4 inconsistências da revisão: alinhamento do focus trap na Decisão 3.6 para "quando aplicável"; atribuição estrita da persistência ao JavaScript na Fase 1; criação dos critérios CA2.1 (painéis e contadores) e CA4.1 (execução estática sem backend); remapeamento completo da Matriz de Rastreabilidade para RF01–RF15 e RNF01–RNF07. | Fechamento rigoroso das pendências apontadas na revisão técnica pós-commit 03eae77. |
 | **2.0** | 2026-11-02 | Refinamento dos critérios RF01 e RNF01: validação dos contadores após operações do quadro e comprovação de execução efetiva na hospedagem publicada do GitHub Pages. | Tornar as evidências de aceite diretamente verificáveis e alinhadas aos requisitos aprovados. |
 | **2.1** | 2026-11-02 | Ajustes finais de rastreabilidade e critérios: CA2.1 explicita botão de criação em cada coluna; CA2.3 detalha o comportamento contextual de `Esc`; RF04 passa a referenciar as seis transições de estado e seus testes em CA1.2. | Fechar lacunas entre os requisitos aprovados, critérios de aceite e evidências previstas. |\n| **2.2** | 2026-11-03 | Registro da conclusão da inspeção visual da Fase 3 nos três breakpoints e nos dois temas, incluindo o teste manual de `prefers-reduced-motion` e a correção da navegação mobile. | Atualizar os critérios de aceite com as evidências efetivamente confirmadas pelo usuário. |
+| **2.3** | 2026-11-03 | Atualização do estado de validação da Fase 4 com os testes executados pelo usuário: ciclo de vida das quatro operações, persistência e falhas simuladas com rollback. | Evitar repetição de testes já realizados e manter explícitas as evidências e pendências reais da homologação. |
