@@ -8,7 +8,7 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fases 1 a 4 conforme evidências registradas; Fase 5 com implementação inicial na branch `fase-5-interacoes`, aguardando validação local; Fase 6 pendente]
+- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fases 1 a 4 conforme evidências registradas; Fase 5 implementada na branch `fase-5-interacoes`, com validação manual parcial e pendências registradas; Fase 6 pendente]
 - **Etapa 6 — Validação final e homologação:** [Pendente]
 
 ---
