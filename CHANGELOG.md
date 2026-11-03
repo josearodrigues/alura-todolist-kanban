@@ -12,8 +12,10 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 - Preservados os seis diálogos e seus controles ainda desabilitados enquanto as integrações funcionais não forem implementadas.
 - Commits registrados na branch `main`: `d02c4fe` e `b5c3200`.
 
+### Validado
+- Workflow `41550545873` concluído com sucesso; as etapas de auditoria de contraste e validação HTML foram aprovadas.
+
 ### Pendente
-- Confirmar o workflow de HTML e contraste do commit `b5c3200`.
 - Inspecionar Desktop, Tablet e Mobile nos temas claro e escuro, incluindo `prefers-reduced-motion`; critérios CA3.1–CA3.5 ainda não aceitos.
 - A Fase 2 continua com checklist manual pendente; Fases 4 a 6 não iniciadas.
 
