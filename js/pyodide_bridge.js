@@ -71,6 +71,7 @@ _funcoes_kanban = (
     "editar_tarefa",
     "mover_tarefa",
     "excluir_tarefa",
+    "excluir_tarefas",
     "validar_envelope_backup",
     "gerar_envelope_backup",
     "calcular_relatorio_completo",
@@ -188,6 +189,17 @@ def _kanban_dispatch(payload_json):
             dados["tarefa_id"],
             timestamp_injetado=dados.get("timestamp_injetado"),
         )
+    elif operacao == "excluir_varias":
+        novas, timestamp, tarefas_excluidas = todolist.excluir_tarefas(
+            tarefas,
+            dados.get("tarefas_ids"),
+            timestamp_injetado=dados.get("timestamp_injetado"),
+        )
+        return json.dumps({
+            "tarefas": novas,
+            "timestamp_ultima_alteracao": timestamp,
+            "tarefas_excluidas": tarefas_excluidas,
+        }, ensure_ascii=False)
     else:
         raise ValueError("Operação de domínio desconhecida: " + str(operacao))
 
@@ -275,5 +287,6 @@ export async function executeDomainOperation(operacao, estado, dados) {
     tarefas: resultado.tarefas,
     timestamp_ultima_alteracao: resultado.timestamp_ultima_alteracao,
     tarefa: resultado.tarefa,
+    tarefas_excluidas: resultado.tarefas_excluidas || [],
   };
 }
