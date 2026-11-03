@@ -22,7 +22,13 @@ export function initializeCalendar({ getTasks, onFocusTask }) {
     return map;
   }
   function focusDay(date,map) {
-    const tasks = map.get(date) || [];
+    const tasks = [...(map.get(date) || [])].sort((a, b) =>
+      String(a.titulo ?? "").localeCompare(
+        String(b.titulo ?? ""),
+        "pt-BR",
+        { sensitivity: "base" }
+      )
+    );
     const title = popover.querySelector("h2");
     title.textContent = new Intl.DateTimeFormat("pt-BR",{dateStyle:"full",timeZone:"UTC"}).format(new Date(date+"T12:00:00Z"));
     const list = popover.querySelector("ul"); list.replaceChildren();
