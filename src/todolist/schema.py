@@ -4,7 +4,7 @@ Implementa a política estrita de rejeição integral em caso de campos
 desconhecidos ou ausentes, sem correções silenciosas (RF13, RF14, Seção 5).
 """
 
-from typing import Any, Dict, List, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 from todolist.models import (
     CAMPOS_OBRIGATORIOS_TAREFA,
     Tarefa,
@@ -118,4 +118,66 @@ def gerar_envelope_backup(
         "data_exportacao": timestamp_exportacao,
         "total_tarefas": len(tarefas),
         "tarefas": [dict(t) for t in tarefas],
+    }
+
+
+def preparar_importacao_backup(
+    conteudo_json: str,
+    timestamp_importacao: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Lê, valida estritamente e prepara o estado de uma importação (RF14).
+
+    Chaves JSON duplicadas e constantes não padronizadas (NaN/Infinity) são
+    rejeitadas. Nenhum estado da aplicação é alterado por esta função.
+    """
+    import json
+
+    if not isinstance(conteudo_json, str):
+        raise ValueError("O conteúdo do backup deve ser texto.")
+
+    def rejeitar_chaves_duplicadas(pares):
+        objeto = {}
+        for chave, valor in pares:
+            if chave in objeto:
+                raise ValueError(f"O JSON contém chave duplicada: '{chave}'.")
+            objeto[chave] = valor
+        return objeto
+
+    def rejeitar_constante(valor):
+        raise ValueError(f"Constante não permitida no JSON: {valor}.")
+
+    try:
+        envelope = json.loads(
+            conteudo_json,
+            object_pairs_hook=rejeitar_chaves_duplicadas,
+            parse_constant=rejeitar_constante,
+        )
+    except (json.JSONDecodeError, TypeError, ValueError) as erro:
+        raise ValueError(f"Arquivo JSON inválido: {erro}") from erro
+
+    valido, mensagem = validar_envelope_backup(envelope)
+    if not valido:
+        raise ValueError(mensagem)
+
+    if timestamp_importacao is not None:
+        validar_iso_utc_ms(timestamp_importacao, "timestamp_importacao")
+    return {
+        "tarefas": [dict(tarefa) for tarefa in envelope["tarefas"]],
+        "timestamp_ultima_alteracao": timestamp_importacao,
+    }
+
+
+def preparar_estado_importado(
+    tarefas: List[Dict[str, Any]],
+    timestamp_importacao: str,
+) -> Dict[str, Any]:
+    """Valida tarefas já aprovadas e gera o estado candidato no momento da confirmação."""
+    validar_iso_utc_ms(timestamp_importacao, "timestamp_importacao")
+    envelope = gerar_envelope_backup(tarefas, timestamp_importacao)
+    valido, mensagem = validar_envelope_backup(envelope)
+    if not valido:
+        raise ValueError(mensagem)
+    return {
+        "tarefas": envelope["tarefas"],
+        "timestamp_ultima_alteracao": timestamp_importacao,
     }

@@ -24,10 +24,10 @@
   - *Relação de Nomenclatura:* A distinção entre o nome da pasta de trabalho local (`alura-kanban-python`) e o repositório remoto (`alura-todolist-kanban`) é intencional e preservada, sem exigência de renomeação.
 - **Controle de Versão (Git):**
   - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
-  - *Branch remota de trabalho:* `fase-5-interacoes`
-  - *Branch remota:* `fase-5-interacoes` (criada anteriormente pelo usuário; implementação remota em andamento).
+  - *Branch remota de trabalho:* `fase-6-relatorios-backup`
+  - *Branch remota:* `fase-6-relatorios-backup` (branch de trabalho da Fase 6; comparação remota confirma que está à frente da `main`, sem commits atrás).
   - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits de implementação HTML e atualizações documentais; a pipeline Nu HTML Checker foi adicionada no commit `11f6cdf`; a correção HTML foi registrada em `a6c7495` e o diagnóstico detalhado da pipeline em `58558ad`. A implementação CSS da Fase 3 e a auditoria de contraste foram adicionadas diretamente à `main` nesta sessão.
-  - *Situação local/remota:* comparação remota `main...fase-5-interacoes`: branch de trabalho à frente da `main`, sem commits atrás na comparação registrada; a `main` permanece sem alterações nesta implementação. A cópia local não foi inspecionada nesta sessão.
+  - *Situação local/remota:* a branch `fase-6-relatorios-backup` contém a implementação da Fase 6; a `main` permanece sem alterações. A cópia local não foi inspecionada nesta sessão.
   - *Ações realizadas na Fase 5:* módulos de interface, drag and drop e calendário adicionados/atualizados diretamente na branch remota `fase-5-interacoes`; ponte Python/JavaScript ampliada para métricas; workflow ajustado para validar os módulos ES e HTML nessa branch. Nenhuma alteração foi feita na `main`. Nenhuma tag, release ou publicação da aplicação foi criada. Último commit de código da camada de interação: `11e7615` (tratamento de falha de persistência sem notificação duplicada).
 - **Mockup Oficial de Referência:**
   - Arquivo `Painel Kanban de Tarefas Pastel.png`, localizado na Biblioteca do projeto Desafios Alura e consultado durante a revisão visual de 2026-11-02/03.
@@ -43,14 +43,28 @@
 - Calendário lateral com cabeçalho azul-marinho, mês, setas visuais e grade alinhada a novembro de 2025; criado painel de calendário em tela própria. Os controles de mês estavam desabilitados na versão demonstrativa; a navegação funcional foi implementada na Fase 5.
 - Resumo corrigido: 7 tarefas; 2 concluídas (29%) e 5 pendentes (71%), sendo pendentes a soma de A Fazer + Em Andamento. Restauradas duas barras de progresso independentes (concluídas e pendentes).
 - Rodapé recuperou o crédito completo “Desenvolvido com Python • Pyodide • ♥ Alura + Google for Startups”, com versão e última atualização à direita.
-- Criadas telas demonstrativas estáticas para Relatórios, Importar/Exportar e Configurações, além do Calendário. As telas de Relatórios e Importar/Exportar permanecem demonstrativas, conforme escopo da Fase 6; o calendário foi integrado funcionalmente na Fase 5.
+- Criadas telas demonstrativas estáticas para Relatórios, Importar/Exportar e Configurações, além do Calendário. Na Fase 6, Relatórios foi convertido em modal funcional e a tela Importar/Exportar recebeu ações de backup; Configurações permanece demonstrativa. O calendário foi integrado funcionalmente na Fase 5.
 - Workflow `41560866108` aprovado no commit `db37ac91`: Nu HTML Checker sem erros/avisos e auditoria de contraste aprovada. Inspeção visual manual e aceite do usuário ainda pendentes.
+
+## 2.2 Implementação da Fase 6 — 2026-11-03
+
+- `js/reports_ui.js`: modal de relatórios com indicadores dinâmicos e filtro opcional de conclusão por data inicial/final.
+- `js/backup_ui.js`: download JSON, seleção de arquivo, validação, confirmação com contadores e importação.
+- `src/todolist/schema.py`: leitura estrita de JSON, rejeição de chaves duplicadas/constantes não padronizadas, validação do envelope e preparação do estado importado. O timestamp global é gerado pelo Python somente após confirmação.
+- `js/pyodide_bridge.js` e `js/app.js`: integração dos relatórios e backups com o núcleo Python e a persistência preventiva existente.
+- `index.html` e `css/components.css`: Relatórios abre em modal; Importar/Exportar permanece como tela própria, com diálogos de operação e confirmação.
+- `tests/test_schema.py`: novos testes de preparação e validação estrita da importação.
+- `.github/workflows/validar-html.yml`: inclui a branch da Fase 6 e a sintaxe dos novos módulos JavaScript. `.github/workflows/testes-python.yml`: executa `pytest && python scripts/verify_coverage.py` em Python 3.14.
+- **Testes automatizados:** execução local informada pelo usuário: 60 testes aprovados; cobertura de linhas de 96,10% (meta mínima de 90%) e cobertura de branches de 92,72% (meta mínima de 85%). O script de verificação de cobertura concluiu com sucesso.
+- **Homologação manual:** CA6.1–CA6.7 aprovados, incluindo a preservação das 30 tarefas nos cenários de rejeição e o cancelamento sem alteração dos dados. Na validação posterior do ajuste de usabilidade, o usuário aprovou a importação válida e a mensagem amigável para schema diferente de 1.0, chave inválida e valor inválido. Detalhes na Seção 12.
+- **Homologação manual:** CA6.8 aprovado em 2026-11-03. Durante a importação de um backup válido diferente do estado atual, foi simulada falha de `Storage.prototype.setItem` com `QuotaExceededError`. A aplicação informou que a substituição não foi concluída. As comparações `JSON.stringify(window.kanbanApp.getState()) === window.estadoAntesCA68` e `localStorage.getItem("kanban_app_state") === window.storageAntesCA68` retornaram `true`; o usuário confirmou que o quadro visual permaneceu inalterado. O método original de `Storage.prototype.setItem` e as variáveis temporárias foram restaurados/removidos ao final.
+- **Situação da Fase 6:** CA6.1–CA6.8 aprovados. CA6.9 (regressão integrada) e CA6.10 (workflows) foram transferidos para o encerramento do projeto, após os testes específicos da Fase 7; não bloqueiam o início da Fase 7.
 
 ## 3. Estado da Governança Documental
 
 A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
-- **`docs/REQUISITOS.md`:** Atualizado (Versão 1.7 — RNF06 alinhado aos critérios normativos de contraste WCAG 2.2 AA).
-- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 2.1 — plano aprovado; situação da Etapa 4 e autorização da Fase 1 alinhadas ao estado real, com registro da revisão corretiva).
+- **`docs/REQUISITOS.md`:** Atualizado (Versão 1.8 — inclusão do RF16 para seleção e exclusão coletiva).
+- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 3.3 — Fase 7 e critérios finais CA7.10–CA7.12; regressão integrada, workflows e validação de segurança transferidos para o encerramento do projeto).
 - **`docs/ESTADO-ATUAL.md`:** Atualizado com o estado operacional corrente (este documento).
 - **`README.md`:** Atualizado com tecnologias, estrutura do projeto, instruções de execução, testes, roteiro manual da Fase 2 e roteiro de inspeção visual da Fase 3.
 - **`CHANGELOG.md`:** Registra as alterações implementadas por fase.
@@ -66,22 +80,23 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | **Etapa 2 — Planejamento Funcional** | **Concluída e Aprovada** | Especificação consolidada de RF01–RF15, RNF01–RNF07 e regras de negócio. |
 | **Etapa 3 — Arquitetura Técnica** | **Concluída e Aprovada** | Sete decisões técnicas aprovadas, arquitetura modular e critérios de testes definidos. |
 | **Etapa 4 — Plano de Implementação** | **Concluída e Aprovada** | Plano de Implementação (versão 2.1) formalmente aprovado pelo usuário. |
-| **Etapa 5 — Implementação Controlada** | **Em andamento** | Fase 1 concluída e validada; Fase 2 implementada, com validação manual parcial; Fase 3 implementada e inspeção visual aprovada; Fase 4 implementada e validada funcionalmente pela API JS/Python, com auditoria de rede parcial; Fase 5 implementada na branch `fase-5-interacoes`, com validação manual parcial e pendências descritas nesta seção; Fase 6 não iniciada. |
+| **Etapa 5 — Implementação Controlada** | **Em andamento** | Fases 1 a 6 implementadas, com pendências de homologação já registradas; Fase 7 planejada e aprovada, com implementação não iniciada. |
 | ↳ *Fase 1: Domínio Python e Testes* | **Concluída e Validada** | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados. Após a revisão corretiva, o procedimento oficial aprovou 48/48 testes, com 96,16% de cobertura de linhas e 92,78% de branches. |
 | ↳ *Fase 2: HTML e Acessibilidade* | **Implementada; validação manual parcial** | `index.html` contém estrutura semântica, três colunas, widgets, formulários, seis diálogos nativos, template de cartão, nomes acessíveis, atalhos e gerenciamento de foco. Foram aprovadas 20 verificações automatizadas gerais em Chromium; os seis diálogos também foram exercitados individualmente. Nu HTML Checker: execução `41520632228`, zero erros e zero avisos. Na verificação manual desta sessão: `Tab`, `Shift + Tab`, `Enter`, `Espaço`, `Ctrl + K`, foco inicial/contenção/restauração no diálogo Nova Tarefa e fechamento desse diálogo por `Esc` aprovados pelo usuário. Menu contextual não testado: controle `⋮` está desativado; usuário também identificou divergência visual do ícone em relação ao mockup. Inspeção visual dos rótulos/nome dos controles sem problemas aparentes, mas leitor de tela não testado. Validação formal da fase permanece parcial; itens não verificados não são considerados aprovados. |
 | ↳ *Fase 3: CSS e Validação Visual* | **Implementada; inspeção visual manual concluída** | Refinamentos visuais e mocks estáticos mantidos. Navegação lateral recolhível em telas de até 960 px, com fechamento por `Esc`, clique no fundo e seleção de seção, restauração e contenção de foco; ícone `⋮` ajustado visualmente, sem ativar o menu contextual. Usuário aprovou Desktop, Tablet (1024 × 768) e Mobile (390 × 844), nos temas Claro e Escuro. Teste manual de `prefers-reduced-motion` também aprovado. Workflow `41553398236`: 25 combinações de contraste aprovadas, zero reprovações e Nu HTML Checker sem erros/avisos. CA3.1–CA3.5 considerados atendidos conforme as evidências registradas; não implica validação funcional das telas demonstrativas. |
 | ↳ *Fase 4: WebAssembly e Persistência* | **Implementada; validação funcional concluída, CA4.1 parcialmente verificado** | Pyodide 314.0.7 e importação dos cinco módulos confirmados. Criação, edição, movimentação e exclusão executadas pela API JS/Python; persistência, timestamp e recuperação após recarga confirmados nas quatro operações. Falhas simuladas nas quatro operações preservaram memória e armazenamento; notificação visual observada na criação. CA4.2–CA4.6 atendidos conforme as evidências registradas. No GitHub Pages, o usuário confirmou o carregamento e observou, no filtro Fetch/XHR durante a carga, uma requisição ao CDN jsDelivr para `pyodide-lock.json` (HTTP 200), sem chamadas a APIs de backend nessa amostra. Como a auditoria ficou restrita ao filtro e ao período observado, CA4.1 permanece parcialmente verificado, não homologado integralmente. |
 | ↳ *Fase 5: Interações (Pointer Events)* | **Implementada; validação manual parcial** | CA5.2 a CA5.7 aprovados nos cenários exercitados, exceto CA5.1, que permanece parcial por falta de teste de toque. Mouse e alternativa acessível pelo menu foram aprovados. CA5.5 aprovado no cenário exercitado. Após observação de usabilidade com 10 tarefas no mesmo dia, foi implementada rolagem vertical interna no popover; validação visual com listas extensas e em viewport móvel ainda pendente. Correção do menu contextual, datas relativas, destaque de vencidas e remoção da mensagem transitória de carregamento foram implementados e validados pelo usuário. A implementação da Fase 5 está concluída; aceite integral aguarda teste de toque em CA5.1. |
-| ↳ *Fase 6: Relatórios e Backup JSON* | Não iniciada | Modal de relatórios, exportação e importação atômica estrita. |
-| **Etapa 6 — Validação Final** | **Não iniciada** | Homologação integrada e testes de aceitação. |
+| ↳ *Fase 6: Relatórios e Backup JSON* | **Implementada; CA6.1–CA6.8 aprovados** | Mensagem amigável para rejeição de JSON inválido implementada e validada pelo usuário. CA6.9 e CA6.10 transferidos para o encerramento do projeto como CA7.10 e CA7.11; não bloqueiam a Fase 7. Testes automatizados locais informados: 60 aprovados, cobertura de linhas 96,10% e branches 92,72%. Consulte a Seção 12. |
+| ↳ *Fase 7: Seleção e Exclusão Coletiva* | **Planejada e aprovada; implementação não iniciada** | Seleção múltipla de tarefas em quaisquer colunas e exclusão coletiva com confirmação. Checkbox será controle de seleção, independente do tick de conclusão. Inclui contagem, limpeza da seleção, persistência preventiva, rollback e testes. Não contempla movimentação ou outras operações coletivas. |
+| **Etapa 6 — Validação Final** | **Pendente; após a Fase 7** | CA7.10 regressão integrada RF01–RF16 e RNF01–RNF07; CA7.11 workflows GitHub; CA7.12 validação de segurança com escopo documentado. |
 
 ---
 
 ## 5. Matriz de Rastreabilidade
 
 - **Planejado:** Aplicação To-Do Kanban estática com Python via WebAssembly (Pyodide), 3 colunas, drag and drop via Pointer Events, calendário integrado, métricas em tempo real e backup JSON.
-- **Aprovado:** Versão 1.7 de Requisitos (RNF06 alinhado à WCAG 2.2 AA), Etapa 3 (Arquitetura Técnica) e Etapa 4 (Plano de Implementação, versão 2.1) formalmente aprovadas.
-- **Implementado:** Em 2026-11-03, a interface da Fase 3 recebeu refinamento visual e dados demonstrativos estáticos para tarefas, calendário, resumo e status. Na branch `revisao-visual-d83bbee`, a correção posterior adicionou navegação lateral recolhível em telas de até 960 px e ajustou o símbolo `⋮`; o controle contextual estava desabilitado nessa revisão visual; foi ativado na implementação da Fase 5. Fase 1 implementada: pacote Python `src/todolist/`, configuração, testes e script de cobertura. Fase 2 implementada em `index.html`; workflow Nu HTML Checker criado. Fase 4 implementada na branch `fase-4-pyodide-persistencia`, com ponte JS/Python, Pyodide e persistência local; testes funcionais da API concluídos. Fase 5 implementada na branch `fase-5-interacoes`, com validação manual parcial; Fase 6 não iniciada.
+- **Aprovado:** Versão 1.8 de Requisitos (RF16 para seleção e exclusão coletiva), Etapa 3 (Arquitetura Técnica), Etapa 4 (Plano de Implementação) e Fase 7 (escopo funcional aprovado; implementação não iniciada).
+- **Implementado:** Em 2026-11-03, a interface da Fase 3 recebeu refinamento visual e dados demonstrativos estáticos para tarefas, calendário, resumo e status. Na branch `revisao-visual-d83bbee`, a correção posterior adicionou navegação lateral recolhível em telas de até 960 px e ajustou o símbolo `⋮`; o controle contextual estava desabilitado nessa revisão visual; foi ativado na implementação da Fase 5. Fase 1 implementada: pacote Python `src/todolist/`, configuração, testes e script de cobertura. Fase 2 implementada em `index.html`; workflow Nu HTML Checker criado. Fase 4 implementada na branch `fase-4-pyodide-persistencia`, com ponte JS/Python, Pyodide e persistência local; testes funcionais da API concluídos. Fase 5 implementada na branch `fase-5-interacoes`, com validação manual parcial; Fase 6 implementada na branch `fase-6-relatorios-backup`, com validação automatizada e manual pendentes. A Fase 7 está apenas planejada e aprovada; nenhum código foi alterado para ela.
 - **Testado:** Fase 1: procedimento oficial `pytest && python scripts/verify_coverage.py`, com 48/48 testes aprovados, 96,16% de cobertura de linhas e 92,78% de branches. Fase 2: 20 verificações automatizadas em Chromium foram aprovadas; o usuário confirmou manualmente parte dos comportamentos de teclado e foco. Fase 3: usuário aprovou Desktop, Tablet (1024 × 768) e Mobile (390 × 844), nos temas Claro e Escuro, e confirmou o funcionamento com `prefers-reduced-motion` ativo. Não houve teste com leitor de tela. O ícone `⋮` foi implementado, mas não há confirmação isolada de sua aparência.
 - **Validado:** critérios CA1.1 a CA1.7 aceitos conforme evidências informadas pelo usuário. Na Fase 2, CA2.1 foi verificado por inspeção estrutural e automatização no navegador; CA2.2 foi validado pelo Nu HTML Checker na execução `41520632228`, sem erros ou avisos. A verificação manual confirmou parte de CA2.3 e CA2.4; CA2.5 e CA2.6 permanecem parcialmente pendentes, sem aceite formal da Fase 2. Na Fase 3, inspeção visual manual aprovada pelo usuário nos três breakpoints (Desktop, Tablet 1024 × 768 e Mobile 390 × 844), nos temas Claro e Escuro; `prefers-reduced-motion` também testado e aprovado. O menu mobile teve funcionamento confirmado pelo usuário. O teste isolado da aparência do ícone `⋮` não foi confirmado.
 - **Commitado / Enviado ao GitHub:** Revisão visual registrada diretamente na branch remota `main`: `d02c4fe` (estrutura visual), `b5c3200` (tema e foco), `6861fc8` (ajustes de cabeçalho), `9c2bd97` (mocks e refinamento visual), `740aa60` (semântica e rodapé) e `98078d1` (correção de acessibilidade). O workflow `41553398236`, acionado pelo commit `98078d1`, concluiu com sucesso: 25 combinações de contraste aprovadas, zero reprovações, Nu HTML Checker com zero erros e zero avisos. A execução anterior `41553256719` falhou por atributos ARIA inválidos nos mocks; a correção foi registrada em `98078d1`. Fase 2 registrada diretamente na branch remota `main`. O workflow Nu HTML Checker foi adicionado no commit `11f6cdf`, seus diagnósticos foram aprimorados em `58558ad` e as correções HTML foram registradas em `a6c7495`. Na Fase 3, os arquivos `css/variables.css`, `css/base.css`, `css/layout.css`, `css/kanban.css`, `css/components.css` e `scripts/check_contrast.py` foram criados; `index.html` passou a carregar os estilos e a alternar temas. O workflow `.github/workflows/validar-html.yml` foi ampliado para auditar contraste e considerar alterações em CSS. A cópia local ainda precisa ser sincronizada pelo usuário. Nenhuma tag, release ou publicação da aplicação foi criada.
@@ -102,7 +117,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 7. Informações e Pendências de Confirmação
 
-- **Ambiente Git:** repositório remoto `josearodrigues/alura-todolist-kanban`, branch de trabalho `fase-5-interacoes`. A situação da cópia local não foi verificada nesta sessão. O registro histórico de validação da Fase 4 foi executado pelo usuário no navegador local, com a aplicação servida por HTTP. Naquela ocasião, o usuário confirmou a cópia local alinhada à branch remota e sem alterações pendentes. Isso não confirma o estado local atual.
+- **Ambiente Git:** repositório remoto `josearodrigues/alura-todolist-kanban`, branch de trabalho `fase-6-relatorios-backup`. A situação da cópia local não foi verificada nesta sessão. O registro histórico de validação da Fase 4 foi executado pelo usuário no navegador local, com a aplicação servida por HTTP. Naquela ocasião, o usuário confirmou a cópia local alinhada à branch remota e sem alterações pendentes. Isso não confirma o estado local atual.
 - **Fase 4 — implementação:** Pyodide 314.0.7 inicializado; cinco módulos Python carregados no filesystem virtual; pacote `todolist` importado; API disponível em `window.kanbanApp`.
 - **Fase 4 — operações e persistência:** criação, edição, movimentação e exclusão executadas pela API JS/Python. O conteúdo de `kanban_app_state` e o timestamp foram conferidos após as operações. Recuperação após recarga confirmada para criação, edição, movimentação e exclusão. As três últimas recuperações foram verificadas nesta sessão, com resultados apresentados pelo usuário no console.
 - **Fase 4 — falha de persistência:** `Storage.prototype.setItem` foi interceptado temporariamente para simular falha nas quatro operações. Em todos os casos, a alteração foi impedida e o estado anterior permaneceu em memória e no `localStorage`. A notificação de erro foi observada na interface durante o teste de criação; não há confirmação visual independente para as outras três operações.
@@ -115,11 +130,9 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 8. Próxima Ação Recomendada
 
-1. Realizar, quando houver dispositivo disponível, o teste manual de drag and drop por toque exigido em CA5.1; registrar o resultado por dispositivo.
-2. O cenário de grande volume no popover permanece como verificação adicional não realizada, sem defeito identificado e sem constituir critério de aceite explícito.
-3. Não iniciar a Fase 6 até concluir a revisão e o aceite da Fase 5.
-5. Manter CA4.1 como parcialmente verificado; não antecipar `replaceState` nem importação, pertencentes à Fase 6.
-
+1. Iniciar a Fase 7 — Seleção e Exclusão Coletiva, conforme escopo aprovado e critérios CA7.1–CA7.9.
+2. Manter a regressão integrada (CA7.10), a validação dos workflows (CA7.11) e a validação de segurança (CA7.12) para o encerramento, após os testes específicos da Fase 7.
+3. Após concluir e homologar a Fase 7 e as validações finais, preparar a integração à `main` e a limpeza das branches temporárias. As operações Git serão orientadas, mas executadas pelo usuário.
 ---
 
 ## 9. Registro de Validação Local — Fase 4 (2026-11-03)
@@ -183,3 +196,51 @@ Os resultados abaixo foram informados e confirmados pelo usuário durante a vali
 | Carregamento inicial | Mensagem transitória “Carregando tarefas...” e indicador de status do Pyodide. | Usuário decidiu remover a mensagem transitória por provocar deslocamento vertical do Kanban. A mensagem e suas referências foram removidas de `index.html`, `js/kanban_ui.js` e `js/app.js`; usuário confirmou após recarga que o Kanban funciona sem o deslocamento e que o indicador de status do Pyodide continua funcionando (RNF07). |
 
 **Estado de validação:** implementação da Fase 5 concluída. CA5.2 a CA5.7 aprovados nos cenários exercitados. CA5.1 permanece parcialmente validado: mouse e alternativa pelo menu aprovados; teste por toque pendente, conforme critério explícito. Caneta não testada. A rolagem vertical interna foi implementada para limitar a altura da lista no popover; a validação com mais de 10 tarefas e em viewport móvel permanece pendente. A remoção da mensagem transitória de carregamento foi validada após recarga; o indicador de status do Pyodide permanece funcional. O aceite integral da Fase 5 depende do teste de toque.
+
+---
+
+## 11. Decisão aprovada — Fase 7: Seleção e Exclusão Coletiva (2026-11-03)
+
+- **Decisão:** incluir a Fase 7 no plano, restrita à seleção múltipla e exclusão coletiva de tarefas.
+- **Experiência do usuário:** o checkbox dos cartões será um controle real de seleção. A seleção não representa conclusão; o tick já existente continuará identificando tarefas concluídas, de forma independente.
+- **Comportamento aprovado:** permitir selecionar tarefas em diferentes colunas/estados; exibir quantidade selecionada; oferecer limpeza da seleção; solicitar confirmação com a quantidade selecionada; excluir somente após confirmação.
+- **Integridade:** a seleção é temporária e não integra os dados persistidos. O cancelamento preserva dados e seleção. A seleção só será limpa após persistência bem-sucedida. Falha de persistência preserva o estado anterior e a seleção. A ordenação das colunas afetadas deverá continuar contígua.
+- **Limites:** não implementar movimentação coletiva, edição coletiva ou qualquer outra operação em lote nesta fase.
+- **Situação:** aprovada e documentada; implementação, testes e validação ainda não iniciados.
+
+
+## 12. Registro de Homologação Manual — Fase 6 (2026-11-03)
+
+Os resultados abaixo foram informados pelo usuário durante a execução dos testes no navegador. A aprovação se limita aos cenários efetivamente exercitados.
+
+| Critério | Verificação e evidência | Resultado |
+|---|---|---|
+| CA6.1 — Relatórios | Com massa de 30 tarefas: total 30; A Fazer 10 (33,3%); Em Andamento 8 (26,7%); Concluídas 12 (40,0%). | **Aprovado pelo usuário** |
+| CA6.2 — Exportação JSON | Arquivo exportado inspecionado: schema 1.0, identificação da aplicação, timestamp ISO, total 30, 30 tarefas, IDs únicos e ordenação contígua por coluna. | **Aprovado após inspeção** |
+| CA6.3 — Importação válida | Aplicação informou sucesso na substituição do estado. A inspeção do fluxo de código confirmou encaminhamento para substituição integral do estado e persistência na chave `kanban_app_state`; não é uma operação de acréscimo. | **Aprovado pelo usuário** |
+| CA6.4 — Schema incompatível | Arquivo com `versao_schema: "9.9"` foi rejeitado; a validação informou que a versão esperada é `"1.0"`. O usuário confirmou que as 30 tarefas permaneceram intactas. | **Aprovado pelo usuário** |
+| CA6.5 — Chave JSON malformada | Chave com aspas incorretas foi rejeitada pelo parser (`JSONDecodeError: Expecting ':' delimiter`, linha 21, coluna 17). O usuário confirmou que as 30 tarefas permaneceram intactas. | **Aprovado pelo usuário** |
+| CA6.6 — Valor JSON malformado | Valor contendo caractere de controle inválido foi rejeitado pelo parser (`JSONDecodeError: Invalid control character`, linha 22, coluna 85); o usuário confirmou que as 30 tarefas permaneceram intactas após a rejeição. | **Aprovado pelo usuário** |
+| CA6.7 — Cancelamento da importação | Cenário de cancelamento executado; os dados existentes permaneceram inalterados. Critério funcional aprovado. | **Aprovado pelo usuário** |
+| CA6.8 — Falha de persistência/rollback | Falha `QuotaExceededError` simulada durante a importação; a aplicação informou que a substituição não foi concluída. As comparações do estado em memória e do `localStorage` retornaram `true`, e o usuário confirmou que o quadro visual permaneceu inalterado. O método original de `Storage.prototype.setItem` foi restaurado. | **Aprovado pelo usuário** |
+
+### Observação de usabilidade
+
+- **Rejeição de JSON inválido (usabilidade):** nos cenários de rejeição, a interface exibia traceback completo do Pyodide/Python. A mensagem apresentada ao usuário deve ser objetiva e amigável; detalhes técnicos permanecem disponíveis no console para diagnóstico. Após a implementação em `js/backup_ui.js`, o usuário validou a mensagem amigável nos cenários de schema diferente de 1.0, chave inválida e valor inválido. A importação válida também foi aprovada.
+- **Cancelamento (CA6.7):** comportamento funcional aprovado; não há ajuste pendente neste critério.
+
+### Limites e pendências
+
+- **CA6.8 — Falha de persistência/rollback:** aprovado no cenário de falha simulada durante a importação, conforme evidências registradas na tabela.
+- **CA6.9 e CA6.10:** transferidos para o encerramento do projeto como CA7.10 (regressão integrada) e CA7.11 (workflows), após a implementação e os testes específicos da Fase 7.
+- A execução local informada de 60 testes, com 96,10% de cobertura de linhas e 92,72% de branches, permanece registrada separadamente; não substitui os critérios manuais pendentes nem a conferência dos workflows.
+
+
+## 13. Replanejamento do encerramento do projeto — 2026-11-03
+
+- CA6.1–CA6.8 permanecem aprovados; a Fase 6 não fica bloqueada pela regressão integrada ou pela validação dos workflows.
+- CA6.9 e CA6.10 foram transferidos para o encerramento, após os testes específicos da Fase 7, como CA7.10 e CA7.11.
+- **CA7.10:** regressão integrada RF01–RF16 e RNF01–RNF07, reutilizando evidências anteriores válidas e concentrando novos testes nos impactos, integrações e lacunas. Não repetir indiscriminadamente todos os testes de aceite.
+- **CA7.11:** executar e validar os workflows GitHub no estado final, registrando workflow, branch, commit e resultado. Não declarar aprovação sem evidência no GitHub Actions.
+- **CA7.12:** validação de segurança com escopo, método, evidências, achados, severidade, correções e retestes documentados. A conclusão deve refletir apenas o escopo efetivamente avaliado; não denominar pentest ou auditoria abrangente sem cobertura correspondente.
+- Pendências de acessibilidade e compatibilidade já registradas (toque em CA5.1, leitor de tela, zoom de 200% inconclusivo, rolagem do popover com mais de 10 tarefas e viewport móvel, e auditoria de rede RNF01 parcial) não foram convertidas em aprovações e devem ser reavaliadas conforme impacto e escopo da regressão final.

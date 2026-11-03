@@ -8,8 +8,8 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fases 1 a 4 conforme evidências registradas; implementação da Fase 5 concluída na branch `fase-5-interacoes`, com aceite manual parcial pendente do teste de toque previsto em CA5.1; Fase 6 pendente]
-- **Etapa 6 — Validação final e homologação:** [Pendente]
+- **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Fases 1 a 6 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; CA6.1–CA6.8 aprovados; Fase 7 planejada e aprovada, implementação não iniciada]
+- **Etapa 6 — Validação final e homologação:** [Pendente — após os testes específicos da Fase 7, executar regressão integrada RF01–RF16 e RNF01–RNF07, validar workflows GitHub e realizar validação de segurança]
 
 ---
 
@@ -158,7 +158,7 @@ Esta seção registra as sete decisões técnicas formalmente aprovadas que defi
 
 ## 3. Fases de Implementação Controlada
 
-A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e verificáveis:
+A execução da Etapa 5 será dividida em sete fases pequenas, sequenciais e verificáveis:
 
 ### Fase 1 — Fundação do Domínio Python e Testes Automatizados
 - **Objetivo:** Construir o pacote `todolist` com regras de negócio, manipulação de estado, cálculos estatísticos e validação estrita de schema JSON em Python puro.
@@ -365,13 +365,13 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 
 ### Fase 6 — Relatórios, Backup JSON (Import/Export) e Homologação Final
 - **Objetivo:** Implementar o modal de relatórios com métricas dinâmicas em Python, o download de backup JSON versionado e a importação com validação atômica preventiva e confirmação explícita.
-- **Arquivos Previstos:** `js/reports_ui.js`, `js/backup_ui.js`.
+- **Arquivos previstos e implementados:** `js/reports_ui.js`, `js/backup_ui.js`, ajustes em `js/app.js`, `js/pyodide_bridge.js`, `index.html`, `css/components.css`, `src/todolist/schema.py`, `src/todolist/__init__.py` e `tests/test_schema.py`; workflows de validação ampliados.
 - **Atividades:**
   - Integrar o modal de relatórios com os cálculos estatísticos do núcleo Python (incluindo filtro por `data_conclusao`).
   - Implementar geração e download do arquivo JSON de backup estruturado (`versao_schema: "1.0"`).
   - Implementar upload e validação de schema antes da substituição de dados.
   - Implementar modal de confirmação com contadores de tarefas (atual vs. nova).
-- **Dependências:** Conclusão de todas as fases anteriores.
+- **Dependências:** Núcleo Python, ponte Pyodide, persistência preventiva e componentes de interface das fases anteriores.
 - **Critérios e Evidências de Conclusão:**
   1. Conferência das métricas do relatório com conjunto de dados controlado.
   2. Validação do schema JSON gerado na exportação.
@@ -380,6 +380,8 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
   5. Teste de cancelamento da importação comprovando ausência de alteração.
   6. Teste de falha de gravação durante a importação comprovando que o estado anterior é preservado e que os novos dados não são apresentados como salvos.
   7. Regressão integrada verificando os requisitos funcionais (RF01–RF15) e não funcionais (RNF01–RNF07) conforme a matriz de rastreabilidade, sem substituir os testes específicos das fases anteriores.
+- **Implementação registrada:** modal de relatórios com filtro de conclusão; exportação JSON; importação estrita com rejeição de chaves duplicadas/constantes inválidas; modal de confirmação com contadores; timestamp global gerado no momento da confirmação; substituição pelo fluxo transacional existente.
+- **Estado de validação:** CA6.1–CA6.7 aprovados. Foi implementado e validado pelo usuário o ajuste de usabilidade para apresentar mensagem amigável na rejeição de JSON inválido, mantendo o detalhe técnico no console. CA6.8 aprovado em teste manual de falha simulada durante a importação; CA6.9–CA6.10 permanecem pendentes. A execução local de 60 testes e as coberturas de 96,10% (linhas) e 92,72% (branches) foi informada pelo usuário; a conferência dos workflows ainda é necessária. Não declarar a Fase 6 homologada antes da conclusão dos critérios pendentes.
 
 #### Critérios de Aceite — Fase 6
 
@@ -388,19 +390,57 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 | CA6.1 | Métricas do modal de relatórios calculadas corretamente pelo núcleo Python: total, por estado, por prioridade, atrasadas, vencem hoje, vencem nos próximos 7 dias e concluídas no período por `data_conclusao` (RF12). | Conferência com conjunto de dados controlado. |
 | CA6.2 | Exportação gera arquivo JSON com envelope de exatamente 5 campos e lista de tarefas com exatamente 10 atributos cada (RF13, Seção 5.1–5.2 REQUISITOS.md). | Validação do schema do arquivo gerado. |
 | CA6.3 | Importação com arquivo válido substitui dados integralmente, exibe modal de confirmação com contadores e atualiza o quadro imediatamente após confirmação (RF14). | Teste manual documentado. |
-| CA6.4 | Importação com campos desconhecidos rejeitada integralmente; estado anterior preservado (RF14). | Teste manual com arquivo inválido. |
-| CA6.5 | Cancelamento da importação não altera nenhum dado (RF14). | Teste manual documentado. |
-| CA6.6 | Falha de gravação durante importação preserva estado anterior em memória e na interface (RNF04, Seção 6.3 REQUISITOS.md). | Teste de falha simulada. |
-| CA6.7 | Regressão integrada de RF01–RF15 e RNF01–RNF07 executada e aprovada conforme a matriz de rastreabilidade (Seção 5 deste documento). | Registro dos resultados da regressão por requisito. |
-| CA6.8 | Metas de cobertura atendidas: `percent_covered` $\ge 90{,}0\%$ e `percent_branches_covered` $\ge 85{,}0\%$ (RNF03). | Saída de `scripts/verify_coverage.py`. |
+| CA6.4 | Arquivo com versão de schema incompatível é rejeitado integralmente e o estado anterior permanece intacto. | Teste manual com versão não suportada. |
+| CA6.5 | JSON com chave malformada é rejeitado integralmente e o estado anterior permanece intacto. | Teste manual com sintaxe inválida na chave. |
+| CA6.6 | JSON com valor malformado é rejeitado integralmente e o estado anterior permanece intacto. | Teste manual com valor inválido; confirmação da preservação dos dados. |
+| CA6.7 | Cancelamento da importação não altera os dados existentes. | Teste manual documentado; aprovado pelo usuário. |
+| CA6.8 | Falha de gravação durante a importação preserva o estado anterior em memória, na interface e no armazenamento (RNF04). | **Aprovado pelo usuário:** falha `QuotaExceededError` simulada; mensagem de não conclusão; comparações de memória e `localStorage` retornaram `true`; quadro visual permaneceu inalterado. Método original de `Storage.prototype.setItem` restaurado ao final. |
+| CA6.9 | Transferido para o encerramento do projeto após os testes específicos da Fase 7; não bloqueia a conclusão da Fase 6. | Será executado como CA7.10, com reaproveitamento de evidências anteriores válidas e testes direcionados aos impactos e lacunas. |
+| CA6.10 | Transferido para o encerramento do projeto após os testes específicos da Fase 7; não bloqueia a conclusão da Fase 6. | Será executado como CA7.11, com evidências do GitHub Actions no estado final. |
+
+**Qualidade automatizada:** o procedimento local `pytest && python scripts/verify_coverage.py` foi informado com 60 testes aprovados, 96,10% de cobertura de linhas e 92,72% de branches. Esses números são registrados como evidência automatizada já obtida, sem substituir CA6.8–CA6.10.
 
 ---
+
+### Fase 7 — Seleção e Exclusão Coletiva de Tarefas
+
+- **Objetivo:** permitir que o usuário selecione múltiplas tarefas em diferentes colunas e as exclua em uma única operação, com confirmação explícita e garantia de integridade dos dados.
+- **Escopo aprovado:** seleção/deseleção individual; seleção simultânea entre colunas e estados; indicação da quantidade selecionada; ação para limpar a seleção; confirmação com a quantidade de tarefas; exclusão coletiva. O checkbox será um controle real de seleção e permanecerá independente do indicador visual (tick) de conclusão.
+- **Fora do escopo:** movimentação coletiva, edição coletiva, alteração coletiva de prioridade ou vencimento e qualquer outra operação em lote.
+- **Arquivos previstos:** a definir após inspeção da implementação existente. Áreas potencialmente envolvidas: `js/kanban_ui.js`, `js/app.js`, `js/storage.js`, `src/todolist/services.py`, CSS e testes. A definição final deverá respeitar a arquitetura atual e evitar alterações desnecessárias.
+- **Atividades:**
+  1. Implementar seleção e desseleção de tarefas na interface, inclusive em cartões de tarefas concluídas.
+  2. Manter a seleção temporária no frontend, sem persistir esse estado no backup ou no `localStorage`.
+  3. Exibir a quantidade selecionada e disponibilizar ação para limpar a seleção.
+  4. Apresentar confirmação explícita com a quantidade de tarefas selecionadas; cancelar não altera dados nem seleção.
+  5. Implementar no domínio Python uma operação única de exclusão para o conjunto de IDs selecionados, validando os identificadores e recalculando a ordenação das colunas afetadas.
+  6. Integrar a operação à persistência preventiva existente: somente confirmar a exclusão e limpar a seleção após gravação bem-sucedida.
+  7. Em falha de persistência, preservar integralmente o estado anterior em memória e na interface, mantendo a seleção para nova tentativa.
+  8. Atualizar os cartões e contadores após sucesso, preservando os metadados das tarefas restantes, exceto os índices `ordem` necessários à contiguidade.
+  9. Implementar testes automatizados e validar teclado, foco, feedback e responsividade.
+- **Dependências:** conclusão da integração de persistência da Fase 4 e componentes de interface das Fases 2 e 5. A homologação da Fase 6 permanece uma pendência independente e não será considerada concluída por causa da Fase 7.
+- **Critérios de Aceite:**
+
+| # | Critério | Evidência |
+|---|----------|-----------|
+| CA7.1 | Selecionar e desselecionar individualmente tarefas por controle próprio, sem confundir seleção com conclusão. | Teste manual dos estados selecionado/não selecionado e concluído/pendente. |
+| CA7.2 | Selecionar simultaneamente tarefas de colunas e estados diferentes. | Cenário controlado com tarefas nas três colunas. |
+| CA7.3 | Exibir a quantidade correta de tarefas selecionadas e permitir limpar a seleção sem alterar os dados. | Conferência da contagem e teste da ação limpar seleção. |
+| CA7.4 | Exibir confirmação com a quantidade correta; cancelar preserva dados e seleção. | Testes manuais de confirmação e cancelamento. |
+| CA7.5 | Excluir somente as tarefas selecionadas em uma única operação e atualizar cartões e contadores. | Teste funcional com tarefas selecionadas e não selecionadas em todas as colunas. |
+| CA7.6 | Persistir a exclusão antes de confirmar a atualização da interface; em falha, preservar dados e seleção. | Teste de falha simulada de persistência e verificação de memória, armazenamento e interface. |
+| CA7.7 | Manter a ordenação contígua nas colunas afetadas e preservar os metadados das tarefas restantes, exceto `ordem`. | Inspeção do estado persistido antes e depois da exclusão coletiva. |
+| CA7.8 | Testes automatizados aprovados e metas do RNF03 mantidas. | Saída de `pytest && python scripts/verify_coverage.py`. |
+| CA7.9 | Operação acessível por teclado, com foco e feedback adequados, e interface responsiva. | Checklist manual de teclado/acessibilidade e inspeção nos breakpoints Desktop, Tablet e Mobile. |
+| CA7.10 | Após os testes específicos da Fase 7, executar regressão integrada RF01–RF16 e RNF01–RNF07, considerando evidências anteriores válidas e concentrando novos testes nos impactos, integrações e lacunas. | Matriz de rastreabilidade atualizada, resultados por requisito, evidências reutilizadas identificadas e retestes registrados. |
+| CA7.11 | Executar e validar os workflows GitHub no estado final do projeto. | Evidências no GitHub Actions com workflow, branch, commit e resultado de cada execução. |
+| CA7.12 | Realizar validação de segurança com escopo e método definidos, registrar achados, severidade, correções e retestes. | Relatório delimitado ao escopo efetivamente avaliado; não caracterizar como pentest ou auditoria abrangente sem cobertura correspondente. |
 
 ## 5. Matriz de Rastreabilidade de Requisitos
 
 Esta seção relaciona cada requisito aprovado à fase responsável pela sua implementação, ao critério de aceite correspondente e à evidência prevista para validação.
 
-### 5.1 Requisitos Funcionais (RF01–RF15)
+### 5.1 Requisitos Funcionais (RF01–RF16)
 
 | Req. | Descrição Resumida | Fase | Critério de Aceite | Evidência |
 |------|--------------------|------|--------------------|-----------|
@@ -419,6 +459,7 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | RF13 | Exportação JSON com envelope e tarefas conforme contrato de dados | Fase 1, Fase 6 | CA1.1, CA6.2 | Testes automatizados de schema; validação estrutural do arquivo exportado. |
 | RF14 | Importação com validação estrita, confirmação e rollback em falhas | Fase 1, Fase 6 | CA1.5, CA6.3, CA6.4, CA6.5, CA6.6 | Testes em `test_schema.py`; testes manuais por cenário de importação. |
 | RF15 | Alternância de tema claro/escuro com persistência da preferência | Fase 3, Fase 5 | CA3.2, CA5.7 | Inspeção visual nos dois temas; teste com recarga de página. |
+| RF16 | Seleção múltipla e exclusão coletiva com confirmação, persistência segura e rollback | Fase 7 | CA7.1–CA7.9 | Testes automatizados do domínio; testes manuais de seleção, cancelamento, exclusão, ordenação e falha de persistência; checklist de acessibilidade. |
 
 ### 5.2 Requisitos Não Funcionais (RNF01–RNF07)
 
@@ -456,3 +497,9 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **2.5** | 2026-11-03 | Consolidação da validação funcional da API da Fase 4; registro da auditoria Fetch/XHR no GitHub Pages (requisição ao CDN jsDelivr, HTTP 200, sem chamada a backend na amostra); explicitação de que a interface demonstrativa será integrada na Fase 5. | Distinguir validação do motor Python da integração da interface e registrar o alcance real da auditoria de rede. |
 | **2.6** | 2026-11-03 | Registro da validação manual parcial da Fase 5: operações e contadores, busca/atalhos, calendário/popover, resumo, tema e metadados de reordenação/no-op; explicitação das verificações ainda pendentes em CA5.1, CA5.3 e CA5.6. | Preservar evidências confirmadas, evitar repetição de testes e manter o estado real dos critérios de aceite. |
 | **2.7** | 2026-11-03 | Atualização das evidências da Fase 5: conclusão/reabertura e metadados (CA5.3), Foco de Hoje e divisão por zero (CA5.6), correção do menu contextual, datas relativas e destaque de vencidas; registro das pendências de toque/caneta e compatibilidade móvel; implementação de rolagem interna no popover após avaliação de usabilidade; remoção da mensagem de carregamento implementada e validada. | Manter o plano alinhado aos testes efetivamente confirmados e às pendências reais. |
+| **2.8** | 2026-11-03 | Inclusão da Fase 7 — Seleção e Exclusão Coletiva, com escopo restrito à exclusão em lote, requisito RF16, critérios CA7.1–CA7.9, confirmação explícita, persistência preventiva e preservação da seleção em caso de falha. | Incorporar a melhoria de experiência do usuário aprovada, mantendo a homologação da Fase 6 como atividade independente. |
+| **3.3** | 2026-11-03 | Replanejamento do encerramento: CA6.9 e CA6.10 transferidos para a conclusão do projeto como CA7.10 e CA7.11; inclusão da validação de segurança CA7.12 após os testes específicos da Fase 7. Regressão final deverá reutilizar evidências válidas e priorizar impactos e lacunas. | Evitar regressão prematura antes da última fase funcional e assegurar validação integrada, CI e segurança sobre o estado final. |
+| **3.2** | 2026-11-03 | Validação manual de CA6.8: falha simulada na gravação durante a importação preservou memória, `localStorage` e interface; método original restaurado. | Registrar a evidência do rollback e liberar a sequência para a Fase 7. |
+| **3.1** | 2026-11-03 | Validação manual pelo usuário da mensagem amigável na rejeição de JSON inválido: schema diferente de 1.0, chave inválida e valor inválido; importação válida também aprovada. | Registrar a conclusão do ajuste de usabilidade e liberar a sequência para CA6.8. |
+| **3.0** | 2026-11-03 | Correção da rastreabilidade da Fase 6: CA6.7 registrado como aprovado; ajuste de usabilidade separado para mensagens de rejeição de JSON inválido, com detalhes técnicos restritos ao console. | Refletir corretamente a pendência de interface sem reabrir o critério de cancelamento. |
+| **2.9** | 2026-11-03 | Reorganização dos critérios de homologação da Fase 6 para refletir os cenários executados: CA6.4–CA6.6 para rejeição de arquivos inválidos, CA6.7 para cancelamento, CA6.8 para falha de persistência, CA6.9 para regressão integrada e CA6.10 para workflows. | Corrigir a rastreabilidade entre os testes efetivamente executados, os critérios de aceite e as pendências restantes.

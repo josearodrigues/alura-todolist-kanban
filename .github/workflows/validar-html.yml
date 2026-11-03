@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - fase-5-interacoes
+      - fase-6-relatorios-backup
     paths:
       - "index.html"
       - "css/**"
@@ -15,6 +16,7 @@ on:
     branches:
       - main
       - fase-5-interacoes
+      - fase-6-relatorios-backup
     paths:
       - "index.html"
       - "css/**"
@@ -44,6 +46,8 @@ jobs:
           node --input-type=module --check < js/kanban_ui.js
           node --input-type=module --check < js/drag_drop.js
           node --input-type=module --check < js/calendar_ui.js
+          node --input-type=module --check < js/reports_ui.js
+          node --input-type=module --check < js/backup_ui.js
 
       - name: Auditar contraste WCAG 2.2 AA
         run: python scripts/check_contrast.py

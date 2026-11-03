@@ -231,3 +231,104 @@ def test_validar_envelope_rejeita_enum_nao_hashable_sem_excecao():
     assert valido is False
     assert "Erro na tarefa de índice 0" in mensagem
     assert "Campo 'estado' inválido" in mensagem
+
+
+def test_preparar_importacao_backup_valida_sem_alterar_timestamp_global():
+    """Valida e prepara tarefas sem alterar o timestamp antes da confirmação."""
+    import json
+    from todolist.schema import preparar_importacao_backup
+
+    tarefa = criar_tarefa_valida(UUID_1, "a_fazer", 0)
+    envelope = gerar_envelope_backup([tarefa], TS_EXPORT)
+    estado = preparar_importacao_backup(json.dumps(envelope))
+
+    assert estado == {
+        "tarefas": [tarefa],
+        "timestamp_ultima_alteracao": None,
+    }
+    assert envelope["data_exportacao"] == TS_EXPORT
+
+
+@pytest.mark.parametrize(
+    "conteudo",
+    [
+        "{",
+        '{"versao_schema":"1.0","versao_schema":"1.0"}',
+        '{"valor":NaN}',
+        "null",
+        "[]",
+    ],
+)
+def test_preparar_importacao_backup_rejeita_json_invalido_ou_ambiguo(conteudo):
+    """JSON malformado, chaves duplicadas, constantes e raízes inválidas são rejeitados."""
+    from todolist.schema import preparar_importacao_backup
+
+    with pytest.raises(ValueError):
+        preparar_importacao_backup(conteudo, TS_EXPORT)
+
+
+def test_preparar_importacao_backup_rejeita_envelope_estruturalmente_invalido():
+    """A preparação não contorna o contrato estrito do envelope."""
+    import json
+    from todolist.schema import preparar_importacao_backup
+
+    envelope = gerar_envelope_backup([], TS_EXPORT)
+    envelope["campo_extra"] = True
+
+    with pytest.raises(ValueError, match="campos desconhecidos"):
+        preparar_importacao_backup(json.dumps(envelope), TS_EXPORT)
+
+
+def test_preparar_importacao_backup_rejeita_timestamp_global_invalido():
+    """O timestamp global da importação também respeita ISO 8601 UTC com milissegundos."""
+    import json
+    from todolist.schema import preparar_importacao_backup
+
+    envelope = gerar_envelope_backup([], TS_EXPORT)
+
+    with pytest.raises(ValueError):
+        preparar_importacao_backup(json.dumps(envelope), "03/11/2026")
+
+
+def test_preparar_estado_importado_gera_timestamp_no_momento_da_confirmacao():
+    """O timestamp global é criado somente ao preparar a substituição confirmada."""
+    from todolist.schema import preparar_estado_importado
+
+    tarefa = criar_tarefa_valida(UUID_1, "a_fazer", 0)
+    timestamp_importacao = "2026-11-03T15:30:00.000Z"
+
+    estado = preparar_estado_importado([tarefa], timestamp_importacao)
+
+    assert estado["tarefas"] == [tarefa]
+    assert estado["timestamp_ultima_alteracao"] == timestamp_importacao
+
+
+def test_preparar_estado_importado_rejeita_tarefas_invalidas():
+    """A confirmação revalida o estado candidato antes de persistir."""
+    from todolist.schema import preparar_estado_importado
+
+    tarefa = criar_tarefa_valida(UUID_1, "a_fazer", 0)
+    tarefa["campo_extra"] = True
+
+    with pytest.raises(ValueError):
+        preparar_estado_importado([tarefa], TS_EXPORT)
+
+
+def test_preparar_importacao_backup_com_timestamp_opcional_valido():
+    """Permite validar envelope com timestamp fornecido sem alterar o arquivo original."""
+    import json
+    from todolist.schema import preparar_importacao_backup
+
+    envelope = gerar_envelope_backup([], TS_EXPORT)
+    estado = preparar_importacao_backup(json.dumps(envelope), TS_EXPORT)
+
+    assert estado["tarefas"] == []
+    assert estado["timestamp_ultima_alteracao"] == TS_EXPORT
+
+
+def test_preparar_importacao_backup_rejeita_conteudo_que_nao_e_texto():
+    """O serviço exige conteúdo textual para interpretar o documento JSON."""
+    from todolist.schema import preparar_importacao_backup
+
+    with pytest.raises(ValueError, match="deve ser texto"):
+        preparar_importacao_backup(None)

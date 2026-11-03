@@ -3,11 +3,17 @@ import {
   initializePythonRuntime,
   validateState,
   calculateMetrics,
+  calculateReport,
+  createBackup,
+  validateBackup,
+  prepareImportedState,
 } from "./pyodide_bridge.js";
 import { createKanbanUI } from "./kanban_ui.js";
 import { initializeDragDrop } from "./drag_drop.js";
 import { initializeCalendar } from "./calendar_ui.js";
 import { createStorage } from "./storage.js";
+import { initializeReportsUI } from "./reports_ui.js";
+import { initializeBackupUI } from "./backup_ui.js";
 
 const STORAGE = createStorage();
 let estadoAtual = { tarefas: [], timestamp_ultima_alteracao: null };
@@ -15,6 +21,7 @@ let runtimeDisponivel = false;
 let persistenciaDisponivel = false;
 let kanbanUI = null;
 let calendarioUI = null;
+let relatoriosUI = null;
 
 function copiarEstado(estado) {
   return {
@@ -191,6 +198,10 @@ function publicarApiAplicacao() {
       }
     },
     getMetrics: (dataLocal) => calculateMetrics(estadoAtual, dataLocal),
+    getReport: (dataLocal, periodoInicio, periodoFim) => calculateReport(estadoAtual, dataLocal, periodoInicio, periodoFim),
+    createBackup: () => createBackup(estadoAtual),
+    validateBackup: (conteudo) => validateBackup(conteudo),
+    prepareImportedState: (tarefas) => prepareImportedState(tarefas),
     validateState,
   });
 }
@@ -225,6 +236,11 @@ async function inicializarAplicacao() {
     }
 
     publicarApiAplicacao();
+    relatoriosUI = initializeReportsUI({
+      getReport: (dataLocal, inicio, fim) => window.kanbanApp.getReport(dataLocal, inicio, fim),
+    });
+    if (document.getElementById("dialog-relatorios")?.open) void relatoriosUI.refresh();
+    initializeBackupUI({ actions: window.kanbanApp, notify: notificarUsuario });
     kanbanUI = createKanbanUI({
       getState: () => estadoAtual,
       actions: window.kanbanApp,
@@ -348,7 +364,9 @@ async function inicializarAplicacao() {
         const openButton = event.target.closest("[data-dialog-open]");
         if (openButton) {
           const dialog = document.getElementById(openButton.dataset.dialogOpen);
-          if (dialog instanceof HTMLDialogElement && !dialog.open) {
+          if (openButton.dataset.dialogOpen === "dialog-relatorios" && relatoriosUI) {
+            relatoriosUI.open();
+          } else if (dialog instanceof HTMLDialogElement && !dialog.open) {
             dialog.showModal();
           }
           return;

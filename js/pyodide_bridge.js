@@ -73,6 +73,10 @@ _funcoes_kanban = (
     "excluir_tarefa",
     "validar_envelope_backup",
     "gerar_envelope_backup",
+    "calcular_relatorio_completo",
+    "obter_timestamp_utc_atual",
+    "preparar_importacao_backup",
+    "preparar_estado_importado",
 )
 all(callable(getattr(todolist, nome, None)) for nome in _funcoes_kanban)
 `);
@@ -99,6 +103,36 @@ def _kanban_dispatch(payload_json):
             "resumo": todolist.calcular_resumo_projeto(tarefas),
             "foco_hoje": todolist.calcular_foco_hoje(tarefas, data_local),
         }, ensure_ascii=False)
+
+    if operacao == "relatorio":
+        return json.dumps(
+            todolist.calcular_relatorio_completo(
+                tarefas,
+                dados["data_local_referencia"],
+                dados.get("periodo_conclusao_inicio"),
+                dados.get("periodo_conclusao_fim"),
+            ),
+            ensure_ascii=False,
+        )
+
+    if operacao == "exportar_backup":
+        timestamp_exportacao = todolist.obter_timestamp_utc_atual()
+        envelope = todolist.gerar_envelope_backup(tarefas, timestamp_exportacao)
+        valido, mensagem = todolist.validar_envelope_backup(envelope)
+        if not valido:
+            raise ValueError(mensagem)
+        return json.dumps(envelope, ensure_ascii=False)
+
+    if operacao == "validar_backup":
+        estado_candidato = todolist.preparar_importacao_backup(dados["conteudo"])
+        return json.dumps(estado_candidato, ensure_ascii=False)
+
+    if operacao == "confirmar_importacao":
+        timestamp_importacao = todolist.obter_timestamp_utc_atual()
+        estado_candidato = todolist.preparar_estado_importado(
+            dados["tarefas"], timestamp_importacao
+        )
+        return json.dumps(estado_candidato, ensure_ascii=False)
 
     if operacao == "validar_estado":
         estado = dados.get("estado", {})
@@ -196,6 +230,30 @@ async function executarPython(operacao, dados) {
 export async function validateState(estado) {
   await executarPython("validar_estado", { estado });
   return true;
+}
+
+export async function calculateReport(estado, dataLocalReferencia, periodoInicio = null, periodoFim = null) {
+  return executarPython("relatorio", {
+    tarefas: estado.tarefas,
+    data_local_referencia: dataLocalReferencia,
+    periodo_conclusao_inicio: periodoInicio,
+    periodo_conclusao_fim: periodoFim,
+  });
+}
+
+export async function createBackup(estado) {
+  return executarPython("exportar_backup", { tarefas: estado.tarefas });
+}
+
+export async function prepareImportedState(tarefas) {
+  return executarPython("confirmar_importacao", { tarefas });
+}
+
+export async function validateBackup(conteudo) {
+  if (typeof conteudo !== "string") {
+    throw new TypeError("O conteúdo do arquivo deve ser texto.");
+  }
+  return executarPython("validar_backup", { conteudo });
 }
 
 export async function calculateMetrics(estado, dataLocalReferencia) {

@@ -356,3 +356,43 @@
 .task-card .task-move-menu > summary::before {
   content: none;
 }
+
+
+/* Metadados em uma linha; a expiração ocupa uma faixa própria quando vencida. */
+.task-meta:not(.completed-meta) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+.task-meta-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.task-meta-row .badge-prioridade { flex: none; }
+.task-meta-row .task-due { min-width: 0; white-space: nowrap; }
+.overdue-banner {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border: 1px solid #fecaca;
+  border-radius: 7px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-align: center;
+}
+:root[data-theme="dark"] .overdue-banner {
+  border-color: #7f1d1d;
+  background: #5b2028;
+  color: #fecaca;
+}

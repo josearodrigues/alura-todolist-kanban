@@ -60,17 +60,24 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
       const data = tarefa.data_conclusao ? rotuloData(tarefa.data_conclusao) : "";
       meta.append(document.createTextNode(data ? "Concluída em " + data : "Concluída"));
     } else {
-      meta.append(el("span", "badge-prioridade priority-" + tarefa.prioridade, rotuloPrioridade[tarefa.prioridade] || tarefa.prioridade));
+      const linhaMeta = el("div", "task-meta-row");
+      linhaMeta.append(el("span", "badge-prioridade priority-" + tarefa.prioridade, rotuloPrioridade[tarefa.prioridade] || tarefa.prioridade));
       if (tarefa.data_limite) {
-        const prazo = el("span", "task-due" + (vencida ? " is-overdue" : ""));
+        const prazo = el("span", "task-due");
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("class", "ui-icon"); svg.setAttribute("aria-hidden", "true");
         const use = document.createElementNS("http://www.w3.org/2000/svg", "use"); use.setAttribute("href", "#icon-calendar"); svg.append(use);
         const time = el("time", "", rotuloData(tarefa.data_limite, true));
         time.dateTime = tarefa.data_limite;
         prazo.append(svg, document.createTextNode(" "), time);
-        if (vencida) prazo.append(el("span", "overdue-label", "Vencida"));
-        meta.append(prazo);
+        linhaMeta.append(prazo);
+      }
+      meta.append(linhaMeta);
+      if (vencida) {
+        const alerta = el("div", "overdue-banner");
+        alerta.setAttribute("role", "status");
+        alerta.textContent = "⚠ TAREFA VENCIDA";
+        meta.append(alerta);
       }
     }
     conteudo.append(meta); card.append(checkbox, conteudo);

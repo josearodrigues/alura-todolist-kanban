@@ -48,7 +48,7 @@
         <ul class="primary-nav">
           <li><button type="button" data-view="quadro" aria-current="page"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-layout"></use></svg><span>Quadro</span></button></li>
           <li><button type="button" data-view="calendario"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-calendar"></use></svg><span>Calendário</span></button></li>
-          <li><button type="button" data-view="relatorios"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-chart"></use></svg><span>Relatórios</span></button></li>
+          <li><button type="button" data-dialog-open="dialog-relatorios"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-chart"></use></svg><span>Relatórios</span></button></li>
           <li><button type="button" data-view="backup"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-transfer"></use></svg><span>Importar/Exportar</span></button></li>
         </ul>
       </nav>
@@ -162,20 +162,11 @@
           <p class="mock-disclaimer"></p>
         </article>
       </section>
-      <section class="page-view" data-page-view="relatorios" hidden aria-labelledby="pagina-relatorios-titulo">
-        <header class="page-heading"><div><p class="eyebrow">ACOMPANHAMENTO</p><h1 id="pagina-relatorios-titulo">Relatórios</h1><p>Indicadores gerais para acompanhar o andamento do projeto.</p></div></header>
-        <div class="report-grid">
-          <article class="page-card report-total"><span>Total de tarefas</span><strong>7</strong><small>Registros demonstrativos</small></article>
-          <article class="page-card"><span>Concluídas</span><strong class="report-green">2 <small>29%</small></strong><div class="report-track"><i style="width:28.6%"></i></div></article>
-          <article class="page-card"><span>Pendentes</span><strong class="report-blue">5 <small>71%</small></strong><div class="report-track pending"><i style="width:71.4%"></i></div></article>
-        </div>
-        <article class="page-card report-breakdown"><h2>Distribuição por estado</h2><div><span>A Fazer</span><b>3</b><span>Em Andamento</span><b>2</b><span>Concluídas</span><b>2</b></div><p class="mock-disclaimer">Relatório visual demonstrativo · cálculos dinâmicos serão integrados na Fase 6.</p></article>
-      </section>
       <section class="page-view" data-page-view="backup" hidden aria-labelledby="pagina-backup-titulo">
         <header class="page-heading"><div><p class="eyebrow">SEGURANÇA DOS DADOS</p><h1 id="pagina-backup-titulo">Importar / Exportar</h1><p>Faça cópias de segurança ou prepare a restauração dos seus dados.</p></div></header>
         <div class="backup-grid">
-          <article class="page-card backup-card"><span class="backup-icon">↑</span><h2>Exportar tarefas</h2><p>Gere um arquivo de backup em formato JSON para guardar seus dados.</p><button type="button" disabled>Exportar arquivo JSON</button><small>Disponível na Fase 6</small></article>
-          <article class="page-card backup-card"><span class="backup-icon import">↓</span><h2>Importar tarefas</h2><p>Restaure tarefas a partir de um arquivo JSON previamente exportado.</p><label class="file-mock">Selecionar arquivo <input type="file" accept=".json,application/json" disabled></label><button type="button" disabled>Validar e importar</button><small>Validação e confirmação serão implementadas na Fase 6</small></article>
+          <article class="page-card backup-card"><span class="backup-icon" aria-hidden="true">↑</span><h2>Exportar tarefas</h2><p>Gere um arquivo de backup em formato JSON para guardar seus dados.</p><button type="button" data-dialog-open="dialog-exportar">Exportar arquivo JSON</button><small>O arquivo contém o contrato versionado do projeto.</small></article>
+          <article class="page-card backup-card"><span class="backup-icon import" aria-hidden="true">↓</span><h2>Importar tarefas</h2><p>Restaure tarefas a partir de um arquivo JSON previamente exportado.</p><button type="button" data-dialog-open="dialog-importar">Selecionar backup JSON</button><small>O arquivo será validado antes de qualquer substituição.</small></article>
         </div>
       </section>
     </main>
@@ -322,30 +313,55 @@
     <button type="button" data-dialog-close>Cancelar</button>
   </dialog>
 
-  <dialog id="dialog-relatorios" aria-labelledby="titulo-relatorios">
-    <h2 id="titulo-relatorios">Relatórios</h2>
-    <p>Os indicadores detalhados serão apresentados após a integração com o núcleo Python.</p>
-    <button type="button" data-dialog-close>Fechar</button>
+  <dialog id="dialog-relatorios" class="report-dialog" aria-labelledby="titulo-relatorios" aria-describedby="descricao-relatorios">
+    <header class="report-header">
+      <div><p class="eyebrow">ACOMPANHAMENTO</p><h2 id="titulo-relatorios">Relatórios</h2><p id="descricao-relatorios">Indicadores calculados pelo núcleo Python com base nas tarefas salvas.</p></div>
+      <button type="button" data-dialog-close aria-label="Fechar relatórios">Fechar</button>
+    </header>
+    <section class="report-period" aria-label="Período de conclusão">
+      <p class="report-section-title">Conclusões no período</p>
+      <div class="report-period-fields">
+        <p><label for="relatorio-periodo-inicio">Data inicial</label><input id="relatorio-periodo-inicio" type="date"></p>
+        <p><label for="relatorio-periodo-fim">Data final</label><input id="relatorio-periodo-fim" type="date"></p>
+        <button type="button" id="limpar-periodo-relatorio">Todo o histórico</button>
+      </div>
+      <p id="relatorios-status" class="report-status" role="status" aria-live="polite">Aguardando cálculo dos indicadores...</p>
+    </section>
+    <div class="report-grid report-modal-grid">
+      <article class="page-card report-total"><span>Total de tarefas</span><strong data-report-value="total">0</strong><small>Todos os estados</small></article>
+      <article class="page-card"><span>Concluídas</span><strong class="report-green" data-report-value="concluida">0</strong><small>Estado atual</small></article>
+      <article class="page-card"><span>A Fazer</span><strong data-report-value="a_fazer">0</strong><small>Por estado</small></article>
+      <article class="page-card"><span>Em Andamento</span><strong data-report-value="em_andamento">0</strong><small>Por estado</small></article>
+    </div>
+    <div class="report-modal-columns">
+      <article class="page-card report-breakdown"><h3>Distribuição por prioridade</h3><dl><dt>Baixa</dt><dd data-report-value="baixa">0</dd><dt>Média</dt><dd data-report-value="media">0</dd><dt>Alta</dt><dd data-report-value="alta">0</dd></dl></article>
+      <article class="page-card report-breakdown"><h3>Prazos</h3><dl><dt>Atrasadas</dt><dd data-report-value="atrasadas">0</dd><dt>Vencem hoje</dt><dd data-report-value="vencem_hoje">0</dd><dt>Próximos 7 dias</dt><dd data-report-value="proximos_7_dias">0</dd></dl></article>
+    </div>
+    <article class="page-card report-completions"><span>Tarefas concluídas no período</span><strong data-report-value="concluidas_no_periodo">0</strong><small>Apuradas exclusivamente por data_conclusao.</small></article>
   </dialog>
 
-  <dialog id="dialog-importar" aria-labelledby="titulo-importar">
-    <h2 id="titulo-importar">Importar dados</h2>
-    <form>
-      <p>
-        <label for="arquivo-importacao">Arquivo de backup JSON</label>
-        <input id="arquivo-importacao" name="arquivo" type="file" accept="application/json,.json">
-      </p>
-      <p>A validação e a confirmação da substituição serão habilitadas na etapa de backup.</p>
-      <button type="button" disabled>Validar arquivo (integração pendente)</button>
-      <button type="button" data-dialog-close>Cancelar</button>
-    </form>
+  <dialog id="dialog-importar" aria-labelledby="titulo-importar" aria-describedby="descricao-importar">
+    <header class="new-task-header"><h2 id="titulo-importar">Importar backup</h2><p id="descricao-importar">Selecione um arquivo JSON exportado pelo To-Do List Kanban.</p></header>
+    <div class="backup-dialog-field">
+      <label for="arquivo-importacao">Arquivo de backup JSON</label>
+      <input id="arquivo-importacao" name="arquivo" type="file" accept="application/json,.json">
+      <p id="arquivo-selecionado" class="backup-file-name">Nenhum arquivo selecionado.</p>
+    </div>
+    <p id="importacao-status" class="report-status" role="status" aria-live="polite"></p>
+    <div class="new-task-actions"><button type="button" data-dialog-close>Cancelar</button><button type="button" id="validar-arquivo-importacao" disabled>Validar arquivo</button></div>
   </dialog>
 
   <dialog id="dialog-exportar" aria-labelledby="titulo-exportar">
-    <h2 id="titulo-exportar">Exportar dados</h2>
-    <p>O download do backup JSON será habilitado na etapa de backup.</p>
-    <button type="button" disabled>Exportar JSON (integração pendente)</button>
-    <button type="button" data-dialog-close>Fechar</button>
+    <header class="new-task-header"><h2 id="titulo-exportar">Exportar backup</h2><p>Será gerado um arquivo JSON com as tarefas e o contrato de dados versão 1.0.</p></header>
+    <p>O arquivo será baixado no navegador. Guarde-o em local seguro para poder restaurar seus dados posteriormente.</p>
+    <div class="new-task-actions"><button type="button" data-dialog-close>Cancelar</button><button type="button" id="executar-exportacao" class="new-task-submit">Exportar JSON</button></div>
+  </dialog>
+
+  <dialog id="dialog-confirmar-importacao" aria-labelledby="titulo-confirmar-importacao" aria-describedby="descricao-confirmar-importacao">
+    <header class="new-task-header"><h2 id="titulo-confirmar-importacao">Confirmar substituição</h2><p id="descricao-confirmar-importacao">A importação substituirá integralmente as tarefas atuais. Esta operação não pode ser desfeita automaticamente.</p></header>
+    <div class="import-counts"><p><span>Tarefas atuais</span><strong id="quantidade-atual-importacao">0</strong></p><p><span>Tarefas do backup</span><strong id="quantidade-nova-importacao">0</strong></p></div>
+    <p id="confirmacao-importacao-status" class="report-status" role="status" aria-live="polite"></p>
+    <div class="new-task-actions"><button type="button" data-dialog-close>Cancelar substituição</button><button type="button" id="confirmar-substituicao-importacao" class="new-task-submit">Confirmar importação</button></div>
   </dialog>
 
   <script type="module" src="js/app.js"></script>

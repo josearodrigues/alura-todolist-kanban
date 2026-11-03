@@ -4,6 +4,35 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 
 ## [Não lançado] — 2026-11-03
 
+### Replanejamento da homologação final
+
+- Mantida a aprovação de CA6.1–CA6.8; a Fase 6 não depende da regressão integrada nem da validação dos workflows para avançar.
+- Transferidos CA6.9 e CA6.10 para o encerramento do projeto, após os testes específicos da Fase 7, como CA7.10 (regressão integrada RF01–RF16 e RNF01–RNF07) e CA7.11 (workflows GitHub).
+- Incluído CA7.12 para validação de segurança com escopo, método, evidências, achados, severidade, correções e retestes documentados.
+- Definido que a regressão final deverá reaproveitar evidências anteriores válidas e concentrar novos testes nos impactos, integrações e lacunas, evitando repetição indiscriminada de testes de aceite.
+- O plano passa a refletir sua natureza evolutiva, preservando rastreabilidade e distinguindo critérios aprovados, transferidos e pendentes.
+
+## [Não lançado] — 2026-11-03
+
+### Fase 6 — homologação parcial
+
+- Registrada a aprovação de CA6.1–CA6.7, incluindo a preservação dos dados nos cenários de rejeição e o cancelamento da importação sem alterações.
+- Implementado ajuste de usabilidade em `js/backup_ui.js`: rejeições de JSON inválido agora exibem mensagem objetiva e amigável, enquanto os detalhes técnicos são enviados ao console para diagnóstico. Validação manual aprovada pelo usuário: importação válida e rejeição de schema diferente de 1.0, chave inválida e valor inválido com mensagem amigável.
+- CA6.8 aprovado em teste manual: falha `QuotaExceededError` simulada durante a importação; mensagem de não conclusão exibida; estado em memória e `localStorage` comparados com os valores anteriores (`true`); quadro visual confirmado inalterado. O método original de `Storage.prototype.setItem` foi restaurado e as variáveis temporárias removidas.
+- Permanecem pendentes CA6.9 (regressão integrada RF01–RF15 e RNF01–RNF07) e CA6.10 (conferência dos workflows GitHub).
+- A execução local informada de 60 testes, com 96,10% de cobertura de linhas e 92,72% de branches, foi preservada como evidência automatizada já obtida.
+
+### Fase 6 — relatórios e backup JSON (implementação)
+
+- Criado `js/reports_ui.js` para apresentar no modal Relatórios os indicadores calculados pelo núcleo Python, com filtro opcional por data de conclusão e opção de limpar o período.
+- Criado `js/backup_ui.js` para exportar o envelope JSON versionado e conduzir a seleção, validação, confirmação e importação de arquivos.
+- Integrados à ponte Pyodide os cálculos do RF12, a geração de backup e a preparação de importação no domínio Python.
+- Reforçada a importação estrita: rejeita JSON malformado, chaves duplicadas, constantes não padronizadas, campos ausentes/desconhecidos e tarefas inválidas; o timestamp global é gerado pelo Python somente após a confirmação.
+- A substituição usa o fluxo transacional existente, que persiste antes de confirmar memória e interface e tenta restaurar o documento anterior em falha de renderização.
+- Atualizados `index.html` e `css/components.css`: Relatórios abre como modal; Importar/Exportar permanece como tela com ações próprias e modal de confirmação com contadores.
+- Ampliados os testes unitários de schema e criados workflows para sintaxe/HTML/contraste e para `pytest` com metas RNF03.
+- **Validação:** CA6.1–CA6.7 aprovados. A mensagem amigável para rejeição de JSON inválido foi validada pelo usuário nos cenários de schema incompatível, chave inválida e valor inválido; a importação válida também foi aprovada. CA6.8 (falha de persistência/rollback), CA6.9 (regressão integrada) e CA6.10 (conferência dos workflows) continuam pendentes.
+
 ### Fase 5 — implementação inicial
 
 - Criados `js/kanban_ui.js`, `js/drag_drop.js` e `js/calendar_ui.js` para renderização dinâmica, menus de cartão, movimentação por Pointer Events e calendário mensal com marcadores e popover.
