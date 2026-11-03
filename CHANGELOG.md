@@ -4,6 +4,13 @@ Este arquivo registra alterações relevantes do projeto em ordem cronológica i
 
 ## [Não lançado] — 2026-11-03
 
+### Fase 4 — validação local parcial
+
+- Registrados os testes do usuário para criação, edição, movimentação e exclusão via API JS/Python, com conferência de persistência no `localStorage`.
+- Falhas simuladas de gravação nas quatro operações preservaram o estado anterior em memória e no armazenamento; notificação visual observada no cenário de criação.
+- Recuperação após recarga confirmada após criação. Permanecem pendentes a confirmação visual do indicador de runtime, evidência de recarga após as demais operações e homologação no GitHub Pages com auditoria de rede.
+- Nenhuma publicação ou integração à `main` realizada nesta atualização.
+
 ### Simplificação da composição da interface
 
 - Removida a barra inferior; crédito tecnológico e versão transferidos para a parte inferior da sidebar.
