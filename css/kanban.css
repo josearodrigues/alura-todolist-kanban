@@ -120,3 +120,43 @@
 .task-more { padding: 0; border: 0; border-radius: 6px; background: transparent; cursor: not-allowed; }
 .task-more:disabled { opacity: .75; }
 :root[data-theme="dark"] .demo-note { background: #30365E; color: #C7D2FE; }
+
+
+/* Ajustes de fidelidade ao mockup oficial: hierarquia, ícones e cartões. */
+.connection-status { display:inline-flex; align-items:center; gap:7px; padding:0; border:0; background:transparent; color:#334155; font-size:14px; font-weight:600; }
+.connection-status .ui-icon { width:20px; height:20px; padding:3px; border-radius:50%; background:#16a34a; color:#fff; stroke-width:3; }
+.topbar-actions { gap:16px; }
+.theme-toggle { border:0; border-radius:0; background:transparent; box-shadow:none; color:#475569; }
+.profile-avatar { width:54px; height:54px; }
+.sidebar-avatar { margin:18px auto 0; flex:0 0 auto; }
+.primary-nav a, .primary-nav button { min-height:58px; font-size:16px; gap:16px; }
+.primary-nav a .ui-icon, .primary-nav button .ui-icon { width:25px; height:25px; color:#bfdbfe; }
+.primary-nav a[aria-current="page"] { color:#fff; }
+.brand-mark { width:58px; height:58px; }
+.brand strong { font-size:24px; }
+.column-heading > p { display:none; }
+.column-title { gap:10px; margin-bottom:14px; }
+.column-title h3 { font-size:20px; }
+.column-symbol { width:40px; height:40px; font-size:21px; }
+.column-symbol .ui-icon { width:23px; height:23px; }
+.column-count { min-width:34px; height:34px; background:var(--column-strong); color:#fff; border:0; font-size:16px; }
+.add-task { min-height:46px; font-size:15px; }
+.task-card { min-height:116px; padding:14px 12px; gap:12px; }
+.task-check { appearance:none; width:28px; height:28px; margin:2px 0 0; border:2px solid #aab8ce; border-radius:50%; background:#fff; cursor:default; }
+.task-check:checked { border-color:#16a34a; background:#16a34a; }
+.task-check:checked::after { content:"✓"; display:block; color:#fff; font-size:18px; font-weight:800; line-height:23px; text-align:center; }
+.task-card h3 { font-size:16px; line-height:1.35; }
+.task-card p { font-size:14px; line-height:1.45; }
+.task-meta { gap:10px; font-size:13px; }
+.badge-prioridade { align-items:center; gap:5px; padding:3px 8px; font-size:13px; }
+.priority-alta::before { content:"!"; display:inline-grid; place-items:center; width:16px; height:16px; border-radius:50%; background:#f97316; color:#fff; font-size:11px; }
+.priority-media::before { content:"⚑"; color:#2563eb; font-size:15px; }
+.priority-baixa::before { content:"●"; color:#16a34a; font-size:14px; }
+.task-due { gap:6px; font-size:13px; }
+.task-due .ui-icon { width:17px; height:17px; }
+.task-more { flex-basis:28px; width:28px; height:28px; color:#172554; }
+.task-more .ui-icon { width:22px; height:22px; }
+.task-card.is-completed { border-left-color:#16a34a; }
+.task-card.is-completed .task-check { border-color:#16a34a; }
+.completed-meta { color:#334155; font-size:13px; }
+.completed-check { display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; background:#16a34a; color:white; font-weight:800; }
