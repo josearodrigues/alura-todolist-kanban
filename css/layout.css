@@ -132,7 +132,7 @@
   text-align: center;
 }
 .sidebar-meta p { margin: 0; }
-.sidebar-meta span { display: inline-block; margin-top: 5px; color: #eaf0ff; }
+.sidebar-meta > span { display: inline-block; margin-top: 5px; color: #eaf0ff; }
  
 /* Larguras desktop alinhadas à composição do mockup de referência. */
 @media (min-width: 1281px) {
