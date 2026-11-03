@@ -142,3 +142,12 @@
 .task-more .ui-icon { width: 18px; height: 18px; }
 .task-more:hover:not(:disabled) { background: var(--surface-soft); }
 .task-more:focus-visible { outline-offset: 1px; }
+
+/* Alinhamento da barra superior com o limite do painel lateral. */
+.topbar { width: 100%; }
+.search-wrap { flex: 1 1 auto; width: auto; max-width: none; }
+.topbar-actions { flex: none; margin-left: auto; }
+@media (max-width: 767px) {
+  .search-wrap { flex: none; width: 100%; }
+  .topbar-actions { width: 100%; justify-content: flex-end; }
+}
