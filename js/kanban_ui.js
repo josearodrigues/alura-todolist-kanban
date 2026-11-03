@@ -62,7 +62,7 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     } else {
       meta.append(el("span", "badge-prioridade priority-" + tarefa.prioridade, rotuloPrioridade[tarefa.prioridade] || tarefa.prioridade));
       if (tarefa.data_limite) {
-        const prazo = el("span", "task-due");
+        const prazo = el("span", "task-due" + (vencida ? " is-overdue" : ""));
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("class", "ui-icon"); svg.setAttribute("aria-hidden", "true");
         const use = document.createElementNS("http://www.w3.org/2000/svg", "use"); use.setAttribute("href", "#icon-calendar"); svg.append(use);
