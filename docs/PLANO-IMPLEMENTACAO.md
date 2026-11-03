@@ -8,7 +8,7 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Fases 1 a 6 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; Fase 6 aguarda execução dos workflows e homologação manual CA6.1–CA6.7]
+- **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Fases 1 a 6 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; Fase 6 aguarda execução dos workflows e homologação manual CA6.1–CA6.7; Fase 7 planejada e aprovada, implementação não iniciada]
 - **Etapa 6 — Validação final e homologação:** [Pendente — regressão integrada RF01–RF15 e RNF01–RNF07]
 
 ---
@@ -398,11 +398,42 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 
 ---
 
+### Fase 7 — Seleção e Exclusão Coletiva de Tarefas
+
+- **Objetivo:** permitir que o usuário selecione múltiplas tarefas em diferentes colunas e as exclua em uma única operação, com confirmação explícita e garantia de integridade dos dados.
+- **Escopo aprovado:** seleção/deseleção individual; seleção simultânea entre colunas e estados; indicação da quantidade selecionada; ação para limpar a seleção; confirmação com a quantidade de tarefas; exclusão coletiva. O checkbox será um controle real de seleção e permanecerá independente do indicador visual (tick) de conclusão.
+- **Fora do escopo:** movimentação coletiva, edição coletiva, alteração coletiva de prioridade ou vencimento e qualquer outra operação em lote.
+- **Arquivos previstos:** a definir após inspeção da implementação existente. Áreas potencialmente envolvidas: `js/kanban_ui.js`, `js/app.js`, `js/storage.js`, `src/todolist/services.py`, CSS e testes. A definição final deverá respeitar a arquitetura atual e evitar alterações desnecessárias.
+- **Atividades:**
+  1. Implementar seleção e desseleção de tarefas na interface, inclusive em cartões de tarefas concluídas.
+  2. Manter a seleção temporária no frontend, sem persistir esse estado no backup ou no `localStorage`.
+  3. Exibir a quantidade selecionada e disponibilizar ação para limpar a seleção.
+  4. Apresentar confirmação explícita com a quantidade de tarefas selecionadas; cancelar não altera dados nem seleção.
+  5. Implementar no domínio Python uma operação única de exclusão para o conjunto de IDs selecionados, validando os identificadores e recalculando a ordenação das colunas afetadas.
+  6. Integrar a operação à persistência preventiva existente: somente confirmar a exclusão e limpar a seleção após gravação bem-sucedida.
+  7. Em falha de persistência, preservar integralmente o estado anterior em memória e na interface, mantendo a seleção para nova tentativa.
+  8. Atualizar os cartões e contadores após sucesso, preservando os metadados das tarefas restantes, exceto os índices `ordem` necessários à contiguidade.
+  9. Implementar testes automatizados e validar teclado, foco, feedback e responsividade.
+- **Dependências:** conclusão da integração de persistência da Fase 4 e componentes de interface das Fases 2 e 5. A homologação da Fase 6 permanece uma pendência independente e não será considerada concluída por causa da Fase 7.
+- **Critérios de Aceite:**
+
+| # | Critério | Evidência |
+|---|----------|-----------|
+| CA7.1 | Selecionar e desselecionar individualmente tarefas por controle próprio, sem confundir seleção com conclusão. | Teste manual dos estados selecionado/não selecionado e concluído/pendente. |
+| CA7.2 | Selecionar simultaneamente tarefas de colunas e estados diferentes. | Cenário controlado com tarefas nas três colunas. |
+| CA7.3 | Exibir a quantidade correta de tarefas selecionadas e permitir limpar a seleção sem alterar os dados. | Conferência da contagem e teste da ação limpar seleção. |
+| CA7.4 | Exibir confirmação com a quantidade correta; cancelar preserva dados e seleção. | Testes manuais de confirmação e cancelamento. |
+| CA7.5 | Excluir somente as tarefas selecionadas em uma única operação e atualizar cartões e contadores. | Teste funcional com tarefas selecionadas e não selecionadas em todas as colunas. |
+| CA7.6 | Persistir a exclusão antes de confirmar a atualização da interface; em falha, preservar dados e seleção. | Teste de falha simulada de persistência e verificação de memória, armazenamento e interface. |
+| CA7.7 | Manter a ordenação contígua nas colunas afetadas e preservar os metadados das tarefas restantes, exceto `ordem`. | Inspeção do estado persistido antes e depois da exclusão coletiva. |
+| CA7.8 | Testes automatizados aprovados e metas do RNF03 mantidas. | Saída de `pytest && python scripts/verify_coverage.py`. |
+| CA7.9 | Operação acessível por teclado, com foco e feedback adequados, e interface responsiva. | Checklist manual de teclado/acessibilidade e inspeção nos breakpoints Desktop, Tablet e Mobile. |
+
 ## 5. Matriz de Rastreabilidade de Requisitos
 
 Esta seção relaciona cada requisito aprovado à fase responsável pela sua implementação, ao critério de aceite correspondente e à evidência prevista para validação.
 
-### 5.1 Requisitos Funcionais (RF01–RF15)
+### 5.1 Requisitos Funcionais (RF01–RF16)
 
 | Req. | Descrição Resumida | Fase | Critério de Aceite | Evidência |
 |------|--------------------|------|--------------------|-----------|
@@ -421,6 +452,7 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | RF13 | Exportação JSON com envelope e tarefas conforme contrato de dados | Fase 1, Fase 6 | CA1.1, CA6.2 | Testes automatizados de schema; validação estrutural do arquivo exportado. |
 | RF14 | Importação com validação estrita, confirmação e rollback em falhas | Fase 1, Fase 6 | CA1.5, CA6.3, CA6.4, CA6.5, CA6.6 | Testes em `test_schema.py`; testes manuais por cenário de importação. |
 | RF15 | Alternância de tema claro/escuro com persistência da preferência | Fase 3, Fase 5 | CA3.2, CA5.7 | Inspeção visual nos dois temas; teste com recarga de página. |
+| RF16 | Seleção múltipla e exclusão coletiva com confirmação, persistência segura e rollback | Fase 7 | CA7.1–CA7.9 | Testes automatizados do domínio; testes manuais de seleção, cancelamento, exclusão, ordenação e falha de persistência; checklist de acessibilidade. |
 
 ### 5.2 Requisitos Não Funcionais (RNF01–RNF07)
 
@@ -458,3 +490,4 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **2.5** | 2026-11-03 | Consolidação da validação funcional da API da Fase 4; registro da auditoria Fetch/XHR no GitHub Pages (requisição ao CDN jsDelivr, HTTP 200, sem chamada a backend na amostra); explicitação de que a interface demonstrativa será integrada na Fase 5. | Distinguir validação do motor Python da integração da interface e registrar o alcance real da auditoria de rede. |
 | **2.6** | 2026-11-03 | Registro da validação manual parcial da Fase 5: operações e contadores, busca/atalhos, calendário/popover, resumo, tema e metadados de reordenação/no-op; explicitação das verificações ainda pendentes em CA5.1, CA5.3 e CA5.6. | Preservar evidências confirmadas, evitar repetição de testes e manter o estado real dos critérios de aceite. |
 | **2.7** | 2026-11-03 | Atualização das evidências da Fase 5: conclusão/reabertura e metadados (CA5.3), Foco de Hoje e divisão por zero (CA5.6), correção do menu contextual, datas relativas e destaque de vencidas; registro das pendências de toque/caneta e compatibilidade móvel; implementação de rolagem interna no popover após avaliação de usabilidade; remoção da mensagem de carregamento implementada e validada. | Manter o plano alinhado aos testes efetivamente confirmados e às pendências reais. |
+| **2.8** | 2026-11-03 | Inclusão da Fase 7 — Seleção e Exclusão Coletiva, com escopo restrito à exclusão em lote, requisito RF16, critérios CA7.1–CA7.9, confirmação explícita, persistência preventiva e preservação da seleção em caso de falha. | Incorporar a melhoria de experiência do usuário aprovada, mantendo a homologação da Fase 6 como atividade independente. |
