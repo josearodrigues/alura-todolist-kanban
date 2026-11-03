@@ -8,7 +8,7 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fases 1 e 2 implementadas; Fase 3 em validação]
+- **Etapa 5 — Implementação controlada (Fases 1 a 6):** [Em andamento — Fase 1 validada; Fase 2 implementada com validação manual parcial; Fase 3 em validação]
 - **Etapa 6 — Validação final e homologação:** [Pendente]
 
 ---
@@ -211,6 +211,24 @@ A execução da Etapa 5 será dividida em seis fases pequenas, sequenciais e ver
      - Navegação por teclado em menus contextuais e formulários de criação e edição.
      - Indicador de foco visível e inequívoco em todos os elementos focáveis.
      - Nomes acessíveis em botões e campos; estados não comunicados exclusivamente por cor.
+
+#### Registro da verificação manual — 2026-11-03
+
+Checklist executado pelo usuário na aplicação local, com resultados informados nesta sessão:
+
+| Verificação | Resultado | Observação |
+|---|---|---|
+| `Tab` e `Shift + Tab` | Aprovado | Navegação nos controles testados. |
+| `Enter` e `Espaço` | Aprovado | Ativação dos controles apropriados testados. |
+| `Ctrl + K` | Aprovado | Foco direcionado ao campo de busca. |
+| Diálogo Nova Tarefa: foco inicial, contenção e restauração | Aprovado | Comportamentos confirmados pelo usuário nesse diálogo. |
+| `Esc` no diálogo Nova Tarefa | Aprovado | O diálogo foi fechado. |
+| `Esc` no menu contextual | Pendente | Menu contextual indisponível/desativado. |
+| Navegação por teclado no menu contextual | Pendente | Controle `⋮` desativado; não foi possível abrir o menu. |
+| Rótulos e identificação visual dos controles | Sem problema visual observado | Não equivale a teste com leitor de tela. |
+| Nomes acessíveis com leitor de tela | Não testado | Exige validação específica com tecnologia assistiva. |
+
+**Resultado da Fase 2:** validação manual parcial. Os resultados aprovados acima não cobrem todos os critérios CA2.3–CA2.6. O menu contextual também apresenta divergência visual em relação ao mockup (desenho do ícone `⋮`), registrada para correção na etapa apropriada, sem alteração nesta validação.
 
 #### Critérios de Aceite — Fase 2
 
