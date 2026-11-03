@@ -168,6 +168,7 @@ Os resultados acima registram as evidências já obtidas; não representam uma n
 | 4. WebAssembly e persistência | Integração Pyodide, execução Python no navegador e persistência local | Implementada e validada funcionalmente; CA4.1 parcialmente verificado |
 | 5. Interações | Movimentação, reordenação, busca e calendário | Implementada; homologação manual parcial, com teste de toque CA5.1 pendente |
 | 6. Relatórios e backup JSON | Relatórios, exportação e importação com validação e consistência | Implementada; validação automatizada e homologação manual pendentes |
+| 7. Seleção e exclusão coletiva | Seleção individual/global, confirmação e exclusão atômica com persistência | Implementação inicial gravada; testes e homologação pendentes |
 
 Após as seis fases, o plano prevê uma etapa de validação final e homologação. Os critérios detalhados de conclusão estão em [docs/PLANO-IMPLEMENTACAO.md](docs/PLANO-IMPLEMENTACAO.md).
 
