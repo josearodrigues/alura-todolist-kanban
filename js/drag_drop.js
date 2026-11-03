@@ -40,7 +40,7 @@ export function initializeDragDrop({ onMove, notify = () => {} }) {
     const column = target?.closest(".kanban-column");
     const targetCard = target?.closest(".task-card[data-task-id]");
     cleanup();
-    if (!current.active || !column) return;
+    if (!current.active || !column || targetCard?.dataset.taskId === current.id) return;
     const state = column.dataset.taskState;
     const cards = [...column.querySelectorAll(".task-card[data-task-id]")].filter(card => card.dataset.taskId !== current.id);
     let order = cards.length;
