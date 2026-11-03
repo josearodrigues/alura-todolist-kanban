@@ -73,6 +73,8 @@ _funcoes_kanban = (
     "excluir_tarefa",
     "validar_envelope_backup",
     "gerar_envelope_backup",
+    "calcular_relatorio_completo",
+    "obter_timestamp_utc_atual",
 )
 all(callable(getattr(todolist, nome, None)) for nome in _funcoes_kanban)
 `);
@@ -99,6 +101,60 @@ def _kanban_dispatch(payload_json):
             "resumo": todolist.calcular_resumo_projeto(tarefas),
             "foco_hoje": todolist.calcular_foco_hoje(tarefas, data_local),
         }, ensure_ascii=False)
+
+    if operacao == "relatorio":
+        return json.dumps(
+            todolist.calcular_relatorio_completo(
+                tarefas,
+                dados["data_local_referencia"],
+                dados.get("periodo_conclusao_inicio"),
+                dados.get("periodo_conclusao_fim"),
+            ),
+            ensure_ascii=False,
+        )
+
+    if operacao == "exportar_backup":
+        timestamp_exportacao = todolist.obter_timestamp_utc_atual()
+        envelope = todolist.gerar_envelope_backup(tarefas, timestamp_exportacao)
+        valido, mensagem = todolist.validar_envelope_backup(envelope)
+        if not valido:
+            raise ValueError(mensagem)
+        return json.dumps(envelope, ensure_ascii=False)
+
+    if operacao == "validar_backup":
+        def rejeitar_chave_duplicada(pares):
+            objeto = {}
+            for chave, valor in pares:
+                if chave in objeto:
+                    raise ValueError("O JSON contém chave duplicada: " + str(chave))
+                objeto[chave] = valor
+            return objeto
+
+        def rejeitar_constante_json(valor):
+            raise ValueError("Constante não permitida no JSON: " + str(valor))
+
+        try:
+            envelope = json.loads(
+                dados["conteudo"],
+                object_pairs_hook=rejeitar_chave_duplicada,
+                parse_constant=rejeitar_constante_json,
+            )
+        except (json.JSONDecodeError, TypeError, ValueError) as erro:
+            raise ValueError("Arquivo JSON inválido: " + str(erro)) from erro
+
+        valido, mensagem = todolist.validar_envelope_backup(envelope)
+        if not valido:
+            raise ValueError(mensagem)
+
+        timestamp_importacao = todolist.obter_timestamp_utc_atual()
+        estado_candidato = {
+            "tarefas": envelope["tarefas"],
+            "timestamp_ultima_alteracao": timestamp_importacao,
+        }
+        # Revalidar a estrutura que será persistida antes de entregá-la ao JavaScript.
+        if estado_candidato["tarefas"]:
+            todolist.validar_iso_utc_ms(timestamp_importacao, "timestamp_ultima_alteracao")
+        return json.dumps(estado_candidato, ensure_ascii=False)
 
     if operacao == "validar_estado":
         estado = dados.get("estado", {})
@@ -196,6 +252,26 @@ async function executarPython(operacao, dados) {
 export async function validateState(estado) {
   await executarPython("validar_estado", { estado });
   return true;
+}
+
+export async function calculateReport(estado, dataLocalReferencia, periodoInicio = null, periodoFim = null) {
+  return executarPython("relatorio", {
+    tarefas: estado.tarefas,
+    data_local_referencia: dataLocalReferencia,
+    periodo_conclusao_inicio: periodoInicio,
+    periodo_conclusao_fim: periodoFim,
+  });
+}
+
+export async function createBackup(estado) {
+  return executarPython("exportar_backup", { tarefas: estado.tarefas });
+}
+
+export async function validateBackup(conteudo) {
+  if (typeof conteudo !== "string") {
+    throw new TypeError("O conteúdo do arquivo deve ser texto.");
+  }
+  return executarPython("validar_backup", { conteudo });
 }
 
 export async function calculateMetrics(estado, dataLocalReferencia) {
