@@ -196,14 +196,3 @@
     padding-right: 18px;
   }
 }
-
-
-/* Títulos das páginas internas no mesmo padrão dos títulos dos painéis. */
-.page-view[data-page-view="calendario"] .page-heading h1,
-.page-view[data-page-view="relatorios"] .page-heading h1 {
-  margin: 0 0 7px;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.3;
-}
