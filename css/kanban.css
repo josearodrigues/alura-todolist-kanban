@@ -112,10 +112,10 @@
 .task-due::before { content: "📅 "; }
 .task-card.is-overdue { border-color: #dc2626; border-left-color: #dc2626; background: #fff7f7; }
 .task-due.is-overdue { color: #b91c1c; font-weight: 700; }
-.overdue-label { display: inline-flex; align-items: center; margin-left: 4px; padding: 2px 7px; border-radius: 999px; background: #fee2e2; color: #991b1b; font-size: 11px; font-weight: 700; }
+.overdue-label { display: inline-flex; align-items: center; margin-left: 4px; padding: 3px 9px; border-radius: 999px; background: #dc2626; color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .01em; }
 :root[data-theme="dark"] .task-card.is-overdue { border-color: #7f1d1d; border-left-color: #f87171; background: #321b25; }
 :root[data-theme="dark"] .task-due.is-overdue { color: #fca5a5; }
-:root[data-theme="dark"] .overdue-label { background: #5b2028; color: #fecaca; }
+:root[data-theme="dark"] .overdue-label { background: #ef4444; color: #fff; }
 .task-card details { position: relative; flex: none; }
 .task-card details > summary { display: grid; place-items: center; width: 28px; height: 30px; overflow: hidden; border-radius: 7px; color: var(--muted); font-size: 0; cursor: pointer; list-style: none; }
 .task-card details > summary::-webkit-details-marker { display: none; }
