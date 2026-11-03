@@ -222,7 +222,7 @@ A inspeção visual completa da Fase 3 será realizada separadamente, após a co
 
 ## Limitações Conhecidas
 
-- A inspeção visual final nos breakpoints e nos dois temas ainda está pendente.
+- A inspeção visual final nos breakpoints e nos dois temas ainda está pendente; Desktop e Tablet (1024 × 768) já foram aprovados, e Mobile aguarda nova conferência após a correção da navegação lateral.
 - O domínio Python está implementado e testado, mas ainda não está integrado ao navegador por Pyodide.
 - Persistência no navegador, movimentação interativa, busca funcional, calendário, relatórios e backup ainda não foram implementados.
 - Os controles correspondentes às funcionalidades não integradas permanecem desabilitados.
