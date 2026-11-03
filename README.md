@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual (03/11/2026):** Fase 1 concluída e validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspecionada; Fase 4 implementada e validada funcionalmente pela API JS/Python, com CA4.1 parcialmente verificado. A implementação inicial da Fase 5 está registrada na branch `fase-5-interacoes`: interface integrada às operações Python, busca, drag and drop, calendário e indicadores. A validação local/manual da Fase 5 permanece pendente; a Fase 6 não foi iniciada.
+> **Estado atual (03/11/2026):** Fase 1 concluída e validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspecionada; Fase 4 implementada e validada funcionalmente pela API JS/Python, com CA4.1 parcialmente verificado. A Fase 5 está implementada na branch `fase-5-interacoes` e possui validação manual parcial: operações, movimentação com mouse, busca, calendário, métricas, metadados, datas relativas e tema foram verificados nos cenários exercitados. Toque/caneta ainda não testados; a Fase 5 não está concluída. A Fase 6 não foi iniciada.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
@@ -224,12 +224,10 @@ A inspeção visual completa da Fase 3 será realizada separadamente, após a co
 
 ## Limitações Conhecidas
 
-- A inspeção visual final nos breakpoints e nos dois temas ainda está pendente; Desktop e Tablet (1024 × 768) já foram aprovados, e Mobile aguarda nova conferência após a correção da navegação lateral.
-- O domínio Python está implementado e testado, mas ainda não está integrado ao navegador por Pyodide.
-- Persistência no navegador, movimentação interativa, busca funcional, calendário, relatórios e backup ainda não foram implementados.
-- Os controles correspondentes às funcionalidades não integradas permanecem desabilitados.
-- O checklist manual da Fase 2 ainda precisa ser executado.
-- A aplicação final ainda não foi homologada nem publicada no GitHub Pages.
+- A Fase 5 ainda não recebeu aceite integral: movimentação por toque/caneta não foi testada; o popover com grande volume de tarefas também não foi exercitado.
+- Foi observada falha de inicialização em navegador móvel antigo. A causa não foi comprovada; a limitação será mantida registrada de forma genérica, sem identificar aparelho ou versão. A investigação de compatibilidade não integra a próxima ação imediata.
+- A mensagem transitória “Carregando tarefas...” ainda será removida por causar deslocamento vertical do Kanban; o indicador de status do Pyodide deve ser preservado.
+- Relatórios detalhados e importação/exportação permanecem reservados à Fase 6.
 
 ---
 
@@ -239,7 +237,7 @@ A inspeção visual completa da Fase 3 será realizada separadamente, após a co
 - **Fase 2:** implementada; validação automática de HTML aprovada; checklist manual pendente.
 - **Fase 3:** implementada; inspeção visual aprovada conforme registro.
 - **Fase 4:** implementada e validada funcionalmente; CA4.1 parcialmente verificado.
-- **Fase 5:** implementação inicial registrada na branch `fase-5-interacoes`; validação local/manual pendente.
+- **Fase 5:** implementação registrada na branch `fase-5-interacoes`; validação manual parcial. CA5.2, CA5.3, CA5.4, CA5.6 e CA5.7 aprovados nos cenários exercitados; CA5.1 parcial (toque/caneta não testados). Pendentes: remoção da mensagem transitória de carregamento e registro da limitação de compatibilidade móvel.
 - **Fase 6:** não iniciada.
 - **Validação final:** pendente.
 - **Publicação no GitHub Pages:** ainda não realizada.
