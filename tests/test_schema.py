@@ -233,15 +233,13 @@ def test_validar_envelope_rejeita_enum_nao_hashable_sem_excecao():
     assert "Campo 'estado' inválido" in mensagem
 
 
-def test_preparar_importacao_backup_valida_e_atualiza_timestamp_global():
-    """Prepara estado sem mutar dados e usa timestamp da importação efetiva."""
+def test_preparar_importacao_backup_valida_sem_alterar_timestamp_global():
+    """Valida e prepara tarefas sem alterar o timestamp antes da confirmação."""
     import json
     from todolist.schema import preparar_importacao_backup
 
     tarefa = criar_tarefa_valida(UUID_1, "a_fazer", 0)
     envelope = gerar_envelope_backup([tarefa], TS_EXPORT)
-    timestamp_importacao = "2026-11-03T15:30:00.000Z"
-
     estado = preparar_importacao_backup(json.dumps(envelope))
 
     assert estado == {
