@@ -222,6 +222,7 @@ Os resultados abaixo foram informados pelo usuário durante a execução dos tes
 | CA6.5 — Chave JSON malformada | Chave com aspas incorretas foi rejeitada pelo parser (`JSONDecodeError: Expecting ':' delimiter`, linha 21, coluna 17). O usuário confirmou que as 30 tarefas permaneceram intactas. | **Aprovado pelo usuário** |
 | CA6.6 — Valor JSON malformado | Valor contendo caractere de controle inválido foi rejeitado pelo parser (`JSONDecodeError: Invalid control character`, linha 22, coluna 85); o usuário confirmou que as 30 tarefas permaneceram intactas após a rejeição. | **Aprovado pelo usuário** |
 | CA6.7 — Cancelamento da importação | Cenário de cancelamento executado; os dados existentes permaneceram inalterados. Critério funcional aprovado. | **Aprovado pelo usuário** |
+| CA6.8 — Falha de persistência/rollback | Falha `QuotaExceededError` simulada durante a importação; a aplicação informou que a substituição não foi concluída. As comparações do estado em memória e do `localStorage` retornaram `true`, e o usuário confirmou que o quadro visual permaneceu inalterado. O método original de `Storage.prototype.setItem` foi restaurado. | **Aprovado pelo usuário** |
 
 ### Observação de usabilidade
 
@@ -230,7 +231,7 @@ Os resultados abaixo foram informados pelo usuário durante a execução dos tes
 
 ### Limites e pendências
 
-- **CA6.8 — Falha de persistência/rollback:** pendente; comprovar que memória, interface e armazenamento preservam o estado anterior quando a gravação falha durante a importação.
+- **CA6.8 — Falha de persistência/rollback:** aprovado no cenário de falha simulada durante a importação, conforme evidências registradas na tabela.
 - **CA6.9 — Regressão integrada:** pendente; executar e registrar a regressão RF01–RF15 e RNF01–RNF07.
 - **CA6.10 — Workflows:** pendente; conferir os resultados dos workflows GitHub associados à branch da Fase 6.
 - A execução local informada de 60 testes, com 96,10% de cobertura de linhas e 92,72% de branches, permanece registrada separadamente; não substitui os critérios manuais pendentes nem a conferência dos workflows.
