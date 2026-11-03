@@ -237,7 +237,10 @@ A inspeção visual completa da Fase 3 será realizada separadamente, após a co
 
 - **Fase 1:** concluída e validada.
 - **Fase 2:** implementada; validação automática de HTML aprovada; checklist manual pendente.
-- **Fase 3:** implementada; inspeção visual aprovada conforme registro.\n- **Fase 4:** implementada e validada funcionalmente; CA4.1 parcialmente verificado.\n- **Fase 5:** implementação inicial registrada na branch `fase-5-interacoes`; validação local/manual pendente.\n- **Fase 6:** não iniciada.
+- **Fase 3:** implementada; inspeção visual aprovada conforme registro.
+- **Fase 4:** implementada e validada funcionalmente; CA4.1 parcialmente verificado.
+- **Fase 5:** implementação inicial registrada na branch `fase-5-interacoes`; validação local/manual pendente.
+- **Fase 6:** não iniciada.
 - **Validação final:** pendente.
 - **Publicação no GitHub Pages:** ainda não realizada.
 
