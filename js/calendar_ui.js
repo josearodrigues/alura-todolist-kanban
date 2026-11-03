@@ -66,7 +66,6 @@ export function initializeCalendar({ getTasks, onFocusTask }) {
     const fullHeader=full.querySelector(".full-calendar-head");
     if(fullHeader){fullHeader.querySelector("h2").textContent=label;fullHeader.querySelectorAll("button").forEach((button,index)=>{button.disabled=false;button.onclick=()=>{month.setMonth(month.getMonth()+(index===0?-1:1));render();};});}
     full.querySelector(".full-calendar-days")?.replaceWith(makeGrid(false,map));
-    full.querySelector(".calendar-weekdays")?.remove();
     full.querySelector(".mock-disclaimer")?.remove();
   }
   render();
