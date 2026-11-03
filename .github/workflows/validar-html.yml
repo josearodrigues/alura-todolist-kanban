@@ -38,12 +38,12 @@ jobs:
 
       - name: Verificar sintaxe dos módulos JavaScript
         run: |
-          node --check js/app.js
-          node --check js/pyodide_bridge.js
-          node --check js/storage.js
-          node --check js/kanban_ui.js
-          node --check js/drag_drop.js
-          node --check js/calendar_ui.js
+          node --input-type=module --check < js/app.js
+          node --input-type=module --check < js/pyodide_bridge.js
+          node --input-type=module --check < js/storage.js
+          node --input-type=module --check < js/kanban_ui.js
+          node --input-type=module --check < js/drag_drop.js
+          node --input-type=module --check < js/calendar_ui.js
 
       - name: Auditar contraste WCAG 2.2 AA
         run: python scripts/check_contrast.py
