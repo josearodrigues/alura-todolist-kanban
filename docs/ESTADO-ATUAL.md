@@ -25,7 +25,7 @@
 - **Controle de Versão (Git):**
   - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
   - *Branch remota de trabalho:* `fase-6-relatorios-backup`
-  - *Branch remota:* `fase-6-relatorios-backup` (branch de trabalho da Fase 6; comparação remota indica 25 commits à frente da `main`, sem commits atrás).
+  - *Branch remota:* `fase-6-relatorios-backup` (branch de trabalho da Fase 6; comparação remota indica 37 commits à frente da `main`, sem commits atrás).
   - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits de implementação HTML e atualizações documentais; a pipeline Nu HTML Checker foi adicionada no commit `11f6cdf`; a correção HTML foi registrada em `a6c7495` e o diagnóstico detalhado da pipeline em `58558ad`. A implementação CSS da Fase 3 e a auditoria de contraste foram adicionadas diretamente à `main` nesta sessão.
   - *Situação local/remota:* a branch `fase-6-relatorios-backup` contém a implementação da Fase 6; a `main` permanece sem alterações. A cópia local não foi inspecionada nesta sessão.
   - *Ações realizadas na Fase 5:* módulos de interface, drag and drop e calendário adicionados/atualizados diretamente na branch remota `fase-5-interacoes`; ponte Python/JavaScript ampliada para métricas; workflow ajustado para validar os módulos ES e HTML nessa branch. Nenhuma alteração foi feita na `main`. Nenhuma tag, release ou publicação da aplicação foi criada. Último commit de código da camada de interação: `11e7615` (tratamento de falha de persistência sem notificação duplicada).
@@ -115,11 +115,10 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 ## 8. Próxima Ação Recomendada
 
-1. Realizar, quando houver dispositivo disponível, o teste manual de drag and drop por toque exigido em CA5.1; registrar o resultado por dispositivo.
-2. O cenário de grande volume no popover permanece como verificação adicional não realizada, sem defeito identificado e sem constituir critério de aceite explícito.
-3. Não iniciar a Fase 6 até concluir a revisão e o aceite da Fase 5.
-5. Manter CA4.1 como parcialmente verificado; não antecipar `replaceState` nem importação, pertencentes à Fase 6.
-
+1. Conferir a execução dos workflows da Fase 6: `pytest && python scripts/verify_coverage.py`, sintaxe dos módulos JavaScript, Nu HTML Checker e auditoria de contraste.
+2. Executar a homologação manual dos critérios CA6.1–CA6.6: relatórios, exportação, importação válida/inválida, cancelamento e falha de persistência.
+3. Registrar a regressão integrada RF01–RF15 e RNF01–RNF07 (CA6.7), sem declarar critérios não exercitados como aprovados.
+4. Manter a pendência de toque em CA5.1 separada da validação da Fase 6 e preservar CA4.1 como parcialmente verificado.
 ---
 
 ## 9. Registro de Validação Local — Fase 4 (2026-11-03)
