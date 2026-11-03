@@ -66,6 +66,13 @@ dialog button:disabled { opacity: .58; cursor: not-allowed; }
 dialog details { margin-top: 12px; }
 dialog ul { padding-left: 20px; }
 dialog input:focus-visible, dialog textarea:focus-visible, dialog select:focus-visible { outline-offset: 1px; }
+/* Refinamento tipográfico do modal de criação de tarefas. */
+#dialog-nova-tarefa header h2 { font-size: 16px; font-weight: 600; }
+#dialog-nova-tarefa label { font-size: 14px; font-weight: 600; }
+#dialog-nova-tarefa input,
+#dialog-nova-tarefa textarea,
+#dialog-nova-tarefa select { padding-right: 14px; padding-left: 14px; font-size: 14px; }
+
 @media (max-width: 767px) {
   .insight-card h2 { min-height: 48px; }
   dialog { padding: 18px; }
