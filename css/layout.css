@@ -118,3 +118,8 @@
   .setting-row > span { text-align:left; }
   .footer-credit { justify-content:center; flex-wrap:wrap; }
 }
+
+/* Regras de visibilidade das telas controladas pela navegação */
+.welcome-banner[hidden], .board[hidden], [data-board-insights][hidden] { display:none !important; }
+.primary-nav button[aria-current="page"] { background:linear-gradient(110deg,#3478ed,#2861c8); box-shadow:0 5px 14px rgb(0 0 0 / 15%); color:#fff; }
+.primary-nav button[aria-current="page"] .ui-icon { color:#fff; }
