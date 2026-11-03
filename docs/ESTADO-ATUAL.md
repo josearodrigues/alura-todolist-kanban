@@ -155,3 +155,11 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 - O timestamp funcional da última alteração permanece exclusivamente no cartão Status da Aplicação, conforme RF11. O texto estático “Sem alterações” e o ícone decorativo de atualização do antigo rodapé foram eliminados.
 - A reserva de espaço e os estilos específicos da barra inferior foram removidos. A sidebar mantém os créditos também quando aberta como navegação móvel.
 - Implementação registrada na branch `fase-4-pyodide-persistencia`; inspeção visual e validação responsiva desta alteração ainda pendentes.
+
+
+## Correções de interface — 2026-11-03
+
+- **Modal de edição:** estrutura HTML harmonizada com o modal de criação, reutilizando as mesmas classes e regras visuais. Campos, nomes (titulo, descricao, prioridade, data_limite) e fluxo de submissão foram preservados; opções de prioridade agora exibem os mesmos ícones.
+- **Inicialização do Kanban:** removidos os cartões demonstrativos estáticos das três listas e os contadores/foco fixos. O quadro mantém sua estrutura e apresenta um estado de carregamento enquanto o Pyodide inicializa; os cartões reais são renderizados a partir do estado recuperado. Em caso de falha do runtime, a mensagem de carregamento informa que não foi possível carregar as tarefas.
+- **Acessibilidade:** o contêiner das colunas sinaliza o carregamento com aria-busy e encerra esse estado após a renderização ou falha de inicialização.
+- **Registro:** alterações implementadas diretamente na branch fase-5-interacoes. Testes de sintaxe, execução e inspeção visual dos modais e da inicialização ainda pendentes; não considerar as correções homologadas até a validação local e no navegador.
