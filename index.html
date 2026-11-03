@@ -74,9 +74,15 @@
           <p id="ajuda-busca" class="visually-hidden">Atalho: Ctrl + K para ir à busca. Esc limpa a busca ou fecha o componente aberto.</p>
         </div>
         <div class="topbar-actions">
-          <span class="connection-status"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="#icon-check"></use></svg> Aplicação Online</span>
-          <button type="button" id="alternar-tema" class="theme-toggle" aria-pressed="false" aria-label="Ativar tema escuro"><svg class="ui-icon icon-moon" aria-hidden="true"><use href="#icon-moon"></use></svg><svg class="ui-icon icon-sun" aria-hidden="true"><use href="#icon-sun"></use></svg></button>
-          
+          <span class="connection-status">
+            <span class="connection-check" aria-hidden="true"><svg class="ui-icon" focusable="false"><use href="#icon-check"></use></svg></span>
+            <span>Aplicação Online</span>
+            <span class="connection-dot" aria-hidden="true"></span>
+          </span>
+          <button type="button" id="alternar-tema" class="theme-toggle" aria-pressed="false" aria-label="Ativar tema escuro">
+            <svg class="ui-icon icon-moon" aria-hidden="true" focusable="false"><use href="#icon-moon"></use></svg>
+            <svg class="ui-icon icon-sun" aria-hidden="true" focusable="false"><use href="#icon-sun"></use></svg>
+          </button>
         </div>
       </header>
 
