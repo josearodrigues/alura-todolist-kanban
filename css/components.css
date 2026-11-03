@@ -39,10 +39,10 @@
 .runtime-card { padding-bottom: 14px; }
 .runtime-card h2 { min-height: 0; padding: 18px 16px 12px; border-bottom: 0; background: var(--surface); color: var(--text); }
 .runtime-dot { display: inline-block; flex: none; width: 18px; height: 18px; border-radius: 50%; background: #22b45b; }
-.runtime-complete { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 8px 16px; color: var(--text); font-size: 14px; }
-.runtime-complete strong { color: var(--done); font-weight: 750; }
+.runtime-complete { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 8px 16px; color: var(--text); font-size: 15px; }
+.runtime-complete strong { color: var(--done); font-weight: 600; }
 .demo-disclaimer { margin: 0 16px 8px; color: var(--muted); font-size: 10px; }
-.runtime-card .last-updated { margin: 8px 16px 12px; color: var(--muted); font-size: 11px; }
+.runtime-card .last-updated { margin: 8px 16px 12px; color: var(--muted); font-size: 12px; }
 :root[data-theme="dark"] .calendar-card h2, :root[data-theme="dark"] .calendar-month { background: #0a1330; color: #e8edff; }
 :root[data-theme="dark"] .calendar-weekdays, :root[data-theme="dark"] .calendar-day { color: #e8edff; }
 :root[data-theme="dark"] .calendar-day.muted-day { color: #66749a; }
