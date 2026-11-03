@@ -151,6 +151,9 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     tarefasSelecionadas.clear();
     atualizarBarraSelecao();
     document.querySelectorAll("[data-task-select]").forEach((controle) => { controle.checked = false; });
+    const primeiroControle = document.querySelector("[data-task-select]");
+    if (primeiroControle) primeiroControle.focus();
+    else document.getElementById("quadro-kanban")?.focus();
   }
 
   function render(state = getState()) {
