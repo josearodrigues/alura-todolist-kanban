@@ -6,7 +6,7 @@ O projeto utiliza Python como linguagem central para as regras de negócio e foi
 
 O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
 
-> **Estado atual (03/11/2026):** Fase 1 concluída e validada; Fase 2 implementada com validação manual parcial; Fase 3 implementada e inspecionada; Fase 4 implementada e validada funcionalmente pela API JS/Python, com CA4.1 parcialmente verificado. A implementação da Fase 5 está concluída na branch `fase-5-interacoes`, com pendência de homologação por toque em CA5.1. A Fase 6 está implementada na branch `fase-6-relatorios-backup`; execução automatizada e homologação manual dos critérios CA6.1–CA6.7 ainda pendentes.
+> **Estado atual (03/11/2026):** Fases 1 a 6 implementadas, com pendências de homologação registradas em `docs/ESTADO-ATUAL.md`. A Fase 7 possui implementação inicial na branch `fase-7-selecao-exclusao-coletiva`: seleção múltipla e exclusão coletiva integradas ao domínio Python e à interface web. A validação automatizada e manual desta fase ainda está pendente.
 
 Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
@@ -14,7 +14,7 @@ Este projeto é independente, não é um produto oficial da Alura ou do Google e
 
 ## O que você encontra neste projeto
 
-- **Quadro Kanban:** três colunas com cartões renderizados a partir do estado persistido, contadores dinâmicos e menus para editar, mover e excluir tarefas.
+- **Quadro Kanban:** três colunas com cartões renderizados a partir do estado persistido, contadores dinâmicos, menus individuais e seleção múltipla com exclusão coletiva.
 - **Domínio em Python:** entidade de tarefa, validações, regras de transição entre estados, serviços, métricas e validação do contrato JSON.
 - **Acessibilidade estrutural:** HTML semântico, navegação por teclado, nomes acessíveis, foco visível e diálogos nativos.
 - **Interações da Fase 5:** busca por título e descrição com normalização de acentos; drag and drop por Pointer Events; movimentação pelo menu contextual; calendário mensal com marcadores e popover; resumo e Foco de Hoje calculados pelo domínio Python.
@@ -114,7 +114,7 @@ http://127.0.0.1:8000
 
 O servidor disponibiliza os arquivos estáticos localmente e fica restrito ao próprio computador. Para encerrá-lo, volte ao terminal e pressione `Ctrl+C`.
 
-**Importante:** a aplicação carrega tarefas a partir do `localStorage`. Em um navegador sem estado salvo, o quadro inicia vazio. O Pyodide carrega os módulos Python no navegador; criação, edição, movimentação e exclusão usam a ponte JS/Python e a persistência preventiva. A interface da Fase 5 foi validada manualmente de forma parcial; consulte o estado atual para os limites da validação.
+**Importante:** a aplicação carrega tarefas a partir do `localStorage`. Em um navegador sem estado salvo, o quadro inicia vazio. O Pyodide carrega os módulos Python no navegador; criação, edição, movimentação, exclusão individual e coletiva usam a ponte JS/Python e a persistência preventiva. A seleção coletiva é temporária e não integra o estado persistido. A implementação da Fase 7 foi gravada; consulte o estado atual para os limites da validação.
 
 ---
 
