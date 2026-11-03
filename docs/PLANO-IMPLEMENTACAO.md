@@ -13,7 +13,7 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 
 ---
 
-## 2. Revisão corretiva da interface — Fase 3 (2026-11-03)\n\nA revisão visual foi ajustada com base nas divergências apontadas pelo usuário e no mockup oficial. Foram refinados cabeçalho, navegação lateral, cartões, estados, calendário, resumo, status demonstrativo e rodapé. A implementação permanece estática: setas do calendário e indicadores são visuais, sem integração funcional. A validação automatizada de HTML e contraste foi executada no workflow `41558220193` com sucesso; o workflow `41558291161`, acionado pelo ajuste de datas Hoje/Amanhã, ainda estava em execução no momento do registro. A inspeção manual nos seis cenários responsivos/temas permanece obrigatória antes do aceite da Fase 3.\n\n## 3. Consolidação da Etapa 3 — Arquitetura e Planejamento Técnico
+## 2. Revisão corretiva da interface — Fase 3 (2026-11-03)\n\nA revisão visual foi ajustada com base nas divergências apontadas pelo usuário e no mockup oficial. Foram refinados cabeçalho, navegação lateral, cartões, estados, calendário, resumo, status demonstrativo e rodapé. A implementação permanece estática: setas do calendário e indicadores são visuais, sem integração funcional. A validação automatizada de HTML e contraste foi executada no workflow `41558220193` com sucesso; o workflow `41558291161`, acionado pelo ajuste de datas Hoje/Amanhã, concluiu com sucesso, sem falhas na validação automatizada. A inspeção manual nos seis cenários responsivos/temas permanece obrigatória antes do aceite da Fase 3.\n\n## 3. Consolidação da Etapa 3 — Arquitetura e Planejamento Técnico
 
 Esta seção registra as sete decisões técnicas formalmente aprovadas que definem a arquitetura da aplicação.
 
