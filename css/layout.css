@@ -129,7 +129,16 @@
 }
 @media (max-width: 767px) {
   .workspace { padding: 14px 14px 20px; }
-  .insights-panel { display: flex; padding: 0 14px 22px; }
+  .insights-panel {
+    display: flex;
+    align-items: stretch;
+    padding: 0 14px 22px;
+  }
+  .insights-panel > .insight-card {
+    width: 100%;
+    min-width: 0;
+    align-self: stretch;
+  }
   .app-footer {
     min-height: 60px;
     height: auto;
