@@ -131,28 +131,34 @@
 .task-card:has(.badge-prioridade.priority-baixa) { border-left-color: #2563eb; }
 .task-card.is-completed { border-left-color: #22a05a; }
 
-/* Nas tarefas concluídas, o checkbox mantém sua semântica sem o círculo visual. */
+/* Tarefa concluída: checkbox circular no campo de seleção e check simples na data. */
 .task-card.is-completed .task-check {
+  border: 2px solid var(--done);
+  border-radius: 50%;
+  background: var(--done);
+}
+.task-card.is-completed .task-check:checked {
+  border: 2px solid var(--done);
+  background: var(--done);
+}
+.task-card.is-completed .task-check:checked::after {
+  top: 1px;
+  left: 6px;
+  width: 7px;
+  height: 12px;
+  border-color: #fff;
+  border-width: 0 2px 2px 0;
+}
+.completed-check {
+  display: inline;
   border: 0;
   border-radius: 0;
   background: transparent;
+  color: #2a6b44;
+  font-size: 14px;
+  font-weight: 400;
 }
-.task-card.is-completed .task-check:checked {
-  border: 0;
-  background: transparent;
-}
-.task-card.is-completed .task-check:checked::after {
-  top: 3px;
-  left: 8px;
-  width: 8px;
-  height: 14px;
-  border-color: #22a05a;
-  border-width: 0 3px 3px 0;
-}
-:root[data-theme="dark"] .task-card.is-completed .task-check:checked::after {
-  border-color: #7ee2a8;
-}
-.completed-check { display: none; }
+:root[data-theme="dark"] .completed-check { color: #7ee2a8; }
 .empty-state { padding: 18px 8px; color: var(--muted); text-align: center; font-size: 13px; }
 @media (max-width: 1280px) {
   .kanban-column { padding: 14px 10px; }
