@@ -46,7 +46,18 @@
 - Criadas telas demonstrativas estáticas para Relatórios, Importar/Exportar e Configurações, além do Calendário. Na Fase 6, Relatórios foi convertido em modal funcional e a tela Importar/Exportar recebeu ações de backup; Configurações permanece demonstrativa. O calendário foi integrado funcionalmente na Fase 5.
 - Workflow `41560866108` aprovado no commit `db37ac91`: Nu HTML Checker sem erros/avisos e auditoria de contraste aprovada. Inspeção visual manual e aceite do usuário ainda pendentes.
 
-## 2.2 Implementação da Fase 6 — 2026-11-03\n\n- `js/reports_ui.js`: modal de relatórios com indicadores dinâmicos e filtro opcional de conclusão por data inicial/final.\n- `js/backup_ui.js`: download JSON, seleção de arquivo, validação, confirmação com contadores e importação.\n- `src/todolist/schema.py`: leitura estrita de JSON, rejeição de chaves duplicadas/constantes não padronizadas, validação do envelope e preparação do estado importado. O timestamp global é gerado pelo Python somente após confirmação.\n- `js/pyodide_bridge.js` e `js/app.js`: integração dos relatórios e backups com o núcleo Python e a persistência preventiva existente.\n- `index.html` e `css/components.css`: Relatórios abre em modal; Importar/Exportar permanece como tela própria, com diálogos de operação e confirmação.\n- `tests/test_schema.py`: novos testes de preparação e validação estrita da importação.\n- `.github/workflows/validar-html.yml`: inclui a branch da Fase 6 e a sintaxe dos novos módulos JavaScript. `.github/workflows/testes-python.yml`: executa `pytest && python scripts/verify_coverage.py` em Python 3.14.\n- **Validação:** implementação registrada; os workflows ainda não tiveram resultado confirmado nesta sessão. Testes manuais dos critérios CA6.1–CA6.7 permanecem pendentes.\n\n## 3. Estado da Governança Documental
+## 2.2 Implementação da Fase 6 — 2026-11-03
+
+- `js/reports_ui.js`: modal de relatórios com indicadores dinâmicos e filtro opcional de conclusão por data inicial/final.
+- `js/backup_ui.js`: download JSON, seleção de arquivo, validação, confirmação com contadores e importação.
+- `src/todolist/schema.py`: leitura estrita de JSON, rejeição de chaves duplicadas/constantes não padronizadas, validação do envelope e preparação do estado importado. O timestamp global é gerado pelo Python somente após confirmação.
+- `js/pyodide_bridge.js` e `js/app.js`: integração dos relatórios e backups com o núcleo Python e a persistência preventiva existente.
+- `index.html` e `css/components.css`: Relatórios abre em modal; Importar/Exportar permanece como tela própria, com diálogos de operação e confirmação.
+- `tests/test_schema.py`: novos testes de preparação e validação estrita da importação.
+- `.github/workflows/validar-html.yml`: inclui a branch da Fase 6 e a sintaxe dos novos módulos JavaScript. `.github/workflows/testes-python.yml`: executa `pytest && python scripts/verify_coverage.py` em Python 3.14.
+- **Testes automatizados:** execução local informada pelo usuário: 60 testes aprovados; cobertura de linhas de 96,10% (meta mínima de 90%) e cobertura de branches de 92,72% (meta mínima de 85%). O script de verificação de cobertura concluiu com sucesso.
+- **Homologação manual:** CA6.1 a CA6.5 aprovados; CA6.6 teve a rejeição do arquivo confirmada, mas a preservação dos dados ainda aguarda confirmação. Detalhes na Seção 12.
+- **Pendências:** CA6.6 — confirmar preservação dos dados; CA6.7 — regressão funcional; verificar os resultados dos workflows no GitHub. A interface também precisa substituir a exibição de tracebacks completos por mensagens amigáveis nos erros de importação.\n\n## 3. Estado da Governança Documental
 
 A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
 - **`docs/REQUISITOS.md`:** Atualizado (Versão 1.8 — inclusão do RF16 para seleção e exclusão coletiva).
@@ -72,7 +83,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | ↳ *Fase 3: CSS e Validação Visual* | **Implementada; inspeção visual manual concluída** | Refinamentos visuais e mocks estáticos mantidos. Navegação lateral recolhível em telas de até 960 px, com fechamento por `Esc`, clique no fundo e seleção de seção, restauração e contenção de foco; ícone `⋮` ajustado visualmente, sem ativar o menu contextual. Usuário aprovou Desktop, Tablet (1024 × 768) e Mobile (390 × 844), nos temas Claro e Escuro. Teste manual de `prefers-reduced-motion` também aprovado. Workflow `41553398236`: 25 combinações de contraste aprovadas, zero reprovações e Nu HTML Checker sem erros/avisos. CA3.1–CA3.5 considerados atendidos conforme as evidências registradas; não implica validação funcional das telas demonstrativas. |
 | ↳ *Fase 4: WebAssembly e Persistência* | **Implementada; validação funcional concluída, CA4.1 parcialmente verificado** | Pyodide 314.0.7 e importação dos cinco módulos confirmados. Criação, edição, movimentação e exclusão executadas pela API JS/Python; persistência, timestamp e recuperação após recarga confirmados nas quatro operações. Falhas simuladas nas quatro operações preservaram memória e armazenamento; notificação visual observada na criação. CA4.2–CA4.6 atendidos conforme as evidências registradas. No GitHub Pages, o usuário confirmou o carregamento e observou, no filtro Fetch/XHR durante a carga, uma requisição ao CDN jsDelivr para `pyodide-lock.json` (HTTP 200), sem chamadas a APIs de backend nessa amostra. Como a auditoria ficou restrita ao filtro e ao período observado, CA4.1 permanece parcialmente verificado, não homologado integralmente. |
 | ↳ *Fase 5: Interações (Pointer Events)* | **Implementada; validação manual parcial** | CA5.2 a CA5.7 aprovados nos cenários exercitados, exceto CA5.1, que permanece parcial por falta de teste de toque. Mouse e alternativa acessível pelo menu foram aprovados. CA5.5 aprovado no cenário exercitado. Após observação de usabilidade com 10 tarefas no mesmo dia, foi implementada rolagem vertical interna no popover; validação visual com listas extensas e em viewport móvel ainda pendente. Correção do menu contextual, datas relativas, destaque de vencidas e remoção da mensagem transitória de carregamento foram implementados e validados pelo usuário. A implementação da Fase 5 está concluída; aceite integral aguarda teste de toque em CA5.1. |
-| ↳ *Fase 6: Relatórios e Backup JSON* | Implementada; validação pendente | Modal de relatórios com métricas Python e filtro por data de conclusão; exportação JSON versionada; importação estrita, confirmação com contadores e substituição transacional. Testes automatizados ampliados; execução dos workflows e homologação manual ainda pendentes. |
+| ↳ *Fase 6: Relatórios e Backup JSON* | **Implementada; homologação parcial** | CA6.1–CA6.5 aprovados; CA6.6 com rejeição confirmada e preservação dos dados pendente de confirmação; CA6.7 e verificação dos workflows pendentes. Testes automatizados: 60 aprovados, cobertura de linhas 96,10% e branches 92,72%. Consulte a Seção 12. |
 | ↳ *Fase 7: Seleção e Exclusão Coletiva* | **Planejada e aprovada; implementação não iniciada** | Seleção múltipla de tarefas em quaisquer colunas e exclusão coletiva com confirmação. Checkbox será controle de seleção, independente do tick de conclusão. Inclui contagem, limpeza da seleção, persistência preventiva, rollback e testes. Não contempla movimentação ou outras operações coletivas. |
 | **Etapa 6 — Validação Final** | **Não iniciada** | Homologação integrada e testes de aceitação. |
 
@@ -194,3 +205,28 @@ Os resultados abaixo foram informados e confirmados pelo usuário durante a vali
 - **Integridade:** a seleção é temporária e não integra os dados persistidos. O cancelamento preserva dados e seleção. A seleção só será limpa após persistência bem-sucedida. Falha de persistência preserva o estado anterior e a seleção. A ordenação das colunas afetadas deverá continuar contígua.
 - **Limites:** não implementar movimentação coletiva, edição coletiva ou qualquer outra operação em lote nesta fase.
 - **Situação:** aprovada e documentada; implementação, testes e validação ainda não iniciados.
+
+
+## 12. Registro de Homologação Manual — Fase 6 (2026-11-03)
+
+Os resultados abaixo foram informados pelo usuário durante a execução dos testes no navegador. A aprovação se limita aos cenários efetivamente exercitados.
+
+| Critério | Verificação e evidência | Resultado |
+|---|---|---|
+| CA6.1 — Relatórios | Com massa de 30 tarefas: total 30; A Fazer 10 (33,3%); Em Andamento 8 (26,7%); Concluídas 12 (40,0%). | **Aprovado pelo usuário** |
+| CA6.2 — Exportação JSON | Arquivo exportado inspecionado: schema 1.0, identificação da aplicação, timestamp ISO, total 30, 30 tarefas, IDs únicos e ordenação contígua por coluna. | **Aprovado após inspeção** |
+| CA6.3 — Importação válida | Aplicação informou sucesso na substituição do estado. A inspeção do fluxo de código confirmou encaminhamento para substituição integral do estado e persistência na chave `kanban_app_state`; não é uma operação de acréscimo. | **Aprovado pelo usuário** |
+| CA6.4 — Schema incompatível | Arquivo com `versao_schema: "9.9"` foi rejeitado; a validação informou que a versão esperada é `"1.0"`. O usuário confirmou que as 30 tarefas permaneceram intactas. | **Aprovado pelo usuário** |
+| CA6.5 — Chave JSON malformada | Chave com aspas incorretas foi rejeitada pelo parser (`JSONDecodeError: Expecting ':' delimiter`, linha 21, coluna 17). O usuário confirmou que as 30 tarefas permaneceram intactas. | **Aprovado pelo usuário** |
+| CA6.6 — Valor JSON malformado | Valor contendo caractere de controle inválido foi rejeitado pelo parser (`JSONDecodeError: Invalid control character`, linha 22, coluna 85). | **Rejeição confirmada; preservação dos dados ainda não confirmada** |
+
+### Observação de usabilidade
+
+Nos cenários de rejeição, a interface exibiu o traceback completo do Pyodide/Python, incluindo caminhos internos e detalhes da exceção. A validação identificou os arquivos inválidos, mas a apresentação não é adequada ao usuário final. Recomenda-se tratar os erros na camada de interface e exibir mensagens objetivas, por exemplo, indicando o tipo de problema e, quando disponível, linha e coluna. Os detalhes técnicos devem permanecer disponíveis para diagnóstico, sem serem apresentados integralmente na interface.
+
+### Limites e pendências
+
+- Os resultados acima não representam aprovação integral da Fase 6.
+- CA6.6 ainda requer confirmação de que as 30 tarefas permaneceram intactas após a rejeição.
+- Permanecem pendentes os cenários de cancelamento da importação, falha de persistência/rollback e regressão funcional, conforme o plano de implementação.
+- A execução dos workflows GitHub da Fase 6 ainda não foi confirmada neste registro.
