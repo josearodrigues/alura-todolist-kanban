@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - fase-6-relatorios-backup
+      - fase-7-selecao-exclusao-coletiva
     paths:
       - "src/**"
       - "tests/**"
@@ -15,6 +16,7 @@ on:
     branches:
       - main
       - fase-6-relatorios-backup
+      - fase-7-selecao-exclusao-coletiva
     paths:
       - "src/**"
       - "tests/**"
