@@ -27,3 +27,16 @@
   .app-footer { min-height: 64px; flex-wrap: wrap; justify-content: center; padding: 12px 0; text-align: center; }
   .app-footer p { width: 100%; }
 }
+/* Rodapé global: atravessa a largura total da aplicação. */
+#aplicacao { grid-template-rows: minmax(calc(100vh - 58px), auto) 58px; padding-right: 0; }
+.sidebar { grid-row: 1; }
+.app-footer { grid-column: 1 / -1; grid-row: 2; min-height: 58px; padding: 0 28px; }
+@media (max-width: 1199px) {
+  #aplicacao { grid-template-rows: auto auto auto; padding-right: 0; }
+  .sidebar { grid-row: 1; }
+  .app-footer { grid-column: 1 / -1; grid-row: 3; padding: 12px 20px; }
+}
+@media (max-width: 767px) {
+  #aplicacao { padding: 0 14px; }
+  .app-footer { margin: 0 -14px; padding: 14px; }
+}
