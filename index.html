@@ -15,135 +15,144 @@
   <a href="#conteudo-principal">Pular para o conteúdo principal</a>
 
   <div id="aplicacao">
-    <aside aria-label="Navegação principal">
-      <header>
-        <p>To-Do List</p>
-        <p>Kanban</p>
-      </header>
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#quadro-kanban" aria-label="To-Do Kanban, início">
+        <span class="brand-mark" aria-hidden="true">✓</span>
+        <span><strong>To-Do<br>Kanban</strong><small>Organize. Conquiste.</small></span>
+      </a>
 
       <nav aria-label="Seções da aplicação">
-        <ul>
-          <li><a href="#quadro-kanban" aria-current="page">Quadro Kanban</a></li>
-          <li><a href="#calendario">Calendário</a></li>
-          <li><a href="#resumo-projeto">Resumo do Projeto</a></li>
+        <ul class="primary-nav">
+          <li><a href="#quadro-kanban" aria-current="page"><span aria-hidden="true">▦</span>Quadro</a></li>
+          <li><a href="#calendario"><span aria-hidden="true">▦</span>Calendário</a></li>
+          <li><button type="button" data-dialog-open="dialog-relatorios"><span aria-hidden="true">▥</span>Relatórios</button></li>
+          <li><button type="button" data-dialog-open="dialog-importar"><span aria-hidden="true">☁</span>Importar/Exportar</button></li>
+          <li><button type="button" disabled aria-disabled="true"><span aria-hidden="true">⚙</span>Configurações</button></li>
         </ul>
       </nav>
 
-      <section aria-labelledby="acoes-projeto-titulo">
-        <h2 id="acoes-projeto-titulo">Projeto</h2>
-        <ul>
-          <li><button type="button" data-dialog-open="dialog-relatorios">Relatórios</button></li>
-          <li><button type="button" data-dialog-open="dialog-importar">Importar dados</button></li>
-          <li><button type="button" data-dialog-open="dialog-exportar">Exportar dados</button></li>
-        </ul>
+      <section class="about-card" aria-labelledby="sobre-projeto-titulo">
+        <h2 id="sobre-projeto-titulo"><span aria-hidden="true">◆</span> Sobre o Projeto</h2>
+        <p>Desafio 3 · Alura<br>Python + Pyodide</p>
+        <a href="https://github.com/josearodrigues/alura-todolist-kanban" target="_blank" rel="noreferrer">Saiba mais <span aria-hidden="true">→</span></a>
       </section>
+
+      <div class="sidebar-mascot" aria-hidden="true">
+        <div class="robot-face"><span>•ᴗ•</span></div>
+        <div class="robot-body">▰</div>
+      </div>
+      <p class="sidebar-quote">“Grandes conquistas começam com boas ideias!” 🚀</p>
     </aside>
 
-    <main id="conteudo-principal" tabindex="-1">
-      <header aria-label="Cabeçalho do quadro">
-        <div>
-          <label for="busca-tarefas">Buscar tarefas</label>
-          <input
-            id="busca-tarefas"
-            name="busca"
-            type="search"
-            placeholder="Buscar por título ou descrição"
-            autocomplete="off"
-            aria-describedby="ajuda-busca"
-          >
-          <p id="ajuda-busca">Atalho: Ctrl + K para ir à busca. Esc limpa a busca ou fecha o componente aberto.</p>
+    <main id="conteudo-principal" class="workspace" tabindex="-1">
+      <header class="topbar" aria-label="Cabeçalho do quadro">
+        <div class="search-wrap">
+          <span aria-hidden="true">⌕</span>
+          <label class="visually-hidden" for="busca-tarefas">Buscar tarefas</label>
+          <input id="busca-tarefas" name="busca" type="search" placeholder="Buscar tarefas... (Ctrl + K)" autocomplete="off" aria-describedby="ajuda-busca">
+          <p id="ajuda-busca" class="visually-hidden">Atalho: Ctrl + K para ir à busca. Esc limpa a busca ou fecha o componente aberto.</p>
         </div>
-        <button type="button" id="alternar-tema" aria-pressed="false" aria-label="Ativar tema escuro">Ativar tema escuro</button>
+        <div class="topbar-actions">
+          <span class="connection-status"><span aria-hidden="true">●</span> Interface disponível</span>
+          <button type="button" id="alternar-tema" class="theme-toggle" aria-pressed="false" aria-label="Ativar tema escuro">☾</button>
+        </div>
       </header>
 
-      <section aria-labelledby="saudacao">
-        <h1 id="saudacao">Olá!</h1>
-        <p>Foco de hoje: <output id="foco-hoje">0</output> tarefas pendentes.</p>
+      <section class="welcome-banner" aria-labelledby="saudacao">
+        <span class="welcome-wave" aria-hidden="true">👋</span>
+        <div class="welcome-copy">
+          <h1 id="saudacao">Olá!</h1>
+          <p>Organize suas tarefas de forma simples e visual.</p>
+        </div>
+        <div class="focus-card">
+          <span>Foco de hoje:</span>
+          <strong><output id="foco-hoje">0</output> tarefas</strong>
+          <span class="target-icon" aria-hidden="true">🎯</span>
+        </div>
       </section>
 
-      <section id="quadro-kanban" aria-labelledby="titulo-quadro">
-        <header>
-          <h2 id="titulo-quadro">Quadro Kanban</h2>
-          <p>Organize suas tarefas conforme o estado de execução.</p>
+      <section id="quadro-kanban" class="board" aria-labelledby="titulo-quadro">
+        <header class="board-heading">
+          <div><h2 id="titulo-quadro">Meu quadro</h2><p>Visualize e organize suas tarefas</p></div>
         </header>
-
         <div id="colunas-kanban">
-          <section aria-labelledby="titulo-a-fazer">
-            <header>
-              <h3 id="titulo-a-fazer">A Fazer</h3>
-              <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-a-fazer">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Criar tarefa a partir da coluna A Fazer; será criada em A Fazer">Adicionar tarefa</button>
+          <section class="kanban-column todo-column" aria-labelledby="titulo-a-fazer">
+            <header class="column-heading">
+              <div class="column-title"><span class="column-symbol" aria-hidden="true">●</span><h3 id="titulo-a-fazer">A Fazer</h3><output id="contador-a-fazer" class="column-count">0</output></div>
+              <p>Tarefas que ainda precisam ser feitas</p>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
             <ul id="lista-a-fazer" aria-label="Tarefas a fazer" aria-live="polite"></ul>
-            <p id="vazio-a-fazer">Nenhuma tarefa nesta coluna.</p>
+            <p id="vazio-a-fazer" class="empty-state">Nenhuma tarefa nesta coluna.</p>
           </section>
 
-          <section aria-labelledby="titulo-em-andamento">
-            <header>
-              <h3 id="titulo-em-andamento">Em Andamento</h3>
-              <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-em-andamento">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Criar tarefa a partir da coluna Em Andamento; será criada em A Fazer">Adicionar tarefa</button>
+          <section class="kanban-column progress-column" aria-labelledby="titulo-em-andamento">
+            <header class="column-heading">
+              <div class="column-title"><span class="column-symbol" aria-hidden="true">▶</span><h3 id="titulo-em-andamento">Em Andamento</h3><output id="contador-em-andamento" class="column-count">0</output></div>
+              <p>Tarefas em execução</p>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
             <ul id="lista-em-andamento" aria-label="Tarefas em andamento" aria-live="polite"></ul>
-            <p id="vazio-em-andamento">Nenhuma tarefa nesta coluna.</p>
+            <p id="vazio-em-andamento" class="empty-state">Nenhuma tarefa nesta coluna.</p>
           </section>
 
-          <section aria-labelledby="titulo-concluidas">
-            <header>
-              <h3 id="titulo-concluidas">Concluídas</h3>
-              <p><span class="visually-hidden">Quantidade de tarefas: </span><output id="contador-concluidas">0</output></p>
-              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" aria-label="Criar tarefa a partir da coluna Concluídas; será criada em A Fazer">Adicionar tarefa</button>
+          <section class="kanban-column done-column" aria-labelledby="titulo-concluidas">
+            <header class="column-heading">
+              <div class="column-title"><span class="column-symbol" aria-hidden="true">✓</span><h3 id="titulo-concluidas">Concluídas</h3><output id="contador-concluidas" class="column-count">0</output></div>
+              <p>Tarefas finalizadas</p>
+              <button type="button" data-dialog-open="dialog-nova-tarefa" data-task-state="a_fazer" class="add-task">＋ Nova tarefa</button>
             </header>
             <ul id="lista-concluidas" aria-label="Tarefas concluídas" aria-live="polite"></ul>
-            <p id="vazio-concluidas">Nenhuma tarefa nesta coluna.</p>
+            <p id="vazio-concluidas" class="empty-state">Nenhuma tarefa nesta coluna.</p>
           </section>
         </div>
       </section>
     </main>
 
-    <aside aria-label="Painel de informações">
-      <section id="calendario" aria-labelledby="titulo-calendario">
-        <h2 id="titulo-calendario">Calendário</h2>
-        <p id="calendario-orientacao">A visualização mensal será disponibilizada na etapa de interações.</p>
-        <div id="calendario-conteudo" aria-live="polite">
-          <p>Calendário ainda não inicializado.</p>
+    <aside class="insights-panel" aria-label="Painel de informações">
+      <section id="calendario" class="insight-card calendar-card" aria-labelledby="titulo-calendario">
+        <h2 id="titulo-calendario"><span aria-hidden="true">▦</span> Calendário de Tarefas</h2>
+        <div class="calendar-placeholder">
+          <span aria-hidden="true">▦</span>
+          <p>A visualização mensal será habilitada na etapa de interações.</p>
         </div>
       </section>
 
-      <section id="resumo-projeto" aria-labelledby="titulo-resumo">
-        <h2 id="titulo-resumo">Resumo do Projeto</h2>
-        <dl>
-          <div>
-            <dt>Total de tarefas</dt>
-            <dd><output id="total-tarefas">0</output></dd>
-          </div>
-          <div>
-            <dt>Concluídas</dt>
-            <dd><output id="percentual-concluidas">0,0%</output></dd>
-          </div>
-          <div>
-            <dt>Pendentes</dt>
-            <dd><output id="percentual-pendentes">0,0%</output></dd>
-          </div>
-        </dl>
-        <progress id="progresso-concluidas" max="100" value="0" aria-label="Percentual de tarefas concluídas">0%</progress>
+      <section id="resumo-projeto" class="insight-card summary-card" aria-labelledby="titulo-resumo">
+        <h2 id="titulo-resumo"><span aria-hidden="true">▥</span> Resumo do Projeto</h2>
+        <div class="summary-total"><span>Total de Tarefas</span><strong><output id="total-tarefas">0</output></strong></div>
+        <div class="summary-metric">
+          <div><span class="metric-name"><i class="metric-dot done-dot"></i>Concluídas</span><output id="percentual-concluidas">0,0%</output></div>
+          <progress id="progresso-concluidas" max="100" value="0" aria-label="Percentual de tarefas concluídas">0%</progress>
+        </div>
+        <div class="summary-metric">
+          <div><span class="metric-name"><i class="metric-dot pending-dot"></i>Pendentes</span><output id="percentual-pendentes">0,0%</output></div>
+          <progress id="progresso-pendentes" max="100" value="0" aria-label="Percentual de tarefas pendentes">0%</progress>
+        </div>
       </section>
 
-      <section aria-labelledby="titulo-status-runtime">
-        <h2 id="titulo-status-runtime">Status da aplicação</h2>
-        <p id="status-runtime" role="status" aria-live="polite">Python: aguardando inicialização.</p>
-        <p>Última alteração: <span id="ultima-alteracao">Ainda não registrada</span></p>
+      <section class="insight-card runtime-card" aria-labelledby="titulo-status-runtime">
+        <h2 id="titulo-status-runtime"><span class="runtime-dot" aria-hidden="true"></span>Status da Aplicação</h2>
+        <p id="status-runtime" role="status" aria-live="polite">Python (Pyodide) · Aguardando inicialização</p>
+        <p class="last-updated">Última atualização: <span id="ultima-alteracao">Ainda não registrada</span></p>
       </section>
     </aside>
+
+    <footer class="app-footer">
+      <p><span aria-hidden="true">ϟ</span> Desenvolvido com Python · Pyodide <b>♥</b> Alura + Google for Startups</p>
+      <p>Versão 1.0.0 <span aria-hidden="true">│</span> Interface em desenvolvimento</p>
+    </footer>
   </div>
 
   <template id="modelo-cartao-tarefa">
     <li>
-      <article>
-        <h3 data-task-title></h3>
-        <p data-task-description></p>
-        <p>Prioridade: <span class="badge-prioridade" data-task-priority></span></p>
-        <p>Prazo: <span data-task-due-date></span></p>
+      <article class="task-card">
+        <input class="task-check" type="checkbox" disabled aria-label="Tarefa concluída">
+        <div class="task-content">
+          <h3 data-task-title></h3>
+          <p data-task-description></p>
+          <div class="task-meta"><span class="badge-prioridade" data-task-priority></span><span class="task-due">▦ <span data-task-due-date></span></span></div>
+        </div>
         <details>
           <summary>Opções da tarefa</summary>
           <ul>

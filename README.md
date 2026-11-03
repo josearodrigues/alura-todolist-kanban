@@ -16,7 +16,7 @@ Este projeto é independente, não é um produto oficial da Alura ou do Google e
 
 - **Quadro Kanban:** estrutura com três colunas — A Fazer, Em Andamento e Concluídas — e contadores.
 - **Domínio em Python:** entidade de tarefa, validações, regras de transição entre estados, serviços, métricas e validação do contrato JSON.
-- **Acessibilidade estrutural:** HTML semântico, navegação por teclado, nomes acessíveis, foco visível, diálogos nativos e suporte a movimento reduzido.\n- **Elementos visuais:** cartões, badges de prioridade e barra de progresso do resumo.
+- **Acessibilidade estrutural:** HTML semântico, navegação por teclado, nomes acessíveis, foco visível e diálogos nativos.
 - **Planejamento funcional:** requisitos para criação, edição, movimentação, reordenação, busca, calendário, relatórios, importação, exportação e alternância de tema.
 - **Validação automatizada:** testes Python com pytest e workflow do GitHub Actions para o Nu HTML Checker.
 - **Documentação de engenharia:** requisitos, decisões arquiteturais, plano de implementação, estado atual e histórico de alterações.

@@ -1,16 +1,40 @@
-dialog { width: min(34rem, calc(100vw - 2rem)); max-width: calc(100vw - 2rem); max-height: min(88vh, 48rem); overflow: auto; padding: 1.4rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-md); }
-dialog::backdrop { background: var(--color-overlay); backdrop-filter: blur(3px); }
-dialog header { margin-bottom: 1rem; }
-dialog header p, dialog > p { color: var(--color-text-muted); }
-dialog form > p { margin-bottom: 1rem; }
-dialog form > p:last-of-type { display: flex; flex-wrap: wrap; gap: .6rem; }
-dialog button:not(:disabled) { margin-right: .25rem; }
-dialog button[type="submit"], .button-primary { border-color: var(--color-primary); background: var(--color-primary); color: var(--color-primary-contrast); }
-dialog button[type="submit"]:hover:not(:disabled), .button-primary:hover:not(:disabled) { background: var(--color-primary-hover); }
-#status-runtime { font-weight: 650; }
-#ultima-alteracao { color: var(--color-text); font-weight: 600; }
-@media (max-width: 767px) {
-  dialog { padding: 1rem; }
-  dialog form > p:last-of-type { flex-direction: column; }
-  dialog form > p:last-of-type button { width: 100%; }
-}
+.insight-card { overflow: hidden; border: 1px solid var(--border); border-radius: 13px; background: var(--surface); box-shadow: var(--shadow); }
+.insight-card h2 { display: flex; align-items: center; gap: 10px; margin: 0; padding: 15px 16px; border-bottom: 1px solid var(--border); font-size: 15px; }
+.insight-card h2 > span { color: var(--primary); font-size: 19px; }
+.calendar-card { min-height: 260px; }
+.calendar-card h2 { background: var(--sidebar); color: #fff; }
+.calendar-card h2 > span { color: #bfdbfe; }
+.calendar-placeholder { display: grid; place-items: center; min-height: 200px; padding: 20px; color: var(--muted); text-align: center; }
+.calendar-placeholder > span { font-size: 36px; color: var(--primary); }
+.calendar-placeholder p { max-width: 220px; margin: 10px 0 0; font-size: 13px; }
+.summary-card { padding-bottom: 12px; }
+.summary-total, .summary-metric { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px 4px; }
+.summary-total strong { font-size: 22px; }
+.summary-metric { display: block; padding-top: 10px; }
+.summary-metric > div { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }
+.metric-name { display: inline-flex; align-items: center; gap: 6px; }
+.metric-dot, .runtime-dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; background: var(--done); }
+.pending-dot { background: var(--todo); }
+progress { display: block; width: 100%; height: 10px; overflow: hidden; border: 0; border-radius: 20px; background: var(--page); }
+progress::-webkit-progress-bar { border-radius: 20px; background: var(--page); }
+progress::-webkit-progress-value { border-radius: 20px; background: var(--done); }
+#progresso-pendentes::-webkit-progress-value { background: var(--todo); }
+progress::-moz-progress-bar { border-radius: 20px; background: var(--done); }
+#progresso-pendentes::-moz-progress-bar { background: var(--todo); }
+.runtime-card { padding-bottom: 12px; }
+.runtime-card h2 { border: 0; }
+.runtime-dot { background: #22c55e; }
+.runtime-card > p { margin: 0 16px 7px; font-size: 13px; }
+.runtime-card .last-updated { color: var(--muted); font-size: 11px; }
+dialog { width: min(590px, calc(100% - 28px)); max-height: min(90vh, 760px); overflow: auto; padding: 22px; border: 1px solid var(--border); border-radius: 15px; background: var(--surface); color: var(--text); box-shadow: 0 20px 60px rgb(0 0 0 / 25%); }
+dialog::backdrop { background: rgb(15 23 42 / 52%); backdrop-filter: blur(2px); }
+dialog header h2, dialog > h2 { margin-bottom: 5px; font-size: 20px; }
+dialog header p, dialog > p { color: var(--muted); }
+dialog form > p { display: grid; gap: 6px; margin: 14px 0; }
+dialog input, dialog textarea, dialog select { width: 100%; min-height: 42px; padding: 9px 11px; border: 1px solid var(--control-border); border-radius: 8px; background: var(--surface); color: var(--text); }
+dialog textarea { min-height: 90px; resize: vertical; }
+dialog button { min-height: 40px; margin: 6px 6px 0 0; padding: 8px 14px; border: 1px solid var(--control-border); border-radius: 8px; background: var(--surface-soft); color: var(--text); font-weight: 650; }
+dialog button[data-dialog-close] { background: var(--primary); border-color: var(--primary); color: white; }
+dialog details { margin-top: 12px; }
+dialog ul { padding-left: 20px; }
+@media (max-width: 767px) { dialog { padding: 17px; } }

@@ -32,7 +32,7 @@ PAIRS = (
     ColorPair("Claro", "Título da coluna Concluídas", "#166534", "#FFFFFF", 4.5, "1.4.3"),
     ColorPair("Claro", "Indicador da coluna Concluídas", "#15803D", "#FFFFFF", 3.0, "1.4.11"),
     ColorPair("Escuro", "Texto principal sobre superfície", "#E5EDF8", "#1E293B", 4.5, "1.4.3"),
-    ColorPair("Escuro", "Texto secundário sobre superfície", "#CBD5E1", "#1E293B", 4.5, "1.4.3"),
+    ColorPair("Escuro", "Texto secundário sobre superfície", "#94A3B8", "#1E293B", 4.5, "1.4.3"),
     ColorPair("Escuro", "Texto principal sobre fundo", "#E5EDF8", "#0F172A", 4.5, "1.4.3"),
     ColorPair("Escuro", "Texto sobre sidebar", "#FFFFFF", "#0B1220", 4.5, "1.4.3"),
     ColorPair("Escuro", "Borda de controles na sidebar", "#94A3B8", "#0B1220", 3.0, "1.4.11"),
