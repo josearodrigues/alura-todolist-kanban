@@ -49,10 +49,12 @@
 }
 .app-footer p { margin: 0; }
 .app-footer b { padding: 0 3px; color: var(--muted); }
-.app-footer p:first-child > span { color: #f59e0b; font-size: 18px; }
-.app-footer strong { color: #ef4444; }
-.footer-updated { display: flex; align-items: center; gap: 14px; }
-.footer-updated i { display: block; height: 20px; border-left: 1px solid var(--border); }
+.app-footer .footer-credit { display: flex; align-items: center; gap: 6px; }
+.app-footer .footer-bolt { color: #f59e0b; font-size: 18px; line-height: 1; }
+.app-footer .footer-heart { color: #ef4444; font-size: 14px; line-height: 1; }
+.app-footer .footer-meta { display: flex; align-items: center; gap: 16px; white-space: nowrap; }
+.app-footer .footer-meta i { display: block; height: 20px; border-left: 1px solid var(--border); }
+.app-footer .footer-refresh { color: var(--muted); font-size: 20px; line-height: 1; }
 .page-view { padding: 8px 0 30px; }
 .page-view[hidden] { display: none !important; }
 .page-heading { display: flex; align-items: center; justify-content: space-between; margin: 10px 0 22px; }
