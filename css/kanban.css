@@ -160,3 +160,21 @@
 .task-card.is-completed .task-check { border-color:#16a34a; }
 .completed-meta { color:#334155; font-size:13px; }
 .completed-check { display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; background:#16a34a; color:white; font-weight:800; }
+
+
+/* Ajustes de proporção e tipografia conforme o mockup original */
+.primary-nav a, .primary-nav button { min-height:54px; gap:15px; padding:10px 14px; font-size:15px; }
+.primary-nav a .ui-icon, .primary-nav button .ui-icon { width:26px; height:26px; color:#dbeafe; }
+.primary-nav a[aria-current="page"] { background:linear-gradient(110deg,#3478ed,#2861c8); }
+.brand-mark { width:58px; height:58px; border-radius:18px; }
+.brand strong { font-size:23px; }
+.brand small { font-size:12px; }
+.sidebar-mascot { min-height:150px; margin-top:auto; }
+.robot-face { width:76px; height:63px; border-width:5px; border-radius:25px 25px 18px 18px; font-size:27px; }
+.robot-body { margin-top:-4px; font-size:42px; }
+.sidebar-quote { font-size:16px; line-height:1.45; }
+.task-card h3 { font-size:15px; }
+.task-card p { font-size:13px; }
+.badge-prioridade { font-size:12px; }
+.task-due { font-size:12px; }
+:root[data-theme="dark"] .column-heading > p { color:#dbeafe; }
