@@ -165,3 +165,19 @@ def preparar_importacao_backup(
         "tarefas": [dict(tarefa) for tarefa in envelope["tarefas"]],
         "timestamp_ultima_alteracao": timestamp_importacao,
     }
+
+
+def preparar_estado_importado(
+    tarefas: List[Dict[str, Any]],
+    timestamp_importacao: str,
+) -> Dict[str, Any]:
+    """Valida tarefas já aprovadas e gera o estado candidato no momento da confirmação."""
+    validar_iso_utc_ms(timestamp_importacao, "timestamp_importacao")
+    envelope = gerar_envelope_backup(tarefas, timestamp_importacao)
+    valido, mensagem = validar_envelope_backup(envelope)
+    if not valido:
+        raise ValueError(mensagem)
+    return {
+        "tarefas": envelope["tarefas"],
+        "timestamp_ultima_alteracao": timestamp_importacao,
+    }
