@@ -450,3 +450,63 @@ def excluir_tarefa(
 
     todas_final = coluna_reindexada + outras_tarefas
     return [t.to_dict() for t in todas_final], ts, tarefa_excluida.to_dict()
+
+def excluir_tarefas(
+    tarefas: List[Dict[str, Any]],
+    tarefas_ids: List[str],
+    timestamp_injetado: Optional[str] = None,
+) -> Tuple[List[Dict[str, Any]], str, List[Dict[str, Any]]]:
+    """Exclui um conjunto de tarefas atomicamente e reindexa apenas colunas afetadas.
+
+    Valida toda a lista de IDs antes de construir o novo estado. A entrada não é
+    modificada. Retorna (novas_tarefas, timestamp_global, tarefas_excluidas).
+    """
+    if not isinstance(tarefas_ids, list) or not tarefas_ids:
+        raise ValueError("A lista de IDs para exclusão deve conter ao menos uma tarefa.")
+    if any(not isinstance(tarefa_id, str) or not tarefa_id for tarefa_id in tarefas_ids):
+        raise ValueError("Todos os IDs selecionados devem ser strings não vazias.")
+    if len(set(tarefas_ids)) != len(tarefas_ids):
+        raise ValueError("A lista de IDs para exclusão contém identificadores duplicados.")
+
+    por_id: Dict[str, Dict[str, Any]] = {}
+    for tarefa in tarefas:
+        tarefa_id = tarefa.get("id")
+        if tarefa_id in por_id:
+            raise ValueError(f"Estado inválido: ID de tarefa duplicado '{tarefa_id}'.")
+        por_id[tarefa_id] = tarefa
+
+    inexistentes = [tarefa_id for tarefa_id in tarefas_ids if tarefa_id not in por_id]
+    if inexistentes:
+        raise ValueError(
+            "Tarefa(s) não encontrada(s) para exclusão: " + ", ".join(inexistentes)
+        )
+
+    ids_excluir = set(tarefas_ids)
+    tarefas_excluidas = [
+        Tarefa.from_dict(por_id[tarefa_id]).to_dict() for tarefa_id in tarefas_ids
+    ]
+    estados_afetados = {por_id[tarefa_id].get("estado") for tarefa_id in tarefas_ids}
+
+    colunas_reindexadas: Dict[str, Dict[str, Any]] = {}
+    for estado in estados_afetados:
+        coluna = [
+            Tarefa.from_dict(tarefa)
+            for tarefa in tarefas
+            if tarefa.get("estado") == estado and tarefa.get("id") not in ids_excluir
+        ]
+        coluna.sort(key=lambda tarefa: tarefa.ordem)
+        for tarefa in reindexar_coluna(coluna):
+            colunas_reindexadas[tarefa.id] = tarefa.to_dict()
+
+    novas_tarefas = []
+    for tarefa in tarefas:
+        if tarefa.get("id") in ids_excluir:
+            continue
+        if tarefa.get("estado") in estados_afetados:
+            novas_tarefas.append(colunas_reindexadas[tarefa["id"]])
+        else:
+            novas_tarefas.append(dict(tarefa))
+
+    timestamp = timestamp_injetado if timestamp_injetado is not None else obter_timestamp_utc_atual()
+    return novas_tarefas, timestamp, tarefas_excluidas
+
