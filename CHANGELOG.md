@@ -2,7 +2,7 @@
 
 Este arquivo registra alterações relevantes do projeto em ordem cronológica inversa. Os registros descrevem o que foi implementado e validado, sem antecipar funcionalidades planejadas.
 
-## [Não lançado] — 2026-11-03
+## [Não lançado] — 2026-11-03\n\n### Fase 6 — relatórios e backup JSON (implementação)\n\n- Criado `js/reports_ui.js` para apresentar no modal Relatórios os indicadores calculados pelo núcleo Python, com filtro opcional por data de conclusão e opção de limpar o período.\n- Criado `js/backup_ui.js` para exportar o envelope JSON versionado e conduzir a seleção, validação, confirmação e importação de arquivos.\n- Integrados à ponte Pyodide os cálculos do RF12, a geração de backup e a preparação de importação no domínio Python.\n- Reforçada a importação estrita: rejeita JSON malformado, chaves duplicadas, constantes não padronizadas, campos ausentes/desconhecidos e tarefas inválidas; o timestamp global é gerado pelo Python somente após a confirmação.\n- A substituição usa o fluxo transacional existente, que persiste antes de confirmar memória e interface e tenta restaurar o documento anterior em falha de renderização.\n- Atualizados `index.html` e `css/components.css`: Relatórios abre como modal; Importar/Exportar permanece como tela com ações próprias e modal de confirmação com contadores.\n- Ampliados os testes unitários de schema e criados workflows para sintaxe/HTML/contraste e para `pytest` com metas RNF03.\n- **Validação pendente:** os workflows ainda precisam executar e ser conferidos; os cenários manuais de relatórios, download, importação válida/inválida, cancelamento e falha de persistência ainda não foram homologados.\n\n## [Não lançado] — 2026-11-03
 
 ### Fase 5 — implementação inicial
 
