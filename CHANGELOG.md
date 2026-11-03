@@ -13,7 +13,7 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 - Em falha de persistência, dados, ordenação, interface e seleção deverão permanecer preservados. Exclusão parcial, idempotência adicional e demais operações coletivas permanecem fora do escopo.
 - Implementada a operação Python `excluir_tarefas()` e exportada pela API pública do pacote. A operação valida a lista e todos os IDs antes de alterar o estado, rejeita vazio/duplicidade/inexistência, não muta a entrada, reindexa apenas colunas afetadas e retorna as tarefas excluídas com um timestamp global.
 - Integrada a operação ao dispatcher Pyodide e à API `deleteTasks`, utilizando a persistência preventiva existente.
-- Implementada seleção independente da conclusão nos cartões, barra contextual com selecionar todas/desselecionar todas/contagem/exclusão e confirmação com quantidade.
+- Implementada seleção independente da conclusão nos cartões, barra contextual com selecionar todas/desselecionar todas/contagem/exclusão e confirmação com quantidade. A seleção é reconciliada após alterações persistidas e o foco é direcionado de volta ao quadro ao limpar a seleção.
 - Adicionados testes unitários para cenários válidos e inválidos e ampliados os workflows para a branch da Fase 7.
 - **Validação:** gravações no GitHub confirmadas; execução da suíte, cobertura, workflows e testes manuais ainda pendentes.
 
