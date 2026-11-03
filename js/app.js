@@ -35,6 +35,8 @@ function atualizarStatusRuntime(tipo, mensagem = "") {
   }
 }
 
+let avisoTimeout = null;
+
 function notificarUsuario(mensagem, tipo = "error") {
   let aviso = document.getElementById("app-notice");
 
@@ -42,7 +44,11 @@ function notificarUsuario(mensagem, tipo = "error") {
     aviso = document.createElement("div");
     aviso.id = "app-notice";
     aviso.className = "app-notice";
-    document.querySelector(".runtime-card")?.append(aviso);
+    document.body.append(aviso);
+  }
+
+  if (avisoTimeout !== null) {
+    window.clearTimeout(avisoTimeout);
   }
 
   aviso.dataset.type = tipo;
@@ -50,6 +56,11 @@ function notificarUsuario(mensagem, tipo = "error") {
   aviso.setAttribute("aria-live", tipo === "error" ? "assertive" : "polite");
   aviso.textContent = mensagem;
   aviso.hidden = false;
+
+  avisoTimeout = window.setTimeout(() => {
+    aviso.hidden = true;
+    avisoTimeout = null;
+  }, 5000);
 }
 
 function formatarTimestamp(timestamp) {
