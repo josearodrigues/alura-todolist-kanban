@@ -1,75 +1,51 @@
 # To-Do List Kanban | Engenharia de Software
 
-Aplicação web de gerenciamento de tarefas no formato **Kanban**, desenvolvida como **Desafio 3** da *Imersão Engenharia de Software: Dev na Era da IA*, iniciativa da **Alura Imersões** em parceria com o **Google for Startups**.
+Aplicação web de gerenciamento de tarefas no formato Kanban, desenvolvida como **Desafio 3** da *Imersão Engenharia de Software: Dev na Era da IA* (Alura + Google for Startups).
 
-O projeto utiliza Python como linguagem central para as regras de negócio e foi planejado para execução integral no navegador por meio de WebAssembly, com hospedagem estática no GitHub Pages. A implementação segue fases controladas, com requisitos, decisões técnicas, critérios de aceitação e evidências registrados na documentação.
+O projeto utiliza Python como núcleo das regras de negócio, executado no navegador por WebAssembly (Pyodide). A interface é construída com HTML, CSS e JavaScript ES Modules; os dados são persistidos localmente no navegador.
 
-O desenvolvimento tem finalidade educacional: praticar Engenharia de Software por meio da compreensão dos requisitos, planejamento, implementação, testes, validação e explicação das decisões. Ferramentas de inteligência artificial podem apoiar atividades do processo, mas não substituem a análise técnica nem a compreensão do código.
+Este é um projeto educacional. O processo prioriza compreender requisitos, planejar, implementar, testar, validar e explicar as decisões. O uso de ferramentas de IA não substitui a revisão técnica nem a compreensão do código.
 
-> **Estado atual (03/11/2026):** Fases 1 a 6 implementadas, com pendências de homologação registradas em `docs/ESTADO-ATUAL.md`. A Fase 7 possui implementação inicial na branch `fase-7-selecao-exclusao-coletiva`: seleção múltipla e exclusão coletiva integradas ao domínio Python e à interface web. A validação automatizada e manual desta fase ainda está pendente.
+> **Estado em 03/11/2026:** Fase 7 implementada. CA7.1–CA7.9 e a regressão funcional RF01–RF16 foram aprovados nos cenários executados. A validação final permanece em andamento: o workflow Python ainda precisa ser executado na branch desta fase e a CA7.12 (segurança) está em avaliação.
 
-Este projeto é independente, não é um produto oficial da Alura ou do Google e não representa endosso dessas organizações.
+O projeto é independente, não é produto oficial da Alura ou do Google e não representa endosso dessas organizações.
 
----
+## Funcionalidades
 
-## O que você encontra neste projeto
+- Quadro Kanban com as colunas A Fazer, Em Andamento e Concluídas.
+- Criação, edição, movimentação, reordenação e exclusão de tarefas.
+- Busca por título e descrição, calendário, resumo e Foco de Hoje.
+- Relatórios calculados pelo domínio Python.
+- Exportação e importação de backup JSON com validação estrita. A importação substitui integralmente os dados após validação e confirmação.
+- Seleção individual e coletiva de tarefas, com confirmação e exclusão em operação única.
+- Temas claro e escuro, layout responsivo e recursos de acessibilidade por teclado.
+- Persistência local com restauração do estado anterior em caso de falha de gravação.
 
-- **Quadro Kanban:** três colunas com cartões renderizados a partir do estado persistido, contadores dinâmicos, menus individuais e seleção múltipla com exclusão coletiva.
-- **Domínio em Python:** entidade de tarefa, validações, regras de transição entre estados, serviços, métricas e validação do contrato JSON.
-- **Acessibilidade estrutural:** HTML semântico, navegação por teclado, nomes acessíveis, foco visível e diálogos nativos.
-- **Interações da Fase 5:** busca por título e descrição com normalização de acentos; drag and drop por Pointer Events; movimentação pelo menu contextual; calendário mensal com marcadores e popover; resumo e Foco de Hoje calculados pelo domínio Python.
-- **Validação automatizada:** testes Python com pytest e workflow do GitHub Actions para o Nu HTML Checker.
-- **Documentação de engenharia:** requisitos, decisões arquiteturais, plano de implementação, estado atual e histórico de alterações.
+## Tecnologias
 
-A Fase 5 já foi exercitada manualmente nos cenários descritos em `docs/ESTADO-ATUAL.md`; permanece pendente o teste por toque exigido em CA5.1. A mensagem transitória de carregamento foi removida e validada. Relatórios dinâmicos, exportação JSON e importação com validação estrita e substituição transacional foram implementados na Fase 6; consulte `docs/ESTADO-ATUAL.md` para o estado de validação.
-
----
-
-## Tecnologias e recursos
-
-| Tecnologia / Recurso | Utilização |
+| Tecnologia | Utilização |
 |---|---|
-| Python 3.14 ou superior | Linguagem central e implementação do domínio |
-| pytest | Testes automatizados do domínio Python |
-| pytest-cov | Medição de cobertura de linhas e branches |
-| HTML5 | Estrutura semântica da interface |
-| CSS3 modular | Design system, temas claro/escuro e layout responsivo (Fase 3) |
-| Python (script padrão) | Auditoria matemática das combinações de contraste WCAG 2.2 AA |
-| JavaScript ES Modules | Ponte com Pyodide, persistência local e coordenação da inicialização (Fase 4) |
-| HTML Dialog | Estrutura nativa dos diálogos |
-| GitHub Actions | Automação da validação de HTML |
+| Python 3.14 | Modelo, validações, serviços, métricas e regras de negócio |
+| Pyodide / WebAssembly | Execução de Python no navegador |
+| HTML5 e CSS3 | Estrutura semântica, componentes, temas e responsividade |
+| JavaScript ES Modules | Interface, integração com Pyodide e persistência no navegador |
+| pytest e pytest-cov | Testes automatizados e cobertura do domínio Python |
+| GitHub Actions | Validação de HTML/contraste e testes Python/cobertura |
 | Nu HTML Checker | Verificação de conformidade do HTML |
-| GitHub Pages | Hospedagem estática prevista para a aplicação final |
-| Pyodide 314.0.7 / WebAssembly | Execução de Python 3.14.2 no navegador via CDN (Fase 4) |
 
-A tabela distingue tecnologias já utilizadas daquelas previstas na arquitetura e nas próximas fases. A alternância de tema claro/escuro foi implementada na Fase 3 e salva a preferência visual no navegador; isso não representa a implementação da persistência das tarefas.
+A aplicação carrega a fonte Inter do Google Fonts e o Pyodide do CDN jsDelivr. Não foi identificada outra dependência externa nos arquivos de aplicação examinados nesta revisão.
 
----
-
-## Estrutura do Projeto
+## Estrutura do repositório
 
 ```text
 alura-todolist-kanban/
-├── .github/
-│   └── workflows/
-│       └── validar-html.yml
-├── docs/
-│   ├── design/
-│   │   └── referencias/
-│   │       └── todolist-kanban-1.0-mockup.png
-│   ├── ESTADO-ATUAL.md
-│   ├── PLANO-IMPLEMENTACAO.md
-│   └── REQUISITOS.md
-├── scripts/
-│   └── verify_coverage.py
-├── src/
-│   └── todolist/
-│       ├── __init__.py
-│       ├── metrics.py
-│       ├── models.py
-│       ├── schema.py
-│       └── services.py
-├── tests/
+├── .github/workflows/       # Workflows de HTML/contraste e testes Python
+├── css/                     # Tokens, layout, Kanban e componentes
+├── docs/                    # Requisitos, plano, estado e referências visuais
+├── js/                      # Interface, Pyodide, persistência e interações
+├── scripts/                 # Verificação de cobertura e contraste
+├── src/todolist/            # Domínio, serviços, métricas e schema Python
+├── tests/                   # Testes automatizados e fixtures
 ├── CHANGELOG.md
 ├── index.html
 ├── LICENSE
@@ -77,193 +53,65 @@ alura-todolist-kanban/
 └── README.md
 ```
 
-- **`src/todolist/`:** pacote Python com o modelo de domínio, serviços, métricas e validação do schema.
-- **`tests/`:** testes automatizados do domínio.
-- **`css/`:** tokens de design, estilos base, layout responsivo, quadro Kanban e componentes.
-- **`js/`:** inicialização da aplicação, ponte Pyodide, persistência, renderização Kanban, drag and drop e calendário.
-- **`scripts/`:** ferramentas auxiliares de validação, incluindo a verificação de cobertura e a auditoria de contraste.
-- **`docs/`:** requisitos, plano de implementação, estado operacional e referência visual aprovada.
-- **`.github/workflows/`:** automação da validação HTML.
-- **`index.html`:** estrutura atual da interface web.
+Documentos operacionais:
+- [Requisitos](docs/REQUISITOS.md)
+- [Plano de Implementação](docs/PLANO-IMPLEMENTACAO.md)
+- [Estado Atual](docs/ESTADO-ATUAL.md)
+- [Histórico de Alterações](CHANGELOG.md)
 
-Os módulos JavaScript da Fase 4 e da Fase 5 estão presentes. A validação funcional em navegador da Fase 5 foi realizada parcialmente; consulte `docs/ESTADO-ATUAL.md` para os critérios aprovados e pendentes.
+## Executar localmente
 
----
+Requer Python 3.14 para executar a suíte de testes. Para servir a aplicação web, basta um navegador moderno e um servidor HTTP local.
 
-## Como Executar
-
-### Requisitos
-
-- Python **3.14 ou superior** para instalar e executar o projeto Python, conforme declarado em `pyproject.toml`.
-- Navegador moderno para visualizar a estrutura HTML.
-- Git, caso deseje clonar o repositório.
-
-### Visualizar a interface atual
-
-Na raiz do repositório, execute:
+Na raiz do repositório:
 
 ```bash
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-Acesse:
+Abra `http://127.0.0.1:8000` no navegador. O servidor fica restrito ao computador local. Para encerrá-lo, pressione `Ctrl+C` no terminal.
 
-```text
-http://127.0.0.1:8000
-```
+A aplicação armazena as tarefas em `localStorage`. Em um navegador sem dados salvos, o quadro inicia vazio. O runtime Pyodide e os módulos Python são carregados pelo navegador.
 
-O servidor disponibiliza os arquivos estáticos localmente e fica restrito ao próprio computador. Para encerrá-lo, volte ao terminal e pressione `Ctrl+C`.
+## Executar os testes Python
 
-**Importante:** a aplicação carrega tarefas a partir do `localStorage`. Em um navegador sem estado salvo, o quadro inicia vazio. O Pyodide carrega os módulos Python no navegador; criação, edição, movimentação, exclusão individual e coletiva usam a ponte JS/Python e a persistência preventiva. A seleção coletiva é temporária e não integra o estado persistido. A implementação da Fase 7 foi gravada; consulte o estado atual para os limites da validação.
-
----
-
-## Como Executar os Testes Automatizados
-
-Os testes Python utilizam `pytest` e `pytest-cov`, declarados como dependências opcionais de desenvolvimento.
-
-### Instalar as dependências de desenvolvimento
-
-Na raiz do repositório:
+Instale as dependências de desenvolvimento:
 
 ```bash
 python -m pip install -e ".[dev]"
 ```
 
-### Executar a suíte e verificar a cobertura
+Execute a suíte e a verificação oficial de cobertura:
 
 ```bash
 pytest && python scripts/verify_coverage.py
 ```
 
-O procedimento oficial exige aprovação integral dos testes, cobertura de linhas de pelo menos 90% e cobertura de branches de pelo menos 85%.
+Metas: 100% de aprovação dos testes, cobertura de linhas ≥ 90% e cobertura de branches ≥ 85%.
 
-### Resultados registrados
+### Evidências registradas
 
-**Fase 1 — Domínio Python e testes**
+- **Fase 1:** 48 testes aprovados; 96,16% de cobertura de linhas e 92,78% de branches.
+- **Fase 7:** 65 testes aprovados; 95,83% de cobertura de linhas e 92,54% de branches, conforme execução local registrada. A execução do workflow Python na branch atual ainda está pendente.
+- **Workflow HTML/contraste:** execução `41742982859` aprovada na branch `fase-7-selecao-exclusao-coletiva`, commit `faa12e9`.
+- **Workflow Python/cobertura:** execução `41742344451` aprovada na `main`, commit `6a967af`; por ser anterior à Fase 7, não comprova o estado atual da branch de trabalho.
 
-- **48/48 testes aprovados**.
-- **96,16%** de cobertura de linhas.
-- **92,78%** de cobertura de branches.
-- Procedimento oficial executado com sucesso.
+Os números acima são registros históricos, não resultados de uma execução realizada durante esta revisão documental.
 
-**Fase 2 — HTML e acessibilidade**
+## Estado de validação
 
-- **20 verificações automatizadas gerais em Chromium aprovadas**.
-- Os seis diálogos foram exercitados individualmente quanto ao foco inicial, contenção do foco, fechamento por `Esc` e restauração do foco.
-- Nu HTML Checker: **zero erros e zero avisos** na execução [41520632228](https://github.com/josearodrigues/alura-todolist-kanban/actions/runs/41520632228).
-- Checklist manual de acessibilidade parcialmente executado em 03/11/2026; resultados e pendências estão registrados abaixo.
+| Área | Estado registrado |
+|---|---|
+| Fases 1 a 6 | Implementadas; pendências de homologação específicas permanecem registradas em `docs/ESTADO-ATUAL.md` |
+| Fase 7 | CA7.1–CA7.9 aprovados nos cenários testados; regressão RF01–RF16 aprovada nos cenários executados |
+| RNF03 / CA7.11 | Parcial: workflow HTML aprovado na branch atual; workflow Python aprovado somente na `main` |
+| CA7.12 — Segurança | Em andamento; inspeção estática e testes dinâmicos iniciais registrados no estado atual |
+| Validação final | Em andamento; não declarar homologação integral |
 
-Os resultados acima registram as evidências já obtidas; não representam uma nova execução dos testes nesta atualização documental. A validação automatizada não substitui a inspeção manual prevista no plano.
+### Validação de segurança em andamento
 
----
+Os testes dinâmicos iniciais não identificaram execução de JavaScript nos cenários de XSS testados no título e na descrição. A importação de um backup com payload foi aceita e substituiu as tarefas existentes, conforme a semântica de restauração definida em RF14; a confirmação da renderização literal do conteúdo importado ainda precisa ser registrada. A inspeção estática identificou oportunidades de hardening, sem vulnerabilidades críticas ou altas confirmadas no escopo examinado. Consulte `docs/ESTADO-ATUAL.md` para evidências, limitações e pendências.
 
-## Fases de Desenvolvimento
+## Licença
 
-| Fase | Escopo | Situação |
-|---|---|---|
-| 1. Domínio Python e testes | Entidade, regras de negócio, serviços, métricas, schema e testes | Concluída e validada |
-| 2. HTML e acessibilidade | Estrutura semântica, diálogos, teclado, foco e validação HTML | Implementada; checklist manual pendente |
-| 3. CSS e validação visual | Design system, temas, responsividade, mocks e contraste WCAG 2.2 AA | Implementada; inspeção visual aprovada conforme registro |
-| 4. WebAssembly e persistência | Integração Pyodide, execução Python no navegador e persistência local | Implementada e validada funcionalmente; CA4.1 parcialmente verificado |
-| 5. Interações | Movimentação, reordenação, busca e calendário | Implementada; homologação manual parcial, com teste de toque CA5.1 pendente |
-| 6. Relatórios e backup JSON | Relatórios, exportação e importação com validação e consistência | Implementada; validação automatizada e homologação manual pendentes |
-| 7. Seleção e exclusão coletiva | Seleção individual/global, confirmação e exclusão atômica com persistência | Implementação inicial gravada; testes e homologação pendentes |
-
-Após as seis fases, o plano prevê uma etapa de validação final e homologação. Os critérios detalhados de conclusão estão em [docs/PLANO-IMPLEMENTACAO.md](docs/PLANO-IMPLEMENTACAO.md).
-
----
-
-## Requisitos e Comportamentos Planejados
-
-A aplicação final deverá contemplar:
-
-- Criação de tarefas sempre no estado **A Fazer**.
-- Edição dos campos permitidos, preservando os atributos controlados pelo domínio.
-- Movimentação entre as três colunas e reordenação manual independente da prioridade.
-- Busca por título e descrição, com suporte ao atalho `Ctrl + K`.
-- Calendário integrado, resumo do projeto e indicadores de prazos.
-- Relatórios calculados pelas rotinas Python.
-- Exportação e importação de backup JSON com validação estrutural estrita.
-- Persistência local com preservação do estado anterior em caso de falha de gravação.
-- Temas claro e escuro, responsividade e acessibilidade conforme WCAG 2.2 nível AA.
-
-Esses itens descrevem o escopo aprovado, não funcionalidades já concluídas. A especificação completa e as regras de negócio estão em [docs/REQUISITOS.md](docs/REQUISITOS.md).
-
----
-
-## Verificação Visual da Fase 3\n\nA Fase 3 introduziu folhas de estilo modulares, temas claro e escuro, layout adaptativo e suporte a movimento reduzido. Para completar a validação, abra a aplicação localmente e inspecione:\n\n1. Desktop: largura igual ou superior a 1200 px.\n2. Tablet: largura entre 768 px e 1199 px.\n3. Mobile: largura inferior a 768 px.\n4. Cada uma das três larguras nos temas claro e escuro.\n5. Alternância de tema, recarga da página e preservação da preferência selecionada.\n6. Preferência de movimento reduzido ativada no sistema operacional ou navegador.\n\nA auditoria matemática está disponível pelo comando `python scripts/check_contrast.py`. O workflow do GitHub Actions também foi configurado para executá-la quando houver alterações relevantes em CSS ou no script. A inspeção visual humana e a confirmação da execução no Actions ainda precisam ser registradas.\n\n---\n\n## Acessibilidade e Verificação Manual da Fase 2
-
-A estrutura atual inclui navegação semântica, link para pular ao conteúdo principal, rótulos associados aos campos, nomes acessíveis, foco visível, atalho de busca e diálogos nativos.
-
-### Resultados da verificação manual — 03/11/2026
-
-| Verificação | Resultado | Observação |
-|---|---|---|
-| `Tab` e `Shift + Tab` | **Aprovado** | Navegação nos controles testados. |
-| `Enter` e `Espaço` | **Aprovado** | Ativação dos controles apropriados testados. |
-| `Ctrl + K` | **Aprovado** | Foco direcionado ao campo de busca. |
-| Diálogo Nova Tarefa: foco inicial, contenção e restauração | **Aprovado** | Confirmado pelo usuário nesse diálogo. |
-| `Esc` no diálogo Nova Tarefa | **Aprovado** | O diálogo foi fechado. |
-| `Esc` no menu contextual | **Pendente** | Menu contextual indisponível/desativado. |
-| Navegação por teclado no menu contextual | **Pendente** | Controle `⋮` desativado; não foi possível abrir o menu. |
-| Rótulos e identificação visual | **Sem problema visual observado** | Não equivale a teste com leitor de tela. |
-| Nomes acessíveis com leitor de tela | **Não testado** | Requer validação específica com tecnologia assistiva. |
-
-O checklist foi executado parcialmente. Não declarar a Fase 2 integralmente validada enquanto as pendências dos critérios CA2.3–CA2.6 não forem resolvidas ou justificadas. O ícone do menu `⋮` também foi apontado pelo usuário como divergente do mockup; a correção visual fica registrada para a etapa apropriada.
-
-### Itens ainda previstos no roteiro
-
-- Abrir e testar os demais diálogos individualmente, verificando foco inicial, contenção e retorno ao controle de origem.
-- Verificar o comportamento contextual de `Esc` na busca e nos demais componentes ativos, conforme CA2.3.
-- Verificar menus contextuais e formulários de criação/edição por teclado, conforme CA2.5.
-- Inspecionar foco visível, estados e nomes acessíveis; realizar teste com leitor de tela se aplicável ao critério de aceite.
-
-A inspeção visual completa da Fase 3 será realizada separadamente, após a conclusão das pendências da Fase 2.
-
----
-
-## Limitações Conhecidas
-
-- A Fase 5 ainda não recebeu aceite integral: movimentação por toque/caneta não foi testada; o popover com grande volume de tarefas também não foi exercitado.
-- Foi observada falha de inicialização em navegador móvel antigo. A causa não foi comprovada; a limitação será mantida registrada de forma genérica, sem identificar aparelho ou versão. A investigação de compatibilidade não integra a próxima ação imediata.
-- A mensagem transitória “Carregando tarefas...” foi removida para evitar deslocamento vertical do Kanban; o usuário confirmou após recarga o funcionamento do quadro e do indicador de status do Pyodide.
-- Relatórios detalhados, exportação JSON e importação com validação estrita e substituição transacional foram implementados na Fase 6; execução dos workflows e homologação manual permanecem pendentes.
-
----
-
-## Estado do Projeto
-
-- **Fase 1:** concluída e validada.
-- **Fase 2:** implementada; validação automática de HTML aprovada; checklist manual pendente.
-- **Fase 3:** implementada; inspeção visual aprovada conforme registro.
-- **Fase 4:** implementada e validada funcionalmente; CA4.1 parcialmente verificado.
-- **Fase 5:** implementação registrada na branch `fase-5-interacoes`; validação manual parcial. CA5.2, CA5.3, CA5.4, CA5.6 e CA5.7 aprovados nos cenários exercitados; CA5.1 parcial (toque/caneta não testados). Pendente: teste de drag and drop por toque previsto em CA5.1.
-- **Fase 6:** implementada na branch `fase-6-relatorios-backup`; validação automatizada e homologação manual pendentes.
-- **Fase 7:** implementação inicial na branch `fase-7-selecao-exclusao-coletiva`; testes automatizados, workflows e homologação manual pendentes.
-- **Validação final:** pendente.
-- **Publicação no GitHub Pages:** ainda não realizada.
-
-O registro operacional atualizado prevalece sobre este resumo: [docs/ESTADO-ATUAL.md](docs/ESTADO-ATUAL.md).
-
----
-
-## Contexto Acadêmico e Licença
-
-Este projeto foi desenvolvido como atividade do **Desafio 3** da *Imersão Engenharia de Software: Dev na Era da IA*, no contexto da iniciativa educacional da **Alura Imersões** em parceria com o **Google for Startups**.
-
-O objetivo é aplicar práticas de Engenharia de Software em um projeto evolutivo, com rastreabilidade entre requisitos, decisões, implementação e validação. A participação de ferramentas de IA no processo não elimina a responsabilidade de compreender o código, avaliar as sugestões e comprovar os resultados.
-
-O projeto está disponibilizado sob a licença [MIT](LICENSE). Consulte o arquivo para conhecer os termos de uso, modificação e distribuição.
-
----
-
-## Documentação
-
-- [Requisitos do Projeto](docs/REQUISITOS.md)
-- [Plano de Implementação](docs/PLANO-IMPLEMENTACAO.md)
-- [Estado Atual](docs/ESTADO-ATUAL.md)
-- [Histórico de Alterações](CHANGELOG.md)
-- [Licença MIT](LICENSE)
-
-Sugestões e relatos de problemas podem ser registrados por meio das *Issues* do repositório.
+Disponibilizado sob a licença [MIT](LICENSE).
