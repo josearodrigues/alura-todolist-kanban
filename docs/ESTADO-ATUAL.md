@@ -1,6 +1,8 @@
 # Estado Atual do Projeto — To-Do List Kanban
 
-**Data da última atualização:** 2026-11-03
+> **Leitura do documento:** as Seções 9 a 21 preservam registros e snapshots históricos das etapas de execução. Quando houver divergência temporal, prevalece o estado consolidado da Seção 22. A documentação foi revisada após a integração da Fase 7, a criação/envio da tag `v1.0.0` e a remoção da branch temporária.
+
+**Data da última atualização:** 2026-11-03 (consolidação documental posterior à tag v1.0.0)
 
 ## 1. Identificação do Desafio e Objetivo
 
@@ -14,25 +16,15 @@
 
 ## 2. Estado Operacional do Repositório e Ambiente
 
-- **Diretório Local de Trabalho:**
-  - *Caminho absoluto:* `/home/joserodrigues/1h/Alura/20261026-Imersão Engenharia de Software- Dev na Era da IA/projetos/alura-kanban-python`
-  - *Nome da pasta local:* `alura-kanban-python`
-- **Repositório Remoto no GitHub:**
-  - *Proprietário:* `josearodrigues`
-  - *Nome do repositório:* `alura-todolist-kanban`
-  - *URL Canônica:* `https://github.com/josearodrigues/alura-todolist-kanban`
-  - *Relação de Nomenclatura:* A distinção entre o nome da pasta de trabalho local (`alura-kanban-python`) e o repositório remoto (`alura-todolist-kanban`) é intencional e preservada, sem exigência de renomeação.
-- **Controle de Versão (Git):**
-  - *Repositório remoto:* `josearodrigues/alura-todolist-kanban`
-  - *Branch remota de trabalho:* `fase-7-selecao-exclusao-coletiva`.
-  - *Último commit remoto confirmado antes da implementação da Fase 7:* `6a967af2aca53a5af5fcfed98e3ff1ea44b8d0d9` (merge da Fase 6).
-  - *Branch principal:* `main`, preservada; esta atualização documental será restrita à branch de trabalho.
-  - *Situação local/remota:* o estado remoto foi consultado no GitHub. A cópia local não foi inspecionada nesta atualização; portanto, não há confirmação de sincronização local.
-  - *Histórico remoto:* a Fase 1 culminou no commit `0ef5cf4`. A Fase 2 foi registrada em `main` por meio dos commits de implementação HTML e atualizações documentais; a pipeline Nu HTML Checker foi adicionada no commit `11f6cdf`; a correção HTML foi registrada em `a6c7495` e o diagnóstico detalhado da pipeline em `58558ad`. A implementação CSS da Fase 3 e a auditoria de contraste foram adicionadas diretamente à `main` em atualização anterior.
-  - *Ações realizadas na Fase 5:* módulos de interface, drag and drop e calendário adicionados/atualizados diretamente na branch remota `fase-5-interacoes`; ponte Python/JavaScript ampliada para métricas; workflow ajustado para validar os módulos ES e HTML nessa branch. Nenhuma alteração foi feita na `main`. Nenhuma tag, release ou publicação da aplicação foi criada. Último commit de código da camada de interação: `11e7615` (tratamento de falha de persistência sem notificação duplicada).
-- **Mockup Oficial de Referência:**
-  - Arquivo `Painel Kanban de Tarefas Pastel.png`, localizado na Biblioteca do projeto Desafios Alura e consultado durante a revisão visual de 2026-11-02/03.
-  - O PNG histórico versionado em `docs/design/referencias/todolist-kanban-1.0-mockup.png` permanece preservado intacto.
+- **Diretório local de trabalho:** `alura-kanban-python`; o caminho absoluto registrado anteriormente é uma referência do ambiente de desenvolvimento, não requisito para execução.
+- **Repositório remoto:** [josearodrigues/alura-todolist-kanban](https://github.com/josearodrigues/alura-todolist-kanban).
+- **Branch principal:** `main`, integrada e sincronizada com `origin/main` no commit `48574b9` no momento da criação da tag.
+- **Branch de trabalho:** `fase-7-selecao-exclusao-coletiva`, integrada por fast-forward e posteriormente removida local e remotamente.
+- **Tag:** `v1.0.0`, anotada e enviada ao remoto; aponta para `48574b9cdad0d1fcb5721d685fa695052dba58f6`.
+- **Estado Git informado pelo usuário após a limpeza:** somente a branch local `main`, somente `origin/main` entre as branches remotas, working tree limpa e tag local `v1.0.0`. A confirmação remota da tag foi feita por `git ls-remote --tags origin v1.0.0`.
+- **GitHub Release:** não há confirmação de criação; a existência da tag não implica uma Release.
+- **Limite temporal:** a tag representa o snapshot de código/documentação do commit `48574b9`. As revisões documentais realizadas depois são commits posteriores na `main` e não modificam a tag.
+- **Mockup oficial:** o PNG histórico versionado em `docs/design/referencias/todolist-kanban-1.0-mockup.png` permanece preservado.
 
 ---
 
@@ -64,14 +56,16 @@
 ## 3. Estado da Governança Documental
 
 A documentação de governança está estabelecida. A revisão desta data atualizou os arquivos operacionais e corrigiu inconsistências de formatação e histórico:
-- **`docs/REQUISITOS.md`:** Atualizado (Versão 1.9 — RF16 detalha seleção global e contrato de integridade da exclusão coletiva).
-- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 3.7 — rastreabilidade das fases, workflows e avaliação delimitada da CA7.12).
+- **`docs/REQUISITOS.md`:** Especificação aprovada preservada na versão 1.9; adicionada matriz informativa de situação da validação, sem alterar RF/RNF.
+- **`docs/PLANO-IMPLEMENTACAO.md`:** Versão 4.0 — encerramento, rastreabilidade final, workflows e ressalvas.
 - **`docs/ESTADO-ATUAL.md`:** Atualizado com o estado operacional corrente (este documento).
-- **`README.md`:** Atualizado com tecnologias, estrutura do projeto, instruções de execução, testes, roteiro manual da Fase 2 e roteiro de inspeção visual da Fase 3.
+- **`README.md`:** Apresentação pública alinhada à entrega acadêmica v1.0.0, com instruções e limites de validação.
 - **`CHANGELOG.md`:** Registra as alterações implementadas por fase.
 - **`LICENSE`:** Licença MIT.
 
 ---
+
+> **Nota histórica:** as tabelas e descrições detalhadas das fases abaixo registram resultados de momentos distintos do desenvolvimento. O quadro final e a situação Git atual devem ser lidos em conjunto com a Seção 22; registros anteriores de pendência não representam necessariamente pendência atual.
 
 ## 4. Situação de Cada Etapa e Fase do Projeto
 
@@ -81,7 +75,7 @@ A documentação de governança está estabelecida. A revisão desta data atuali
 | **Etapa 2 — Planejamento Funcional** | **Concluída e Aprovada** | Especificação consolidada de RF01–RF16, RNF01–RNF07 e regras de negócio. |
 | **Etapa 3 — Arquitetura Técnica** | **Concluída e Aprovada** | Sete decisões técnicas aprovadas, arquitetura modular e critérios de testes definidos. |
 | **Etapa 4 — Plano de Implementação** | **Concluída e Aprovada** | Plano de Implementação (versão 2.1) formalmente aprovado pelo usuário. |
-| **Etapa 5 — Implementação Controlada** | **Implementação das Fases 1 a 7 concluída; homologação de fases anteriores parcialmente pendente** | Fase 7 implementada e funcionalmente aprovada nos critérios CA7.1–CA7.9. Permanecem pendências de homologação herdadas, especialmente CA5.1 (toque), além das verificações não funcionais consolidadas na Etapa 6. |
+| **Etapa 5 — Implementação Controlada** | **Implementação das Fases 1 a 7 concluída** | Fase 7 implementada; CA7.1–CA7.9 aprovados nos cenários exercitados. As limitações de homologação aceitas para a entrega acadêmica estão consolidadas na Seção 22. |
 | ↳ *Fase 1: Domínio Python e Testes* | **Concluída e Validada** | Pacote `src/todolist/`, `pyproject.toml`, testes automatizados (`tests/`) e `scripts/verify_coverage.py` implementados. Após a revisão corretiva, o procedimento oficial aprovou 48/48 testes, com 96,16% de cobertura de linhas e 92,78% de branches. |
 | ↳ *Fase 2: HTML e Acessibilidade* | **Implementada; validação manual parcial** | `index.html` contém estrutura semântica, três colunas, widgets, formulários, seis diálogos nativos, template de cartão, nomes acessíveis, atalhos e gerenciamento de foco. Foram aprovadas 20 verificações automatizadas gerais em Chromium; os seis diálogos também foram exercitados individualmente. Nu HTML Checker: execução `41520632228`, zero erros e zero avisos. Na verificação manual desta sessão: `Tab`, `Shift + Tab`, `Enter`, `Espaço`, `Ctrl + K`, foco inicial/contenção/restauração no diálogo Nova Tarefa e fechamento desse diálogo por `Esc` aprovados pelo usuário. Menu contextual não testado: controle `⋮` está desativado; usuário também identificou divergência visual do ícone em relação ao mockup. Inspeção visual dos rótulos/nome dos controles sem problemas aparentes, mas leitor de tela não testado. Validação formal da fase permanece parcial; itens não verificados não são considerados aprovados. |
 | ↳ *Fase 3: CSS e Validação Visual* | **Implementada; inspeção visual manual concluída** | Refinamentos visuais e mocks estáticos mantidos. Navegação lateral recolhível em telas de até 960 px, com fechamento por `Esc`, clique no fundo e seleção de seção, restauração e contenção de foco; ícone `⋮` ajustado visualmente, sem ativar o menu contextual. Usuário aprovou Desktop, Tablet (1024 × 768) e Mobile (390 × 844), nos temas Claro e Escuro. Teste manual de `prefers-reduced-motion` também aprovado. Workflow `41553398236`: 25 combinações de contraste aprovadas, zero reprovações e Nu HTML Checker sem erros/avisos. CA3.1–CA3.5 considerados atendidos conforme as evidências registradas; não implica validação funcional das telas demonstrativas. |
@@ -133,7 +127,7 @@ A documentação de governança está estabelecida. A revisão desta data atuali
 
 1. Completar a verificação direcionada de RNF01–RNF07, reutilizando evidências válidas e registrando lacunas: auditoria de rede do GitHub Pages (RNF01), inspeção da lógica Python (RNF02), evidência do workflow para RNF03, responsividade integrada (RNF05), acessibilidade WCAG 2.2 AA (RNF06) e feedback de inicialização (RNF07). RNF04 possui evidência de rollback em falha de persistência.
 2. Executar e validar o workflow Python/cobertura na branch da Fase 7 (CA7.11); o workflow HTML/contraste já foi aprovado nessa branch.
-3. Prosseguir com CA7.12, começando pela confirmação da renderização literal do payload importado e depois cobrindo os pontos dinâmicos ainda não testados.
+3. Registro histórico: a avaliação CA7.12 foi encerrada como análise delimitada; consultar Seções 19 e 22 para o escopo e as limitações aceitas.
 4. Retestar visualmente sidebar e banner de tarefas vencidas nos temas Claro/Escuro e breakpoints pertinentes. A integração à `main` e publicação permanecem fora desta etapa.
 ---
 
@@ -472,42 +466,60 @@ A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Valida�
 - A validação cobre a amostra atual de 30 tarefas e o fluxo de inicialização/renderização observado. Não representa prova de todos os estados possíveis nem substitui a regressão de outros requisitos.
 - A Etapa 6 permanece em andamento. Continuam pendentes as verificações de RNF01, RNF05 e RNF06, a homologação por toque CA5.1 e a conclusão formal da avaliação delimitada CA7.12.
 
-## 22. Encerramento do projeto — 2026-11-03
+## 22. Encerramento do projeto e consolidação da versão acadêmica v1.0.0 — 2026-11-03
 
-### Decisão de encerramento
+### 22.1 Decisão de encerramento
 
-O projeto To-Do List Kanban está **encerrado para fins da entrega acadêmica**, com base na implementação das sete fases, na aprovação dos critérios funcionais exercitados, na regressão RF01–RF16 dos cenários executados e nos resultados de automação registrados. O encerramento não significa homologação integral de todos os requisitos não funcionais nem elimina as limitações abaixo.
+O Desafio 3 — To-Do List Kanban está **encerrado para fins da entrega acadêmica**. As sete fases foram implementadas, a Fase 7 foi integrada à `main`, os workflows relevantes foram aprovados nos commits identificados nesta seção e a regressão funcional RF01–RF16 foi aprovada nos cenários exercitados.
 
-A decisão prioriza a conclusão do desafio e evita reabrir funcionalidades ou repetir testes já realizados. Não foram aprovadas novas funcionalidades nem alterações de código para esta etapa de encerramento.
+O encerramento não significa homologação integral de todos os requisitos não funcionais. As limitações abaixo foram aceitas de forma explícita para concluir o desafio sem ampliar o escopo nem repetir indiscriminadamente testes já realizados.
 
-### Estado consolidado
+### 22.2 Estado funcional e automatizado
 
-- **Etapas 1 a 5:** concluídas quanto à descoberta, especificação, arquitetura, planejamento e implementação. As fases funcionais foram implementadas; as limitações de homologação manual remanescentes estão explicitadas a seguir.
-- **Fase 7:** CA7.1–CA7.9 aprovados nos cenários executados; regressão RF01–RF16 aprovada nos cenários exercitados.
-- **Automação:** workflows HTML/contraste e Python/cobertura aprovados na branch de trabalho. A execução Python registrada após a Fase 7 informou 65 testes aprovados, 95,83% de cobertura de linhas e 92,54% de branches. A integração RNF02 também possui validação posterior no navegador com 30 tarefas.
-- **RNF02, RNF03 e RNF04:** validados no escopo das evidências registradas.
-- **RNF07:** estados de carregamento e sucesso confirmados; o estado de erro não foi provocado.
+- **Fase 7:** CA7.1–CA7.9 aprovados nos cenários manuais exercitados.
+- **Regressão funcional:** RF01–RF16 aprovada nos cenários executados; não equivale a prova exaustiva de todas as combinações possíveis.
+- **CA7.10:** regressão integrada registrada, com reutilização de evidências anteriores válidas e retestes direcionados.
+- **CA7.11 / RNF03:** workflows concluídos com sucesso:
+  - Python/cobertura — execução [41753321406](https://github.com/josearodrigues/alura-todolist-kanban/actions/runs/41753321406), commit `c37ff886fd14e877aca44d0a6dee87a5006e9f25`: 68 testes aprovados, 95,59% de cobertura de linhas e 92,17% de branches.
+  - HTML/JavaScript/contraste — execução [41753384763](https://github.com/josearodrigues/alura-todolist-kanban/actions/runs/41753384763), commit `5adc3021b18e3f3698e19ab2a772868488e68f54`: sucesso.
+  - Os dois workflows foram executados em commits diferentes; não se afirma que avaliaram o mesmo snapshot.
+- **RNF02:** validação funcional integrada no navegador com 30 tarefas; a sequência dos cartões correspondeu à ordem/estado fornecidos pelo núcleo Python e a indicação de vencimento foi consistente em 30/30 elementos examinados.
+- **RNF04:** rollback validado nos cenários de falha de gravação e importação registrados.
+- **RNF07:** estados de carregamento e sucesso confirmados no navegador; estado de erro não testado dinamicamente.
 
-### Limitações aceitas e não conformidades não declaradas como aprovadas
+### 22.3 Limitações aceitas
 
-| Item | Situação no encerramento |
+| Requisito / critério | Resultado e limite da evidência |
 |---|---|
-| RNF01 / CA4.1 | Aplicação executada no GitHub Pages e requisição do lockfile Pyodide observada com HTTP 200. A captura completa de tráfego não foi realizada; auditoria de rede parcial. |
-| RNF05 | Há evidências anteriores de inspeção visual em Desktop, Tablet e Mobile. O reteste visual integrado final não foi concluído; observações pontuais de layout não justificam reabrir a implementação nesta entrega. |
-| RNF06 | Nu HTML Checker, contraste e parte dos testes de teclado/foco foram aprovados. Não houve teste com leitor de tela; não se declara conformidade WCAG 2.2 AA integral. |
+| RNF01 / CA4.1 | Aplicação executada no GitHub Pages. Foi observada uma requisição ao lockfile Pyodide via jsDelivr com HTTP 200; a captura integral de tráfego não foi realizada. Auditoria de rede parcial. |
+| RNF05 | Há inspeção visual anterior em Desktop, Tablet e Mobile. O reteste visual integrado final não foi concluído. |
+| RNF06 | Nu HTML Checker, contraste e parte dos testes de teclado/foco aprovados. Leitor de tela não testado; não se declara conformidade WCAG 2.2 AA integral. |
 | RNF07 | Carregamento e sucesso validados; estado de erro sem teste dinâmico. |
-| CA5.1 | Interação por toque em dispositivo físico não homologada por indisponibilidade de ambiente de teste. |
-| CA7.12 | Inspeção estática e testes dinâmicos delimitados realizados. Nenhuma vulnerabilidade crítica ou alta foi confirmada no escopo examinado; a avaliação não equivale a pentest ou auditoria abrangente. Pontos de hardening permanecem registrados na Seção 19. |
-| Usabilidade visual | Pequenas observações de apresentação foram registradas durante a inspeção final. Não foi comprovado impedimento funcional que justifique reabrir o escopo. |
+| CA5.1 | Teste físico em touchscreen não realizado. A evidência com mouse e alternativa de movimentação não substitui teste de toque. |
+| CA7.12 | Avaliação de segurança delimitada realizada. Nenhuma vulnerabilidade crítica ou alta foi confirmada no escopo examinado. Pontos de hardening permanecem registrados na Seção 19. Não equivale a pentest ou auditoria abrangente. |
+| Apresentação visual | Observações pontuais foram registradas, sem evidência de impedimento funcional que justificasse reabrir o escopo acadêmico. |
 
-### Situação de versionamento e publicação
+### 22.4 Situação de versionamento e publicação
 
-- Branch de trabalho: `fase-7-selecao-exclusao-coletiva`.
-- Esta consolidação é exclusivamente documental e será registrada na branch de trabalho.
-- A branch `main` não foi alterada por esta atualização.
-- Push da branch de trabalho, integração/push final, exclusão das branches temporárias e criação da tag `v1.0.0` permanecem sob execução do usuário, com orientação do assistente.
-- Não há declaração de release/tag criada ou de publicação final decorrente deste registro.
+- **Repositório:** `josearodrigues/alura-todolist-kanban`.
+- **Integração:** branch `fase-7-selecao-exclusao-coletiva` integrada à `main` por fast-forward.
+- **Commit identificado para a versão:** `48574b9cdad0d1fcb5721d685fa695052dba58f6`.
+- **Tag:** `v1.0.0`, anotada, criada nesse commit e enviada ao GitHub. A consulta remota `git ls-remote --tags origin v1.0.0` confirmou a referência da tag.
+- **Branches:** a branch temporária foi removida local e remotamente. Após a limpeza, o usuário confirmou somente `main` local e `origin/main` remota.
+- **Sincronização:** o usuário confirmou `main` local e remota no commit `48574b9`, sem alterações pendentes.
+- **GitHub Release:** não há registro de criação; tag e Release são objetos distintos.
+- **Integridade histórica:** esta revisão documental é posterior à tag. Os commits documentais subsequentes na `main` não movem nem reescrevem a tag `v1.0.0`.
 
-### Critério de conclusão
+### 22.5 Documentos de referência e hierarquia
 
-O desafio está documentalmente encerrado para a entrega acadêmica. As limitações acima permanecem transparentes e não impedem considerar concluído o trabalho planejado dentro do escopo e dos recursos de validação disponíveis.
+- `docs/REQUISITOS.md`: fonte dos requisitos e decisões aprovadas; sua matriz final é informativa e não altera o escopo.
+- `docs/PLANO-IMPLEMENTACAO.md`: fases, critérios, rastreabilidade, evidências e decisão de encerramento.
+- `docs/ESTADO-ATUAL.md`: histórico operacional e consolidação final desta seção.
+- `CHANGELOG.md`: cronologia das alterações e identificação da versão.
+- `README.md`: apresentação pública, funcionalidades, tecnologias, execução e resumo honesto das validações.
+
+### 22.6 Conclusão
+
+O desafio está **concluído para a entrega acadêmica v1.0.0**, com ressalvas explícitas. A implementação funcional, a regressão exercitada, os workflows, a integração Git, a tag e a limpeza das branches foram concluídos conforme as evidências registradas. Não se declara homologação integral de todos os RNFs, certificação WCAG completa, pentest ou GitHub Release.
+
+Nenhuma alteração de código da aplicação foi realizada nesta consolidação documental.
