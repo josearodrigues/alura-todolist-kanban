@@ -75,6 +75,7 @@ _funcoes_kanban = (
     "validar_envelope_backup",
     "gerar_envelope_backup",
     "calcular_relatorio_completo",
+    "preparar_apresentacao_kanban",
     "obter_timestamp_utc_atual",
     "preparar_importacao_backup",
     "preparar_estado_importado",
@@ -97,6 +98,12 @@ def _kanban_dispatch(payload_json):
     dados = payload.get("dados", {})
     tarefas = dados.get("tarefas", [])
     timestamp_atual = dados.get("timestamp_ultima_alteracao")
+
+    if operacao == "apresentacao_kanban":
+        return json.dumps(
+            todolist.preparar_apresentacao_kanban(tarefas, dados["data_local_referencia"]),
+            ensure_ascii=False,
+        )
 
     if operacao == "metricas":
         data_local = dados["data_local_referencia"]
@@ -289,4 +296,13 @@ export async function executeDomainOperation(operacao, estado, dados) {
     tarefa: resultado.tarefa,
     tarefas_excluidas: resultado.tarefas_excluidas || [],
   };
+}
+
+
+
+export async function prepareKanbanPresentation(estado, dataLocalReferencia) {
+  return executarPython("apresentacao_kanban", {
+    tarefas: estado.tarefas,
+    data_local_referencia: dataLocalReferencia,
+  });
 }
