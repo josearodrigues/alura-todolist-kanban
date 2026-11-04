@@ -4,6 +4,7 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 
 ## [Não lançado] — 2026-11-03
 
+- RNF02: centralizada em Python a preparação da ordenação do quadro por coluna/campo `ordem` e a identificação de tarefas vencidas. A interface consome os resultados via Pyodide; a ordenação alfabética do calendário permanece no JavaScript como apresentação. Acrescentados três testes unitários; execução e validação integrada pendentes.
 - RNF05/CA5.1: inspeção CSS identificou breakpoints (1280, 960 e 767 px), navegação lateral recolhível, colunas empilhadas, banner de vencidas fluido e regras para ponteiro coarse. A evidência estática não substitui reteste visual nem homologação física por toque; ambos permanecem pendentes.
 
 
