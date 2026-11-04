@@ -1,40 +1,69 @@
 # To-Do List Kanban — v1.0.0
 
-Aplicação web de gerenciamento de tarefas no formato Kanban, desenvolvida como **Desafio 3** da *Imersão Engenharia de Software: Dev na Era da IA* (Alura + Google for Startups).
+Aplicação web de gerenciamento de tarefas no formato Kanban, desenvolvida em Python como **Desafio 3** da iniciativa [Imersão Engenharia de Software: Dev na Era da IA](https://www.alura.com.br/), promovida pela Alura em parceria com o Google for Startups.
 
-<sub>Projeto educacional independente. Não é produto oficial nem representa endosso da Alura ou do Google.</sub>
+> Projeto educacional independente. Não é um produto oficial nem representa endosso da Alura ou do Google.
 
-A aplicação utiliza Python como núcleo das regras de negócio, executado no navegador por WebAssembly (Pyodide). A interface usa HTML, CSS e JavaScript ES Modules; os dados são persistidos localmente no navegador.
+O projeto aplica conceitos de Engenharia de Software desde a definição dos requisitos e o planejamento técnico até a implementação, os testes, a validação e a documentação.
 
-**Versão:** [tag anotada v1.0.0](https://github.com/josearodrigues/alura-todolist-kanban/tree/v1.0.0)  
-**Repositório:** [josearodrigues/alura-todolist-kanban](https://github.com/josearodrigues/alura-todolist-kanban)
+## Acesse o projeto
+
+- **Aplicação publicada:** https://josearodrigues.github.io/alura-todolist-kanban/
+- **Repositório:** https://github.com/josearodrigues/alura-todolist-kanban
+- **Versão:** [v1.0.0](https://github.com/josearodrigues/alura-todolist-kanban/tree/v1.0.0)
+
+## Sobre a aplicação
+
+O To-Do List Kanban permite organizar tarefas em três etapas de execução:
+
+- **A Fazer:** tarefas ainda não iniciadas.
+- **Em Andamento:** tarefas em execução.
+- **Concluídas:** tarefas finalizadas.
+
+A aplicação utiliza Python como núcleo das regras de negócio, executado diretamente no navegador por meio do Pyodide e WebAssembly. A interface é construída com HTML5, CSS3 e JavaScript ES Modules.
+
+Os dados são armazenados localmente no navegador, sem necessidade de um backend próprio.
 
 ## Funcionalidades
 
-- Quadro Kanban com as colunas A Fazer, Em Andamento e Concluídas.
-- Criação, edição, movimentação, reordenação e exclusão individual de tarefas.
+- Quadro Kanban com três colunas e movimentação de tarefas.
+- Criação, edição, reordenação e exclusão individual.
 - Seleção e exclusão coletiva com confirmação.
-- Busca por título e descrição, calendário, resumo do projeto e Foco de Hoje.
-- Relatórios calculados pelo domínio Python.
-- Exportação e importação de backup JSON com validação estrita e confirmação.
-- Temas claro e escuro, layout responsivo e recursos de acessibilidade por teclado.
+- Busca por título e descrição.
+- Calendário com navegação mensal e identificação de vencimentos.
+- Resumo do projeto com indicadores e percentuais.
+- Foco de Hoje para acompanhamento das tarefas relevantes.
+- Relatórios com indicadores calculados pelo domínio Python.
+- Exportação e importação de backups JSON com validação.
+- Temas claro e escuro.
+- Interface responsiva e recursos de acessibilidade por teclado.
 - Persistência local com preservação do estado anterior em caso de falha de gravação.
 
-## Tecnologias
+## Tecnologias utilizadas
 
-| Tecnologia | Utilização |
+| Tecnologia | Aplicação no projeto |
 |---|---|
-| Python 3.14 | Modelo, validações, serviços, métricas e regras de negócio |
+| Python 3.14 | Domínio, validações, serviços, métricas e regras de negócio |
 | Pyodide / WebAssembly | Execução de Python no navegador |
-| HTML5 e CSS3 | Estrutura, componentes, temas e responsividade |
-| JavaScript ES Modules | Interface, integração com Pyodide e persistência local |
+| HTML5 | Estrutura semântica da aplicação |
+| CSS3 | Layout, componentes, temas e responsividade |
+| JavaScript ES Modules | Interface, interações, integração com Python e persistência |
 | pytest e pytest-cov | Testes automatizados e cobertura do domínio Python |
-| GitHub Actions | Validação de HTML/JavaScript/contraste e testes Python/cobertura |
-| Nu HTML Checker | Verificação do HTML |
+| GitHub Actions | Automação das verificações e testes |
+| Nu HTML Checker | Validação estrutural do HTML |
 
-A aplicação carrega a fonte Inter do Google Fonts e o Pyodide do CDN jsDelivr.
+A aplicação carrega o runtime Pyodide pelo CDN jsDelivr e utiliza a fonte Inter do Google Fonts.
 
-## Estrutura do repositório
+## Arquitetura e organização
+
+A solução separa as responsabilidades entre o domínio Python, a interface Web e os mecanismos de persistência.
+
+- **Domínio Python:** concentra as entidades, regras de negócio, validações e cálculos.
+- **Pyodide:** executa os módulos Python no navegador por WebAssembly.
+- **JavaScript:** integra o domínio à interface e coordena as interações e a persistência.
+- **localStorage:** armazena os dados das tarefas no próprio navegador.
+
+### Estrutura do repositório
 
 ```text
 alura-todolist-kanban/
@@ -52,71 +81,118 @@ alura-todolist-kanban/
 └── README.md
 ```
 
-### Documentação
+## Como executar localmente
 
-- [Requisitos](docs/REQUISITOS.md)
-- [Plano de Implementação](docs/PLANO-IMPLEMENTACAO.md)
-- [Estado Atual e ressalvas da entrega](docs/ESTADO-ATUAL.md)
-- [Changelog](CHANGELOG.md)
+### Requisitos
 
-## Executar localmente
+- Python 3.14 para executar os testes automatizados.
+- Navegador moderno para utilizar a aplicação.
+- Conexão com a internet para carregar o Pyodide e a fonte externa.
 
-Requisitos: Python 3.14 para os testes. Para executar a aplicação web, use um navegador moderno e um servidor HTTP local.
+### Iniciar a aplicação
 
-Na raiz do repositório:
+Na raiz do repositório, execute:
 
 ```bash
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-Abra http://127.0.0.1:8000 no navegador. O servidor fica acessível somente no computador local. Para encerrá-lo, pressione `Ctrl+C`.
+Acesse:
 
-As tarefas são armazenadas em `localStorage`. Em um navegador sem dados salvos, o quadro inicia vazio. O Pyodide e os módulos Python são carregados pelo navegador.
+```text
+http://127.0.0.1:8000
+```
 
-## Executar os testes Python
+Para encerrar o servidor, pressione `Ctrl+C`.
 
-Instale as dependências de desenvolvimento:
+O servidor disponibiliza os arquivos localmente. A aplicação executa o Python no próprio navegador e armazena as tarefas no `localStorage`.
+
+Em um navegador sem dados salvos, o quadro inicia vazio.
+
+## Como executar os testes
+
+### Instalar dependências
 
 ```bash
 python -m pip install -e ".[dev]"
 ```
 
-Execute a suíte e a verificação de cobertura:
+### Executar a suíte automatizada
+
+```bash
+pytest
+```
+
+### Verificar a cobertura
+
+```bash
+python scripts/verify_coverage.py
+```
+
+Também é possível executar os dois procedimentos em sequência:
 
 ```bash
 pytest && python scripts/verify_coverage.py
 ```
 
-Metas do projeto:
-- 100% de aprovação dos testes;
-- cobertura de linhas igual ou superior a 90%;
-- cobertura de branches igual ou superior a 85%.
+### Metas de qualidade
 
-## Evidências da versão acadêmica
+| Indicador | Meta |
+|---|---:|
+| Aprovação dos testes | 100% |
+| Cobertura de linhas | ≥ 90% |
+| Cobertura de branches | ≥ 85% |
 
-| Verificação | Evidência registrada | Resultado |
+## Evidências de validação
+
+Os resultados abaixo correspondem a execuções registradas durante o desenvolvimento e encerramento acadêmico do projeto.
+
+| Verificação | Evidência | Resultado |
 |---|---|---|
-| Testes Python e cobertura | [Workflow 41753321406](https://github.com/josearodrigues/alura-todolist-kanban/actions/runs/41753321406), commit `c37ff886` | 68 testes aprovados; 95,59% linhas; 92,17% branches |
-| HTML, JavaScript e contraste | [Workflow 41753384763](https://github.com/josearodrigues/alura-todolist-kanban/actions/runs/41753384763), commit `5adc3021` | Sucesso |
-| RNF02 — integração Python/Pyodide | Inspeção funcional no navegador com 30 tarefas | Ordem e vencimento consistentes em 30/30 tarefas examinadas |
-| RF01–RF16 | Regressão funcional manual | Aprovada nos cenários exercitados |
-| Persistência / rollback | Testes manuais de falha | Estado anterior preservado nos cenários registrados |
+| Testes Python e cobertura | [Workflow 41753321406](https://github.com/josearodrigues/alura-todolist-kanban/actions/runs/41753321406) | 68 testes aprovados; 95,59% de linhas e 92,17% de branches |
+| HTML, JavaScript e contraste | [Workflow 41753384763](https://github.com/josearodrigues/alura-todolist-kanban/actions/runs/41753384763) | Workflow aprovado |
+| Integração Python/Pyodide | Inspeção funcional no navegador | Ordem e vencimento consistentes nas 30 tarefas examinadas |
+| Regressão funcional | RF01–RF16 | Aprovada nos cenários exercitados |
+| Persistência e rollback | Testes manuais de falha | Estado anterior preservado nos cenários registrados |
 
-Os workflows foram aprovados em commits diferentes; não se afirma que ambos avaliaram o mesmo snapshot. Os resultados acima são evidências históricas registradas, não uma execução realizada durante a leitura deste README.
+**Importante:** os dois workflows foram executados em commits diferentes. Portanto, não se afirma que ambos validaram exatamente o mesmo snapshot do código. Os resultados são registros históricos, não uma nova execução realizada durante a leitura deste documento.
 
 ## Limites conhecidos da validação
 
-A versão foi encerrada para fins acadêmicos, com ressalvas documentadas. Não se declara homologação integral de todos os requisitos não funcionais.
+A versão foi encerrada para fins acadêmicos com ressalvas documentadas. Isso não significa homologação integral de todos os requisitos não funcionais.
 
-- **RNF01:** execução no GitHub Pages confirmada; auditoria completa de tráfego não realizada.
-- **RNF05:** há inspeção visual anterior em Desktop, Tablet e Mobile; o reteste visual integrado final não foi concluído.
-- **RNF06:** HTML, contraste e parte dos testes de teclado/foco foram verificados; leitor de tela não testado. Não se declara conformidade WCAG 2.2 AA integral.
-- **RNF07:** estados de carregamento e sucesso confirmados; estado de erro não testado dinamicamente.
-- **CA5.1:** teste físico por toque não realizado.
-- **CA7.12:** avaliação de segurança delimitada; nenhuma vulnerabilidade crítica ou alta foi confirmada no escopo examinado. Não equivale a pentest ou auditoria abrangente.
+- **RNF01 — Hospedagem e comunicação:** execução no GitHub Pages confirmada; auditoria completa de tráfego não realizada.
+- **RNF05 — Responsividade:** houve inspeção visual em Desktop, Tablet e Mobile, mas o reteste visual integrado final não foi concluído.
+- **RNF06 — Acessibilidade:** HTML, contraste e parte dos testes de teclado e foco foram verificados. Não houve teste com leitor de tela; não se declara conformidade integral com WCAG 2.2 AA.
+- **RNF07 — Feedback:** estados de carregamento e sucesso foram confirmados; o estado de erro não foi testado dinamicamente.
+- **CA5.1 — Interação por toque:** teste físico em dispositivo com tela sensível ao toque não realizado.
+- **CA7.12 — Segurança:** avaliação delimitada, sem confirmação de vulnerabilidade crítica ou alta no escopo examinado. Não equivale a pentest ou auditoria abrangente.
 
-A matriz completa de evidências, decisões e limitações está em [docs/ESTADO-ATUAL.md](docs/ESTADO-ATUAL.md), Seção 22.
+A matriz completa de evidências, decisões e limitações está em [docs/ESTADO-ATUAL.md](docs/ESTADO-ATUAL.md), especialmente na Seção 22.
+
+## Documentação
+
+A documentação do projeto mantém a rastreabilidade entre requisitos, decisões técnicas, implementação e validação.
+
+- [Requisitos do projeto](docs/REQUISITOS.md)
+- [Plano de implementação](docs/PLANO-IMPLEMENTACAO.md)
+- [Estado atual e evidências](docs/ESTADO-ATUAL.md)
+- [Histórico de alterações](CHANGELOG.md)
+
+## Contexto acadêmico e ferramentas de IA
+
+O projeto foi desenvolvido no contexto do **Desafio 3 — To-Do List Kanban**, da Imersão Engenharia de Software: Dev na Era da IA.
+
+O desenvolvimento contou com o apoio do **Google Antigravity** e do **ChatGPT** em atividades de análise, planejamento, implementação, revisão e documentação.
+
+O uso de ferramentas de inteligência artificial foi acompanhado da análise das propostas, compreensão das decisões técnicas e validação dos resultados.
+
+O princípio de aprendizagem adotado foi:
+
+**Compreender, implementar, validar e explicar.**
 
 ## Licença
 
-Disponibilizado sob a licença [MIT](LICENSE).
+Este projeto está disponibilizado sob a licença [MIT](LICENSE).
+
+Consulte o arquivo de licença para conhecer os termos de utilização, modificação e distribuição.
