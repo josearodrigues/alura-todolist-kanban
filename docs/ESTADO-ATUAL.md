@@ -374,7 +374,7 @@ A CA7.12 permanece **parcialmente concluída**. Esta avaliação é delimitada a
 - **RNF03:** validado para a execução Python/cobertura informada, com as metas mínimas de linhas (90%) e branches (85%) superadas.
 - **RNF04:** rollback por falha de persistência validado na Fase 7; evidências anteriores das Fases 4 e 6 permanecem aplicáveis.
 - **RNF01:** execução no GitHub Pages confirmada. Na auditoria de rede, foi apresentada a requisição GET ao `https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide-lock.json`, com origem e referenciador `https://josearodrigues.github.io/`, HTTPS e HTTP 200. A lista completa de requisições não foi apresentada; portanto, não se conclui ausência de outras chamadas externas ou de APIs.
-- **RNF02:** após a inspeção, foram centralizadas em Python a identificação de tarefas vencidas e a ordenação das tarefas do quadro por coluna/campo `ordem`. A interface consome os resultados preparados pelo núcleo via Pyodide. A ordenação alfabética do popover do calendário permanece em JavaScript por ser exclusivamente de apresentação. Foram acrescentados três testes unitários; execução e validação integrada ainda pendentes. RNF02 permanece **em validação**, sem aceite final.
+- **RNF02:** após a inspeção, foram centralizadas em Python a identificação de tarefas vencidas e a ordenação das tarefas do quadro por coluna/campo `ordem`. A interface consome os resultados preparados pelo núcleo via Pyodide. A ordenação alfabética do popover do calendário permanece em JavaScript por ser exclusivamente de apresentação. Os três novos testes unitários foram executados no workflow Python: **68 testes aprovados**, 95,59% de cobertura de linhas e 92,17% de branches. O workflow de sintaxe JavaScript também aprovou a integração. Falta a conferência funcional no navegador; RNF02 permanece **em validação**, sem aceite final.
 - **RNF05:** reteste visual integrado da sidebar e do banner de tarefas vencidas nos breakpoints oficiais permanece pendente.
 - **RNF06:** workflow de contraste aprovado e verificações de teclado/foco registradas. Não houve teste com leitor de tela nem evidência suficiente para declarar conformidade WCAG 2.2 AA integral.
 - **RNF07:** além da inspeção estática do elemento inicial `Inicializando...` em `index.html` e das transições no `js/app.js`, o usuário confirmou no navegador a exibição de `Inicializando...` durante a carga e `✓ Carregado` após a inicialização do Pyodide. **Validado funcionalmente para os estados de carregamento e sucesso.** O estado de erro não foi provocado nem testado.
@@ -393,7 +393,7 @@ A CA7.12 permanece **parcialmente concluída**. Esta avaliação é delimitada a
 A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Validação Final permanece em andamento até a resolução ou aceitação formal das pendências listadas nesta seção, incluindo CA5.1 e as verificações RNF01, RNF02, RNF05 e RNF06. RNF07 foi validado funcionalmente para carregamento e sucesso. Não declarar o projeto integralmente homologado neste estado.
 
 - **Branch de trabalho:** `fase-7-selecao-exclusao-coletiva`.
-- **HEAD remoto consultado antes desta atualização documental:** `e817ae300eabc6aeb9af7db6e665dfc1919719a3`.
+- **HEAD remoto consultado antes desta atualização documental:** `b53a921afdd1cdb4de60a13fa55eaaa6c9d32e96`.
 - **Branch `main`:** não foi alterada nesta atualização.
 - **Código da aplicação:** nenhuma alteração realizada nesta atualização; somente documentação.
 - **Cópia local:** não inspecionada; sincronização local não confirmada.
@@ -418,8 +418,10 @@ A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Valida�
 - Acrescentados três testes unitários em `tests/test_metrics.py`, cobrindo ordenação, identificação de vencidas e rejeição de data inválida.
 
 **Validação pendente**
-- As alterações foram gravadas na branch de trabalho, mas os novos testes e a integração navegador/Pyodide ainda não foram executados após esta implementação.
-- Portanto, RNF02 permanece **em validação**; não se declara o requisito aprovado até a execução dos testes e a conferência do comportamento do quadro.
+- Workflow `Testes Python e cobertura`: execução `41753321406`, commit `c37ff886`, resultado `success`; 68 testes aprovados, cobertura de linhas 95,59% e branches 92,17%.
+- Workflow `Validar HTML e contraste`: execução `41753384763`, commit `5adc302`, resultado `success`; sintaxe dos módulos JavaScript, contraste WCAG 2.2 AA e Nu HTML Checker aprovados.
+- A integração funcional navegador/Pyodide ainda precisa ser conferida após a atualização.
+- Portanto, RNF02 permanece **em validação**; não se declara o requisito aprovado até a conferência do comportamento do quadro no navegador.
 
 ### RNF07 — indicador de inicialização
 
@@ -451,4 +453,4 @@ A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Valida�
 - Mantida em JavaScript somente a ordenação alfabética do calendário, classificada como apresentação.
 - Incluídos três testes unitários em `tests/test_metrics.py`; execução ainda pendente.
 - Commits de implementação: `7010d1b` (função Python), `4bff746` (exportação), `c37ff88` (testes), `ac821f7` (ponte Pyodide), `3b51168` (renderizador) e `fdabfde`/`5adc302` (integração e correção da renderização inicial).
-- RNF02 permanece em validação até aprovação dos testes automatizados e da integração no navegador.
+- RNF02 permanece em validação: testes automatizados e sintaxe JavaScript aprovados; integração funcional no navegador ainda pendente.
