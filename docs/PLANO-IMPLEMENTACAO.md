@@ -521,7 +521,7 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 |------|--------------------|------|--------------------|-----------|
 | RNF01 | Execução 100% estática, compatível com GitHub Pages | Fase 4 | CA4.1 | Aplicação acessada e executada na URL publicada do GitHub Pages; auditoria de rede sem requisições a APIs de backend. |
 | RNF02 | Lógica central em Python (regras, cálculos, validações) | Fase 1, Fase 4 | CA1.1–CA1.6, CA4.4 | Testes automatizados no pytest; teste funcional da ponte JS/Python. |
-| RNF03 | 100% de aprovação dos testes; `percent_covered` $\ge 90\%$; `percent_branches_covered` $\ge 85\%$ | Fases 1 e 7 | CA1.7, CA7.8, CA7.11 | Saída oficial de `pytest && python scripts/verify_coverage.py`. |
+| RNF03 | 100% de aprovação dos testes; `percent_covered` $\ge 90\%$; `percent_branches_covered` $\ge 85\%$ | Fases 1 e 7 | CA1.7, CA7.8, CA7.11 | Workflow 41753321406: 68 testes aprovados, 95,59% de linhas e 92,17% de branches no commit `c37ff886`; detalhes e ressalva de commits distintos na Seção 3.1. |
 | RNF04 | Persistência segura com reversão em falha de gravação | Fase 4, Fase 6 | CA4.5, CA4.6, CA6.6 | Testes de falha simulada (`QuotaExceededError`); verificação de consistência. |
 | RNF05 | Responsividade nos três breakpoints (Desktop, Tablet, Mobile) | Fase 3 | CA3.3 | Evidência documental de inspeção visual nos três breakpoints. |
 | RNF06 | Acessibilidade WCAG 2.2 AA: foco, teclado, ARIA, contraste, `prefers-reduced-motion` | Fase 2, Fase 3 | CA2.2–CA2.6, CA3.4, CA3.5 | Relatório Nu HTML Checker; relatório `check_contrast.py`; checklist de teclado. |
