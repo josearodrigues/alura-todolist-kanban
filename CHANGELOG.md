@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0] — 2026-11-03
+## [Não lançado] — 2026-11-03
 
 ### Encerramento acadêmico
 - Concluídas as sete fases de implementação do To-Do List Kanban, com os critérios funcionais aprovados nos cenários executados e regressão RF01–RF16 registrada.
