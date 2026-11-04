@@ -374,10 +374,10 @@ A CA7.12 permanece **parcialmente concluída**. Esta avaliação é delimitada a
 - **RNF03:** validado para a execução Python/cobertura informada, com as metas mínimas de linhas (90%) e branches (85%) superadas.
 - **RNF04:** rollback por falha de persistência validado na Fase 7; evidências anteriores das Fases 4 e 6 permanecem aplicáveis.
 - **RNF01:** execução no GitHub Pages confirmada. Na auditoria de rede, foi apresentada a requisição GET ao `https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide-lock.json`, com origem e referenciador `https://josearodrigues.github.io/`, HTTPS e HTTP 200. A lista completa de requisições não foi apresentada; portanto, não se conclui ausência de outras chamadas externas ou de APIs.
-- **RNF02:** revisão direcionada da centralização da lógica de negócio em Python e das integrações ainda precisa ser consolidada como evidência de aceite.
+- **RNF02:** inspeção estática confirmou que operações CRUD, validações de domínio, schema de backup, métricas e relatórios são executados pelo pacote Python via `pyodide_bridge.js`. Contudo, foram encontrados cálculos/regras derivados em JavaScript: classificação de tarefa vencida em `js/kanban_ui.js` (comparação de `data_limite` com a data local), ordenação de tarefas por `ordem` no renderizador Kanban e ordenação alfabética das tarefas no calendário (`js/calendar_ui.js`). A ordenação alfabética pode ser apenas apresentação; a classificação de vencida duplica regra de domínio. Como RNF02 exige regras, cálculos, ordenação e validações concentrados em Python, o requisito permanece **parcial** até decidir e corrigir/justificar esses pontos. Não foram feitas alterações de código.
 - **RNF05:** reteste visual integrado da sidebar e do banner de tarefas vencidas nos breakpoints oficiais permanece pendente.
 - **RNF06:** workflow de contraste aprovado e verificações de teclado/foco registradas. Não houve teste com leitor de tela nem evidência suficiente para declarar conformidade WCAG 2.2 AA integral.
-- **RNF07:** confirmar o indicador de inicialização no estado atual ainda está pendente.
+- **RNF07:** inspeção estática confirmou o elemento inicial `Inicializando...` em `index.html` e as transições no `js/app.js`: `Inicializando...`, `✓ Carregado` após `initializePythonRuntime()` e `⚠ Erro` em caso de falha; o CSS possui estilos para sucesso e erro. A implementação está presente. Falta apenas confirmação funcional no navegador de que os três estados são exibidos corretamente nos cenários correspondentes.
 - **CA5.1 (Fase 5):** homologação por toque continua pendente; não foi considerada concluída por inferência.
 
 ### 19.2 Atualização da CA7.12 — avaliação delimitada de segurança
@@ -397,3 +397,36 @@ A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Valida�
 - **Branch `main`:** não foi alterada nesta atualização.
 - **Código da aplicação:** nenhuma alteração realizada nesta atualização; somente documentação.
 - **Cópia local:** não inspecionada; sincronização local não confirmada.
+
+
+## 20. Revisão técnica de RNF02 e RNF07 — 2026-11-03
+
+### RNF02 — centralização da lógica em Python
+
+**Evidências favoráveis**
+- `js/pyodide_bridge.js` carrega os módulos `models.py`, `services.py`, `metrics.py` e `schema.py` no runtime Pyodide.
+- A ponte encaminha operações de criação, edição, movimentação, exclusão individual/coletiva, validação de estado, importação/exportação, métricas e relatórios para funções do pacote `todolist`.
+- As regras de entidade, invariantes, validação de schema, cálculos estatísticos e operações de domínio estão implementadas nos módulos Python examinados.
+- `js/app.js` concentra a coordenação da interface, persistência e chamadas ao núcleo Python, sem substituir os serviços de domínio.
+
+**Pontos que impedem aceite integral**
+- `js/kanban_ui.js` classifica visualmente tarefas vencidas com a regra `estado !== "concluida" && data_limite < dataHoje()`. A mesma condição de negócio aparece no cálculo de atrasadas em `src/todolist/metrics.py`; há duplicação da regra entre JavaScript e Python.
+- O renderizador Kanban ordena as tarefas por `ordem` no JavaScript. Essa ordenação pode ser interpretada como apresentação da ordem já definida pelo domínio, mas precisa ser confrontada com a exigência literal do RNF02.
+- `js/calendar_ui.js` ordena alfabeticamente as tarefas do dia por título. É uma ordenação de apresentação, não necessariamente uma regra de domínio.
+
+**Conclusão:** RNF02 parcialmente atendido. Não houve alteração de código. A decisão sobre transferir a classificação de vencidas e/ou a ordenação para o Python deve respeitar o escopo e os requisitos aprovados; não foi realizada unilateralmente.
+
+### RNF07 — indicador de inicialização
+
+**Evidência estática**
+- `index.html` apresenta inicialmente `Inicializando...` no elemento `#pyodide-status`.
+- `js/app.js` atualiza o indicador para carregamento no início de `inicializarAplicacao()`, para sucesso após a inicialização do runtime Pyodide e para erro quando a inicialização falha.
+- `css/components.css` contém estilos para os estados carregado e erro.
+
+**Conclusão:** implementação encontrada e coerente no código. Aceite funcional final depende de confirmação no navegador dos estados de carregamento, sucesso e falha. A inspeção estática não comprova o comportamento em execução.
+
+### Escopo desta revisão
+
+- Arquivos examinados: `js/app.js`, `js/pyodide_bridge.js`, `js/kanban_ui.js`, `js/calendar_ui.js`, `js/backup_ui.js`, `js/drag_drop.js`, `js/reports_ui.js`, `js/storage.js`, módulos Python do domínio e requisito RNF02 em `docs/REQUISITOS.md`.
+- Não foram executados testes nem alterado código da aplicação nesta revisão.
+- RNF02 permanece parcial; RNF07 tem implementação confirmada por inspeção, mas aguarda confirmação funcional.
