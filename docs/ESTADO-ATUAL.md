@@ -425,6 +425,14 @@ A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Valida�
 
 **Conclusão:** implementação encontrada e coerente no código. Aceite funcional final depende de confirmação no navegador dos estados de carregamento, sucesso e falha. A inspeção estática não comprova o comportamento em execução.
 
+
+### RNF05 e CA5.1 — inspeção estática responsiva e de toque
+
+- Os estilos definem breakpoints em 1280 px, 960 px e 767 px. Até 960 px, a navegação lateral passa a ser recolhível e as colunas do Kanban são empilhadas; até 767 px, cabeçalho, formulários e barra de seleção passam a layouts de coluna.
+- O banner de tarefa vencida usa largura de 100%, dimensionamento com `box-sizing: border-box` e altura mínima de 32 px. O cartão permite quebra de texto no título e descrição.
+- Há regra específica para ponteiro coarse: `touch-action: none` no cartão e alvo mínimo de 40 × 40 px no resumo do menu da tarefa. Isso demonstra preparação para interação por toque, mas não comprova usabilidade real em dispositivo touchscreen.
+- **Conclusão:** inspeção estática não substitui o reteste visual integrado da sidebar e do banner nos breakpoints oficiais, nem a homologação por toque CA5.1. Ambos permanecem pendentes de execução manual.
+
 ### Escopo desta revisão
 
 - Arquivos examinados: `js/app.js`, `js/pyodide_bridge.js`, `js/kanban_ui.js`, `js/calendar_ui.js`, `js/backup_ui.js`, `js/drag_drop.js`, `js/reports_ui.js`, `js/storage.js`, módulos Python do domínio e requisito RNF02 em `docs/REQUISITOS.md`.
