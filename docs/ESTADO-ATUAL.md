@@ -89,7 +89,7 @@ A documentação de governança está estabelecida. A revisão desta data atuali
 | ↳ *Fase 5: Interações (Pointer Events)* | **Implementada; validação manual parcial** | CA5.2 a CA5.7 aprovados nos cenários exercitados, exceto CA5.1, que permanece parcial por falta de teste de toque. Mouse e alternativa acessível pelo menu foram aprovados. CA5.5 aprovado no cenário exercitado. Após observação de usabilidade com 10 tarefas no mesmo dia, foi implementada rolagem vertical interna no popover; validação visual com listas extensas e em viewport móvel ainda pendente. Correção do menu contextual, datas relativas, destaque de vencidas e remoção da mensagem transitória de carregamento foram implementados e validados pelo usuário. A implementação da Fase 5 está concluída; aceite integral aguarda teste de toque em CA5.1. |
 | ↳ *Fase 6: Relatórios e Backup JSON* | **Implementada; CA6.1–CA6.8 aprovados** | Mensagem amigável para rejeição de JSON inválido implementada e validada pelo usuário. CA6.9 e CA6.10 transferidos para o encerramento do projeto como CA7.10 e CA7.11; não bloqueiam a Fase 7. Testes automatizados locais informados: 60 aprovados, cobertura de linhas 96,10% e branches 92,72%. Consulte a Seção 12. |
 | ↳ *Fase 7: Seleção e Exclusão Coletiva* | **Implementada; CA7.1–CA7.9 aprovados** | 65 testes aprovados; cobertura de linhas 95,83% e branches 92,54%. Validação manual CA7.1–CA7.9 aprovada nos cenários testados, incluindo rollback, preservação da seleção e integridade dos metadados. Regressão funcional RF01–RF16 aprovada nos cenários executados. Workflows HTML/contraste e Python/cobertura aprovados na branch de trabalho, conforme Seção 19. A homologação não funcional do projeto permanece em andamento. |
-| **Etapa 6 — Validação Final** | **Em andamento** | Regressão funcional RF01–RF16 aprovada nos cenários executados. Os workflows HTML/contraste e Python/cobertura foram aprovados na branch de trabalho; RNF03 está validado para o commit testado. RNF01, RNF02, RNF05, RNF06 e RNF07 mantêm verificações parciais ou pendentes. RNF04 possui evidência de rollback. CA7.12 permanece como avaliação delimitada, com achados e limitações registrados nas Seções 18 e 19. |
+| **Etapa 6 — Validação Final** | **Em andamento** | Regressão funcional RF01–RF16 aprovada nos cenários executados. Os workflows HTML/contraste e Python/cobertura foram aprovados na branch de trabalho; RNF03 está validado para o commit testado. RNF01, RNF02, RNF05 e RNF06 mantêm verificações parciais ou pendentes. RNF07 foi confirmado funcionalmente no navegador. RNF04 possui evidência de rollback. CA7.12 permanece como avaliação delimitada, com achados e limitações registrados nas Seções 18 e 19. |
 
 ---
 
@@ -377,7 +377,7 @@ A CA7.12 permanece **parcialmente concluída**. Esta avaliação é delimitada a
 - **RNF02:** inspeção estática confirmou que operações CRUD, validações de domínio, schema de backup, métricas e relatórios são executados pelo pacote Python via `pyodide_bridge.js`. Contudo, foram encontrados cálculos/regras derivados em JavaScript: classificação de tarefa vencida em `js/kanban_ui.js` (comparação de `data_limite` com a data local), ordenação de tarefas por `ordem` no renderizador Kanban e ordenação alfabética das tarefas no calendário (`js/calendar_ui.js`). A ordenação alfabética pode ser apenas apresentação; a classificação de vencida duplica regra de domínio. Como RNF02 exige regras, cálculos, ordenação e validações concentrados em Python, o requisito permanece **parcial** até decidir e corrigir/justificar esses pontos. Não foram feitas alterações de código.
 - **RNF05:** reteste visual integrado da sidebar e do banner de tarefas vencidas nos breakpoints oficiais permanece pendente.
 - **RNF06:** workflow de contraste aprovado e verificações de teclado/foco registradas. Não houve teste com leitor de tela nem evidência suficiente para declarar conformidade WCAG 2.2 AA integral.
-- **RNF07:** inspeção estática confirmou o elemento inicial `Inicializando...` em `index.html` e as transições no `js/app.js`: `Inicializando...`, `✓ Carregado` após `initializePythonRuntime()` e `⚠ Erro` em caso de falha; o CSS possui estilos para sucesso e erro. A implementação está presente. Falta apenas confirmação funcional no navegador de que os três estados são exibidos corretamente nos cenários correspondentes.
+- **RNF07:** além da inspeção estática do elemento inicial `Inicializando...` em `index.html` e das transições no `js/app.js`, o usuário confirmou no navegador a exibição de `Inicializando...` durante a carga e `✓ Carregado` após a inicialização do Pyodide. **Validado funcionalmente para os estados de carregamento e sucesso.** O estado de erro não foi provocado nem testado.
 - **CA5.1 (Fase 5):** homologação por toque continua pendente; não foi considerada concluída por inferência.
 
 ### 19.2 Atualização da CA7.12 — avaliação delimitada de segurança
@@ -390,7 +390,7 @@ A CA7.12 permanece **parcialmente concluída**. Esta avaliação é delimitada a
 
 ### 19.3 Conclusão operacional
 
-A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Validação Final permanece em andamento até a resolução ou aceitação formal das pendências listadas nesta seção, incluindo CA5.1 e as verificações RNF01, RNF02, RNF05, RNF06 e RNF07. Não declarar o projeto integralmente homologado neste estado.
+A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Validação Final permanece em andamento até a resolução ou aceitação formal das pendências listadas nesta seção, incluindo CA5.1 e as verificações RNF01, RNF02, RNF05 e RNF06. RNF07 foi validado funcionalmente para carregamento e sucesso. Não declarar o projeto integralmente homologado neste estado.
 
 - **Branch de trabalho:** `fase-7-selecao-exclusao-coletiva`.
 - **HEAD remoto consultado antes desta atualização documental:** `e817ae300eabc6aeb9af7db6e665dfc1919719a3`.
@@ -423,7 +423,7 @@ A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Valida�
 - `js/app.js` atualiza o indicador para carregamento no início de `inicializarAplicacao()`, para sucesso após a inicialização do runtime Pyodide e para erro quando a inicialização falha.
 - `css/components.css` contém estilos para os estados carregado e erro.
 
-**Conclusão:** implementação encontrada e coerente no código. Aceite funcional final depende de confirmação no navegador dos estados de carregamento, sucesso e falha. A inspeção estática não comprova o comportamento em execução.
+**Conclusão:** implementação encontrada e coerente no código. O usuário confirmou no navegador os estados `Inicializando...` e `✓ Carregado`; RNF07 está validado funcionalmente para carregamento e sucesso. O estado `⚠ Erro` permanece sem teste dinâmico, portanto não se afirma que os três estados foram homologados.
 
 
 ### RNF05 e CA5.1 — inspeção estática responsiva e de toque
@@ -437,4 +437,4 @@ A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Valida�
 
 - Arquivos examinados: `js/app.js`, `js/pyodide_bridge.js`, `js/kanban_ui.js`, `js/calendar_ui.js`, `js/backup_ui.js`, `js/drag_drop.js`, `js/reports_ui.js`, `js/storage.js`, módulos Python do domínio e requisito RNF02 em `docs/REQUISITOS.md`.
 - Não foram executados testes nem alterado código da aplicação nesta revisão.
-- RNF02 permanece parcial; RNF07 tem implementação confirmada por inspeção, mas aguarda confirmação funcional.
+- RNF02 permanece parcial; RNF07 foi validado funcionalmente nos estados de carregamento e sucesso. O estado de erro permanece sem teste dinâmico.
