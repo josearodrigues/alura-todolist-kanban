@@ -4,6 +4,14 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 
 ## [Não lançado] — 2026-11-03
 
+### Atualização da validação da Fase 7
+
+- CA7.1–CA7.9 aprovados pelo usuário nos cenários manuais executados; a regressão funcional RF01–RF16 também foi aprovada nos cenários executados.
+- Suíte local informada: 65 testes aprovados; cobertura de linhas de 95,83% e branches de 92,54%.
+- Workflow `Validar HTML e contraste`: execução `41742982859` aprovada na branch `fase-7-selecao-exclusao-coletiva`, commit `faa12e9`.
+- Workflow `Testes Python e cobertura`: execução `41742344451` aprovada na `main`, commit `6a967af`, com 60 testes, 96,10% de linhas e 92,72% de branches. Como antecede a Fase 7, não comprova RNF03 na branch atual; a execução correspondente permanece pendente.
+- A validação final de RNF01–RNF07 mantém as lacunas registradas em `docs/ESTADO-ATUAL.md`.
+
 ### CA7.12 — validação de segurança (em andamento)
 
 - Inspeção estática da branch `fase-7-selecao-exclusao-coletiva`, no commit-base `c4e8eae`, abrangendo HTML, CSS, módulos JavaScript, domínio Python, dependências e workflows.
