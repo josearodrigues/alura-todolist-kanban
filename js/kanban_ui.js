@@ -25,6 +25,7 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
   let termo = "";
   let selecionada = null;
   const tarefasSelecionadas = new Set();
+  let idsTarefasVencidas = new Set();
   const barraSelecao = document.getElementById("barra-selecao");
   const quantidadeSelecionada = document.getElementById("quantidade-selecionada");
   const dialogoExclusaoColetiva = document.getElementById("dialog-exclusao-coletiva");
@@ -48,7 +49,7 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
 
   function criarCartao(tarefa) {
     const item = el("li");
-    const vencida = tarefa.estado !== "concluida" && Boolean(tarefa.data_limite) && tarefa.data_limite < dataHoje();
+    const vencida = idsTarefasVencidas.has(tarefa.id);
     const card = el("article", "task-card" + (tarefa.estado === "concluida" ? " is-completed" : "") + (vencida ? " is-overdue" : ""));
     card.dataset.taskId = tarefa.id;
     card.tabIndex = -1;
@@ -154,14 +155,18 @@ export function createKanbanUI({ getState, actions, notify, onStateRendered = ()
     else document.getElementById("quadro-kanban")?.focus();
   }
 
-  function render(state = getState()) {
+  function render(state = getState(), apresentacao) {
+    if (!apresentacao || !Array.isArray(apresentacao.tarefas_ordenadas) || !Array.isArray(apresentacao.ids_atrasadas)) {
+      throw new Error("A apresentação do Kanban precisa ser preparada pelo núcleo Python.");
+    }
+    idsTarefasVencidas = new Set(apresentacao.ids_atrasadas);
     const idsAtuais = new Set(state.tarefas.map((tarefa) => tarefa.id));
     for (const id of tarefasSelecionadas) {
       if (!idsAtuais.has(id)) tarefasSelecionadas.delete(id);
     }
     for (const [estado, listaId, contadorId, vazioId] of ESTADOS) {
       const lista = document.getElementById(listaId); if (!lista) continue;
-      const tarefas = state.tarefas.filter(t => t.estado === estado).sort((a,b) => a.ordem-b.ordem);
+      const tarefas = apresentacao.tarefas_ordenadas.filter(t => t.estado === estado);
       lista.replaceChildren(...tarefas.map(criarCartao));
       document.getElementById("colunas-kanban")?.setAttribute("aria-busy", "false");
       const contador = document.getElementById(contadorId); if (contador) contador.textContent = String(tarefas.length);
