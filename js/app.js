@@ -7,6 +7,7 @@ import {
   createBackup,
   validateBackup,
   prepareImportedState,
+  prepareKanbanPresentation,
 } from "./pyodide_bridge.js";
 import { createKanbanUI } from "./kanban_ui.js";
 import { initializeDragDrop } from "./drag_drop.js";
@@ -109,8 +110,15 @@ function atualizarTimestampInterface(timestamp) {
   });
 }
 
-function renderizarQuadro(estado) {
-  if (kanbanUI) kanbanUI.render(estado);
+function obterDataLocalHoje() {
+  const data = new Date();
+  return [data.getFullYear(), String(data.getMonth() + 1).padStart(2, "0"), String(data.getDate()).padStart(2, "0")].join("-");
+}
+
+async function renderizarQuadro(estado) {
+  if (!kanbanUI) return;
+  const apresentacao = await prepareKanbanPresentation(estado, obterDataLocalHoje());
+  kanbanUI.render(estado, apresentacao);
 }
 
 async function validarEGravarEstado(candidato) {
@@ -132,7 +140,7 @@ async function validarEGravarEstado(candidato) {
 
   try {
     estadoAtual = copiarEstado(candidato);
-    renderizarQuadro(estadoAtual);
+    await renderizarQuadro(estadoAtual);
     atualizarTimestampInterface(estadoAtual.timestamp_ultima_alteracao);
   } catch (erroInterface) {
     estadoAtual = estadoAnterior;
@@ -141,7 +149,7 @@ async function validarEGravarEstado(candidato) {
     } catch (erroRollback) {
       console.error("Falha adicional ao restaurar o documento anterior:", erroRollback);
     }
-    renderizarQuadro(estadoAnterior);
+    await renderizarQuadro(estadoAnterior);
     throw new Error(
       `A gravação foi revertida porque a interface não pôde ser atualizada: ${erroInterface.message}`,
     );
@@ -226,7 +234,7 @@ async function inicializarAplicacao() {
       estadoAtual = copiarEstado(recuperado.state);
       persistenciaDisponivel = true;
 
-      renderizarQuadro(estadoAtual);
+      await renderizarQuadro(estadoAtual);
       atualizarTimestampInterface(estadoAtual.timestamp_ultima_alteracao);
     } catch (erroPersistencia) {
       persistenciaDisponivel = false;
