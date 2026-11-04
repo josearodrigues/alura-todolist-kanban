@@ -117,3 +117,35 @@ def test_calcular_relatorio_rejeita_limites_de_periodo_invalidos():
             periodo_conclusao_inicio="2026-11-30",
             periodo_conclusao_fim="2026-11-01",
         )
+
+
+
+def test_preparar_apresentacao_kanban_ordena_por_coluna_e_ordem():
+    from todolist.metrics import preparar_apresentacao_kanban
+    tarefas = [
+        {"id": "c", "estado": "concluida", "ordem": 0, "data_limite": None},
+        {"id": "b", "estado": "a_fazer", "ordem": 1, "data_limite": None},
+        {"id": "a", "estado": "a_fazer", "ordem": 0, "data_limite": None},
+        {"id": "d", "estado": "em_andamento", "ordem": 0, "data_limite": None},
+    ]
+    resultado = preparar_apresentacao_kanban(tarefas, DATA_HOJE)
+    assert [x["id"] for x in resultado["tarefas_ordenadas"]] == ["a", "b", "d", "c"]
+    assert resultado["ids_atrasadas"] == []
+
+
+def test_preparar_apresentacao_kanban_identifica_atrasadas():
+    from todolist.metrics import preparar_apresentacao_kanban
+    tarefas = [
+        {"id": "atrasada", "estado": "a_fazer", "ordem": 0, "data_limite": "2026-11-01"},
+        {"id": "hoje", "estado": "em_andamento", "ordem": 0, "data_limite": DATA_HOJE},
+        {"id": "futura", "estado": "a_fazer", "ordem": 1, "data_limite": "2026-11-03"},
+        {"id": "concluida", "estado": "concluida", "ordem": 0, "data_limite": "2026-11-01"},
+        {"id": "sem_prazo", "estado": "a_fazer", "ordem": 2, "data_limite": None},
+    ]
+    assert preparar_apresentacao_kanban(tarefas, DATA_HOJE)["ids_atrasadas"] == ["atrasada"]
+
+
+def test_preparar_apresentacao_kanban_rejeita_data_invalida():
+    from todolist.metrics import preparar_apresentacao_kanban
+    with pytest.raises(ValueError):
+        preparar_apresentacao_kanban([], "02/11/2026")
