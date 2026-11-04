@@ -4,6 +4,16 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 
 ## [Não lançado] — 2026-11-03
 
+### Atualização do encerramento da Fase 7
+
+- Fase 7 registrada como implementada e funcionalmente aprovada: CA7.1–CA7.9; regressão funcional RF01–RF16 aprovada nos cenários executados.
+- Workflow `Testes Python e cobertura` executado posteriormente na branch `fase-7-selecao-exclusao-coletiva`, conforme confirmação do usuário: 65 testes aprovados, 95,83% de cobertura de linhas e 92,54% de branches; commit informado `c6feb6b`. O identificador da execução não consta no registro disponível.
+- CA7.11 registrado como aprovado: workflow Python/cobertura e workflow HTML/contraste na branch de trabalho.
+- RNF01 permanece parcial: GitHub Pages e requisição do lockfile Pyodide confirmados (HTTPS, HTTP 200), mas a lista completa de requisições não foi auditada.
+- CA7.12 atualizado: payload de XSS importado foi exibido como texto comum; avaliação permanece delimitada e parcial, com pontos de hardening documentados.
+- A Etapa 6 permanece em andamento por pendências de RNF02, RNF05, RNF06 e RNF07, auditoria completa de rede e homologação por toque CA5.1. Nenhuma homologação integral foi declarada.
+
+
 ### Atualização da validação da Fase 7
 
 - CA7.1–CA7.9 aprovados pelo usuário nos cenários manuais executados; a regressão funcional RF01–RF16 também foi aprovada nos cenários executados.
