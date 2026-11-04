@@ -10,7 +10,7 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 ### Revisão técnica de RNF02 e RNF07
 
 - RNF02: inspeção confirmou o núcleo de operações, validações, métricas, relatórios e schema no Python via Pyodide. Identificada duplicação da regra de tarefa vencida em JavaScript e Python; ordenações na interface precisam ser distinguidas entre regra de domínio e apresentação. Requisito permanece parcial, sem alteração de código.
-- RNF07: código contém estado inicial `Inicializando...`, transição para `✓ Carregado` após inicialização Pyodide e `⚠ Erro` em falha, com estilos correspondentes. Falta confirmação funcional no navegador.
+- RNF07: usuário confirmou no navegador `Inicializando...` durante o carregamento e `✓ Carregado` após a inicialização do Pyodide. Validado funcionalmente para carregamento e sucesso; o estado de erro não foi testado.
 
 
 ### Atualização do encerramento da Fase 7
@@ -20,7 +20,7 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 - CA7.11 registrado como aprovado: workflow Python/cobertura e workflow HTML/contraste na branch de trabalho.
 - RNF01 permanece parcial: GitHub Pages e requisição do lockfile Pyodide confirmados (HTTPS, HTTP 200), mas a lista completa de requisições não foi auditada.
 - CA7.12 atualizado: payload de XSS importado foi exibido como texto comum; avaliação permanece delimitada e parcial, com pontos de hardening documentados.
-- A Etapa 6 permanece em andamento por pendências de RNF02, RNF05, RNF06 e RNF07, auditoria completa de rede e homologação por toque CA5.1. Nenhuma homologação integral foi declarada.
+- A Etapa 6 permanece em andamento por pendências de RNF01, RNF02, RNF05, RNF06 e homologação por toque CA5.1. RNF07 foi validado funcionalmente para carregamento e sucesso. Nenhuma homologação integral foi declarada.
 
 
 ### Atualização da validação da Fase 7
