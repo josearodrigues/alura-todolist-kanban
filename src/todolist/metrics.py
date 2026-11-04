@@ -150,3 +150,26 @@ def calcular_relatorio_completo(
         "proximos_7_dias": proximos_7_dias,
         "concluidas_no_periodo": concluidas_no_periodo,
     }
+
+
+
+def preparar_apresentacao_kanban(tarefas: List[Dict[str, Any]], data_local_referencia: str) -> Dict[str, Any]:
+    """Prepara ordenação das colunas e identificação de tarefas vencidas (RNF02)."""
+    validar_data_limite(data_local_referencia)
+    if data_local_referencia is None:
+        raise ValueError("data_local_referencia é obrigatória.")
+    ordem_estados = {"a_fazer": 0, "em_andamento": 1, "concluida": 2}
+    tarefas_ordenadas = sorted(
+        tarefas,
+        key=lambda tarefa: (
+            ordem_estados.get(tarefa.get("estado"), len(ordem_estados)),
+            tarefa.get("ordem", 0),
+        ),
+    )
+    ids_atrasadas = [
+        tarefa["id"] for tarefa in tarefas
+        if tarefa.get("estado") != "concluida"
+        and tarefa.get("data_limite") is not None
+        and tarefa["data_limite"] < data_local_referencia
+    ]
+    return {"tarefas_ordenadas": tarefas_ordenadas, "ids_atrasadas": ids_atrasadas}
