@@ -89,7 +89,7 @@ A documentação de governança está estabelecida. A revisão desta data atuali
 | ↳ *Fase 5: Interações (Pointer Events)* | **Implementada; validação manual parcial** | CA5.2 a CA5.7 aprovados nos cenários exercitados, exceto CA5.1, que permanece parcial por falta de teste de toque. Mouse e alternativa acessível pelo menu foram aprovados. CA5.5 aprovado no cenário exercitado. Após observação de usabilidade com 10 tarefas no mesmo dia, foi implementada rolagem vertical interna no popover; validação visual com listas extensas e em viewport móvel ainda pendente. Correção do menu contextual, datas relativas, destaque de vencidas e remoção da mensagem transitória de carregamento foram implementados e validados pelo usuário. A implementação da Fase 5 está concluída; aceite integral aguarda teste de toque em CA5.1. |
 | ↳ *Fase 6: Relatórios e Backup JSON* | **Implementada; CA6.1–CA6.8 aprovados** | Mensagem amigável para rejeição de JSON inválido implementada e validada pelo usuário. CA6.9 e CA6.10 transferidos para o encerramento do projeto como CA7.10 e CA7.11; não bloqueiam a Fase 7. Testes automatizados locais informados: 60 aprovados, cobertura de linhas 96,10% e branches 92,72%. Consulte a Seção 12. |
 | ↳ *Fase 7: Seleção e Exclusão Coletiva* | **Implementada; CA7.1–CA7.9 aprovados** | 65 testes aprovados; cobertura de linhas 95,83% e branches 92,54%. Validação manual CA7.1–CA7.9 aprovada nos cenários testados, incluindo rollback, preservação da seleção e integridade dos metadados. Regressão funcional RF01–RF16 aprovada nos cenários executados. Workflows HTML/contraste e Python/cobertura aprovados na branch de trabalho, conforme Seção 19. A homologação não funcional do projeto permanece em andamento. |
-| **Etapa 6 — Validação Final** | **Em andamento** | Regressão funcional RF01–RF16 aprovada nos cenários executados. RNF02 validado funcionalmente no navegador após integração Python/Pyodide/JavaScript. RNF03 validado para os workflows executados. RNF01, RNF05 e RNF06 mantêm verificações parciais ou pendentes. RNF07 foi confirmado funcionalmente nos estados de carregamento e sucesso. RNF04 possui evidência de rollback. CA5.1 e CA7.12 permanecem parciais, conforme Seções 18, 19 e 21. |
+| **Etapa 6 — Validação Final** | **Encerrada para a entrega acadêmica, com ressalvas documentadas** | Regressão funcional RF01–RF16 aprovada nos cenários executados. RNF02 validado funcionalmente; RNF03 validado nos workflows executados; RNF04 validado por evidências de rollback; RNF07 validado nos estados de carregamento e sucesso. RNF01 permanece com auditoria de rede parcial; RNF05 com reteste visual integrado não concluído; RNF06 sem teste com leitor de tela; CA5.1 sem homologação física por toque; CA7.12 corresponde a avaliação de segurança delimitada, não a pentest. As limitações foram aceitas para o encerramento acadêmico e não são declaradas como conformidade integral. |
 
 ---
 
@@ -471,3 +471,43 @@ A **Fase 7 está implementada e funcionalmente aprovada**. A Etapa 6 — Valida�
 - **RNF02: validado funcionalmente nos cenários examinados.** A preparação Python integrada ao Pyodide alimentou corretamente a ordenação do quadro e a indicação visual de tarefas vencidas.
 - A validação cobre a amostra atual de 30 tarefas e o fluxo de inicialização/renderização observado. Não representa prova de todos os estados possíveis nem substitui a regressão de outros requisitos.
 - A Etapa 6 permanece em andamento. Continuam pendentes as verificações de RNF01, RNF05 e RNF06, a homologação por toque CA5.1 e a conclusão formal da avaliação delimitada CA7.12.
+
+## 22. Encerramento do projeto — 2026-11-03
+
+### Decisão de encerramento
+
+O projeto To-Do List Kanban está **encerrado para fins da entrega acadêmica**, com base na implementação das sete fases, na aprovação dos critérios funcionais exercitados, na regressão RF01–RF16 dos cenários executados e nos resultados de automação registrados. O encerramento não significa homologação integral de todos os requisitos não funcionais nem elimina as limitações abaixo.
+
+A decisão prioriza a conclusão do desafio e evita reabrir funcionalidades ou repetir testes já realizados. Não foram aprovadas novas funcionalidades nem alterações de código para esta etapa de encerramento.
+
+### Estado consolidado
+
+- **Etapas 1 a 5:** concluídas quanto à descoberta, especificação, arquitetura, planejamento e implementação. As fases funcionais foram implementadas; as limitações de homologação manual remanescentes estão explicitadas a seguir.
+- **Fase 7:** CA7.1–CA7.9 aprovados nos cenários executados; regressão RF01–RF16 aprovada nos cenários exercitados.
+- **Automação:** workflows HTML/contraste e Python/cobertura aprovados na branch de trabalho. A execução Python registrada após a Fase 7 informou 65 testes aprovados, 95,83% de cobertura de linhas e 92,54% de branches. A integração RNF02 também possui validação posterior no navegador com 30 tarefas.
+- **RNF02, RNF03 e RNF04:** validados no escopo das evidências registradas.
+- **RNF07:** estados de carregamento e sucesso confirmados; o estado de erro não foi provocado.
+
+### Limitações aceitas e não conformidades não declaradas como aprovadas
+
+| Item | Situação no encerramento |
+|---|---|
+| RNF01 / CA4.1 | Aplicação executada no GitHub Pages e requisição do lockfile Pyodide observada com HTTP 200. A captura completa de tráfego não foi realizada; auditoria de rede parcial. |
+| RNF05 | Há evidências anteriores de inspeção visual em Desktop, Tablet e Mobile. O reteste visual integrado final não foi concluído; observações pontuais de layout não justificam reabrir a implementação nesta entrega. |
+| RNF06 | Nu HTML Checker, contraste e parte dos testes de teclado/foco foram aprovados. Não houve teste com leitor de tela; não se declara conformidade WCAG 2.2 AA integral. |
+| RNF07 | Carregamento e sucesso validados; estado de erro sem teste dinâmico. |
+| CA5.1 | Interação por toque em dispositivo físico não homologada por indisponibilidade de ambiente de teste. |
+| CA7.12 | Inspeção estática e testes dinâmicos delimitados realizados. Nenhuma vulnerabilidade crítica ou alta foi confirmada no escopo examinado; a avaliação não equivale a pentest ou auditoria abrangente. Pontos de hardening permanecem registrados na Seção 19. |
+| Usabilidade visual | Pequenas observações de apresentação foram registradas durante a inspeção final. Não foi comprovado impedimento funcional que justifique reabrir o escopo. |
+
+### Situação de versionamento e publicação
+
+- Branch de trabalho: `fase-7-selecao-exclusao-coletiva`.
+- Esta consolidação é exclusivamente documental e será registrada na branch de trabalho.
+- A branch `main` não foi alterada por esta atualização.
+- Push da branch de trabalho, integração/push final, exclusão das branches temporárias e criação da tag `v1.0.0` permanecem sob execução do usuário, com orientação do assistente.
+- Não há declaração de release/tag criada ou de publicação final decorrente deste registro.
+
+### Critério de conclusão
+
+O desafio está documentalmente encerrado para a entrega acadêmica. As limitações acima permanecem transparentes e não impedem considerar concluído o trabalho planejado dentro do escopo e dos recursos de validação disponíveis.
