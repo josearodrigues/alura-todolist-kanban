@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0] — 2026-11-03
+
+### Encerramento acadêmico
+- Concluídas as sete fases de implementação do To-Do List Kanban, com os critérios funcionais aprovados nos cenários executados e regressão RF01–RF16 registrada.
+- Workflows HTML/contraste e Python/cobertura aprovados na branch de trabalho; suíte Python registrada com 65 testes aprovados, 95,83% de cobertura de linhas e 92,54% de branches.
+- RNF02, RNF03 e RNF04 validados no escopo documentado; RNF07 validado para carregamento e sucesso.
+- Limitações remanescentes documentadas: auditoria completa de rede (RNF01), reteste visual integrado (RNF05), leitor de tela (RNF06), estado de erro do indicador (RNF07), teste físico de toque (CA5.1) e avaliação de segurança delimitada (CA7.12).
+- O encerramento acadêmico não representa homologação integral de todos os requisitos não funcionais. Não foram adicionadas funcionalidades nem alterado código da aplicação nesta consolidação.
 Este arquivo registra decisões aprovadas, alterações implementadas e resultados validados em ordem cronológica inversa. Cada entrada distingue planejamento, implementação e validação efetivamente realizados.
 
 ## [Não lançado] — 2026-11-03
