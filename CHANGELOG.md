@@ -1,16 +1,18 @@
 # Changelog
 
-## [Não lançado] — 2026-11-03
+## [1.0.0] — 2026-11-03
 
 ### Encerramento acadêmico
 - Concluídas as sete fases de implementação do To-Do List Kanban, com os critérios funcionais aprovados nos cenários executados e regressão RF01–RF16 registrada.
-- Workflows HTML/contraste e Python/cobertura aprovados na branch de trabalho; suíte Python registrada com 65 testes aprovados, 95,83% de cobertura de linhas e 92,54% de branches.
+- Workflows HTML/contraste e Python/cobertura aprovados na branch de trabalho. Evidência Python mais recente: execução 41753321406, commit c37ff886, com 68 testes aprovados, 95,59% de cobertura de linhas e 92,17% de branches. Workflow HTML/contraste: execução 41753384763, commit 5adc3021, resultado success. Os workflows avaliaram commits diferentes.
 - RNF02, RNF03 e RNF04 validados no escopo documentado; RNF07 validado para carregamento e sucesso.
 - Limitações remanescentes documentadas: auditoria completa de rede (RNF01), reteste visual integrado (RNF05), leitor de tela (RNF06), estado de erro do indicador (RNF07), teste físico de toque (CA5.1) e avaliação de segurança delimitada (CA7.12).
-- O encerramento acadêmico não representa homologação integral de todos os requisitos não funcionais. Não foram adicionadas funcionalidades nem alterado código da aplicação nesta consolidação.
+- O encerramento acadêmico não representa homologação integral de todos os requisitos não funcionais. A tag anotada v1.0.0 aponta para o commit 48574b9. Esta entrada registra a versão identificada pela tag; as revisões documentais posteriores são commits adicionais na main e não alteram o objeto tag.
+- A GitHub Release não está declarada como criada.
+
 Este arquivo registra decisões aprovadas, alterações implementadas e resultados validados em ordem cronológica inversa. Cada entrada distingue planejamento, implementação e validação efetivamente realizados.
 
-## [Não lançado] — 2026-11-03
+### Registros técnicos anteriores à consolidação — 2026-11-03
 
 - RNF02: centralizada em Python a preparação da ordenação do quadro por coluna/campo `ordem` e a identificação de tarefas vencidas; a interface consome os resultados via Pyodide. Os 68 testes Python foram aprovados (95,59% de cobertura de linhas e 92,17% de branches; workflow `41753321406`) e o workflow de sintaxe JavaScript foi aprovado (`41753384763`). Na validação integrada posterior no navegador, os 30 cartões corresponderam à sequência de estado/ordem dos dados e a indicação de vencimento foi consistente em 30/30 tarefas (14 vencidas). RNF02 validado funcionalmente nos cenários examinados; permanecem as pendências gerais da Etapa 6.
 - RNF05/CA5.1: inspeção CSS identificou breakpoints (1280, 960 e 767 px), navegação lateral recolhível, colunas empilhadas, banner de vencidas fluido e regras para ponteiro coarse. A evidência estática não substitui reteste visual nem homologação física por toque; ambos permanecem pendentes.
@@ -25,11 +27,11 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 ### Atualização do encerramento da Fase 7
 
 - Fase 7 registrada como implementada e funcionalmente aprovada: CA7.1–CA7.9; regressão funcional RF01–RF16 aprovada nos cenários executados.
-- Workflow `Testes Python e cobertura` executado posteriormente na branch `fase-7-selecao-exclusao-coletiva`, conforme confirmação do usuário: 65 testes aprovados, 95,83% de cobertura de linhas e 92,54% de branches; commit informado `c6feb6b`. O identificador da execução não consta no registro disponível.
-- CA7.11 registrado como aprovado: workflow Python/cobertura e workflow HTML/contraste na branch de trabalho.
+- Medição anterior da suíte na branch `fase-7-selecao-exclusao-coletiva`: 65 testes aprovados, 95,83% de cobertura de linhas e 92,54% de branches; commit informado `c6feb6b`. Essa medição foi sucedida pela execução 41753321406, com 68 testes e cobertura atualizada.
+- CA7.11: os workflows foram posteriormente confirmados com sucesso nas execuções 41753321406 (Python/cobertura) e 41753384763 (HTML/contraste), em commits diferentes.
 - RNF01 permanece parcial: GitHub Pages e requisição do lockfile Pyodide confirmados (HTTPS, HTTP 200), mas a lista completa de requisições não foi auditada.
 - CA7.12 atualizado: payload de XSS importado foi exibido como texto comum; avaliação permanece delimitada e parcial, com pontos de hardening documentados.
-- A Etapa 6 permanece em andamento por pendências de RNF01, RNF02, RNF05, RNF06 e homologação por toque CA5.1. RNF07 foi validado funcionalmente para carregamento e sucesso. Nenhuma homologação integral foi declarada.
+- Registro histórico anterior ao encerramento: naquele momento, a Etapa 6 era considerada em andamento. A decisão final posterior está na entrada [1.0.0] acima e na Seção 22 de docs/ESTADO-ATUAL.md.
 
 
 ### Atualização da validação da Fase 7
