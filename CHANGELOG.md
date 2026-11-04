@@ -34,7 +34,7 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 - Integrada a operação ao dispatcher Pyodide e à API `deleteTasks`, utilizando a persistência preventiva existente.
 - Implementada seleção independente da conclusão nos cartões, barra contextual com selecionar todas/desselecionar todas/contagem/exclusão e confirmação com quantidade. A seleção é reconciliada após alterações persistidas e o foco é direcionado de volta ao quadro ao limpar a seleção.
 - Adicionados testes unitários para cenários válidos e inválidos e ampliados os workflows para a branch da Fase 7.
-- **Validação:** gravações no GitHub confirmadas; execução da suíte, cobertura, workflows e testes manuais ainda pendentes.
+- **Validação no registro inicial:** gravações no GitHub confirmadas; naquele momento, a execução da suíte, cobertura, workflows e testes manuais ainda estava pendente. Os resultados posteriores estão registrados na atualização de validação da Fase 7 acima.
 
 ### Replanejamento da homologação final
 
