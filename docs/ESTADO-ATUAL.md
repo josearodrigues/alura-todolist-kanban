@@ -63,9 +63,9 @@
 
 ## 3. Estado da Governança Documental
 
-A tríade documental mandatória encontra-se plenamente estabelecida e atualizada:
+A documentação de governança está estabelecida. A revisão desta data atualizou os arquivos operacionais e corrigiu inconsistências de formatação e histórico:
 - **`docs/REQUISITOS.md`:** Atualizado (Versão 1.9 — RF16 detalha seleção global e contrato de integridade da exclusão coletiva).
-- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 3.4 — interface contextual, contrato técnico da exclusão coletiva e critérios CA7.1–CA7.12).
+- **`docs/PLANO-IMPLEMENTACAO.md`:** Atualizado (Versão 3.7 — rastreabilidade das fases, workflows e avaliação delimitada da CA7.12).
 - **`docs/ESTADO-ATUAL.md`:** Atualizado com o estado operacional corrente (este documento).
 - **`README.md`:** Atualizado com tecnologias, estrutura do projeto, instruções de execução, testes, roteiro manual da Fase 2 e roteiro de inspeção visual da Fase 3.
 - **`CHANGELOG.md`:** Registra as alterações implementadas por fase.
@@ -78,7 +78,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | Etapa / Fase | Situação | Descrição / Entregáveis |
 | :--- | :--- | :--- |
 | **Etapa 1 — Descoberta e Requisitos** | **Concluída e Aprovada** | Levantamento via método Grill Me; requisitos aprovados. |
-| **Etapa 2 — Planejamento Funcional** | **Concluída e Aprovada** | Especificação consolidada de RF01–RF15, RNF01–RNF07 e regras de negócio. |
+| **Etapa 2 — Planejamento Funcional** | **Concluída e Aprovada** | Especificação consolidada de RF01–RF16, RNF01–RNF07 e regras de negócio. |
 | **Etapa 3 — Arquitetura Técnica** | **Concluída e Aprovada** | Sete decisões técnicas aprovadas, arquitetura modular e critérios de testes definidos. |
 | **Etapa 4 — Plano de Implementação** | **Concluída e Aprovada** | Plano de Implementação (versão 2.1) formalmente aprovado pelo usuário. |
 | **Etapa 5 — Implementação Controlada** | **Em andamento** | Fases 1 a 7 implementadas. Fase 7: CA7.1–CA7.9 aprovados nos cenários testados; regressão funcional RF01–RF16 aprovada nos cenários executados. Permanecem pendências não funcionais, workflows e segurança. |
@@ -89,7 +89,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 | ↳ *Fase 5: Interações (Pointer Events)* | **Implementada; validação manual parcial** | CA5.2 a CA5.7 aprovados nos cenários exercitados, exceto CA5.1, que permanece parcial por falta de teste de toque. Mouse e alternativa acessível pelo menu foram aprovados. CA5.5 aprovado no cenário exercitado. Após observação de usabilidade com 10 tarefas no mesmo dia, foi implementada rolagem vertical interna no popover; validação visual com listas extensas e em viewport móvel ainda pendente. Correção do menu contextual, datas relativas, destaque de vencidas e remoção da mensagem transitória de carregamento foram implementados e validados pelo usuário. A implementação da Fase 5 está concluída; aceite integral aguarda teste de toque em CA5.1. |
 | ↳ *Fase 6: Relatórios e Backup JSON* | **Implementada; CA6.1–CA6.8 aprovados** | Mensagem amigável para rejeição de JSON inválido implementada e validada pelo usuário. CA6.9 e CA6.10 transferidos para o encerramento do projeto como CA7.10 e CA7.11; não bloqueiam a Fase 7. Testes automatizados locais informados: 60 aprovados, cobertura de linhas 96,10% e branches 92,72%. Consulte a Seção 12. |
 | ↳ *Fase 7: Seleção e Exclusão Coletiva* | **Implementada; CA7.1–CA7.9 aprovados** | Testes automatizados: 65 aprovados; cobertura de linhas 95,83% e branches 92,54%. Validação manual CA7.1–CA7.9 aprovada nos cenários testados, incluindo rollback após `QuotaExceededError`, preservação de seleção e ordenação/metadados. Regressão RF01–RF16 aprovada nos cenários executados. Retestes visuais integrados e validação RNF01–RNF07 ainda têm lacunas registradas. |
-| **Etapa 6 — Validação Final** | **Em andamento** | Regressão funcional RF01–RF16 aprovada nos cenários executados. Workflow HTML/contraste aprovado na branch da Fase 7 (commit `faa12e9`). Workflow Python/cobertura aprovado, mas executado na `main` (commit `6a967af`, anterior à Fase 7); RNF03 e CA7.11 permanecem parcialmente validados até execução equivalente na branch de trabalho. RNF01, RNF02, RNF05, RNF06, RNF07 e CA7.12 ainda têm pendências específicas. |
+| **Etapa 6 — Validação Final** | **Em andamento** | Regressão funcional RF01–RF16 aprovada nos cenários executados. Workflow HTML/contraste aprovado na branch da Fase 7 (commit `faa12e9`). Workflow Python/cobertura aprovado, mas executado na `main` (commit `6a967af`, anterior à Fase 7); RNF03 e CA7.11 permanecem parcialmente validados até execução equivalente na branch de trabalho. RNF01, RNF02, RNF05, RNF06 e RNF07 ainda têm pendências específicas; CA7.12 está em andamento, com inspeção estática e testes dinâmicos iniciais registrados na Seção 18. |
 
 ---
 
@@ -97,7 +97,7 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 
 - **Planejado:** Aplicação To-Do Kanban estática com Python via WebAssembly (Pyodide), 3 colunas, drag and drop via Pointer Events, calendário integrado, métricas em tempo real e backup JSON.
 - **Aprovado:** Versão 1.9 de Requisitos (RF16 detalhado), Etapa 3 (Arquitetura Técnica), Etapa 4 (Plano de Implementação) e decisões funcionais/técnicas da Fase 7. CA7.1–CA7.9 e regressão RF01–RF16 aprovados nos cenários testados.
-- **Implementado:** Em 2026-11-03, a interface da Fase 3 recebeu refinamento visual e dados demonstrativos estáticos para tarefas, calendário, resumo e status. Na branch `revisao-visual-d83bbee`, a correção posterior adicionou navegação lateral recolhível em telas de até 960 px e ajustou o símbolo `⋮`; o controle contextual estava desabilitado nessa revisão visual; foi ativado na implementação da Fase 5. Fase 1 implementada: pacote Python `src/todolist/`, configuração, testes e script de cobertura. Fase 2 implementada em `index.html`; workflow Nu HTML Checker criado. Fase 4 implementada na branch `fase-4-pyodide-persistencia`, com ponte JS/Python, Pyodide e persistência local; testes funcionais da API concluídos. Fase 5 implementada na branch `fase-5-interacoes`, com validação manual parcial; Fase 6 implementada e integrada ao histórico remoto até o commit `6a967af`; CA6.1–CA6.8 aprovados e CA6.9/CA6.10 transferidos para o encerramento. A branch atual é `fase-7-selecao-exclusao-coletiva`. A Fase 7 está implementada: serviço coletivo Python, testes, ponte Pyodide, API, seleção individual/global, barra contextual e confirmação. CA7.1–CA7.9 foram aprovados nos cenários testados; suíte automatizada: 65 aprovados, 95,83% de cobertura de linhas e 92,54% de branches. A regressão RF01–RF16 também foi aprovada nos cenários executados. Workflows e validação de segurança permanecem pendentes.
+- **Implementado:** Em 2026-11-03, a interface da Fase 3 recebeu refinamento visual e dados demonstrativos estáticos para tarefas, calendário, resumo e status. Na branch `revisao-visual-d83bbee`, a correção posterior adicionou navegação lateral recolhível em telas de até 960 px e ajustou o símbolo `⋮`; o controle contextual estava desabilitado nessa revisão visual; foi ativado na implementação da Fase 5. Fase 1 implementada: pacote Python `src/todolist/`, configuração, testes e script de cobertura. Fase 2 implementada em `index.html`; workflow Nu HTML Checker criado. Fase 4 implementada na branch `fase-4-pyodide-persistencia`, com ponte JS/Python, Pyodide e persistência local; testes funcionais da API concluídos. Fase 5 implementada na branch `fase-5-interacoes`, com validação manual parcial; Fase 6 implementada e integrada ao histórico remoto até o commit `6a967af`; CA6.1–CA6.8 aprovados e CA6.9/CA6.10 transferidos para o encerramento. A branch atual é `fase-7-selecao-exclusao-coletiva`. A Fase 7 está implementada: serviço coletivo Python, testes, ponte Pyodide, API, seleção individual/global, barra contextual e confirmação. CA7.1–CA7.9 foram aprovados nos cenários testados; suíte automatizada: 65 aprovados, 95,83% de cobertura de linhas e 92,54% de branches. A regressão RF01–RF16 também foi aprovada nos cenários executados. A validação do workflow Python na branch atual permanece pendente; CA7.12 está em andamento, conforme Seção 18.
 - **Testado:** Fase 1: procedimento oficial `pytest && python scripts/verify_coverage.py`, com 48/48 testes aprovados, 96,16% de cobertura de linhas e 92,78% de branches. Fase 2: 20 verificações automatizadas em Chromium foram aprovadas; o usuário confirmou manualmente parte dos comportamentos de teclado e foco. Fase 3: usuário aprovou Desktop, Tablet (1024 × 768) e Mobile (390 × 844), nos temas Claro e Escuro, e confirmou o funcionamento com `prefers-reduced-motion` ativo. Não houve teste com leitor de tela. O ícone `⋮` foi implementado, mas não há confirmação isolada de sua aparência.
 - **Validado:** critérios CA1.1 a CA1.7 aceitos conforme evidências informadas pelo usuário. Na Fase 2, CA2.1 foi verificado por inspeção estrutural e automatização no navegador; CA2.2 foi validado pelo Nu HTML Checker na execução `41520632228`, sem erros ou avisos. A verificação manual confirmou parte de CA2.3 e CA2.4; CA2.5 e CA2.6 permanecem parcialmente pendentes, sem aceite formal da Fase 2. Na Fase 3, inspeção visual manual aprovada pelo usuário nos três breakpoints (Desktop, Tablet 1024 × 768 e Mobile 390 × 844), nos temas Claro e Escuro; `prefers-reduced-motion` também testado e aprovado. O menu mobile teve funcionamento confirmado pelo usuário. O teste isolado da aparência do ícone `⋮` não foi confirmado.
 - **Commitado / Enviado ao GitHub:** Revisão visual registrada diretamente na branch remota `main`: `d02c4fe` (estrutura visual), `b5c3200` (tema e foco), `6861fc8` (ajustes de cabeçalho), `9c2bd97` (mocks e refinamento visual), `740aa60` (semântica e rodapé) e `98078d1` (correção de acessibilidade). O workflow `41553398236`, acionado pelo commit `98078d1`, concluiu com sucesso: 25 combinações de contraste aprovadas, zero reprovações, Nu HTML Checker com zero erros e zero avisos. A execução anterior `41553256719` falhou por atributos ARIA inválidos nos mocks; a correção foi registrada em `98078d1`. Fase 2 registrada diretamente na branch remota `main`. O workflow Nu HTML Checker foi adicionado no commit `11f6cdf`, seus diagnósticos foram aprimorados em `58558ad` e as correções HTML foram registradas em `a6c7495`. Na Fase 3, os arquivos `css/variables.css`, `css/base.css`, `css/layout.css`, `css/kanban.css`, `css/components.css` e `scripts/check_contrast.py` foram criados; `index.html` passou a carregar os estilos e a alternar temas. O workflow `.github/workflows/validar-html.yml` foi ampliado para auditar contraste e considerar alterações em CSS. A cópia local ainda precisa ser sincronizada pelo usuário. Nenhuma tag, release ou publicação da aplicação foi criada.
@@ -132,8 +132,8 @@ A tríade documental mandatória encontra-se plenamente estabelecida e atualizad
 ## 8. Próxima Ação Recomendada
 
 1. Completar a verificação direcionada de RNF01–RNF07, reutilizando evidências válidas e registrando lacunas: auditoria de rede do GitHub Pages (RNF01), inspeção da lógica Python (RNF02), evidência do workflow para RNF03, responsividade integrada (RNF05), acessibilidade WCAG 2.2 AA (RNF06) e feedback de inicialização (RNF07). RNF04 possui evidência de rollback em falha de persistência.
-2. Executar e validar os workflows GitHub na branch da Fase 7 (CA7.11).
-3. Realizar validação de segurança delimitada, registrando método, escopo, achados e retestes (CA7.12).
+2. Executar e validar o workflow Python/cobertura na branch da Fase 7 (CA7.11); o workflow HTML/contraste já foi aprovado nessa branch.
+3. Prosseguir com CA7.12, começando pela confirmação da renderização literal do payload importado e depois cobrindo os pontos dinâmicos ainda não testados.
 4. Retestar visualmente sidebar e banner de tarefas vencidas nos temas Claro/Escuro e breakpoints pertinentes. A integração à `main` e publicação permanecem fora desta etapa.
 ---
 
@@ -289,7 +289,7 @@ Os resultados abaixo foram informados pelo usuário durante a execução dos tes
 - **RNF06:** completar verificações WCAG 2.2 AA pertinentes; os testes de teclado realizados não equivalem a auditoria completa nem a teste com leitor de tela.
 - **RNF07:** confirmar o indicador de inicialização no estado atual da aplicação.
 - **CA7.11:** validação parcial. Workflow `Validar HTML e contraste` aprovado na branch `fase-7-selecao-exclusao-coletiva`, commit `faa12e9514137f24ce8952652b6ae6d6c3e1a72d` (execução `41742982859`). Workflow `Testes Python e cobertura` aprovado na `main`, commit `6a967af2aca53a5af5fcfed98e3ff1ea44b8d0d9` (execução `41742344451`); falta executá-lo na branch da Fase 7.
-- **CA7.12:** validação de segurança ainda não executada.
+- **CA7.12:** avaliação delimitada em andamento. A inspeção estática e os primeiros testes dinâmicos foram realizados; resultados e lacunas estão na Seção 18.
 - A situação da cópia local não foi inspecionada nesta atualização documental.
 
 
@@ -298,3 +298,63 @@ Os resultados abaixo foram informados pelo usuário durante a execução dos tes
 - **Workflow `Validar HTML e contraste`:** execução `41742982859`, branch `fase-7-selecao-exclusao-coletiva`, commit `faa12e9514137f24ce8952652b6ae6d6c3e1a72d`; conclusão `success`. Sintaxe dos módulos JavaScript, auditoria de contraste WCAG 2.2 AA e Nu HTML Checker aprovados.
 - **Workflow `Testes Python e cobertura`:** execução `41742344451`, branch `main`, commit `6a967af2aca53a5af5fcfed98e3ff1ea44b8d0d9`; conclusão `success`. 60 testes aprovados; cobertura de linhas 96,10% (meta ≥90%) e branches 92,72% (meta ≥85%). Essa execução é anterior à integração da Fase 7 e não valida a versão atual da branch de trabalho.
 - **Conclusão:** CA7.11 parcialmente validado. RNF03 permanece pendente de execução do workflow Python/cobertura na branch `fase-7-selecao-exclusao-coletiva`. A branch `main` não foi alterada nesta atualização documental.
+
+## 18. Revisão documental e avaliação inicial de segurança — 2026-11-03
+
+### 18.1 Estado da revisão documental
+
+A revisão foi realizada na branch `fase-7-selecao-exclusao-coletiva`, a partir do commit-base `c4e8eae81d29d766c5ce02466dcac22c599d688c`. Foram examinados os cinco documentos Markdown versionados: `README.md`, `CHANGELOG.md`, `docs/ESTADO-ATUAL.md`, `docs/PLANO-IMPLEMENTACAO.md` e `docs/REQUISITOS.md`.
+
+- `README.md`: reestruturado para remover um bloco inteiro armazenado como texto com sequências literais `\n`, corrigir informações desatualizadas sobre as fases, workflows e validação, e alinhar a estrutura do repositório aos arquivos existentes.
+- `CHANGELOG.md`: convertidas as sequências literais `\n` em quebras reais, consolidados os cabeçalhos repetidos da mesma data e corrigida a ordem cronológica das versões 1.8 e 1.9. Adicionado o registro inicial da CA7.12.
+- `docs/REQUISITOS.md`: corrigida a ordem das entradas 1.8 e 1.9. Não foram alterados os requisitos aprovados.
+- `docs/PLANO-IMPLEMENTACAO.md`: corrigida a sequência dos títulos das seções de rastreabilidade e histórico, removido um bloco de atualização de validação duplicado com o estado operacional, ordenado o histórico de versões e atualizada a versão para 3.7.
+- `docs/ESTADO-ATUAL.md`: esta seção consolida as novas evidências e mantém as pendências explícitas.
+
+Não foram encontrados outros blocos de documentação com quebras de linha literais equivalentes ao problema do README/CHANGELOG. Os registros históricos de fases anteriores foram preservados quando ainda explicam decisões ou evidências da época; não foram apagados apenas por estarem desatualizados como fotografia histórica.
+
+### 18.2 Escopo da inspeção estática de segurança
+
+Inspecionados `index.html`, os cinco arquivos CSS, os oito módulos JavaScript, os módulos Python do domínio, `pyproject.toml` e os dois workflows GitHub Actions.
+
+**Resultados favoráveis:**
+- Não foram encontrados nos módulos JavaScript os sinks pesquisados: `innerHTML`, `outerHTML`, `insertAdjacentHTML`, `document.write`, `eval` e `new Function`.
+- Os conteúdos de tarefas examinados são apresentados com APIs de texto e criação explícita de elementos.
+- A importação JSON passa por validação estrita no domínio Python, incluindo estrutura do envelope, campos conhecidos, versão e integridade das tarefas.
+- Os workflows declaram permissão `contents: read`.
+- Não foi identificada dependência Python de execução declarada em `pyproject.toml`.
+
+**Dependências externas encontradas nos arquivos da aplicação:**
+- Google Fonts (`fonts.googleapis.com` e `fonts.gstatic.com`): fonte Inter.
+- jsDelivr (`cdn.jsdelivr.net`): distribuição do Pyodide, com versão fixada e HTTPS.
+- O link para o repositório GitHub em `index.html` é navegação e não dependência de execução.
+
+**Pontos de atenção preliminares, sem exploração confirmada:**
+1. Não foi identificada Content-Security-Policy (CSP) explícita.
+2. O script do Pyodide é carregado dinamicamente sem Subresource Integrity (SRI).
+3. A importação lê o arquivo JSON integralmente, sem limite explícito de tamanho ou de quantidade de tarefas.
+4. As GitHub Actions usam tags (`actions/checkout@v4` e `actions/setup-python@v5`), não SHAs imutáveis.
+5. O `localStorage` não é criptografado. Isso é uma limitação de privacidade da arquitetura local; os usuários não devem armazenar segredos ou dados sensíveis na aplicação.
+
+Nenhuma vulnerabilidade crítica ou alta foi confirmada na inspeção estática. Os itens acima são oportunidades de hardening ou limitações, não vulnerabilidades exploradas.
+
+### 18.3 Testes dinâmicos e evidências do usuário
+
+| Cenário | Resultado observado | Estado |
+|---|---|---|
+| Payload XSS no título de tarefa (`<img src=x onerror=alert(document.domain)>`) | Conteúdo exibido como texto; nenhum alerta foi aberto. | Aprovado neste cenário |
+| Payload XSS na descrição (`<svg onload=alert(document.domain)>`) | Conteúdo exibido como texto; nenhum alerta foi aberto. | Aprovado neste cenário |
+| Importação de backup contendo payload no título | Arquivo importado normalmente; as três tarefas existentes foram substituídas pela tarefa importada, conforme RF14. Não foi registrada confirmação explícita sobre a renderização literal do payload após a importação. | Importação aprovada; verificação XSS inconclusiva |
+| Inspeção do `localStorage` | Usuário observou somente propriedades comuns das tarefas, sem credenciais ou dados sensíveis. | Aprovado no escopo observado |
+
+A importação por substituição corresponde ao requisito RF14 vigente. A proposta de oferecer escolha entre substituir e mesclar tarefas não faz parte do escopo aprovado e não foi incorporada.
+
+### 18.4 Limites e próximas verificações da CA7.12
+
+- Confirmar se o payload importado é exibido literalmente no cartão, sem execução de JavaScript.
+- Concluir os testes dinâmicos controlados restantes de integridade e exposição, sem repetir os testes de importação inválida e rollback já aprovados nas Fases 4 e 6.
+- Avaliar a necessidade de limites para tamanho do arquivo e quantidade de tarefas.
+- Avaliar medidas de hardening para CSP, SRI e fixação das Actions por SHA, sem alterar o escopo funcional.
+- Registrar correções e retestes somente se forem aprovados e implementados.
+
+A CA7.12 permanece **em andamento**. Esta avaliação é delimitada aos arquivos, cenários e evidências descritos; não constitui pentest nem auditoria abrangente. Nenhuma alteração no código da aplicação foi realizada nesta revisão documental.
