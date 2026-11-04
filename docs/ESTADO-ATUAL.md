@@ -309,7 +309,7 @@ A revisão foi realizada na branch `fase-7-selecao-exclusao-coletiva`, a partir 
 - `docs/REQUISITOS.md`: corrigida a ordem das entradas 1.8 e 1.9. Não foram alterados os requisitos aprovados.
 - `docs/PLANO-IMPLEMENTACAO.md`: corrigida a sequência dos títulos das seções de rastreabilidade e histórico, removido um bloco de atualização de validação duplicado com o estado operacional, ordenado o histórico de versões e atualizada a versão para 3.7.
 - `docs/ESTADO-ATUAL.md`: esta seção consolida as novas evidências e mantém as pendências explícitas.
-- Commits documentais nesta revisão: README `30ece5d6d010e1e2c8e91299cfe895b276aead96`; CHANGELOG `7309d2555cd875d50f87259d5db67a4fa2f467dd`; REQUISITOS `34d010e4749070f8da26bc35133590d0d48cfaa3`; PLANO-IMPLEMENTACAO (versão final revisada) `c0989554aad45e83db4e3f5ff97d19ea2df8f168`.
+- Commits documentais nesta revisão: README `30ece5d6d010e1e2c8e91299cfe895b276aead96`; CHANGELOG `f0361812874b1c6c50b9c9e1ebf638c1957b98b7`; REQUISITOS `34d010e4749070f8da26bc35133590d0d48cfaa3`; PLANO-IMPLEMENTACAO (versão final revisada) `c0989554aad45e83db4e3f5ff97d19ea2df8f168`.
 - A branch `main` foi consultada e permanece em `6a967af2aca53a5af5fcfed98e3ff1ea44b8d0d9`; nenhuma gravação foi feita nela. O HEAD final da branch de trabalho é informado no relatório desta revisão.
 
 Não foram encontrados outros blocos de documentação com quebras de linha literais equivalentes ao problema do README/CHANGELOG. Os registros históricos de fases anteriores foram preservados quando ainda explicam decisões ou evidências da época; não foram apagados apenas por estarem desatualizados como fotografia histórica.
