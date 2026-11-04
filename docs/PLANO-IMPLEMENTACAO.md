@@ -9,7 +9,7 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
 - **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Implementação concluída; CA7.1–CA7.9 aprovados nos cenários executados; regressão RF01–RF16 aprovada nos cenários exercitados; pendências de homologação manual aceitas e documentadas para a entrega acadêmica]
-- **Etapa 6 — Validação final e homologação:** [Encerrada para a entrega acadêmica, com ressalvas documentadas: RNF02, RNF03 e RNF04 validados no escopo registrado; RNF01 e RNF05 parciais; RNF06 sem teste com leitor de tela; RNF07 validado para carregamento/sucesso; CA5.1 sem teste físico por toque; CA7.12 avaliação de segurança delimitada]
+- **Etapa 6 — Validação final e homologação:** [Encerrada para a entrega acadêmica v1.0.0, com ressalvas explícitas: RNF01 e RNF05 parciais; RNF06 sem teste com leitor de tela; RNF07 validado apenas para carregamento/sucesso; CA5.1 sem teste físico por toque; CA7.12 avaliação de segurança delimitada. RNF02, RNF03 e RNF04 validados no escopo documentado].
 
 ---
 
@@ -404,8 +404,10 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 
 ### Fase 7 — Seleção e Exclusão Coletiva de Tarefas
 
+> **Situação final:** fase implementada e encerrada para a entrega acadêmica. As evidências finais e as limitações aceitas estão consolidadas na Seção 3.1 deste plano e na Seção 22 de `docs/ESTADO-ATUAL.md`. Os registros anteriores desta seção são históricos e não representam pendências atuais quando superados pelo encerramento.
+
 - **Objetivo:** permitir a seleção de múltiplas tarefas em todo o quadro Kanban e sua exclusão em uma única operação, com confirmação explícita, persistência preventiva e integridade dos dados.
-- **Implementação registrada na branch `fase-7-selecao-exclusao-coletiva`:** serviço Python `excluir_tarefas()`, exportação pública, integração Pyodide/API `deleteTasks`, controles de seleção nos cartões, barra contextual, diálogo de confirmação e estilos responsivos. **Validação:** 65 testes automatizados aprovados; cobertura de linhas 95,83% e branches 92,54%. CA7.1–CA7.9 aprovados pelo usuário nos cenários testados. A regressão funcional RF01–RF16 também foi aprovada nos cenários executados. RNF01–RNF07 e CA7.11 mantêm as pendências descritas no estado atual. A CA7.12 está em andamento: inspeção estática e testes dinâmicos iniciais foram registrados em `docs/ESTADO-ATUAL.md`; não há aprovação final de segurança.
+- **Implementação registrada na branch `fase-7-selecao-exclusao-coletiva`:** serviço Python `excluir_tarefas()`, exportação pública, integração Pyodide/API `deleteTasks`, controles de seleção nos cartões, barra contextual, diálogo de confirmação e estilos responsivos. **Validação:** a execução Python mais recente registrada (workflow 41753321406, commit `c37ff886`) aprovou 68 testes, com 95,59% de cobertura de linhas e 92,17% de branches. O workflow HTML/contraste 41753384763, no commit `5adc302`, também terminou com sucesso. CA7.1–CA7.9 foram aprovados nos cenários testados; a regressão RF01–RF16 foi aprovada nos cenários exercitados. CA7.10 e CA7.11 foram tratados no encerramento integrado. CA7.12 foi concluído como avaliação delimitada, sem equivalência a pentest. As ressalvas finais estão consolidadas na Seção 3.1 e em `docs/ESTADO-ATUAL.md`, Seção 22.
 - **Modelo de interface aprovado:**
   - Exibir um cabeçalho contextual quando o modo de seleção estiver ativo.
   - Disponibilizar nesse cabeçalho: selecionar todas as tarefas, desselecionar todas, exibir a quantidade selecionada e excluir as tarefas selecionadas.
@@ -456,7 +458,37 @@ Checklist executado pelo usuário na aplicação local, com resultados informado
 | CA7.9 | Operação acessível por teclado, com foco e feedback adequados, e interface responsiva. | Checklist manual de teclado/acessibilidade e inspeção nos breakpoints Desktop, Tablet e Mobile. |
 | CA7.10 | Após os testes específicos da Fase 7, executar regressão integrada RF01–RF16 e RNF01–RNF07, considerando evidências anteriores válidas e concentrando novos testes nos impactos, integrações e lacunas. | Matriz de rastreabilidade atualizada, resultados por requisito, evidências reutilizadas identificadas e retestes registrados. |
 | CA7.11 | Executar e validar os workflows GitHub no estado final do projeto. | Evidências no GitHub Actions com workflow, branch, commit e resultado de cada execução. |
-| CA7.12 | Realizar validação de segurança com escopo e método definidos, registrar achados, severidade, correções e retestes. | Relatório delimitado ao escopo efetivamente avaliado; não caracterizar como pentest ou auditoria abrangente sem cobertura correspondente. |
+| CA7.12 | Avaliação de segurança delimitada realizada e registrada; não equivale a pentest ou auditoria abrangente. | Inspeção estática e testes dinâmicos descritos na Seção 19 de `docs/ESTADO-ATUAL.md`; nenhum achado crítico/alto foi confirmado no escopo examinado. Pontos de hardening permanecem como limitações conhecidas. |
+
+## 3.1 Encerramento da versão acadêmica 1.0.0 — 2026-11-03
+
+A implementação das sete fases foi integrada à `main` por fast-forward. O commit de referência da versão é `48574b9cdad0d1fcb5721d685fa695052dba58f6`, identificado pela tag anotada `v1.0.0`. A tag foi enviada ao GitHub. A branch de trabalho `fase-7-selecao-exclusao-coletiva` foi removida local e remotamente; permaneceu somente a branch `main`.
+
+### Evidências automatizadas
+
+| Verificação | Execução | Commit avaliado | Resultado |
+|---|---:|---|---|
+| Testes Python e cobertura | [41753321406](https://github.com/josearodrigues/alura-todolist-kanban/actions/runs/41753321406) | `c37ff886` | Sucesso; 68 testes; 95,59% linhas; 92,17% branches |
+| HTML, sintaxe JavaScript e contraste | [41753384763](https://github.com/josearodrigues/alura-todolist-kanban/actions/runs/41753384763) | `5adc3021` | Sucesso |
+
+Os workflows foram aprovados em commits diferentes da branch de trabalho. Não se afirma que ambos executaram sobre o mesmo commit. A execução Python de 68 testes é posterior ao registro anterior de 65 testes e passa a ser a referência numérica mais recente.
+
+### Resultado funcional e não funcional
+
+- CA7.1–CA7.9: aprovados nos cenários manuais exercitados.
+- CA7.10: regressão RF01–RF16 aprovada nos cenários executados, com reaproveitamento de evidências anteriores válidas.
+- CA7.11: workflows GitHub acima concluídos com sucesso.
+- RNF02: validação funcional integrada no navegador com 30 tarefas; ordem do quadro e indicação de vencimento consistentes em 30/30 elementos examinados.
+- RNF03: workflow Python aprovado, conforme números acima.
+- RNF04: rollback de operações e importação confirmado nos cenários de falha documentados.
+- RNF07: carregamento e sucesso confirmados; estado de erro sem teste dinâmico.
+- RNF01, RNF05 e RNF06 permanecem parciais conforme as ressalvas da matriz de encerramento no estado atual.
+- CA5.1 não teve teste físico por toque.
+- CA7.12 corresponde a avaliação de segurança delimitada. Nenhuma vulnerabilidade crítica ou alta foi confirmada no escopo examinado; pontos de hardening permanecem registrados. Não é pentest.
+
+### Versionamento
+
+A tag anotada `v1.0.0` identifica o commit `48574b9`. As correções documentais posteriores a essa tag são commits adicionais na `main` e não alteram retroativamente o conteúdo do objeto tag. Não houve alteração de código da aplicação nesta revisão documental. A criação de uma GitHub Release é independente da tag e não é declarada como realizada.
 
 ## 4. Matriz de Rastreabilidade de Requisitos
 
@@ -529,5 +561,8 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **3.5** | 2026-11-03 | Atualização do estado da Fase 7: CA7.1–CA7.9 aprovados nos cenários testados; 65 testes aprovados, cobertura de linhas 95,83% e branches 92,54%; regressão funcional RF01–RF16 aprovada nos cenários executados; registro das pendências RNF01–RNF07, workflows e segurança. | Atualizar o plano com evidências efetivamente confirmadas e separar regressão funcional da homologação não funcional. |
 | **3.6** | 2026-11-03 | Registro dos workflows GitHub: HTML/contraste aprovado na branch da Fase 7; Python/cobertura aprovado na `main`, commit anterior à Fase 7. CA7.11 marcado como parcialmente validado e RNF03 mantido pendente de execução na branch de trabalho. | Preservar a rastreabilidade entre resultado do CI, branch e commit efetivamente testados, sem atribuir à Fase 7 evidência produzida na `main`. |
 | **3.7** | 2026-11-03 | Revisão documental integral: correção de estrutura e formatação do README/CHANGELOG, atualização da rastreabilidade e registro inicial da CA7.12 com achados estáticos e testes dinâmicos observados. | Manter a documentação coerente com o estado remoto e distinguir evidências confirmadas de cenários ainda inconclusivos. |
-| **3.9** | 2026-11-03 | Encerramento acadêmico da Etapa 6: atualização do estado consolidado de RF/RNF, registro das limitações aceitas (auditoria de rede, reteste responsivo integrado, leitor de tela, toque físico e avaliação de segurança delimitada) e alinhamento dos critérios CA6.9/CA6.10 com CA7.10/CA7.11. | Concluir o desafio sem reabrir escopo nem declarar aprovações para verificações não executadas. |
 | **3.8** | 2026-11-03 | Atualização do encerramento da Fase 7: registro do workflow Python/cobertura aprovado na branch de trabalho (65 testes, 95,83% de linhas e 92,54% de branches), conclusão funcional CA7.1–CA7.10, atualização do CA7.11/CA7.12 e consolidação das pendências de homologação final. | Refletir as evidências mais recentes sem declarar concluídas as verificações não funcionais ou a homologação integral do projeto. |
+| **3.9** | 2026-11-03 | Encerramento acadêmico da Etapa 6: atualização do estado consolidado de RF/RNF, registro das limitações aceitas (auditoria de rede, reteste responsivo integrado, leitor de tela, toque físico e avaliação de segurança delimitada) e alinhamento dos critérios CA6.9/CA6.10 com CA7.10/CA7.11. | Concluir o desafio sem reabrir escopo nem declarar aprovações para verificações não executadas. |
+
+
+| **4.0** | 2026-11-03 | Consolidação documental posterior à criação da tag `v1.0.0`: atualização do estado final da Fase 7, identificação dos workflows e commits efetivamente avaliados, adoção dos resultados mais recentes (68 testes; 95,59% de linhas; 92,17% de branches), ressalvas finais e situação de versionamento. | Encerrar a cadeia de rastreabilidade sem alterar os requisitos aprovados, reescrever o histórico ou modificar a tag publicada. |
