@@ -163,7 +163,6 @@ A documentação de governança está estabelecida. A revisão desta data atuali
 **Limites desta validação:** os testes funcionais das operações foram executados diretamente pela API no console do navegador, pois os controles da interface permanecem demonstrativos e sua integração está prevista para a Fase 5. A falha de persistência foi simulada nas quatro operações; a notificação visual foi observada na criação. A recuperação após recarga foi confirmada para as quatro operações. No GitHub Pages, a auditoria limitada ao filtro Fetch/XHR durante o carregamento mostrou uma requisição ao CDN jsDelivr para `pyodide-lock.json` (HTTP 200), sem chamadas a APIs de backend nessa amostra. Isso não comprova ausência de toda e qualquer requisição de rede. A substituição de estado/importação não foi testada e permanece reservada à Fase 6.
 
 
-
 ## Revisão da composição da interface — 2026-11-03
 
 - Removida a barra inferior da aplicação. O crédito tecnológico e a versão foram transferidos para a área inferior do painel esquerdo (sidebar).
@@ -310,6 +309,8 @@ A revisão foi realizada na branch `fase-7-selecao-exclusao-coletiva`, a partir 
 - `docs/REQUISITOS.md`: corrigida a ordem das entradas 1.8 e 1.9. Não foram alterados os requisitos aprovados.
 - `docs/PLANO-IMPLEMENTACAO.md`: corrigida a sequência dos títulos das seções de rastreabilidade e histórico, removido um bloco de atualização de validação duplicado com o estado operacional, ordenado o histórico de versões e atualizada a versão para 3.7.
 - `docs/ESTADO-ATUAL.md`: esta seção consolida as novas evidências e mantém as pendências explícitas.
+- Commits documentais nesta revisão: README `30ece5d6d010e1e2c8e91299cfe895b276aead96`; CHANGELOG `ebd70b7c8557192737dee3710b821950909a6c4a`; REQUISITOS `34d010e4749070f8da26bc35133590d0d48cfaa3`; PLANO-IMPLEMENTACAO (versão final revisada) `c0989554aad45e83db4e3f5ff97d19ea2df8f168`; ESTADO-ATUAL (este registro) `6d5ccdb0d0b28b8b87ee81a69d850c02560008a6`.
+- **HEAD da branch após esta revisão:** `6d5ccdb0d0b28b8b87ee81a69d850c02560008a6`. A branch `main` foi consultada e permanece em `6a967af2aca53a5af5fcfed98e3ff1ea44b8d0d9`; nenhuma gravação foi feita nela.
 
 Não foram encontrados outros blocos de documentação com quebras de linha literais equivalentes ao problema do README/CHANGELOG. Os registros históricos de fases anteriores foram preservados quando ainda explicam decisões ou evidências da época; não foram apagados apenas por estarem desatualizados como fotografia histórica.
 
