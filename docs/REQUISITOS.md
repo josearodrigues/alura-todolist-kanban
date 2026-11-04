@@ -1,5 +1,9 @@
 # Requisitos do Projeto — To-Do List Kanban
 
+**Especificação funcional:** versão 1.9 (RF01–RF16; RNF01–RNF07).
+
+Este documento preserva os requisitos e decisões aprovados. O estado de implementação e a extensão das evidências de validação da versão 1.0.0 são registrados nas seções finais de `docs/ESTADO-ATUAL.md` e `docs/PLANO-IMPLEMENTACAO.md`. Requisito especificado não significa, por si só, conformidade integral homologada.
+
 ## 1. Identidade e Propósito da Aplicação
 
 O projeto consiste no desenvolvimento de uma aplicação web de gerenciamento de tarefas (To-Do List) no formato visual **Kanban**, como parte do Desafio 3 da Imersão Engenharia de Software: Dev na Era da IA (Alura + Google for Startups).
@@ -182,3 +186,25 @@ A exportação de arquivos JSON oferece um mecanismo de backup externo e portabi
 | **1.7** | 2026-11-02 | Alinhamento do RNF06 à classificação normativa WCAG 2.2 nível AA: especificação dos limites para texto normal (1.4.3 $\ge 4{,}5:1$), texto grande (1.4.3 $\ge 3:1$) e componentes não textuais relevantes (1.4.11 $\ge 3:1$) em ambos os temas. | Eliminação da definição genérica de contraste de 4.5:1 e alinhamento com as decisões arquiteturais. |
 | **1.8** | 2026-11-03 | Inclusão do RF16 para seleção múltipla e exclusão coletiva, com confirmação explícita, seleção temporária e preservação integral dos dados em falhas de persistência. | Formalizar a melhoria de experiência do usuário aprovada para a Fase 7, restrita à exclusão coletiva. |
 | **1.9** | 2026-11-03 | Detalhamento do RF16: cabeçalho contextual, seleção global e individual em todas as colunas, separação do indicador de conclusão, contrato atômico de exclusão, validação integral de IDs, preservação de metadados e timestamp único. | Transformar as decisões aprovadas no Grill Me em requisito funcional e contrato verificável antes da implementação. |
+
+
+---
+
+## 9. Situação dos requisitos na entrega acadêmica v1.0.0
+
+Esta seção não altera os requisitos aprovados nas Seções 3 a 7. Ela registra apenas o alcance da validação realizada para a entrega acadêmica.
+
+| Requisito | Situação documentada no encerramento |
+|---|---|
+| RF01–RF16 | Regressão funcional aprovada nos cenários exercitados; isso não representa prova exaustiva de todos os estados possíveis. |
+| RNF01 | Execução no GitHub Pages confirmada; auditoria integral de tráfego não realizada. |
+| RNF02 | Validado funcionalmente nos cenários integrados examinados no navegador, com 30 tarefas. |
+| RNF03 | Workflow Python/cobertura aprovado: 68 testes, 95,59% de cobertura de linhas e 92,17% de branches. |
+| RNF04 | Rollback validado nos cenários de falha de persistência registrados. |
+| RNF05 | Inspeção visual anterior em Desktop, Tablet e Mobile; reteste integrado final não concluído. |
+| RNF06 | Validação parcial: HTML, contraste e parte dos testes de teclado/foco; leitor de tela não testado. Não se declara conformidade WCAG 2.2 AA integral. |
+| RNF07 | Estados de carregamento e sucesso validados; estado de erro não testado dinamicamente. |
+
+**Critérios específicos ainda não homologados integralmente:** CA5.1 (teste físico por toque) e CA7.12 (avaliação de segurança delimitada, sem equivalência a pentest ou auditoria abrangente).
+
+A decisão de encerramento acadêmico aceita explicitamente essas limitações. Para detalhes, evidências, escopo e histórico, consultar `docs/ESTADO-ATUAL.md`, Seção 22, e `docs/PLANO-IMPLEMENTACAO.md`, Seção 3.1.
