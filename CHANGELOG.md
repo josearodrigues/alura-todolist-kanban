@@ -4,6 +4,12 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 
 ## [Não lançado] — 2026-11-03
 
+### Revisão técnica de RNF02 e RNF07
+
+- RNF02: inspeção confirmou o núcleo de operações, validações, métricas, relatórios e schema no Python via Pyodide. Identificada duplicação da regra de tarefa vencida em JavaScript e Python; ordenações na interface precisam ser distinguidas entre regra de domínio e apresentação. Requisito permanece parcial, sem alteração de código.
+- RNF07: código contém estado inicial `Inicializando...`, transição para `✓ Carregado` após inicialização Pyodide e `⚠ Erro` em falha, com estilos correspondentes. Falta confirmação funcional no navegador.
+
+
 ### Atualização do encerramento da Fase 7
 
 - Fase 7 registrada como implementada e funcionalmente aprovada: CA7.1–CA7.9; regressão funcional RF01–RF16 aprovada nos cenários executados.
