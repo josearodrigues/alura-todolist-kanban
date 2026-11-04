@@ -4,6 +4,9 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 
 ## [Não lançado] — 2026-11-03
 
+- RNF05/CA5.1: inspeção CSS identificou breakpoints (1280, 960 e 767 px), navegação lateral recolhível, colunas empilhadas, banner de vencidas fluido e regras para ponteiro coarse. A evidência estática não substitui reteste visual nem homologação física por toque; ambos permanecem pendentes.
+
+
 ### Revisão técnica de RNF02 e RNF07
 
 - RNF02: inspeção confirmou o núcleo de operações, validações, métricas, relatórios e schema no Python via Pyodide. Identificada duplicação da regra de tarefa vencida em JavaScript e Python; ordenações na interface precisam ser distinguidas entre regra de domínio e apresentação. Requisito permanece parcial, sem alteração de código.
