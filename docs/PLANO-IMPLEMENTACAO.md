@@ -8,8 +8,8 @@ O desenvolvimento da aplicação é estruturado em etapas controladas, respeitan
 - **Etapa 2 — Planejamento funcional e documentação:** [Concluída]
 - **Etapa 3 — Arquitetura e planejamento técnico:** [Concluída e Aprovada]
 - **Etapa 4 — Plano de implementação detalhado:** [Concluída e Aprovada — versão 2.1]
-- **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Fases 1 a 7 implementadas; Fase 5 mantém pendência de homologação por toque em CA5.1; CA6.1–CA6.8 aprovados; CA7.1–CA7.9 aprovados nos cenários testados; 65 testes automatizados aprovados; regressão funcional RF01–RF16 aprovada nos cenários executados]
-- **Etapa 6 — Validação final e homologação:** [Em andamento — regressão funcional RF01–RF16 executada e aprovada nos cenários testados; concluir verificação direcionada de RNF01–RNF07, executar o workflow Python na branch atual e concluir a validação delimitada de segurança CA7.12]
+- **Etapa 5 — Implementação controlada (Fases 1 a 7):** [Implementação das sete fases concluída; Fase 5 mantém pendência de homologação por toque em CA5.1; CA6.1–CA6.8 aprovados; CA7.1–CA7.9 aprovados; 65 testes automatizados aprovados; regressão funcional RF01–RF16 aprovada nos cenários executados]
+- **Etapa 6 — Validação final e homologação:** [Em andamento — workflows HTML/contraste e Python/cobertura aprovados na branch de trabalho; CA7.12 parcialmente concluída; permanecem pendências RNF01, RNF02, RNF05, RNF06 e RNF07, além de CA5.1]
 
 ---
 
@@ -529,3 +529,4 @@ Esta seção relaciona cada requisito aprovado à fase responsável pela sua imp
 | **3.5** | 2026-11-03 | Atualização do estado da Fase 7: CA7.1–CA7.9 aprovados nos cenários testados; 65 testes aprovados, cobertura de linhas 95,83% e branches 92,54%; regressão funcional RF01–RF16 aprovada nos cenários executados; registro das pendências RNF01–RNF07, workflows e segurança. | Atualizar o plano com evidências efetivamente confirmadas e separar regressão funcional da homologação não funcional. |
 | **3.6** | 2026-11-03 | Registro dos workflows GitHub: HTML/contraste aprovado na branch da Fase 7; Python/cobertura aprovado na `main`, commit anterior à Fase 7. CA7.11 marcado como parcialmente validado e RNF03 mantido pendente de execução na branch de trabalho. | Preservar a rastreabilidade entre resultado do CI, branch e commit efetivamente testados, sem atribuir à Fase 7 evidência produzida na `main`. |
 | **3.7** | 2026-11-03 | Revisão documental integral: correção de estrutura e formatação do README/CHANGELOG, atualização da rastreabilidade e registro inicial da CA7.12 com achados estáticos e testes dinâmicos observados. | Manter a documentação coerente com o estado remoto e distinguir evidências confirmadas de cenários ainda inconclusivos. |
+| **3.8** | 2026-11-03 | Atualização do encerramento da Fase 7: registro do workflow Python/cobertura aprovado na branch de trabalho (65 testes, 95,83% de linhas e 92,54% de branches), conclusão funcional CA7.1–CA7.10, atualização do CA7.11/CA7.12 e consolidação das pendências de homologação final. | Refletir as evidências mais recentes sem declarar concluídas as verificações não funcionais ou a homologação integral do projeto. |
