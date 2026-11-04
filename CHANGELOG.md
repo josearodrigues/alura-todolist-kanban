@@ -4,6 +4,17 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 
 ## [Não lançado] — 2026-11-03
 
+### CA7.12 — validação de segurança (em andamento)
+
+- Inspeção estática da branch `fase-7-selecao-exclusao-coletiva`, no commit-base `c4e8eae`, abrangendo HTML, CSS, módulos JavaScript, domínio Python, dependências e workflows.
+- Não foram encontrados os principais sinks HTML pesquisados (`innerHTML`, `outerHTML`, `insertAdjacentHTML`, `document.write`, `eval` e `new Function`); os conteúdos de tarefas examinados são renderizados por APIs de texto e criação explícita de elementos.
+- Testes dinâmicos: payload XSS no título e na descrição foram exibidos como texto, sem execução de alerta nos cenários observados.
+- Um backup com payload no título foi importado com sucesso e substituiu as três tarefas existentes por uma, conforme RF14. A confirmação de que o conteúdo importado também é exibido literalmente, sem execução, ainda não foi registrada; este cenário permanece inconclusivo para XSS.
+- Inspeção do `localStorage` pelo usuário: somente propriedades funcionais das tarefas; nenhuma credencial ou dado sensível foi identificado. Os dados permanecem em texto claro, sem criptografia.
+- Dependências externas identificadas nos arquivos examinados: Google Fonts (fonte Inter) e jsDelivr (Pyodide). O link do repositório GitHub é apenas navegação, não dependência de execução.
+- Pontos de hardening preliminares: ausência de CSP explícita; carregamento do Pyodide sem SRI; importação JSON sem limite explícito de tamanho/quantidade; GitHub Actions referenciadas por tags, não por SHA imutável. Não são vulnerabilidades exploradas/confirmadas nesta revisão.
+- Nenhuma vulnerabilidade crítica ou alta foi confirmada na inspeção estática realizada. A avaliação permanece delimitada e não constitui pentest nem auditoria abrangente.
+
 ### Fase 7 — implementação inicial
 
 - Aprovado o cabeçalho contextual de seleção, com ações para selecionar todas, desselecionar todas, exibir a quantidade selecionada e excluir as tarefas selecionadas.
@@ -17,8 +28,6 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 - Adicionados testes unitários para cenários válidos e inválidos e ampliados os workflows para a branch da Fase 7.
 - **Validação:** gravações no GitHub confirmadas; execução da suíte, cobertura, workflows e testes manuais ainda pendentes.
 
-## [Não lançado] — 2026-11-03
-
 ### Replanejamento da homologação final
 
 - Mantida a aprovação de CA6.1–CA6.8; a Fase 6 não depende da regressão integrada nem da validação dos workflows para avançar.
@@ -26,8 +35,6 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 - Incluído CA7.12 para validação de segurança com escopo, método, evidências, achados, severidade, correções e retestes documentados.
 - Definido que a regressão final deverá reaproveitar evidências anteriores válidas e concentrar novos testes nos impactos, integrações e lacunas, evitando repetição indiscriminada de testes de aceite.
 - O plano passa a refletir sua natureza evolutiva, preservando rastreabilidade e distinguindo critérios aprovados, transferidos e pendentes.
-
-## [Não lançado] — 2026-11-03
 
 ### Fase 6 — homologação parcial
 
@@ -57,7 +64,6 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 - Atualizado o workflow para verificar sintaxe dos módulos ES, HTML e contraste na branch `fase-5-interacoes`.
 - **Validação pendente:** não foram confirmados testes locais/manuais de navegador nem resultado de execução do workflow nesta sessão. CA5.1–CA5.7 não devem ser considerados concluídos até a obtenção das evidências previstas.
 
-
 ### Fase 4 — validação local parcial
 
 - Registrados os testes do usuário para criação, edição, movimentação e exclusão via API JS/Python, com conferência de persistência no `localStorage`.
@@ -72,7 +78,29 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 - Removidos os estilos e a reserva de espaço associados à barra inferior.
 - Validação visual/responsiva desta alteração pendente.
 
-## [Não lançado] — 2026-11-03\n\n### Revisão de fidelidade ao mockup e telas do menu\n\n- Reposicionado visualmente o indicador “Aplicação Online” na barra superior, mantendo a alternância de tema à direita e removendo a identificação ilustrativa do cabeçalho.\n- Restauradas as descrições das colunas e os ícones de estado; refinado o mascote da barra lateral.\n- Calendário com cabeçalho azul-marinho, mês e setas visuais; grade corrigida para novembro de 2025; criado painel de calendário em tela própria.\n- Resumo corrigido para 2 concluídas (29%) e 5 pendentes (71%), com pendentes agregando A Fazer e Em Andamento e duas barras de progresso.\n- Rodapé restaurado com o crédito completo de Python, Pyodide, Alura e Google for Startups; versão e última atualização à direita.\n- Criadas telas demonstrativas estáticas de Relatórios, Importar/Exportar e Configurações. Não foram implementadas operações funcionais dessas áreas.\n- Workflow `41560866108` aprovado no commit `db37ac91`: Nu HTML Checker e auditoria de contraste sem falhas.\n\n\n### Fase 3 — Correções visuais solicitadas\n\n- Cabeçalho atualizado com indicador “Aplicação online” e ícone de confirmação; removido o avatar do cabeçalho e reposicionado o avatar na barra lateral.\n- Ampliados os ícones de navegação, estados, seleção circular das tarefas, títulos, descrições, prioridades e prazos; o menu de cada cartão passou a usar três pontos verticais.\n- Cartões concluídos passaram a exibir confirmação e data de conclusão.\n- Calendário recebeu cabeçalho claro, identificação do mês e setas visuais de navegação.\n- Resumo passou a exibir quantidade e percentual por estado, com barra segmentada.\n- Status Pyodide apresentado como indicador demonstrativo; rodapé ampliado e última atualização alinhada à direita.\n- Ajustados rótulos de prazo para Hoje/Amanhã. Nenhuma integração funcional da Fase 4 foi iniciada.\n- Commits: `5267b09`, `b587491`, `dd27bbc`, `82aa222` e `fcf7994`.\n\n### Validado\n- Workflows `41558220193` e `41558291161` aprovados: HTML e contraste sem falhas.
+### Revisão de fidelidade ao mockup e telas do menu
+
+- Reposicionado visualmente o indicador “Aplicação Online” na barra superior, mantendo a alternância de tema à direita e removendo a identificação ilustrativa do cabeçalho.
+- Restauradas as descrições das colunas e os ícones de estado; refinado o mascote da barra lateral.
+- Calendário com cabeçalho azul-marinho, mês e setas visuais; grade corrigida para novembro de 2025; criado painel de calendário em tela própria.
+- Resumo corrigido para 2 concluídas (29%) e 5 pendentes (71%), com pendentes agregando A Fazer e Em Andamento e duas barras de progresso.
+- Rodapé restaurado com o crédito completo de Python, Pyodide, Alura e Google for Startups; versão e última atualização à direita.
+- Criadas telas demonstrativas estáticas de Relatórios, Importar/Exportar e Configurações. Não foram implementadas operações funcionais dessas áreas.
+- Workflow `41560866108` aprovado no commit `db37ac91`: Nu HTML Checker e auditoria de contraste sem falhas.
+
+### Fase 3 — Correções visuais solicitadas
+
+- Cabeçalho atualizado com indicador “Aplicação online” e ícone de confirmação; removido o avatar do cabeçalho e reposicionado o avatar na barra lateral.
+- Ampliados os ícones de navegação, estados, seleção circular das tarefas, títulos, descrições, prioridades e prazos; o menu de cada cartão passou a usar três pontos verticais.
+- Cartões concluídos passaram a exibir confirmação e data de conclusão.
+- Calendário recebeu cabeçalho claro, identificação do mês e setas visuais de navegação.
+- Resumo passou a exibir quantidade e percentual por estado, com barra segmentada.
+- Status Pyodide apresentado como indicador demonstrativo; rodapé ampliado e última atualização alinhada à direita.
+- Ajustados rótulos de prazo para Hoje/Amanhã. Nenhuma integração funcional da Fase 4 foi iniciada.
+- Commits: `5267b09`, `b587491`, `dd27bbc`, `82aa222` e `fcf7994`.
+
+### Validado
+- Workflows `41558220193` e `41558291161` aprovados: HTML e contraste sem falhas.
 
 ### Fase 3 — Mocks visuais e refinamento
 
@@ -139,7 +167,8 @@ Este arquivo registra decisões aprovadas, alterações implementadas e resultad
 
 ### Pendente
 - Checklist manual de acessibilidade da Fase 2 pelo usuário.
-- Validação visual da Fase 3 nos seis cenários (três breakpoints × dois temas), confirmação da execução da auditoria no workflow e produção/inspeção da referência visual corrigida.\n- Fases 4 a 6, conforme o plano de implementação.
+- Validação visual da Fase 3 nos seis cenários (três breakpoints × dois temas), confirmação da execução da auditoria no workflow e produção/inspeção da referência visual corrigida.
+- Fases 4 a 6, conforme o plano de implementação.
 
 ## Histórico anterior
 
