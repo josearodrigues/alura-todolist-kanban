@@ -27,6 +27,7 @@ from todolist.metrics import (
     calcular_foco_hoje,
     calcular_relatorio_completo,
     calcular_resumo_projeto,
+    preparar_apresentacao_kanban,
 )
 from todolist.schema import (
     APLICACAO_ESPERADA,
@@ -56,6 +57,7 @@ __all__ = [
     "obter_novo_id",
     "reindexar_coluna",
     "calcular_resumo_projeto",
+    "preparar_apresentacao_kanban",
     "calcular_foco_hoje",
     "calcular_relatorio_completo",
     "validar_envelope_backup",
