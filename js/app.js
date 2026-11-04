@@ -256,7 +256,7 @@ async function inicializarAplicacao() {
       notify: (mensagem, tipo) => notificarUsuario(mensagem, tipo),
       onStateRendered: () => calendarioUI?.render(),
     });
-    kanbanUI.render(estadoAtual);
+    await renderizarQuadro(estadoAtual);
     calendarioUI = initializeCalendar({
       getTasks: () => estadoAtual.tarefas,
       onFocusTask: (id) => kanbanUI.focusTask(id),
